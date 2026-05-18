@@ -104,24 +104,70 @@
     }
 
     .cursor-node {
-      width: 4px;
-      height: 4px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
-      background: rgba(184, 255, 232, 0.84);
-      box-shadow: 0 0 16px rgba(143, 247, 210, 0.58);
+      background: radial-gradient(circle, rgba(184, 255, 232, 0.96) 0%, rgba(143, 247, 210, 0.8) 52%, rgba(143, 247, 210, 0) 100%);
+      box-shadow: 0 0 36px rgba(143, 247, 210, 0.76), 0 0 60px rgba(135, 168, 255, 0.32);
+      filter: blur(0.2px);
     }
 
     .cursor-bit {
-      color: rgba(135, 168, 255, 0.38);
+      color: rgba(135, 168, 255, 0.54);
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 11px;
+      font-size: 18px;
       line-height: 1;
+      text-shadow: 0 0 18px rgba(135, 168, 255, 0.22);
     }
 
     .cursor-link {
-      height: 1px;
+      height: 3px;
       transform-origin: left center;
-      background: linear-gradient(90deg, rgba(143, 247, 210, 0.2), rgba(135, 168, 255, 0.08), transparent);
+      background: linear-gradient(90deg, rgba(143, 247, 210, 0.55), rgba(135, 168, 255, 0.28), transparent);
+      box-shadow: 0 0 18px rgba(143, 247, 210, 0.28);
+    }
+
+    .ambient-tech {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ambient-orb {
+      position: absolute;
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.72);
+      background:
+        radial-gradient(circle, rgba(184, 255, 232, 0.32) 0%, rgba(143, 247, 210, 0.18) 38%, rgba(135, 168, 255, 0.08) 62%, transparent 78%),
+        radial-gradient(circle at 38% 38%, rgba(255, 255, 255, 0.36), transparent 28%);
+      box-shadow: 0 0 34px rgba(143, 247, 210, 0.18), 0 0 64px rgba(135, 168, 255, 0.1);
+      filter: blur(0.3px);
+      animation: ambientOrb 4s ease-in-out forwards;
+      will-change: transform, opacity;
+    }
+
+    @keyframes ambientOrb {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.68);
+      }
+      18% {
+        opacity: 0.96;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      72% {
+        opacity: 0.84;
+        transform: translate(-50%, -50%) scale(1.12);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.3);
+      }
     }
 
     .page {
@@ -267,13 +313,13 @@
       left: 0;
       top: -24px;
       display: block;
-      width: min(140px, 34vw);
+      width: min(180px, 42vw);
       height: 2px;
-      transform-origin: left;
-      transform: scaleX(0.86);
-      opacity: 0.76;
-      background: linear-gradient(90deg, var(--mint), rgba(135, 168, 255, 0.18));
-      box-shadow: 0 0 28px rgba(143, 247, 210, 0.45);
+      opacity: 0.92;
+      background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.14) 10%, var(--mint) 30%, rgba(255, 255, 255, 0.92) 48%, rgba(135, 168, 255, 0.72) 64%, rgba(143, 247, 210, 0.22) 82%, transparent 100%);
+      background-size: 220% 100%;
+      animation: neonStrip 4.8s linear infinite;
+      box-shadow: 0 0 28px rgba(143, 247, 210, 0.45), 0 0 44px rgba(135, 168, 255, 0.14);
     }
 
     .kicker {
@@ -354,8 +400,11 @@
       left: 0;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, var(--mint), rgba(135, 168, 255, 0.38), transparent);
-      opacity: 0.52;
+      background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.18) 8%, var(--mint) 28%, rgba(255, 255, 255, 0.86) 48%, rgba(135, 168, 255, 0.64) 64%, rgba(143, 247, 210, 0.2) 82%, transparent 100%);
+      background-size: 220% 100%;
+      opacity: 0.88;
+      animation: neonStrip 4.2s linear infinite;
+      box-shadow: 0 0 18px rgba(143, 247, 210, 0.24);
     }
 
     .rail-item strong,
@@ -486,7 +535,7 @@
     .status-card strong {
       display: block;
       margin-bottom: 5px;
-      font-size: 15px;
+      font-size: 18px;
     }
 
     .status-card span {
@@ -614,7 +663,7 @@
     .card p {
       color: var(--muted);
       line-height: 1.65;
-      font-size: 15px;
+      font-size: 18px;
     }
 
     .stack {
@@ -656,8 +705,11 @@
       top: 0;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, var(--mint), var(--blue), transparent);
-      opacity: 0.72;
+      background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.18) 8%, var(--mint) 28%, rgba(255, 255, 255, 0.86) 48%, rgba(135, 168, 255, 0.7) 66%, rgba(143, 247, 210, 0.16) 82%, transparent 100%);
+      background-size: 220% 100%;
+      opacity: 0.92;
+      animation: neonStrip 4.6s linear infinite;
+      box-shadow: 0 0 18px rgba(143, 247, 210, 0.22);
     }
 
     .metric strong {
@@ -784,6 +836,15 @@
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    @keyframes neonStrip {
+      0% {
+        background-position: 200% 50%;
+      }
+      100% {
+        background-position: -40% 50%;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -949,6 +1010,7 @@
   <div class="cursor-tech" aria-hidden="true">
     <canvas id="cursor-canvas"></canvas>
   </div>
+  <div class="ambient-tech" aria-hidden="true"></div>
   <div class="page">
     <header class="topbar">
       <nav class="nav shell" aria-label="Primary navigation">
@@ -1009,7 +1071,7 @@
 
         <aside class="profile reveal" aria-label="Profile">
           <div class="portrait">
-            <img src="https://nagymartin.carrd.co/assets/images/image07.jpg?v=7019bcb4" alt="Martin Nagy portrait" />
+            <img src="./avat.jpg" alt="Martin Nagy portrait" />
           </div>
         </aside>
       </section>
@@ -1193,7 +1255,6 @@
         "hero.work": "Pozrieť prácu",
         "about.label": "Profil",
         "about.title": "Krátka digitálna vizitka s ostrejším charakterom.",
-        "about.copy": "Stránka stojí na tom, čo už fungovalo na pôvodnej Carrd verzii: jasné predstavenie, technické zručnosti, chuť učiť sa a priamy kontakt. Nová verzia pridáva viac rytmu, lepšiu štruktúru a jazyk, ktorý pôsobí profesionálne bez zbytočnej strojenosti.",
         "tags.troubleshooting": "Troubleshooting",
         "tags.hardware": "Hardware maintenance",
         "tags.it": "IT infraštruktúra",
@@ -1225,7 +1286,6 @@
         "hero.work": "Prohlédnout práci",
         "about.label": "Profil",
         "about.title": "Krátká digitální vizitka s ostřejším charakterem.",
-        "about.copy": "Stránka stojí na tom, co fungovalo už v původní Carrd verzi: jasné představení, technické dovednosti, chuť učit se a přímý kontakt. Nová verze přidává více rytmu, lepší strukturu a jazyk, který působí profesionálně bez zbytečné strojenosti.",
         "tags.troubleshooting": "Troubleshooting",
         "tags.hardware": "Hardware maintenance",
         "tags.it": "IT infrastruktura",
@@ -1257,7 +1317,6 @@
         "hero.work": "View work",
         "about.label": "Profile",
         "about.title": "A compact digital card with a sharper character.",
-        "about.copy": "The page keeps what already worked on the original Carrd version: a clear intro, technical skills, curiosity, and direct contact. This version adds stronger rhythm, better structure, and a voice that feels professional without becoming stiff.",
         "tags.troubleshooting": "Troubleshooting",
         "tags.hardware": "Hardware maintenance",
         "tags.it": "IT infrastructure",
@@ -1607,13 +1666,9 @@
       setLanguage(browserLanguageFallback());
 
       try {
-        const controller = new AbortController();
         const timeout = window.setTimeout(() => controller.abort(), 1200);
-        const response = await fetch("https://ipapi.co/json/", { signal: controller.signal });
         window.clearTimeout(timeout);
         if (!response.ok) return;
-
-        const data = await response.json();
         const detectedLanguage = countryLanguageMap[String(data.country_code || "").toUpperCase()] || "en";
         setLanguage(detectedLanguage);
       } catch (error) {
@@ -1682,8 +1737,8 @@
           type: "node",
           x,
           y,
-          vx: (Math.random() - 0.5) * 0.58,
-          vy: (Math.random() - 0.5) * 0.58,
+          vx: (Math.random() - 0.5) * 0.32,
+          vy: (Math.random() - 0.5) * 0.32,
           life: 1
         });
       }
@@ -1698,8 +1753,8 @@
           type: "bit",
           x: x + 8 + Math.random() * 18,
           y: y - 12 + Math.random() * 22,
-          vx: (Math.random() - 0.5) * 0.34,
-          vy: -0.16 - Math.random() * 0.22,
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: -0.09 - Math.random() * 0.12,
           life: 1
         });
       }
@@ -1727,7 +1782,7 @@
 
         for (let index = elements.length - 1; index >= 0; index -= 1) {
           const item = elements[index];
-          item.life -= item.type === "link" ? 0.045 : 0.032;
+          item.life -= item.type === "link" ? 0.022 : 0.016;
 
           if (item.life <= 0) {
             item.el.remove();
@@ -1753,7 +1808,7 @@
 
       window.addEventListener("pointermove", (event) => {
         const now = performance.now();
-        if (now - lastSpawn < 48) return;
+        if (now - lastSpawn < 78) return;
 
         const point = { x: event.clientX, y: event.clientY };
         addNode(point.x, point.y);
@@ -1769,33 +1824,40 @@
     }
 
     function initCursorTech() {
-      const layer = document.querySelector(".cursor-tech");
-      const canvas = document.getElementById("cursor-canvas");
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      if (!layer || !finePointer.matches || reducedMotion.matches || window.__cursorTechInitialized) return;
+    if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
 
-      window.__cursorTechInitialized = true;
+    const canvas = document.getElementById('cursor-canvas');
+    if (!canvas) return;
 
-      if (!canvas || typeof canvas.getContext !== "function") {
-        initDomCursorTech(layer);
-        return;
-      }
+    const ctx = canvas.getContext('2d');
+    const particles = [];
+    const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const smoothPointer = { x: pointer.x, y: pointer.y };
+    const ghostCount = 4;
+    const ghosts = Array.from({ length: ghostCount }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        tx: Math.random() * window.innerWidth,
+        ty: Math.random() * window.innerHeight,
+        life: 80 + Math.random() * 180,
+        speed: 0.006 + Math.random() * 0.01
+    }));
 
-      const ctx = canvas.getContext("2d", { alpha: true });
-      if (!ctx) {
-        initDomCursorTech(layer);
-        return;
-      }
-      const particles = [];
-      const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-      const maxParticles = 26;
-      let dpr = 1;
-      let width = 0;
-      let height = 0;
-      let frame = 0;
-      let lastSpawn = 0;
+    const maxParticles = 42;
+    let dpr = 1;
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+    let lastSpawn = 0;
 
-      function resizeCanvas() {
+    function resetGhost(ghost) {
+        ghost.tx = Math.random() * width;
+        ghost.ty = Math.random() * height;
+        ghost.life = 90 + Math.random() * 220;
+        ghost.speed = 0.004 + Math.random() * 0.008;
+    }
+
+    function resizeCanvas() {
         dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         width = window.innerWidth;
         height = window.innerHeight;
@@ -1804,100 +1866,139 @@
         canvas.style.width = `${width}px`;
         canvas.style.height = `${height}px`;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
+    }
 
-      function spawnParticles(x, y) {
-        while (particles.length > maxParticles - 3) {
-          particles.shift();
+    function spawnParticles(x, y, count = 3) {
+        while (particles.length > maxParticles - count) particles.shift();
+
+        for (let index = 0; index < count; index += 1) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 0.18 + Math.random() * 0.28;
+
+            particles.push({
+                x: x + (Math.random() - 0.5) * 40,
+                y: y + (Math.random() - 0.5) * 40,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                life: 1,
+                size: 16 + Math.random() * 8,
+                bit: Math.random() > 0.5 ? '1' : '0'
+            });
         }
+    }
 
-        for (let index = 0; index < 3; index += 1) {
-          const angle = Math.random() * Math.PI * 2;
-          const speed = 0.26 + Math.random() * 0.42;
-          particles.push({
-            x: x + (Math.random() - 0.5) * 24,
-            y: y + (Math.random() - 0.5) * 24,
-            vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed,
-            life: 1,
-            size: 9 + Math.random() * 4,
-            bit: Math.random() > 0.5 ? "1" : "0"
-          });
-        }
-      }
-
-      function drawLine(a, b, alpha) {
+    function drawLine(a, b, alpha, widthBoost = 1) {
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
         ctx.strokeStyle = `rgba(143, 247, 210, ${alpha})`;
-        ctx.lineWidth = 1;
+        ctx.lineWidth = widthBoost;
         ctx.stroke();
-      }
+    }
 
-      function render() {
+    function render() {
         frame = 0;
         ctx.clearRect(0, 0, width, height);
-        ctx.globalCompositeOperation = "lighter";
-        ctx.font = "12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.font = '12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+
+        smoothPointer.x += (pointer.x - smoothPointer.x) * 0.045;
+        smoothPointer.y += (pointer.y - smoothPointer.y) * 0.045;
+
+        ghosts.forEach((ghost) => {
+            ghost.x += (ghost.tx - ghost.x) * ghost.speed;
+            ghost.y += (ghost.ty - ghost.y) * ghost.speed;
+            ghost.life -= 1;
+
+            if (ghost.life <= 0 || Math.hypot(ghost.tx - ghost.x, ghost.ty - ghost.y) < 30) {
+                resetGhost(ghost);
+            }
+
+            if (Math.random() < 0.06) {
+                spawnParticles(ghost.x, ghost.y, 1);
+            }
+        });
+
+        const effectPoints = [smoothPointer, ...ghosts];
 
         for (let i = particles.length - 1; i >= 0; i -= 1) {
-          const particle = particles[i];
-          particle.x += particle.vx;
-          particle.y += particle.vy;
-          particle.life -= 0.024;
+            const particle = particles[i];
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            particle.life -= 0.018;
 
-          if (particle.life <= 0) {
-            particles.splice(i, 1);
-            continue;
-          }
-
-          const cursorDistance = Math.hypot(particle.x - pointer.x, particle.y - pointer.y);
-          if (cursorDistance < 150) {
-            drawLine(particle, pointer, (1 - cursorDistance / 150) * particle.life * 0.16);
-          }
-
-          for (let j = i - 1; j >= 0; j -= 1) {
-            const other = particles[j];
-            const distance = Math.hypot(particle.x - other.x, particle.y - other.y);
-            if (distance < 115) {
-              drawLine(particle, other, (1 - distance / 115) * particle.life * 0.1);
+            if (particle.life <= 0) {
+                particles.splice(i, 1);
+                continue;
             }
-          }
 
-          ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * 0.5})`;
-          ctx.fillRect(particle.x - 1, particle.y - 1, 2, 2);
-          ctx.fillStyle = `rgba(135, 168, 255, ${particle.life * 0.26})`;
-          ctx.fillText(particle.bit, particle.x + 7, particle.y - 7);
+            let strongestInfluence = 0;
+
+            effectPoints.forEach((point) => {
+                const dist = Math.hypot(particle.x - point.x, particle.y - point.y);
+                if (dist < 300) {
+                    const influence = 1 - dist / 300;
+                    strongestInfluence = Math.max(strongestInfluence, influence);
+                    drawLine(particle, point, influence * particle.life * 0.24, 1 + influence * 2);
+                }
+            });
+
+            for (let j = i - 1; j >= 0; j -= 1) {
+                const other = particles[j];
+                const distance = Math.hypot(particle.x - other.x, particle.y - other.y);
+
+                if (distance < 230) {
+                    drawLine(particle, other, (1 - distance / 230) * particle.life * 0.16, 0.8);
+                }
+            }
+
+            const drawSize = particle.size * (1 + strongestInfluence * 2);
+
+            ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * 0.55})`;
+            ctx.fillRect(
+                particle.x - drawSize * 0.08,
+                particle.y - drawSize * 0.08,
+                drawSize * 0.16,
+                drawSize * 0.16
+            );
+
+            ctx.fillStyle = `rgba(135, 168, 255, ${particle.life * (0.24 + strongestInfluence * 0.3)})`;
+            ctx.fillText(particle.bit, particle.x + 8, particle.y - 8);
         }
 
-        if (particles.length) {
-          frame = window.requestAnimationFrame(render);
-        }
-      }
+        if (particles.length) frame = window.requestAnimationFrame(render);
+    }
 
-      function scheduleRender() {
-        if (!frame) {
-          frame = window.requestAnimationFrame(render);
-        }
-      }
+    function scheduleRender() {
+        if (!frame) frame = window.requestAnimationFrame(render);
+    }
 
-      window.addEventListener("pointermove", (event) => {
+    window.addEventListener('pointermove', (event) => {
         pointer.x = event.clientX;
         pointer.y = event.clientY;
 
         const now = performance.now();
-        if (now - lastSpawn > 44) {
-          spawnParticles(pointer.x, pointer.y);
-          lastSpawn = now;
-          scheduleRender();
+        if (now - lastSpawn > 90) {
+            spawnParticles(pointer.x, pointer.y, 2);
+            lastSpawn = now;
         }
-      }, { passive: true });
 
-      window.addEventListener("resize", resizeCanvas, { passive: true });
-      resizeCanvas();
-      window.__cursorTechEnabled = "canvas";
-    }
+        scheduleRender();
+    }, { passive: true });
+
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+
+    resizeCanvas();
+    ghosts.forEach((ghost) => resetGhost(ghost));
+
+    setInterval(() => {
+        ghosts.forEach((ghost) => {
+            if (Math.random() < 0.35) resetGhost(ghost);
+            spawnParticles(ghost.x, ghost.y, 1);
+        });
+        scheduleRender();
+    }, 900);
+}
 
     initCursorTech();
     window.setTimeout(initCursorTech, 300);
