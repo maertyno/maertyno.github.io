@@ -24,6 +24,12 @@
       --shadow: 0 24px 80px rgba(0, 0, 0, 0.46);
     }
 
+    @property --glow-alpha {
+      syntax: "<number>";
+      inherits: false;
+      initial-value: 0;
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -137,6 +143,11 @@
       opacity: 0.5;
     }
 
+    .ambient-tech::before,
+    .ambient-tech::after {
+      content: none;
+    }
+
     .ambient-orb {
       position: absolute;
       width: 132px;
@@ -169,6 +180,21 @@
       100% {
         opacity: 0;
         transform: translate(-50%, -50%) scale(1.3);
+      }
+    }
+
+    @keyframes mobileSignalDrift {
+      0% {
+        opacity: 0.22;
+        transform: translate3d(-3%, -2%, 0) scale(1);
+      }
+      50% {
+        opacity: 0.38;
+        transform: translate3d(3%, 2%, 0) scale(1.04);
+      }
+      100% {
+        opacity: 0.22;
+        transform: translate3d(-3%, -2%, 0) scale(1);
       }
     }
 
@@ -297,12 +323,11 @@
     }
 
     .hero {
-      min-height: calc(100vh - 92px);
       display: grid;
       grid-template-columns: minmax(0, 1.18fr) minmax(170px, 0.62fr);
       gap: clamp(24px, 4vw, 54px);
       align-items: start;
-      padding: 58px 0 86px;
+      padding: clamp(48px, 7vh, 68px) 0 clamp(72px, 9vh, 104px);
     }
 
     .hero-copy {
@@ -338,24 +363,41 @@
     }
 
     h1 {
-      max-width: 830px;
-      font-size: clamp(46px, 7.8vw, 104px);
-      line-height: 1.03;
+      max-width: min(700px, 100%);
+      font-size: clamp(44px, 6.5vw, 88px);
+      line-height: 1.06;
       letter-spacing: -0.028em;
       text-wrap: balance;
     }
 
     .tone {
-      display: inline-block;
+      display: block;
       max-width: 100%;
-      margin-top: 0.1em;
-      padding-bottom: 0.16em;
-      font-size: 0.82em;
-      line-height: 1.12;
-      letter-spacing: -0.012em;
-      white-space: nowrap;
+      margin-top: -0.04em;
+      padding-top: 0.08em;
+      padding-bottom: 0.26em;
+      font-size: inherit;
+      line-height: 1.16;
+      letter-spacing: inherit;
+      white-space: normal;
+      overflow-wrap: normal;
       color: transparent;
       background: linear-gradient(115deg, #ffffff 4%, #b8ffe8 48%, #9fd7ff 92%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .detail-tone {
+      font-size: 0.58em;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-top: -0.2em;
+      padding-bottom: 0.18em;
+      max-width: 11.8em;
+      white-space: normal;
+      text-align: left;
+      text-wrap: balance;
+      background: linear-gradient(115deg, #b8ffe8 4%, #a9bcff 46%, #f0dcff 70%, #ffd48a 96%);
       -webkit-background-clip: text;
       background-clip: text;
     }
@@ -381,11 +423,25 @@
       position: relative;
       overflow: hidden;
       isolation: isolate;
+      --glow-alpha: 0;
       min-height: 76px;
       padding: 14px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.055);
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 44%),
+        rgba(255, 255, 255, 0.055);
+      transition: transform 280ms ease, border-color 280ms ease, background-color 280ms ease, box-shadow 280ms ease, --glow-alpha 360ms ease;
+    }
+
+    .rail-item:hover {
+      --glow-alpha: 0.1;
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 44%),
+        rgba(255, 255, 255, 0.066);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.18), 0 0 18px rgba(143, 247, 210, 0.035);
     }
 
     .rail-item::before {
@@ -508,6 +564,13 @@
       background: var(--panel);
       box-shadow: var(--shadow);
       isolation: isolate;
+      transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+    }
+
+    .portrait:hover {
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+      box-shadow: 0 24px 72px rgba(0, 0, 0, 0.36), 0 0 22px rgba(143, 247, 210, 0.035);
     }
 
     .portrait::before {
@@ -604,8 +667,8 @@
     h2 {
       margin-top: 12px;
       font-size: clamp(32px, 4.6vw, 62px);
-      line-height: 0.98;
-      letter-spacing: -0.04em;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
     }
 
     .section-copy {
@@ -629,7 +692,7 @@
       border-radius: 8px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.045));
       box-shadow: 0 18px 60px rgba(0, 0, 0, 0.24);
-      transition: transform 210ms ease, border-color 210ms ease, background 210ms ease;
+      transition: transform 280ms ease, border-color 280ms ease, background 280ms ease, box-shadow 280ms ease;
     }
 
     .card::before {
@@ -637,15 +700,16 @@
       position: absolute;
       inset: -1px;
       opacity: 0;
-      background: radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgba(143, 247, 210, 0.22), transparent 36%);
-      transition: opacity 210ms ease;
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgba(143, 247, 210, 0.14), transparent 38%);
+      transition: opacity 320ms ease;
       pointer-events: none;
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-3px);
       border-color: var(--line-strong);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.052));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.108), rgba(255, 255, 255, 0.048));
+      box-shadow: 0 18px 54px rgba(0, 0, 0, 0.24), 0 0 20px rgba(143, 247, 210, 0.035);
     }
 
     .card:hover::before {
@@ -772,20 +836,37 @@
 
     .experience-list {
       display: grid;
-      gap: 14px;
+      gap: 12px;
     }
 
     .experience-item {
       position: relative;
       overflow: hidden;
+      --glow-alpha: 0;
       display: grid;
-      grid-template-columns: minmax(230px, 0.32fr) minmax(0, 1fr);
-      gap: clamp(18px, 3vw, 32px);
-      padding: 24px;
+      grid-template-columns: minmax(260px, 0.34fr) minmax(0, 1fr);
+      gap: clamp(22px, 4vw, 48px);
+      align-items: center;
+      padding: clamp(20px, 2.4vw, 26px);
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
-      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 40%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.035)),
+        rgba(6, 9, 7, 0.82);
+      box-shadow: 0 12px 42px rgba(0, 0, 0, 0.18);
+      transition: transform 280ms ease, border-color 280ms ease, background-color 280ms ease, box-shadow 280ms ease, --glow-alpha 360ms ease;
+    }
+
+    .experience-item:hover {
+      --glow-alpha: 0.08;
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 40%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.078), rgba(255, 255, 255, 0.038)),
+        rgba(6, 9, 7, 0.86);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2), 0 0 18px rgba(143, 247, 210, 0.028);
     }
 
     .experience-item::before {
@@ -828,8 +909,9 @@
 
     .experience-meta {
       display: grid;
-      gap: 10px;
-      align-content: start;
+      gap: 8px;
+      align-items: start;
+      max-width: none;
     }
 
     .company {
@@ -840,10 +922,26 @@
       text-transform: uppercase;
     }
 
+    .company-brand.leo {
+      color: #f2a12a;
+    }
+
+    .company-brand.ikea {
+      color: #ffd23c;
+    }
+
+    .company-brand.pcexpres {
+      color: #f28a2e;
+    }
+
+    .company-brand.fixservis {
+      color: #44c7ee;
+    }
+
     .role {
-      font-size: clamp(22px, 3vw, 34px);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
+      font-size: clamp(22px, 2.35vw, 30px);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
     }
 
     .duration,
@@ -851,88 +949,66 @@
       color: var(--muted);
       font-size: 14px;
       line-height: 1.5;
+      text-align: left;
+    }
+
+    .experience-details {
+      min-width: 0;
+    }
+
+    .experience-summary {
+      max-width: 68ch;
+      color: rgba(247, 250, 246, 0.7);
+      font-size: 15px;
+      line-height: 1.58;
     }
 
     .experience-skills {
-      counter-reset: experience-skill;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 8px;
-      align-self: stretch;
-      align-content: stretch;
-      min-height: 74px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(247, 250, 246, 0.1);
       overflow: visible;
     }
 
     .experience-skills span {
-      counter-increment: experience-skill;
       position: relative;
       overflow: hidden;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 100%;
-      padding: 13px 11px;
-      border: 1px solid rgba(247, 250, 246, 0.1);
-      border-radius: 12px;
-      color: rgba(247, 250, 246, 0.82);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.026)),
-        rgba(6, 9, 7, 0.72);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.045);
-      transition: border-color 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+      min-height: 28px;
+      padding: 6px 10px;
+      border: 1px solid rgba(247, 250, 246, 0.11);
+      border-radius: 6px;
+      color: rgba(247, 250, 246, 0.74);
+      background: rgba(255, 255, 255, 0.035);
+      transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
     }
 
     .experience-skills b {
       position: relative;
       z-index: 1;
       display: block;
-      width: 100%;
       color: inherit;
-      font-size: clamp(11px, 0.98vw, 13px);
-      font-weight: 760;
+      font-size: 12px;
+      font-weight: 720;
       line-height: 1.2;
       letter-spacing: 0;
       text-align: center;
-      text-wrap: balance;
-      overflow-wrap: anywhere;
-      text-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+      text-shadow: none;
     }
 
     .experience-skills span::before {
-      content: "";
-      position: absolute;
-      left: 18px;
-      right: 18px;
-      top: 10px;
-      height: 1px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, transparent, rgba(143, 247, 210, 0.42), transparent);
-      opacity: 0.32;
-    }
-
-    .experience-skills span::after {
-      content: "0" counter(experience-skill);
-      position: absolute;
-      right: 10px;
-      bottom: 8px;
-      color: rgba(143, 247, 210, 0.18);
-      font-size: 10px;
-      font-weight: 850;
-      letter-spacing: 0.12em;
+      content: none;
     }
 
     .experience-skills span:hover {
-      z-index: 2;
       color: rgba(247, 250, 246, 0.96);
       border-color: rgba(143, 247, 210, 0.24);
-      background:
-        linear-gradient(180deg, rgba(143, 247, 210, 0.075), rgba(255, 255, 255, 0.032)),
-        rgba(255, 255, 255, 0.02);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.07),
-        0 0 18px rgba(143, 247, 210, 0.055);
+      background: rgba(143, 247, 210, 0.055);
     }
 
     .experience-skills span:hover b {
@@ -950,21 +1026,88 @@
 
     .contact-band {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) auto;
-      gap: 26px;
+      --glow-alpha: 0;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 34px;
       align-items: center;
       margin: 70px 0 46px;
-      padding: 34px;
+      padding: clamp(30px, 4vw, 44px);
       border: 1px solid var(--line);
       border-radius: 8px;
       background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 44%),
         linear-gradient(135deg, rgba(143, 247, 210, 0.16), rgba(135, 168, 255, 0.08) 48%, rgba(255, 212, 138, 0.08)),
         rgba(255, 255, 255, 0.06);
       box-shadow: var(--shadow);
+      transition: transform 280ms ease, border-color 280ms ease, background-color 280ms ease, box-shadow 280ms ease, --glow-alpha 360ms ease;
+    }
+
+    .contact-band:hover {
+      --glow-alpha: 0.09;
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 44%),
+        linear-gradient(135deg, rgba(143, 247, 210, 0.16), rgba(135, 168, 255, 0.085) 48%, rgba(255, 212, 138, 0.085)),
+        rgba(255, 255, 255, 0.07);
+      box-shadow: 0 20px 66px rgba(0, 0, 0, 0.28), 0 0 22px rgba(143, 247, 210, 0.035);
     }
 
     .contact-band h2 {
-      margin: 0 0 13px;
+      max-width: 820px;
+      margin: 0;
+    }
+
+    .contact-band .actions {
+      justify-content: flex-end;
+      margin-top: 0;
+    }
+
+    .contact-band .button {
+      position: relative;
+      overflow: hidden;
+      min-height: 58px;
+      padding: 0 24px;
+      font-size: 16px;
+      transition: transform 280ms ease, border-color 280ms ease, background 280ms ease, box-shadow 280ms ease;
+    }
+
+    .contact-band .button::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      opacity: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(143, 247, 210, 0.18), transparent 58%);
+      transition: opacity 320ms ease;
+      pointer-events: none;
+    }
+
+    .contact-band .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24), 0 0 22px rgba(143, 247, 210, 0.055);
+    }
+
+    .contact-band .button:hover::before {
+      opacity: 1;
+    }
+
+    .contact-band .button > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-band .button.primary:hover {
+      background: linear-gradient(135deg, #9ffbdd, #e3ffed 56%, #ffe0a3);
+    }
+
+    .contact-band .button:not(.primary) {
+      border-color: rgba(247, 250, 246, 0.24);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .contact-band .button:not(.primary):hover {
+      border-color: rgba(143, 247, 210, 0.34);
+      background: rgba(255, 255, 255, 0.12);
     }
 
     .footer {
@@ -1038,6 +1181,10 @@
         grid-template-columns: 1fr;
       }
 
+      .contact-band .actions {
+        justify-content: flex-start;
+      }
+
       .services,
       .metric-grid {
         grid-template-columns: 1fr;
@@ -1049,50 +1196,145 @@
 
       .experience-item {
         grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .experience-meta {
+        gap: 8px;
+      }
+
+      .duration,
+      .location {
+        white-space: normal;
       }
 
       .experience-skills {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        min-height: auto;
+        margin-top: 18px;
       }
 
       .experience-skills span {
-        min-height: 68px;
-      }
-
-      .experience-skills b {
-        font-size: clamp(11px, 3.1vw, 13px);
+        min-height: 24px;
       }
     }
 
     @media (max-width: 700px) {
+      body {
+        background:
+          radial-gradient(circle at 15% 8%, rgba(143, 247, 210, 0.12), transparent 28%),
+          radial-gradient(circle at 92% 28%, rgba(135, 168, 255, 0.1), transparent 30%),
+          linear-gradient(135deg, rgba(143, 247, 210, 0.055), transparent 32%),
+          var(--bg);
+      }
+
+      body::before {
+        opacity: 0.86;
+        background-size: 34px 34px, 34px 34px, 190px 190px;
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.82), transparent 88%);
+      }
+
+      .ambient-tech {
+        opacity: 0.72;
+      }
+
+      .ambient-tech::before,
+      .ambient-tech::after {
+        content: "";
+        position: absolute;
+        inset: -12%;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(143, 247, 210, 0.32) 0 2px, transparent 3px),
+          radial-gradient(circle at 74% 24%, rgba(184, 255, 232, 0.24) 0 2px, transparent 3px),
+          radial-gradient(circle at 55% 62%, rgba(135, 168, 255, 0.2) 0 2px, transparent 3px),
+          linear-gradient(115deg, transparent 0 26%, rgba(143, 247, 210, 0.08) 26.3%, transparent 27% 58%, rgba(135, 168, 255, 0.065) 58.4%, transparent 59%);
+        background-size: 220px 220px, 180px 180px, 260px 260px, 260px 260px;
+        filter: blur(0.1px);
+        animation: mobileSignalDrift 9s ease-in-out infinite;
+      }
+
+      .ambient-tech::after {
+        opacity: 0.55;
+        transform: rotate(10deg);
+        animation-duration: 13s;
+        animation-direction: reverse;
+      }
+
+      .topbar {
+        padding: 10px 0 6px;
+      }
+
+      .nav {
+        grid-template-columns: 1fr auto;
+        min-height: auto;
+        padding: 8px;
+        border-radius: 20px;
+      }
+
+      .nav-links {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, auto));
+        gap: 2px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .nav-links::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-links a {
+        padding: 10px 8px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      .language-switcher {
+        padding: 3px;
+      }
+
+      .lang-button {
+        width: 34px;
+        height: 30px;
+      }
+
       .hero {
         grid-template-columns: 1fr;
         min-height: auto;
+        gap: 26px;
+        padding-top: 30px;
+        padding-bottom: 46px;
       }
 
       .profile {
-        justify-self: start;
-        width: min(340px, 82vw);
+        justify-self: center;
+        width: min(340px, 88vw);
+        order: 2;
+      }
+
+      .hero-copy {
+        order: 1;
+      }
+
+      .lead {
+        max-width: 100%;
       }
 
       .skill-rail {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 100%;
       }
     }
 
     @media (max-width: 560px) {
       .shell {
-        width: min(100% - 22px, 1160px);
+        width: min(100% - 28px, 1160px);
       }
 
       .topbar {
-        padding: 10px 0;
+        padding: 8px 0 6px;
       }
 
       .nav {
-        padding-left: 12px;
-        gap: 10px;
+        gap: 8px;
       }
 
       .language-switcher {
@@ -1106,31 +1348,50 @@
       }
 
       h1 {
-        font-size: clamp(35px, 9.1vw, 48px);
-        line-height: 1.08;
+        max-width: 100%;
+        font-size: clamp(38px, 11.8vw, 54px);
+        line-height: 1.1;
         letter-spacing: -0.012em;
       }
 
       .tone {
-        font-size: 0.75em;
+        font-size: inherit;
+        margin-top: -0.02em;
+        padding-top: 0.06em;
+        padding-bottom: 0.24em;
+        line-height: 1.16;
+      }
+
+      .detail-tone {
+        font-size: 0.64em;
+        line-height: 1.2;
+        margin-top: -0.12em;
+        padding-bottom: 0.22em;
+        text-align: left;
+        white-space: normal;
       }
 
       .lead {
-        margin-top: 34px;
+        margin-top: 26px;
       }
 
       .hero {
-        gap: 34px;
-        padding-top: 34px;
-        padding-bottom: 54px;
+        gap: 24px;
+        padding-top: 26px;
+        padding-bottom: 42px;
       }
 
       .profile {
-        width: min(310px, 78vw);
+        width: min(360px, 100%);
       }
 
       .portrait {
+        aspect-ratio: 1.08;
         border-radius: 20px;
+      }
+
+      .portrait img {
+        object-position: center 25%;
       }
 
       .portrait::after {
@@ -1141,7 +1402,7 @@
       .lead {
         margin-top: 20px;
         font-size: 16px;
-        line-height: 1.62;
+        line-height: 1.68;
       }
 
       .skill-rail {
@@ -1150,13 +1411,22 @@
       }
 
       .rail-item {
-        min-height: 68px;
+        min-height: 72px;
         padding: 12px;
+      }
+
+      .rail-item strong {
+        font-size: 12px;
+      }
+
+      .rail-item span {
+        font-size: 11px;
       }
 
       .actions,
       .contact-band .actions {
         width: 100%;
+        gap: 10px;
       }
 
       .button {
@@ -1164,28 +1434,32 @@
       }
 
       .experience-item {
-        padding: 18px;
+        padding: 20px;
+      }
+
+      .role {
+        font-size: clamp(21px, 7vw, 28px);
       }
 
       .experience-skills {
-        gap: 10px;
+        row-gap: 8px;
       }
 
       .experience-skills span {
-        min-height: 64px;
-        padding: 12px 10px;
-      }
-
-      .experience-skills b {
-        font-size: clamp(10px, 3vw, 12px);
+        min-height: 24px;
       }
 
       section {
-        padding: 62px 0;
+        padding: 54px 0;
       }
 
       .contact-band {
+        margin: 48px 0 34px;
         padding: 24px;
+      }
+
+      .contact-band .button {
+        min-height: 54px;
       }
 
       .footer {
@@ -1195,11 +1469,25 @@
 
     @media (max-width: 430px) {
       .skill-rail {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .rail-item {
-        min-height: auto;
+        min-height: 70px;
+      }
+
+      .nav-links a {
+        padding-inline: 7px;
+        font-size: 11px;
+      }
+
+      .lang-button {
+        width: 31px;
+        height: 29px;
+      }
+
+      h2 {
+        font-size: clamp(30px, 10vw, 42px);
       }
     }
 
@@ -1210,7 +1498,7 @@
     }
   </style>
 </head>
-<body>
+<body id="top">
   <div class="cursor-tech" aria-hidden="true">
     <canvas id="cursor-canvas"></canvas>
   </div>
@@ -1219,6 +1507,7 @@
     <header class="topbar">
       <nav class="nav shell" aria-label="Primary navigation">
         <div class="nav-links">
+          <a href="#top" data-i18n="nav.home">Úvod</a>
           <a href="#services" data-i18n="nav.services">Čo robím</a>
           <a href="#experience" data-i18n="nav.experience">Skúsenosti</a>
           <a href="#contact" data-i18n="nav.contact">Kontakt</a>
@@ -1233,14 +1522,14 @@
       </nav>
     </header>
 
-    <main id="top" class="shell">
+    <main class="shell">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy reveal">
-          <h1 id="hero-title" data-i18n-html="hero.title">IT support. Opravy. <span class="tone">Digitálne riešenia.</span></h1>
+          <h1 id="hero-title" data-i18n-html="hero.title">IT podpora.<br>Opravy.<br><span class="tone">Digitálne riešenia.</span><span class="tone detail-tone">s citom pre detail.</span></h1>
           <p class="lead" data-i18n="hero.lead">Pomáham udržať techniku, zariadenia a digitálne prostredia v chode. Spájam reálnu prax v IT podpore, troubleshootingu, opravách elektroniky, webdesigne a vývoji iOS aplikácií.</p>
           <div class="skill-rail" aria-label="Core skills">
             <div class="rail-item">
-              <strong data-i18n="rail.support.title">IT Support</strong>
+              <strong data-i18n="rail.support.title">IT podpora</strong>
               <span data-i18n="rail.support.copy">používatelia, zariadenia, infra</span>
             </div>
             <div class="rail-item">
@@ -1283,7 +1572,7 @@
         <div class="section-head">
           <div>
             <span class="label" data-i18n="services.label">Skills</span>
-            <h2 id="services-title" data-i18n="services.title">Reálne schopnosti, ktoré sa dajú použiť hneď.</h2>
+            <h2 id="services-title" data-i18n="services.title">Od nápadu či problému po čisté riešenie.</h2>
           </div>
         </div>
 
@@ -1292,8 +1581,8 @@
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/></svg>
             </div>
-            <h3 data-i18n="services.it.title">IT Support</h3>
-            <p data-i18n="services.it.copy">Troubleshooting, device support, lokálna infraštruktúra, používateľská podpora a schopnosť držať technické prostredie prehľadné.</p>
+          <h3 data-i18n="services.it.title">IT podpora</h3>
+          <p data-i18n="services.it.copy">Riešim technické problémy od prvého kontaktu po funkčné riešenie. Pomáham používateľom, zariadeniam aj lokálnemu IT prostrediu fungovať spoľahlivo a prehľadne.</p>
           </article>
 
           <article class="card">
@@ -1301,7 +1590,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
             </div>
             <h3 data-i18n="services.repair.title">Opravy elektroniky</h3>
-            <p data-i18n="services.repair.copy">Diagnostika telefónov, tabletov, počítačov a menšej elektroniky, práca s hardvérom, servisnými postupmi a detailom.</p>
+          <p data-i18n="services.repair.copy">Diagnostika a opravy zariadení s dôrazom na presnosť, postup a detail. Skúsenosť s telefónmi, tabletmi, počítačmi aj menšou elektronikou.</p>
           </article>
 
           <article class="card">
@@ -1309,7 +1598,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 1.9 5.8h6.1l-4.9 3.6 1.9 5.8-5-3.6-5 3.6 1.9-5.8-4.9-3.6h6.1z"/></svg>
             </div>
             <h3 data-i18n="services.design.title">Webdesign & iOS Apps</h3>
-            <p data-i18n="services.design.copy">Webdesign, landing pages, responzívne rozhrania a iOS aplikácie s dôrazom na použiteľnosť, vizuálnu čistotu a technický detail.</p>
+          <p data-i18n="services.design.copy">Tvorím čisté weby, landing pages a app koncepty, ktoré majú zrozumiteľnú štruktúru, dobrý vizuálny cit a fungujú prirodzene na rôznych zariadeniach.</p>
           </article>
         </div>
       </section>
@@ -1325,61 +1614,73 @@
         <div class="experience-list">
           <article class="experience-item">
             <div class="experience-meta">
-              <span class="company" data-i18n="experience.leo.company">Leo Express · Full-time</span>
+              <span class="company"><span class="company-brand leo" data-i18n="experience.leo.companyName">Leo Express</span> · <span data-i18n="experience.leo.workType">Full-time</span></span>
               <h3 class="role" data-i18n="experience.leo.role">IT Support Specialist</h3>
-              <span class="duration" data-i18n="experience.leo.duration">May 2025 - Present · 1 yr 1 mo</span>
+              <span class="duration" data-i18n="experience.leo.duration">May 2025 - Present</span>
               <span class="location" data-i18n="experience.leo.location">Bratislava, Slovakia · Hybrid</span>
             </div>
-            <div class="experience-skills">
-              <span><b data-i18n="experience.leo.skill1">IT support</b></span>
-              <span><b data-i18n="experience.leo.skill2">Infraštruktúra</b></span>
-              <span><b data-i18n="experience.leo.skill3">Incident handling</b></span>
-              <span><b data-i18n="experience.leo.skill4">Spoľahlivosť služieb</b></span>
+            <div class="experience-details">
+              <p class="experience-summary" data-i18n="experience.leo.copy">Podpora používateľov, zariadení a lokálneho IT prostredia v každodennej prevádzke.</p>
+              <div class="experience-skills">
+                <span><b data-i18n="experience.leo.skill1">Samostatné riešenie</b></span>
+                <span><b data-i18n="experience.leo.skill2">Podpora používateľov</b></span>
+                <span><b data-i18n="experience.leo.skill3">Správa zariadení</b></span>
+                <span><b data-i18n="experience.leo.skill4">Lokálne IT prostredie</b></span>
+              </div>
             </div>
           </article>
 
           <article class="experience-item">
             <div class="experience-meta">
-              <span class="company" data-i18n="experience.ikea.company">IKEA · Full-time</span>
+              <span class="company"><span class="company-brand ikea" data-i18n="experience.ikea.companyName">IKEA</span> · <span data-i18n="experience.ikea.workType">Full-time</span></span>
               <h3 class="role" data-i18n="experience.ikea.role">Technical Support Specialist</h3>
-              <span class="duration" data-i18n="experience.ikea.duration">Apr 2023 - Apr 2025 · 2 yrs 1 mo</span>
+              <span class="duration" data-i18n="experience.ikea.duration">Apr 2023 - Apr 2025</span>
               <span class="location" data-i18n="experience.ikea.location">Slovakia · On-site</span>
             </div>
-            <div class="experience-skills">
-              <span><b data-i18n="experience.ikea.skill1">Device support</b></span>
-              <span><b data-i18n="experience.ikea.skill2">Lokálne IT</b></span>
-              <span><b data-i18n="experience.ikea.skill3">User training</b></span>
-              <span><b data-i18n="experience.ikea.skill4">Troubleshooting</b></span>
+            <div class="experience-details">
+              <p class="experience-summary" data-i18n="experience.ikea.copy">Technická podpora tímov, pracovísk a zariadení s dôrazom na rýchle riešenie problémov.</p>
+              <div class="experience-skills">
+                <span><b data-i18n="experience.ikea.skill1">Denná technická podpora</b></span>
+                <span><b data-i18n="experience.ikea.skill2">Riešenie problémov pod tlakom</b></span>
+                <span><b data-i18n="experience.ikea.skill3">Komunikácia s tímami</b></span>
+                <span><b data-i18n="experience.ikea.skill4">Používateľské školenia</b></span>
+              </div>
             </div>
           </article>
 
           <article class="experience-item">
             <div class="experience-meta">
-              <span class="company" data-i18n="experience.pcexpres.company">PCexpres · Freelance</span>
+              <span class="company"><span class="company-brand pcexpres" data-i18n="experience.pcexpres.companyName">PCexpres</span> · <span data-i18n="experience.pcexpres.workType">Freelance</span></span>
               <h3 class="role" data-i18n="experience.pcexpres.role">Freelance Mobile Device Repair Specialist</h3>
-              <span class="duration" data-i18n="experience.pcexpres.duration">Oct 2021 - Apr 2023 · 1 yr 7 mos</span>
+              <span class="duration" data-i18n="experience.pcexpres.duration">Oct 2021 - Apr 2023</span>
               <span class="location" data-i18n="experience.pcexpres.location">On-site</span>
             </div>
-            <div class="experience-skills">
-              <span><b data-i18n="experience.pcexpres.skill1">Mobile repair</b></span>
-              <span><b data-i18n="experience.pcexpres.skill2">PC repair</b></span>
-              <span><b data-i18n="experience.pcexpres.skill3">Customer care</b></span>
-              <span><b data-i18n="experience.pcexpres.skill4">On-site práca</b></span>
+            <div class="experience-details">
+              <p class="experience-summary" data-i18n="experience.pcexpres.copy">Diagnostika a opravy mobilných zariadení, počítačov a hardvéru priamo pre zákazníkov.</p>
+              <div class="experience-skills">
+                <span><b data-i18n="experience.pcexpres.skill1">Diagnostika porúch</b></span>
+                <span><b data-i18n="experience.pcexpres.skill2">Opravy telefónov a PC</b></span>
+                <span><b data-i18n="experience.pcexpres.skill3">Komunikácia so zákazníkom</b></span>
+                <span><b data-i18n="experience.pcexpres.skill4">Zodpovednosť za výsledok</b></span>
+              </div>
             </div>
           </article>
 
           <article class="experience-item">
             <div class="experience-meta">
-              <span class="company" data-i18n="experience.fixservis.company">FixServis · Full-time</span>
+              <span class="company"><span class="company-brand fixservis" data-i18n="experience.fixservis.companyName">FixServis</span> · <span data-i18n="experience.fixservis.workType">Full-time</span></span>
               <h3 class="role" data-i18n="experience.fixservis.role">Authorized Huawei Technician</h3>
-              <span class="duration" data-i18n="experience.fixservis.duration">Oct 2019 - Oct 2021 · 2 yrs 1 mo</span>
+              <span class="duration" data-i18n="experience.fixservis.duration">Oct 2019 - Oct 2021</span>
               <span class="location" data-i18n="experience.fixservis.location">Nitra Region, Slovakia · On-site</span>
             </div>
-            <div class="experience-skills">
-              <span><b data-i18n="experience.fixservis.skill1">Autorizované štandardy</b></span>
-              <span><b data-i18n="experience.fixservis.skill2">Diagnostika</b></span>
-              <span><b data-i18n="experience.fixservis.skill3">Menšia elektronika</b></span>
-              <span><b data-i18n="experience.fixservis.skill4">Zákaznícky servis</b></span>
+            <div class="experience-details">
+              <p class="experience-summary" data-i18n="experience.fixservis.copy">Autorizovaný servis, diagnostika a opravy zariadení podľa štandardov výrobcu.</p>
+              <div class="experience-skills">
+                <span><b data-i18n="experience.fixservis.skill1">Autorizované servisné postupy</b></span>
+                <span><b data-i18n="experience.fixservis.skill2">Diagnostika zariadení</b></span>
+                <span><b data-i18n="experience.fixservis.skill3">Opravy podľa štandardov</b></span>
+                <span><b data-i18n="experience.fixservis.skill4">Kontrola kvality</b></span>
+              </div>
             </div>
           </article>
         </div>
@@ -1387,8 +1688,7 @@
 
       <section id="contact" class="contact-band reveal" aria-labelledby="contact-title">
         <div>
-          <h2 id="contact-title" data-i18n="contact.title">Ak to má fungovať a vyzerať dobre, ozvi sa.</h2>
-          <p class="section-copy" data-i18n="contact.copy">Som otvorený IT supportu, opravám zariadení, webdesignu, iOS aplikáciám aj technickým nápadom, ktoré potrebujú premyslieť a dotiahnuť.</p>
+          <h2 id="contact-title" data-i18n="contact.title">Nápad, problém alebo technická výzva? Môžeme sa na to pozrieť.</h2>
         </div>
         <div class="actions">
           <a class="button primary" href="mailto:martinus.nagy@gmail.com">
@@ -1396,6 +1696,7 @@
             <span data-i18n="contact.email">Email</span>
           </a>
           <a class="button" href="https://www.linkedin.com/in/nagymartinus/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             <span>LinkedIn</span>
           </a>
         </div>
@@ -1411,9 +1712,10 @@
     const translations = {
       sk: {
         "nav.about": "O mne",
+        "nav.home": "Úvod",
         "nav.services": "Čo robím",
         "nav.contact": "Kontakt",
-        "hero.title": "Technika, ktorá funguje. <span class=\"tone\">Dizajn, ktorý drží.</span>",
+        "hero.title": "Technika, ktorá funguje.<br><span class=\"tone\">Dizajn, ktorý drží.</span><span class=\"tone detail-tone\">s citom pre detail.</span>",
         "hero.lead": "Som Martin Nagy, technický nadšenec s praxou v IT podpore, opravách elektroniky, webdesigne a vývoji iOS aplikácií. Rád riešim problémy, skladám veci do poriadku a dávam digitálnym nápadom čistú vizuálnu formu.",
         "hero.email": "Napísať email",
         "hero.work": "Pozrieť prácu",
@@ -1427,23 +1729,23 @@
         "tags.ios": "iOS app development",
         "tags.design": "Creative design",
         "services.label": "Služby",
-        "services.title": "Praktická technika, čisté riešenia.",
-        "services.it.title": "IT Support",
-        "services.it.copy": "Nastavenia, diagnostika, denné technické problémy, podpora používateľov a spoľahlivé udržiavanie systémov v chode.",
+        "services.title": "Od nápadu či problému po čisté riešenie.",
+        "services.it.title": "IT podpora",
+        "services.it.copy": "Riešim technické problémy od prvého kontaktu po funkčné riešenie. Pomáham používateľom, zariadeniam aj lokálnemu IT prostrediu fungovať spoľahlivo a prehľadne.",
         "services.repair.title": "Opravy elektroniky",
-        "services.repair.copy": "Skúsenosť s telefónmi, tabletmi, počítačmi a menšou elektronikou, vrátane kontroly hardvéru a komunikácie so zákazníkom.",
+        "services.repair.copy": "Diagnostika a opravy zariadení s dôrazom na presnosť, postup a detail. Skúsenosť s telefónmi, tabletmi, počítačmi aj menšou elektronikou.",
         "services.design.title": "Webdesign & iOS Apps",
-        "services.design.copy": "Webové koncepty, landing pages, UI estetika a vývoj iOS aplikácií s dôrazom na čistý vizuál, použiteľnosť a technický detail.",
+        "services.design.copy": "Tvorím čisté weby, landing pages a app koncepty, ktoré majú zrozumiteľnú štruktúru, dobrý vizuálny cit a fungujú prirodzene na rôznych zariadeniach.",
         "contact.title": "Poďme niečo vyriešiť.",
-        "contact.copy": "Som otvorený technickým, webovým, dizajnovým aj app nápadom.",
         "contact.email": "Email",
         "footer.note": "Custom landing page"
       },
       cs: {
         "nav.about": "O mně",
+        "nav.home": "Úvod",
         "nav.services": "Co dělám",
         "nav.contact": "Kontakt",
-        "hero.title": "Technika, která funguje. <span class=\"tone\">Design, který drží.</span>",
+        "hero.title": "Technika, která funguje.<br><span class=\"tone\">Design, který drží.</span><span class=\"tone detail-tone\">s citem pro detail.</span>",
         "hero.lead": "Jsem Martin Nagy, technický nadšenec s praxí v IT podpoře, opravách elektroniky, webdesignu a vývoji iOS aplikací. Rád řeším problémy, dávám věci do pořádku a převádím digitální nápady do čisté vizuální formy.",
         "hero.email": "Napsat e-mail",
         "hero.work": "Prohlédnout práci",
@@ -1457,24 +1759,24 @@
         "tags.ios": "iOS app development",
         "tags.design": "Creative design",
         "services.label": "Služby",
-        "services.title": "Praktická technika, čistá řešení.",
+        "services.title": "Od nápadu či problému k čistému řešení.",
         "services.copy": "Silná kombinace uživatelské podpory, diagnostiky zařízení, oprav, webdesignu a vývoje iOS aplikací.",
-        "services.it.title": "IT Support",
-        "services.it.copy": "Nastavení, diagnostika, každodenní technické problémy, podpora uživatelů a spolehlivé udržování systémů v chodu.",
+        "services.it.title": "IT podpora",
+        "services.it.copy": "Řeším technické problémy od prvního kontaktu po funkční řešení. Pomáhám uživatelům, zařízením i lokálnímu IT prostředí fungovat spolehlivě a přehledně.",
         "services.repair.title": "Opravy elektroniky",
-        "services.repair.copy": "Zkušenost s telefony, tablety, počítači a menší elektronikou, včetně kontroly hardwaru a komunikace se zákazníkem.",
+        "services.repair.copy": "Diagnostika a opravy zařízení s důrazem na přesnost, postup a detail. Zkušenost s telefony, tablety, počítači i menší elektronikou.",
         "services.design.title": "Webdesign & iOS Apps",
-        "services.design.copy": "Webové koncepty, landing pages, UI estetika a vývoj iOS aplikací s důrazem na čistý vizuál, použitelnost a technický detail.",
+        "services.design.copy": "Tvořím čisté weby, landing pages a app koncepty, které mají srozumitelnou strukturu, dobrý vizuální cit a fungují přirozeně na různých zařízeních.",
         "contact.title": "Pojďme něco vyřešit.",
-        "contact.copy": "Jsem otevřený technickým, webovým, designovým i app nápadům.",
         "contact.email": "E-mail",
         "footer.note": "Custom landing page"
       },
       en: {
         "nav.about": "About",
+        "nav.home": "Home",
         "nav.services": "What I do",
         "nav.contact": "Contact",
-        "hero.title": "Tech that works. <span class=\"tone\">Design that holds up.</span>",
+        "hero.title": "Tech that works.<br><span class=\"tone\">Design that holds up.</span><span class=\"tone detail-tone\">with an eye for detail.</span>",
         "hero.lead": "I am Martin Nagy, a tech enthusiast with hands-on experience in IT support, electronics repair, webdesign, and iOS app development. I like solving problems, bringing devices back into shape, and giving digital ideas a clean visual form.",
         "hero.email": "Send email",
         "hero.work": "View work",
@@ -1488,16 +1790,15 @@
         "tags.ios": "iOS app development",
         "tags.design": "Creative design",
         "services.label": "Services",
-        "services.title": "Practical tech, clean solutions.",
+        "services.title": "From an idea or problem to a clean solution.",
         "services.copy": "A strong mix of user support, device diagnostics, repair experience, webdesign, and iOS app development.",
         "services.it.title": "IT Support",
-        "services.it.copy": "Setup, diagnostics, everyday technical issues, user assistance, and keeping workplace systems reliable.",
+        "services.it.copy": "I solve technical issues from first contact to a working fix, helping users, devices, and local IT environments stay reliable and easy to understand.",
         "services.repair.title": "Electronics Repair",
-        "services.repair.copy": "Experience with phones, tablets, PCs, and smaller electronics, including hardware checks and customer-facing solutions.",
+        "services.repair.copy": "Device diagnostics and repair with attention to accuracy, process, and detail. Hands-on experience with phones, tablets, computers, and small electronics.",
         "services.design.title": "Webdesign & iOS Apps",
-        "services.design.copy": "Web concepts, landing pages, UI aesthetics, and iOS app development with a focus on clean visuals, usability, and technical detail.",
+        "services.design.copy": "I create clean websites, landing pages, and app concepts with clear structure, visual care, and natural usability across devices.",
         "contact.title": "Let’s solve something.",
-        "contact.copy": "Open to tech, web, design, and app ideas.",
         "contact.email": "Email",
         "footer.note": "Custom landing page"
       }
@@ -1505,10 +1806,10 @@
 
     Object.assign(translations.sk, {
       "nav.experience": "Prax",
-      "hero.title": "IT support. Opravy. <span class=\"tone\">Digitálne riešenia.</span>",
+      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone\">Digitálne riešenia.</span><span class=\"tone detail-tone\">s citom pre detail.</span>",
       "hero.lead": "Pomáham udržať techniku, zariadenia a digitálne prostredia v chode. Spájam reálnu prax v IT podpore, troubleshootingu, opravách elektroniky, webdesigne a vývoji iOS aplikácií.",
       "hero.work": "Pozrieť prax",
-      "rail.support.title": "IT Support",
+      "rail.support.title": "IT podpora",
       "rail.support.copy": "používatelia, zariadenia, infra",
       "rail.repair.title": "Repair",
       "rail.repair.copy": "telefóny, tablety, PC",
@@ -1527,59 +1828,66 @@
       "metrics.digital.value": "Digital",
       "metrics.digital.label": "Webdesign, responzívne stránky a iOS aplikácie",
       "services.label": "Skills",
-      "services.title": "Reálne schopnosti, ktoré sa dajú použiť hneď.",
-      "services.it.copy": "Troubleshooting, device support, lokálna infraštruktúra, používateľská podpora a schopnosť držať technické prostredie prehľadné.",
-      "services.repair.copy": "Diagnostika telefónov, tabletov, počítačov a menšej elektroniky, práca s hardvérom, servisnými postupmi a detailom.",
-      "services.design.copy": "Webdesign, landing pages, responzívne rozhrania a iOS aplikácie s dôrazom na použiteľnosť, vizuálnu čistotu a technický detail.",
+      "services.title": "Od nápadu či problému po čisté riešenie.",
+      "services.it.copy": "Riešim technické problémy od prvého kontaktu po funkčné riešenie. Pomáham používateľom, zariadeniam aj lokálnemu IT prostrediu fungovať spoľahlivo a prehľadne.",
+      "services.repair.copy": "Diagnostika a opravy zariadení s dôrazom na presnosť, postup a detail. Skúsenosť s telefónmi, tabletmi, počítačmi aj menšou elektronikou.",
+      "services.design.copy": "Tvorím čisté weby, landing pages a app koncepty, ktoré majú zrozumiteľnú štruktúru, dobrý vizuálny cit a fungujú prirodzene na rôznych zariadeniach.",
       "experience.label": "Experience",
       "experience.title": "Skúsenosti stručne. Detaily patria na LinkedIn.",
       "experience.leo.company": "Leo Express · Full-time",
+      "experience.leo.companyName": "Leo Express",
+      "experience.leo.workType": "Full-time",
       "experience.leo.role": "IT Support Specialist",
-      "experience.leo.duration": "May 2025 - Present · 1 yr 1 mo",
+      "experience.leo.duration": "May 2025 - Present",
       "experience.leo.location": "Bratislava, Slovakia · Hybrid",
-      "experience.leo.copy": "",
-      "experience.leo.skill1": "IT support",
-      "experience.leo.skill2": "Infraštruktúra",
-      "experience.leo.skill3": "Incident handling",
-      "experience.leo.skill4": "Spoľahlivosť služieb",
+      "experience.leo.copy": "Podpora používateľov, zariadení a lokálneho IT prostredia v každodennej prevádzke.",
+      "experience.leo.skill1": "Samostatné riešenie",
+      "experience.leo.skill2": "Podpora používateľov",
+      "experience.leo.skill3": "Správa zariadení",
+      "experience.leo.skill4": "Lokálne IT prostredie",
       "experience.ikea.company": "IKEA · Full-time",
+      "experience.ikea.companyName": "IKEA",
+      "experience.ikea.workType": "Full-time",
       "experience.ikea.role": "Technical Support Specialist",
-      "experience.ikea.duration": "Apr 2023 - Apr 2025 · 2 yrs 1 mo",
+      "experience.ikea.duration": "Apr 2023 - Apr 2025",
       "experience.ikea.location": "Slovakia · On-site",
-      "experience.ikea.copy": "",
-      "experience.ikea.skill1": "Device support",
-      "experience.ikea.skill2": "Lokálne IT",
-      "experience.ikea.skill3": "User training",
-      "experience.ikea.skill4": "Troubleshooting",
+      "experience.ikea.copy": "Technická podpora tímov, pracovísk a zariadení s dôrazom na rýchle riešenie problémov.",
+      "experience.ikea.skill1": "Denná technická podpora",
+      "experience.ikea.skill2": "Riešenie problémov pod tlakom",
+      "experience.ikea.skill3": "Komunikácia s tímami",
+      "experience.ikea.skill4": "Používateľské školenia",
       "experience.pcexpres.company": "PCexpres · Freelance",
+      "experience.pcexpres.companyName": "PCexpres",
+      "experience.pcexpres.workType": "Freelance",
       "experience.pcexpres.role": "Freelance Mobile Device Repair Specialist",
-      "experience.pcexpres.duration": "Oct 2021 - Apr 2023 · 1 yr 7 mos",
+      "experience.pcexpres.duration": "Oct 2021 - Apr 2023",
       "experience.pcexpres.location": "On-site",
-      "experience.pcexpres.copy": "",
-      "experience.pcexpres.skill1": "Mobile repair",
-      "experience.pcexpres.skill2": "PC repair",
-      "experience.pcexpres.skill3": "Customer care",
-      "experience.pcexpres.skill4": "On-site práca",
+      "experience.pcexpres.copy": "Diagnostika a opravy mobilných zariadení, počítačov a hardvéru priamo pre zákazníkov.",
+      "experience.pcexpres.skill1": "Diagnostika porúch",
+      "experience.pcexpres.skill2": "Opravy telefónov a PC",
+      "experience.pcexpres.skill3": "Komunikácia so zákazníkom",
+      "experience.pcexpres.skill4": "Zodpovednosť za výsledok",
       "experience.fixservis.company": "FixServis · Full-time",
+      "experience.fixservis.companyName": "FixServis",
+      "experience.fixservis.workType": "Full-time",
       "experience.fixservis.role": "Authorized Huawei Technician",
-      "experience.fixservis.duration": "Oct 2019 - Oct 2021 · 2 yrs 1 mo",
+      "experience.fixservis.duration": "Oct 2019 - Oct 2021",
       "experience.fixservis.location": "Nitra Region, Slovakia · On-site",
-      "experience.fixservis.copy": "",
-      "experience.fixservis.skill1": "Autorizované štandardy",
-      "experience.fixservis.skill2": "Diagnostika",
-      "experience.fixservis.skill3": "Menšia elektronika",
-      "experience.fixservis.skill4": "Zákaznícky servis",
-      "contact.title": "Ak to má fungovať a vyzerať dobre, ozvi sa.",
-      "contact.copy": "Som otvorený IT supportu, opravám zariadení, webdesignu, iOS aplikáciám aj technickým nápadom, ktoré potrebujú premyslieť a dotiahnuť.",
+      "experience.fixservis.copy": "Autorizovaný servis, diagnostika a opravy zariadení podľa štandardov výrobcu.",
+      "experience.fixservis.skill1": "Autorizované servisné postupy",
+      "experience.fixservis.skill2": "Diagnostika zariadení",
+      "experience.fixservis.skill3": "Opravy podľa štandardov",
+      "experience.fixservis.skill4": "Kontrola kvality",
+      "contact.title": "Nápad, problém alebo technická výzva? Môžeme sa na to pozrieť.",
       "footer.note": ""
     });
 
     Object.assign(translations.cs, {
       "nav.experience": "Praxe",
-      "hero.title": "IT support. Opravy. <span class=\"tone\">Digitální řešení.</span>",
+      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone\">Digitální řešení.</span><span class=\"tone detail-tone\">s citem pro detail.</span>",
       "hero.lead": "Pomáhám udržet techniku, zařízení a digitální prostředí v chodu. Spojuji reálnou praxi v IT podpoře, troubleshootingu, opravách elektroniky, webdesignu a vývoji iOS aplikací.",
       "hero.work": "Prohlédnout praxi",
-      "rail.support.title": "IT Support",
+      "rail.support.title": "IT podpora",
       "rail.support.copy": "uživatelé, zařízení, infra",
       "rail.repair.title": "Repair",
       "rail.repair.copy": "telefony, tablety, PC",
@@ -1598,57 +1906,64 @@
       "metrics.digital.value": "Digital",
       "metrics.digital.label": "Webdesign, responzivní stránky a iOS aplikace",
       "services.label": "Skills",
-      "services.title": "Reálné schopnosti, které se dají použít hned.",
+      "services.title": "Od nápadu či problému k čistému řešení.",
       "services.copy": "Stránka je stručná, ale základ je jasný: technická podpora, hardware, servisní myšlení, vizuální cit a schopnost tvořit digitální věci, které nepůsobí náhodně.",
-      "services.it.copy": "Troubleshooting, device support, lokální infrastruktura, uživatelská podpora a schopnost udržet technické prostředí přehledné.",
-      "services.repair.copy": "Diagnostika telefonů, tabletů, počítačů a menší elektroniky, práce s hardwarem, servisními postupy a detailem.",
-      "services.design.copy": "Webdesign, landing pages, responzivní rozhraní a iOS aplikace s důrazem na použitelnost, vizuální čistotu a technický detail.",
+      "services.it.copy": "Řeším technické problémy od prvního kontaktu po funkční řešení. Pomáhám uživatelům, zařízením i lokálnímu IT prostředí fungovat spolehlivě a přehledně.",
+      "services.repair.copy": "Diagnostika a opravy zařízení s důrazem na přesnost, postup a detail. Zkušenost s telefony, tablety, počítači i menší elektronikou.",
+      "services.design.copy": "Tvořím čisté weby, landing pages a app koncepty, které mají srozumitelnou strukturu, dobrý vizuální cit a fungují přirozeně na různých zařízeních.",
       "experience.label": "Experience",
       "experience.title": "Zkušenosti stručně. Detaily patří na LinkedIn.",
       "experience.leo.company": "Leo Express · Full-time",
+      "experience.leo.companyName": "Leo Express",
+      "experience.leo.workType": "Full-time",
       "experience.leo.role": "IT Support Specialist",
-      "experience.leo.duration": "May 2025 - Present · 1 yr 1 mo",
+      "experience.leo.duration": "May 2025 - Present",
       "experience.leo.location": "Bratislava, Slovakia · Hybrid",
-      "experience.leo.copy": "",
-      "experience.leo.skill1": "IT support",
-      "experience.leo.skill2": "Infrastruktura",
-      "experience.leo.skill3": "Incident handling",
-      "experience.leo.skill4": "Spolehlivost služeb",
+      "experience.leo.copy": "Podpora uživatelů, zařízení a lokálního IT prostředí v každodenním provozu.",
+      "experience.leo.skill1": "Samostatné řešení",
+      "experience.leo.skill2": "Podpora uživatelů",
+      "experience.leo.skill3": "Správa zařízení",
+      "experience.leo.skill4": "Lokální IT prostředí",
       "experience.ikea.company": "IKEA · Full-time",
+      "experience.ikea.companyName": "IKEA",
+      "experience.ikea.workType": "Full-time",
       "experience.ikea.role": "Technical Support Specialist",
-      "experience.ikea.duration": "Apr 2023 - Apr 2025 · 2 yrs 1 mo",
+      "experience.ikea.duration": "Apr 2023 - Apr 2025",
       "experience.ikea.location": "Slovakia · On-site",
-      "experience.ikea.copy": "",
-      "experience.ikea.skill1": "Device support",
-      "experience.ikea.skill2": "Lokální IT",
-      "experience.ikea.skill3": "User training",
-      "experience.ikea.skill4": "Troubleshooting",
+      "experience.ikea.copy": "Technická podpora týmů, pracovišť a zařízení s důrazem na rychlé řešení problémů.",
+      "experience.ikea.skill1": "Denní technická podpora",
+      "experience.ikea.skill2": "Řešení problémů pod tlakem",
+      "experience.ikea.skill3": "Komunikace s týmy",
+      "experience.ikea.skill4": "Školení uživatelů",
       "experience.pcexpres.company": "PCexpres · Freelance",
+      "experience.pcexpres.companyName": "PCexpres",
+      "experience.pcexpres.workType": "Freelance",
       "experience.pcexpres.role": "Freelance Mobile Device Repair Specialist",
-      "experience.pcexpres.duration": "Oct 2021 - Apr 2023 · 1 yr 7 mos",
+      "experience.pcexpres.duration": "Oct 2021 - Apr 2023",
       "experience.pcexpres.location": "On-site",
-      "experience.pcexpres.copy": "",
-      "experience.pcexpres.skill1": "Mobile repair",
-      "experience.pcexpres.skill2": "PC repair",
-      "experience.pcexpres.skill3": "Customer care",
-      "experience.pcexpres.skill4": "On-site práce",
+      "experience.pcexpres.copy": "Diagnostika a opravy mobilních zařízení, počítačů a hardwaru přímo pro zákazníky.",
+      "experience.pcexpres.skill1": "Diagnostika závad",
+      "experience.pcexpres.skill2": "Opravy telefonů a PC",
+      "experience.pcexpres.skill3": "Komunikace se zákazníkem",
+      "experience.pcexpres.skill4": "Odpovědnost za výsledek",
       "experience.fixservis.company": "FixServis · Full-time",
+      "experience.fixservis.companyName": "FixServis",
+      "experience.fixservis.workType": "Full-time",
       "experience.fixservis.role": "Authorized Huawei Technician",
-      "experience.fixservis.duration": "Oct 2019 - Oct 2021 · 2 yrs 1 mo",
+      "experience.fixservis.duration": "Oct 2019 - Oct 2021",
       "experience.fixservis.location": "Nitra Region, Slovakia · On-site",
-      "experience.fixservis.copy": "",
-      "experience.fixservis.skill1": "Autorizované standardy",
-      "experience.fixservis.skill2": "Diagnostika",
-      "experience.fixservis.skill3": "Menší elektronika",
-      "experience.fixservis.skill4": "Zákaznický servis",
-      "contact.title": "Když to má fungovat a vypadat dobře, ozvi se.",
-      "contact.copy": "Jsem otevřený IT supportu, opravám zařízení, webdesignu, iOS aplikacím i technickým nápadům, které potřebují promyslet a dotáhnout.",
+      "experience.fixservis.copy": "Autorizovaný servis, diagnostika a opravy zařízení podle standardů výrobce.",
+      "experience.fixservis.skill1": "Autorizované servisní postupy",
+      "experience.fixservis.skill2": "Diagnostika zařízení",
+      "experience.fixservis.skill3": "Opravy podle standardů",
+      "experience.fixservis.skill4": "Kontrola kvality",
+      "contact.title": "Nápad, problém nebo technická výzva? Můžeme se na to podívat.",
       "footer.note": ""
     });
 
     Object.assign(translations.en, {
       "nav.experience": "Experience",
-      "hero.title": "IT support. Repair. <span class=\"tone\">Digital work.</span>",
+      "hero.title": "IT support.<br>Repair.<br><span class=\"tone\">Digital work.</span><span class=\"tone detail-tone\">with an eye for detail.</span>",
       "hero.lead": "I help keep technology, devices, and digital environments running. I combine real experience in IT support, troubleshooting, electronics repair, webdesign, and iOS app development.",
       "hero.work": "View experience",
       "rail.support.title": "IT Support",
@@ -1670,52 +1985,59 @@
       "metrics.digital.value": "Digital",
       "metrics.digital.label": "Webdesign, responsive pages, and iOS apps",
       "services.label": "Skills",
-      "services.title": "Real skills that are useful right away.",
+      "services.title": "From an idea or problem to a clean solution.",
       "services.copy": "This page is compact, but the base is clear: technical support, hardware, repair thinking, visual taste, and the ability to build digital things that feel intentional.",
-      "services.it.copy": "Troubleshooting, device support, local infrastructure, user assistance, and keeping technical environments understandable.",
-      "services.repair.copy": "Diagnostics for phones, tablets, computers, and small electronics, with hands-on hardware work and attention to service detail.",
-      "services.design.copy": "Webdesign, landing pages, responsive interfaces, and iOS apps focused on usability, clean visuals, and technical detail.",
+      "services.it.copy": "I solve technical issues from first contact to a working fix, helping users, devices, and local IT environments stay reliable and easy to understand.",
+      "services.repair.copy": "Device diagnostics and repair with attention to accuracy, process, and detail. Hands-on experience with phones, tablets, computers, and small electronics.",
+      "services.design.copy": "I create clean websites, landing pages, and app concepts with clear structure, visual care, and natural usability across devices.",
       "experience.label": "Experience",
       "experience.title": "Experience in brief. Details belong on LinkedIn.",
       "experience.copy": "This is a simple overview of real roles and skills. Full job descriptions, projects, and context can live on LinkedIn.",
       "experience.leo.company": "Leo Express · Full-time",
+      "experience.leo.companyName": "Leo Express",
+      "experience.leo.workType": "Full-time",
       "experience.leo.role": "IT Support Specialist",
-      "experience.leo.duration": "May 2025 - Present · 1 yr 1 mo",
+      "experience.leo.duration": "May 2025 - Present",
       "experience.leo.location": "Bratislava, Slovakia · Hybrid",
-      "experience.leo.copy": "",
-      "experience.leo.skill1": "IT support",
-      "experience.leo.skill2": "Infrastructure",
-      "experience.leo.skill3": "Incident handling",
-      "experience.leo.skill4": "Service reliability",
+      "experience.leo.copy": "Supporting users, devices, and local IT environments in daily operations.",
+      "experience.leo.skill1": "Independent solving",
+      "experience.leo.skill2": "User support",
+      "experience.leo.skill3": "Device management",
+      "experience.leo.skill4": "Local IT environment",
       "experience.ikea.company": "IKEA · Full-time",
+      "experience.ikea.companyName": "IKEA",
+      "experience.ikea.workType": "Full-time",
       "experience.ikea.role": "Technical Support Specialist",
-      "experience.ikea.duration": "Apr 2023 - Apr 2025 · 2 yrs 1 mo",
+      "experience.ikea.duration": "Apr 2023 - Apr 2025",
       "experience.ikea.location": "Slovakia · On-site",
-      "experience.ikea.copy": "",
-      "experience.ikea.skill1": "Device support",
-      "experience.ikea.skill2": "Local IT",
-      "experience.ikea.skill3": "User training",
-      "experience.ikea.skill4": "Troubleshooting",
+      "experience.ikea.copy": "Technical support for teams, workplaces, and devices with a focus on fast problem solving.",
+      "experience.ikea.skill1": "Daily technical support",
+      "experience.ikea.skill2": "Solving issues under pressure",
+      "experience.ikea.skill3": "Team communication",
+      "experience.ikea.skill4": "User training",
       "experience.pcexpres.company": "PCexpres · Freelance",
+      "experience.pcexpres.companyName": "PCexpres",
+      "experience.pcexpres.workType": "Freelance",
       "experience.pcexpres.role": "Freelance Mobile Device Repair Specialist",
-      "experience.pcexpres.duration": "Oct 2021 - Apr 2023 · 1 yr 7 mos",
+      "experience.pcexpres.duration": "Oct 2021 - Apr 2023",
       "experience.pcexpres.location": "On-site",
-      "experience.pcexpres.copy": "",
-      "experience.pcexpres.skill1": "Mobile repair",
-      "experience.pcexpres.skill2": "PC repair",
-      "experience.pcexpres.skill3": "Customer care",
-      "experience.pcexpres.skill4": "On-site work",
+      "experience.pcexpres.copy": "Diagnostics and repair for mobile devices, computers, and hardware directly for customers.",
+      "experience.pcexpres.skill1": "Fault diagnostics",
+      "experience.pcexpres.skill2": "Phone and PC repair",
+      "experience.pcexpres.skill3": "Customer communication",
+      "experience.pcexpres.skill4": "Responsibility for results",
       "experience.fixservis.company": "FixServis · Full-time",
+      "experience.fixservis.companyName": "FixServis",
+      "experience.fixservis.workType": "Full-time",
       "experience.fixservis.role": "Authorized Huawei Technician",
-      "experience.fixservis.duration": "Oct 2019 - Oct 2021 · 2 yrs 1 mo",
+      "experience.fixservis.duration": "Oct 2019 - Oct 2021",
       "experience.fixservis.location": "Nitra Region, Slovakia · On-site",
-      "experience.fixservis.copy": "",
-      "experience.fixservis.skill1": "Authorized standards",
-      "experience.fixservis.skill2": "Diagnostics",
-      "experience.fixservis.skill3": "Small electronics",
-      "experience.fixservis.skill4": "Customer-facing service",
-      "contact.title": "If it should work and look good, let’s connect.",
-      "contact.copy": "I am open to IT support, device repair, webdesign, iOS apps, and technical ideas that need structure and follow-through.",
+      "experience.fixservis.copy": "Authorized service, diagnostics, and device repairs following manufacturer standards.",
+      "experience.fixservis.skill1": "Authorized service procedures",
+      "experience.fixservis.skill2": "Device diagnostics",
+      "experience.fixservis.skill3": "Repairs by standards",
+      "experience.fixservis.skill4": "Quality control",
+      "contact.title": "An idea, a problem, or a technical challenge? We can take a look.",
       "footer.note": ""
     });
 
@@ -1860,7 +2182,7 @@
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
     if (finePointer.matches) {
-      document.querySelectorAll(".card").forEach((card) => {
+      document.querySelectorAll(".card, .rail-item, .experience-item, .contact-band").forEach((card) => {
         card.addEventListener("pointermove", (event) => {
           const rect = card.getBoundingClientRect();
           card.style.setProperty("--x", `${((event.clientX - rect.left) / rect.width) * 100}%`);
