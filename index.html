@@ -564,13 +564,6 @@
       background: var(--panel);
       box-shadow: var(--shadow);
       isolation: isolate;
-      transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
-    }
-
-    .portrait:hover {
-      transform: translateY(-3px);
-      border-color: var(--line-strong);
-      box-shadow: 0 24px 72px rgba(0, 0, 0, 0.36), 0 0 22px rgba(143, 247, 210, 0.035);
     }
 
     .portrait::before {
@@ -1054,8 +1047,14 @@
     }
 
     .contact-band h2 {
-      max-width: 820px;
+      max-width: none;
       margin: 0;
+      white-space: normal;
+    }
+
+    .contact-keep {
+      display: inline-block;
+      white-space: nowrap;
     }
 
     .contact-band .actions {
@@ -1117,6 +1116,85 @@
       padding: 0 0 36px;
       color: rgba(255, 255, 255, 0.44);
       font-size: 13px;
+    }
+
+    .easter-egg {
+      padding: 0 0 42px;
+      text-align: center;
+    }
+
+    .easter-trigger {
+      appearance: none;
+      border: 0;
+      border-bottom: 1px solid rgba(143, 247, 210, 0.34);
+      padding: 0 0 4px;
+      color: rgba(247, 250, 246, 0.56);
+      background: transparent;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      transition: color 220ms ease, border-color 220ms ease, text-shadow 220ms ease;
+    }
+
+    .easter-trigger:hover {
+      color: rgba(184, 255, 232, 0.9);
+      border-color: rgba(184, 255, 232, 0.72);
+      text-shadow: 0 0 18px rgba(143, 247, 210, 0.26);
+    }
+
+    .binary-runner {
+      --glow-alpha: 0;
+      position: relative;
+      overflow: hidden;
+      max-width: 720px;
+      margin: 18px auto 0;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 46%),
+        linear-gradient(135deg, rgba(143, 247, 210, 0.08), rgba(135, 168, 255, 0.045)),
+        rgba(6, 9, 7, 0.74);
+      box-shadow: 0 18px 56px rgba(0, 0, 0, 0.24);
+      text-align: left;
+      transition: border-color 280ms ease, box-shadow 280ms ease, --glow-alpha 360ms ease;
+    }
+
+    .binary-runner:hover {
+      --glow-alpha: 0.065;
+      border-color: rgba(143, 247, 210, 0.26);
+      box-shadow: 0 20px 62px rgba(0, 0, 0, 0.28), 0 0 20px rgba(143, 247, 210, 0.035);
+    }
+
+    .binary-runner-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px 0;
+      color: rgba(247, 250, 246, 0.68);
+      font-size: 12px;
+      font-weight: 720;
+    }
+
+    .binary-runner-score {
+      color: rgba(184, 255, 232, 0.92);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .binary-runner-canvas {
+      display: block;
+      width: 100%;
+      height: clamp(146px, 20vw, 176px);
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .binary-runner-state {
+      min-height: 18px;
+      padding: 0 14px 12px;
+      color: rgba(255, 255, 255, 0.46);
+      font-size: 12px;
+      text-align: center;
     }
 
     .reveal {
@@ -1181,6 +1259,10 @@
         grid-template-columns: 1fr;
       }
 
+      .contact-band h2 {
+        white-space: normal;
+      }
+
       .contact-band .actions {
         justify-content: flex-start;
       }
@@ -1209,11 +1291,21 @@
       }
 
       .experience-skills {
+        display: grid;
+        grid-template-columns: 1fr;
         margin-top: 18px;
+        gap: 8px;
       }
 
       .experience-skills span {
+        width: 100%;
         min-height: 24px;
+        justify-content: flex-start;
+        text-align: left;
+      }
+
+      .experience-skills b {
+        text-align: left;
       }
     }
 
@@ -1297,21 +1389,34 @@
       }
 
       .hero {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr) minmax(118px, 34vw);
         min-height: auto;
-        gap: 26px;
+        gap: 18px;
+        align-items: start;
         padding-top: 30px;
         padding-bottom: 46px;
       }
 
       .profile {
-        justify-self: center;
-        width: min(340px, 88vw);
-        order: 2;
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+        width: min(170px, 34vw);
       }
 
       .hero-copy {
-        order: 1;
+        display: contents;
+      }
+
+      .hero-copy h1 {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .hero-copy .lead,
+      .hero-copy .skill-rail,
+      .hero-copy .actions {
+        grid-column: 1 / -1;
       }
 
       .lead {
@@ -1349,7 +1454,7 @@
 
       h1 {
         max-width: 100%;
-        font-size: clamp(38px, 11.8vw, 54px);
+        font-size: clamp(30px, 8.6vw, 46px);
         line-height: 1.1;
         letter-spacing: -0.012em;
       }
@@ -1363,7 +1468,7 @@
       }
 
       .detail-tone {
-        font-size: 0.64em;
+        font-size: 0.62em;
         line-height: 1.2;
         margin-top: -0.12em;
         padding-bottom: 0.22em;
@@ -1372,26 +1477,26 @@
       }
 
       .lead {
-        margin-top: 26px;
+        margin-top: 10px;
       }
 
       .hero {
-        gap: 24px;
+        gap: 18px;
         padding-top: 26px;
         padding-bottom: 42px;
       }
 
       .profile {
-        width: min(360px, 100%);
+        width: min(156px, 35vw);
       }
 
       .portrait {
-        aspect-ratio: 1.08;
-        border-radius: 20px;
+        aspect-ratio: 0.82;
+        border-radius: 18px;
       }
 
       .portrait img {
-        object-position: center 25%;
+        object-position: center 18%;
       }
 
       .portrait::after {
@@ -1400,7 +1505,7 @@
       }
 
       .lead {
-        margin-top: 20px;
+        margin-top: 10px;
         font-size: 16px;
         line-height: 1.68;
       }
@@ -1433,16 +1538,24 @@
         width: 100%;
       }
 
+      .hero .actions a[href^="mailto:"] {
+        order: 1;
+      }
+
+      .hero .actions a[href*="linkedin.com"] {
+        order: 2;
+      }
+
+      .hero .actions a[href="#experience"] {
+        order: 3;
+      }
+
       .experience-item {
         padding: 20px;
       }
 
       .role {
         font-size: clamp(21px, 7vw, 28px);
-      }
-
-      .experience-skills {
-        row-gap: 8px;
       }
 
       .experience-skills span {
@@ -1464,10 +1577,39 @@
 
       .footer {
         flex-direction: column;
+        padding-bottom: 26px;
       }
+
+      .easter-egg {
+        padding-bottom: 34px;
+      }
+
+      .binary-runner {
+        margin-top: 16px;
+      }
+
+      .binary-runner-head {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
     }
 
     @media (max-width: 430px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr) minmax(108px, 32vw);
+        column-gap: 12px;
+      }
+
+      .profile {
+        width: min(132px, 32vw);
+      }
+
+      h1 {
+        font-size: clamp(28px, 8.2vw, 38px);
+      }
+
       .skill-rail {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -1493,7 +1635,9 @@
 
     @media (hover: none), (pointer: coarse) {
       .cursor-tech {
-        display: none;
+        display: block;
+        opacity: 0.3;
+        mix-blend-mode: screen;
       }
     }
   </style>
@@ -1554,7 +1698,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
               <span data-i18n="hero.work">Pozrieť skúsenosti</span>
             </a>
-            <a class="button" href="https://www.linkedin.com/in/nagymartinus/" target="_blank" rel="noopener">
+            <a class="button" href="https://www.linkedin.com/in/nagymartinus/" data-linkedin-app="linkedin://in/nagymartinus" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               <span>LinkedIn</span>
             </a>
@@ -1635,7 +1779,7 @@
               <span class="company"><span class="company-brand ikea" data-i18n="experience.ikea.companyName">IKEA</span> · <span data-i18n="experience.ikea.workType">Full-time</span></span>
               <h3 class="role" data-i18n="experience.ikea.role">Technical Support Specialist</h3>
               <span class="duration" data-i18n="experience.ikea.duration">Apr 2023 - Apr 2025</span>
-              <span class="location" data-i18n="experience.ikea.location">Slovakia · On-site</span>
+              <span class="location" data-i18n="experience.ikea.location">Bratislava, Slovakia · On-site</span>
             </div>
             <div class="experience-details">
               <p class="experience-summary" data-i18n="experience.ikea.copy">Technická podpora tímov, pracovísk a zariadení s dôrazom na rýchle riešenie problémov.</p>
@@ -1653,7 +1797,7 @@
               <span class="company"><span class="company-brand pcexpres" data-i18n="experience.pcexpres.companyName">PCexpres</span> · <span data-i18n="experience.pcexpres.workType">Freelance</span></span>
               <h3 class="role" data-i18n="experience.pcexpres.role">Freelance Mobile Device Repair Specialist</h3>
               <span class="duration" data-i18n="experience.pcexpres.duration">Oct 2021 - Apr 2023</span>
-              <span class="location" data-i18n="experience.pcexpres.location">On-site</span>
+              <span class="location" data-i18n="experience.pcexpres.location">Západné a stredné Slovensko · On-site</span>
             </div>
             <div class="experience-details">
               <p class="experience-summary" data-i18n="experience.pcexpres.copy">Diagnostika a opravy mobilných zariadení, počítačov a hardvéru priamo pre zákazníkov.</p>
@@ -1671,7 +1815,7 @@
               <span class="company"><span class="company-brand fixservis" data-i18n="experience.fixservis.companyName">FixServis</span> · <span data-i18n="experience.fixservis.workType">Full-time</span></span>
               <h3 class="role" data-i18n="experience.fixservis.role">Authorized Huawei Technician</h3>
               <span class="duration" data-i18n="experience.fixservis.duration">Oct 2019 - Oct 2021</span>
-              <span class="location" data-i18n="experience.fixservis.location">Nitra Region, Slovakia · On-site</span>
+              <span class="location" data-i18n="experience.fixservis.location">Nitra, Slovakia · On-site</span>
             </div>
             <div class="experience-details">
               <p class="experience-summary" data-i18n="experience.fixservis.copy">Autorizovaný servis, diagnostika a opravy zariadení podľa štandardov výrobcu.</p>
@@ -1688,14 +1832,14 @@
 
       <section id="contact" class="contact-band reveal" aria-labelledby="contact-title">
         <div>
-          <h2 id="contact-title" data-i18n="contact.title">Nápad, problém alebo technická výzva? Môžeme sa na to pozrieť.</h2>
+          <h2 id="contact-title" data-i18n-html="contact.title">Nápad, problém<br>alebo technická výzva?<br><span class="contact-keep">Môžeme sa na to pozrieť.</span></h2>
         </div>
         <div class="actions">
           <a class="button primary" href="mailto:martinus.nagy@gmail.com">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
             <span data-i18n="contact.email">Email</span>
           </a>
-          <a class="button" href="https://www.linkedin.com/in/nagymartinus/" target="_blank" rel="noopener">
+          <a class="button" href="https://www.linkedin.com/in/nagymartinus/" data-linkedin-app="linkedin://in/nagymartinus" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             <span>LinkedIn</span>
           </a>
@@ -1706,6 +1850,17 @@
     <footer class="footer shell">
       <span>© <span id="year"></span> Martin Nagy</span>
     </footer>
+
+    <section class="easter-egg shell reveal" aria-label="Mini game" data-runner>
+      <button class="easter-trigger" type="button" data-game-trigger aria-expanded="false" aria-controls="binary-runner" data-i18n="game.prompt">Chceš si zahrať mini hru? Klikni sem.</button>
+      <div class="binary-runner" id="binary-runner" hidden>
+        <div class="binary-runner-head">
+          <span><span data-i18n="game.score">Skóre</span>: <span class="binary-runner-score" data-game-score>0</span></span>
+        </div>
+        <canvas class="binary-runner-canvas" data-game-canvas aria-label="Binary runner mini game"></canvas>
+        <div class="binary-runner-state" data-game-state aria-live="polite" data-i18n="game.ready">Klikni a preskakuj vírusy, bugy, výpadky aj update chaos.</div>
+      </div>
+    </section>
   </div>
 
   <script>
@@ -1747,7 +1902,7 @@
         "nav.contact": "Kontakt",
         "hero.title": "Technika, která funguje.<br><span class=\"tone\">Design, který drží.</span><span class=\"tone detail-tone\">s citem pro detail.</span>",
         "hero.lead": "Jsem Martin Nagy, technický nadšenec s praxí v IT podpoře, opravách elektroniky, webdesignu a vývoji iOS aplikací. Rád řeším problémy, dávám věci do pořádku a převádím digitální nápady do čisté vizuální formy.",
-        "hero.email": "Napsat e-mail",
+        "hero.email": "Napsat email",
         "hero.work": "Prohlédnout práci",
         "about.label": "Profil",
         "about.title": "Krátká digitální vizitka s ostřejším charakterem.",
@@ -1768,7 +1923,7 @@
         "services.design.title": "Webdesign & iOS Apps",
         "services.design.copy": "Tvořím čisté weby, landing pages a app koncepty, které mají srozumitelnou strukturu, dobrý vizuální cit a fungují přirozeně na různých zařízeních.",
         "contact.title": "Pojďme něco vyřešit.",
-        "contact.email": "E-mail",
+        "contact.email": "Email",
         "footer.note": "Custom landing page"
       },
       en: {
@@ -1850,7 +2005,7 @@
       "experience.ikea.workType": "Full-time",
       "experience.ikea.role": "Technical Support Specialist",
       "experience.ikea.duration": "Apr 2023 - Apr 2025",
-      "experience.ikea.location": "Slovakia · On-site",
+      "experience.ikea.location": "Bratislava, Slovakia · On-site",
       "experience.ikea.copy": "Technická podpora tímov, pracovísk a zariadení s dôrazom na rýchle riešenie problémov.",
       "experience.ikea.skill1": "Denná technická podpora",
       "experience.ikea.skill2": "Riešenie problémov pod tlakom",
@@ -1861,7 +2016,7 @@
       "experience.pcexpres.workType": "Freelance",
       "experience.pcexpres.role": "Freelance Mobile Device Repair Specialist",
       "experience.pcexpres.duration": "Oct 2021 - Apr 2023",
-      "experience.pcexpres.location": "On-site",
+      "experience.pcexpres.location": "Západné a stredné Slovensko · On-site",
       "experience.pcexpres.copy": "Diagnostika a opravy mobilných zariadení, počítačov a hardvéru priamo pre zákazníkov.",
       "experience.pcexpres.skill1": "Diagnostika porúch",
       "experience.pcexpres.skill2": "Opravy telefónov a PC",
@@ -1872,13 +2027,18 @@
       "experience.fixservis.workType": "Full-time",
       "experience.fixservis.role": "Authorized Huawei Technician",
       "experience.fixservis.duration": "Oct 2019 - Oct 2021",
-      "experience.fixservis.location": "Nitra Region, Slovakia · On-site",
+      "experience.fixservis.location": "Nitra, Slovakia · On-site",
       "experience.fixservis.copy": "Autorizovaný servis, diagnostika a opravy zariadení podľa štandardov výrobcu.",
       "experience.fixservis.skill1": "Autorizované servisné postupy",
       "experience.fixservis.skill2": "Diagnostika zariadení",
       "experience.fixservis.skill3": "Opravy podľa štandardov",
       "experience.fixservis.skill4": "Kontrola kvality",
-      "contact.title": "Nápad, problém alebo technická výzva? Môžeme sa na to pozrieť.",
+      "contact.title": "Nápad, problém<br>alebo technická výzva?<br><span class=\"contact-keep\">Môžeme sa na to pozrieť.</span>",
+      "game.prompt": "Chceš si zahrať mini hru? Klikni sem.",
+      "game.score": "Skóre",
+      "game.ready": "Klikni a preskakuj vírusy, bugy, výpadky aj update chaos.",
+      "game.running": "Technik v teréne.",
+      "game.over": "Koniec hry. Klikni pre reštart.",
       "footer.note": ""
     });
 
@@ -1929,7 +2089,7 @@
       "experience.ikea.workType": "Full-time",
       "experience.ikea.role": "Technical Support Specialist",
       "experience.ikea.duration": "Apr 2023 - Apr 2025",
-      "experience.ikea.location": "Slovakia · On-site",
+      "experience.ikea.location": "Bratislava, Slovakia · On-site",
       "experience.ikea.copy": "Technická podpora týmů, pracovišť a zařízení s důrazem na rychlé řešení problémů.",
       "experience.ikea.skill1": "Denní technická podpora",
       "experience.ikea.skill2": "Řešení problémů pod tlakem",
@@ -1940,7 +2100,7 @@
       "experience.pcexpres.workType": "Freelance",
       "experience.pcexpres.role": "Freelance Mobile Device Repair Specialist",
       "experience.pcexpres.duration": "Oct 2021 - Apr 2023",
-      "experience.pcexpres.location": "On-site",
+      "experience.pcexpres.location": "Západní a střední Slovensko · On-site",
       "experience.pcexpres.copy": "Diagnostika a opravy mobilních zařízení, počítačů a hardwaru přímo pro zákazníky.",
       "experience.pcexpres.skill1": "Diagnostika závad",
       "experience.pcexpres.skill2": "Opravy telefonů a PC",
@@ -1951,13 +2111,18 @@
       "experience.fixservis.workType": "Full-time",
       "experience.fixservis.role": "Authorized Huawei Technician",
       "experience.fixservis.duration": "Oct 2019 - Oct 2021",
-      "experience.fixservis.location": "Nitra Region, Slovakia · On-site",
+      "experience.fixservis.location": "Nitra, Slovakia · On-site",
       "experience.fixservis.copy": "Autorizovaný servis, diagnostika a opravy zařízení podle standardů výrobce.",
       "experience.fixservis.skill1": "Autorizované servisní postupy",
       "experience.fixservis.skill2": "Diagnostika zařízení",
       "experience.fixservis.skill3": "Opravy podle standardů",
       "experience.fixservis.skill4": "Kontrola kvality",
-      "contact.title": "Nápad, problém nebo technická výzva? Můžeme se na to podívat.",
+      "contact.title": "Nápad, problém<br>nebo technická výzva?<br><span class=\"contact-keep\">Můžeme se na to podívat.</span>",
+      "game.prompt": "Chceš si zahrát mini hru? Klikni sem.",
+      "game.score": "Skóre",
+      "game.ready": "Klikni a přeskakuj viry, bugy, výpadky i update chaos.",
+      "game.running": "Technik v terénu.",
+      "game.over": "Konec hry. Klikni pro restart.",
       "footer.note": ""
     });
 
@@ -2009,7 +2174,7 @@
       "experience.ikea.workType": "Full-time",
       "experience.ikea.role": "Technical Support Specialist",
       "experience.ikea.duration": "Apr 2023 - Apr 2025",
-      "experience.ikea.location": "Slovakia · On-site",
+      "experience.ikea.location": "Bratislava, Slovakia · On-site",
       "experience.ikea.copy": "Technical support for teams, workplaces, and devices with a focus on fast problem solving.",
       "experience.ikea.skill1": "Daily technical support",
       "experience.ikea.skill2": "Solving issues under pressure",
@@ -2020,7 +2185,7 @@
       "experience.pcexpres.workType": "Freelance",
       "experience.pcexpres.role": "Freelance Mobile Device Repair Specialist",
       "experience.pcexpres.duration": "Oct 2021 - Apr 2023",
-      "experience.pcexpres.location": "On-site",
+      "experience.pcexpres.location": "West and Central Slovakia · On-site",
       "experience.pcexpres.copy": "Diagnostics and repair for mobile devices, computers, and hardware directly for customers.",
       "experience.pcexpres.skill1": "Fault diagnostics",
       "experience.pcexpres.skill2": "Phone and PC repair",
@@ -2031,13 +2196,18 @@
       "experience.fixservis.workType": "Full-time",
       "experience.fixservis.role": "Authorized Huawei Technician",
       "experience.fixservis.duration": "Oct 2019 - Oct 2021",
-      "experience.fixservis.location": "Nitra Region, Slovakia · On-site",
+      "experience.fixservis.location": "Nitra, Slovakia · On-site",
       "experience.fixservis.copy": "Authorized service, diagnostics, and device repairs following manufacturer standards.",
       "experience.fixservis.skill1": "Authorized service procedures",
       "experience.fixservis.skill2": "Device diagnostics",
       "experience.fixservis.skill3": "Repairs by standards",
       "experience.fixservis.skill4": "Quality control",
-      "contact.title": "An idea, a problem, or a technical challenge? We can take a look.",
+      "contact.title": "An idea, problem,<br>or a technical challenge?<br><span class=\"contact-keep\">We can take a look.</span>",
+      "game.prompt": "Want to play a mini game? Click here.",
+      "game.score": "Score",
+      "game.ready": "Click and jump over viruses, bugs, outages, and update chaos.",
+      "game.running": "Technician on the run.",
+      "game.over": "Game over. Click to restart.",
       "footer.note": ""
     });
 
@@ -2105,6 +2275,7 @@
 
       currentLanguage = nextLanguage;
       updateLanguageIndicator();
+      window.dispatchEvent(new CustomEvent("site-language-applied"));
 
       if (persist) {
         localStorage.setItem("martin-nagy-language", nextLanguage);
@@ -2160,6 +2331,24 @@
       });
     });
 
+    const mobileLinkedIn = window.matchMedia("(hover: none), (pointer: coarse)");
+
+    document.querySelectorAll("[data-linkedin-app]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (!mobileLinkedIn.matches) return;
+
+        event.preventDefault();
+        const webUrl = link.href;
+        window.location.href = link.dataset.linkedinApp;
+
+        window.setTimeout(() => {
+          if (document.visibilityState === "visible") {
+            window.location.href = webUrl;
+          }
+        }, 900);
+      });
+    });
+
     window.addEventListener("resize", updateLanguageIndicator, { passive: true });
 
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -2178,7 +2367,7 @@
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
     if (finePointer.matches) {
-      document.querySelectorAll(".card, .rail-item, .experience-item, .contact-band").forEach((card) => {
+      document.querySelectorAll(".card, .rail-item, .experience-item, .contact-band, .binary-runner").forEach((card) => {
         card.addEventListener("pointermove", (event) => {
           const rect = card.getBoundingClientRect();
           card.style.setProperty("--x", `${((event.clientX - rect.left) / rect.width) * 100}%`);
@@ -2187,11 +2376,605 @@
       });
     }
 
+    function initBinaryRunner() {
+      const shell = document.querySelector("[data-runner]");
+      if (!shell) return;
+
+      const trigger = shell.querySelector("[data-game-trigger]");
+      const panel = shell.querySelector("#binary-runner");
+      const canvas = shell.querySelector("[data-game-canvas]");
+      const scoreNode = shell.querySelector("[data-game-score]");
+      const stateNode = shell.querySelector("[data-game-state]");
+      if (!trigger || !panel || !canvas || !scoreNode || !stateNode) return;
+
+      const ctx = canvas.getContext("2d");
+      const player = {
+        x: 48,
+        y: 0,
+        width: 36,
+        height: 44,
+        velocity: 0,
+        grounded: true
+      };
+
+      let width = 0;
+      let height = 0;
+      let ground = 0;
+      let dpr = 1;
+      let frame = 0;
+      let lastFrameTime = 0;
+      let revealed = false;
+      let running = false;
+      let gameOver = false;
+      let score = 0;
+      let best = 0;
+      let speed = 215;
+      let spawnTimer = 1.1;
+      let obstacles = [];
+      let bits = [];
+      let obstacleBag = [];
+      let lastObstacleKind = "";
+
+      const obstacleTypes = [
+        { kind: "virus", width: 32, height: 32 },
+        { kind: "bug", width: 42, height: 28 },
+        { kind: "wifi", width: 36, height: 32 },
+        { kind: "update", width: 38, height: 36 },
+        { kind: "bsod", width: 44, height: 32 }
+      ];
+
+      function gameCopy(key) {
+        const language = currentLanguage || html.lang || browserLanguageFallback();
+        return translations[language]?.[key] || translations.en[key] || "";
+      }
+
+      function setState(key) {
+        stateNode.textContent = gameCopy(key);
+      }
+
+      function resizeGame() {
+        const rect = canvas.getBoundingClientRect();
+        width = Math.max(280, rect.width || 320);
+        height = Math.max(126, rect.height || 142);
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ground = height - 30;
+
+        if (player.grounded || player.y <= 0) {
+          player.y = ground - player.height;
+        }
+      }
+
+      function resetGame() {
+        resizeGame();
+        obstacles = [];
+        bits = [];
+        obstacleBag = [];
+        lastObstacleKind = "";
+        score = 0;
+        speed = width < 460 ? 188 : 215;
+        spawnTimer = 0.9;
+        gameOver = false;
+        running = true;
+        lastFrameTime = 0;
+        player.y = ground - player.height;
+        player.velocity = 0;
+        player.grounded = true;
+        scoreNode.textContent = "0";
+        setState("game.running");
+        scheduleGame();
+      }
+
+      function nextObstacleType() {
+        if (!obstacleBag.length) {
+          obstacleBag = [...obstacleTypes].sort(() => Math.random() - 0.5);
+
+          if (obstacleBag[0]?.kind === lastObstacleKind) {
+            obstacleBag.push(obstacleBag.shift());
+          }
+        }
+
+        const next = obstacleBag.shift();
+        lastObstacleKind = next.kind;
+        return next;
+      }
+
+      function spawnObstacle() {
+        const obstacle = nextObstacleType();
+        obstacles.push({
+          x: width + 12,
+          y: ground - obstacle.height,
+          width: obstacle.width,
+          height: obstacle.height,
+          kind: obstacle.kind
+        });
+      }
+
+      function spawnBit() {
+        bits.push({
+          x: width + Math.random() * 80,
+          y: 18 + Math.random() * (height * 0.42),
+          speed: 18 + Math.random() * 26,
+          value: Math.random() > 0.5 ? "1" : "0",
+          alpha: 0.16 + Math.random() * 0.18
+        });
+
+        if (bits.length > 22) bits.shift();
+      }
+
+      function jump() {
+        if (!running || gameOver || !player.grounded) return;
+        player.velocity = width < 460 ? -610 : -665;
+        player.grounded = false;
+      }
+
+      function overlap(a, b) {
+        return (
+          a.x < b.x + b.width &&
+          a.x + a.width > b.x &&
+          a.y < b.y + b.height &&
+          a.y + a.height > b.y
+        );
+      }
+
+      function updateGame(seconds) {
+        score += seconds * 14;
+        speed = Math.min(width < 460 ? 260 : 315, speed + seconds * 5.2);
+        spawnTimer -= seconds;
+
+        if (spawnTimer <= 0) {
+          spawnObstacle();
+          spawnTimer = Math.max(0.78, 1.28 - score / 260) + Math.random() * 0.42;
+        }
+
+        if (Math.random() < seconds * 5.4) spawnBit();
+
+        player.velocity += 1500 * seconds;
+        player.y += player.velocity * seconds;
+
+        if (player.y >= ground - player.height) {
+          player.y = ground - player.height;
+          player.velocity = 0;
+          player.grounded = true;
+        }
+
+        obstacles.forEach((obstacle) => {
+          obstacle.x -= speed * seconds;
+        });
+
+        bits.forEach((bit) => {
+          bit.x -= bit.speed * seconds;
+        });
+
+        obstacles = obstacles.filter((obstacle) => obstacle.x + obstacle.width > -20);
+        bits = bits.filter((bit) => bit.x > -20);
+
+        const playerBox = {
+          x: player.x + 7,
+          y: player.y + 5,
+          width: player.width - 13,
+          height: player.height - 7
+        };
+
+        if (obstacles.some((obstacle) => overlap(playerBox, obstacle))) {
+          running = false;
+          gameOver = true;
+          best = Math.max(best, Math.floor(score));
+          setState("game.over");
+        }
+
+        scoreNode.textContent = `${Math.floor(score)}`;
+      }
+
+      function drawRoundedRect(x, y, rectWidth, rectHeight, radius) {
+        if (ctx.roundRect) {
+          ctx.beginPath();
+          ctx.roundRect(x, y, rectWidth, rectHeight, radius);
+          return;
+        }
+
+        ctx.beginPath();
+        ctx.rect(x, y, rectWidth, rectHeight);
+      }
+
+      function drawVirus(obstacle) {
+        const cx = obstacle.x + obstacle.width / 2;
+        const cy = obstacle.y + obstacle.height / 2;
+        const radius = 10;
+
+        ctx.strokeStyle = "rgba(255, 96, 96, 0.7)";
+        ctx.lineWidth = 1.4;
+        for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 4) {
+          ctx.beginPath();
+          ctx.moveTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
+          ctx.lineTo(cx + Math.cos(angle) * (radius + 6), cy + Math.sin(angle) * (radius + 6));
+          ctx.stroke();
+        }
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 68, 68, 0.28)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(255, 112, 112, 0.82)";
+        ctx.stroke();
+        ctx.fillStyle = "rgba(255, 220, 220, 0.82)";
+        ctx.fillRect(cx - 4, cy - 2, 3, 3);
+        ctx.fillRect(cx + 3, cy + 2, 3, 3);
+      }
+
+      function drawBug(obstacle) {
+        const x = obstacle.x;
+        const y = obstacle.y;
+        const cx = x + obstacle.width / 2;
+        const bodyY = y + 15;
+
+        ctx.strokeStyle = "rgba(255, 97, 97, 0.72)";
+        ctx.lineWidth = 1.4;
+
+        for (let index = 0; index < 3; index += 1) {
+          const offset = -8 + index * 8;
+          ctx.beginPath();
+          ctx.moveTo(cx - 9, bodyY + offset * 0.18);
+          ctx.lineTo(cx - 17, bodyY + offset - 2);
+          ctx.lineTo(cx - 21, bodyY + offset + 3);
+          ctx.moveTo(cx + 9, bodyY + offset * 0.18);
+          ctx.lineTo(cx + 17, bodyY + offset - 2);
+          ctx.lineTo(cx + 21, bodyY + offset + 3);
+          ctx.stroke();
+        }
+
+        ctx.beginPath();
+        ctx.ellipse(cx, bodyY, 12, 9, 0, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(45, 11, 15, 0.94)";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.ellipse(cx, y + 6, 7, 5, 0, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(35, 8, 11, 0.98)";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(cx - 4, y + 3);
+        ctx.lineTo(cx - 10, y - 3);
+        ctx.moveTo(cx + 4, y + 3);
+        ctx.lineTo(cx + 10, y - 3);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgba(255, 130, 130, 0.5)";
+        ctx.beginPath();
+        ctx.moveTo(cx, bodyY - 7);
+        ctx.lineTo(cx, bodyY + 7);
+        ctx.moveTo(cx - 7, bodyY - 5);
+        ctx.lineTo(cx + 7, bodyY + 5);
+        ctx.moveTo(cx + 7, bodyY - 5);
+        ctx.lineTo(cx - 7, bodyY + 5);
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(255, 232, 232, 0.92)";
+        ctx.fillRect(cx - 3, y + 5, 2, 2);
+        ctx.fillRect(cx + 2, y + 5, 2, 2);
+      }
+
+      function drawNoWifi(obstacle) {
+        const cx = obstacle.x + obstacle.width / 2;
+        const cy = obstacle.y + obstacle.height - 5;
+
+        ctx.strokeStyle = "rgba(247, 250, 246, 0.7)";
+        ctx.lineWidth = 1.7;
+        for (let radius = 8; radius <= 22; radius += 7) {
+          ctx.beginPath();
+          ctx.arc(cx, cy, radius, Math.PI * 1.15, Math.PI * 1.85);
+          ctx.stroke();
+        }
+
+        ctx.fillStyle = "rgba(247, 250, 246, 0.78)";
+        ctx.beginPath();
+        ctx.arc(cx, cy, 2.6, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = "rgba(255, 96, 96, 0.84)";
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.moveTo(obstacle.x + 5, obstacle.y + 4);
+        ctx.lineTo(obstacle.x + obstacle.width - 5, obstacle.y + obstacle.height - 3);
+        ctx.stroke();
+      }
+
+      function drawUpdate(obstacle) {
+        const x = obstacle.x + 2;
+        const y = obstacle.y + 2;
+        const size = obstacle.width - 4;
+
+        drawRoundedRect(x, y, size, size, 5);
+        ctx.fillStyle = "rgba(58, 140, 255, 0.34)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(103, 176, 255, 0.86)";
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(224, 241, 255, 0.78)";
+        ctx.fillRect(x + 7, y + 7, 7, 7);
+        ctx.fillRect(x + 16, y + 7, 7, 7);
+        ctx.fillRect(x + 7, y + 16, 7, 7);
+        ctx.fillRect(x + 16, y + 16, 7, 7);
+        ctx.fillStyle = "rgba(103, 176, 255, 0.92)";
+        ctx.font = "8px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.fillText("UPD", x + 7, y + size - 4);
+      }
+
+      function drawBsod(obstacle) {
+        const x = obstacle.x;
+        const y = obstacle.y;
+
+        drawRoundedRect(x, y, obstacle.width, obstacle.height, 4);
+        ctx.fillStyle = "rgba(35, 92, 226, 0.72)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(132, 185, 255, 0.9)";
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(235, 246, 255, 0.9)";
+        ctx.font = "700 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.fillText(":(", x + 7, y + 13);
+        ctx.font = "7px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.fillText("BSOD", x + 7, y + 24);
+      }
+
+      function drawObstacle(obstacle) {
+        if (obstacle.kind === "virus") {
+          drawVirus(obstacle);
+        } else if (obstacle.kind === "bug") {
+          drawBug(obstacle);
+        } else if (obstacle.kind === "wifi") {
+          drawNoWifi(obstacle);
+        } else if (obstacle.kind === "update") {
+          drawUpdate(obstacle);
+        } else {
+          drawBsod(obstacle);
+        }
+      }
+
+      function drawTechnician() {
+        const stride = player.grounded && running ? Math.sin(score * 5.1) : -0.55;
+        const bob = player.grounded && running ? Math.abs(Math.sin(score * 5.1)) * 1.4 : 0;
+        const x = player.x;
+        const y = player.y;
+
+        ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+        ctx.beginPath();
+        ctx.ellipse(x + 20, ground + 4, 19, 4, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.save();
+        ctx.translate(x, y - bob);
+
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        ctx.strokeStyle = "rgba(31, 46, 42, 0.96)";
+        ctx.lineWidth = 4.2;
+        ctx.beginPath();
+        ctx.moveTo(18, 31);
+        ctx.lineTo(12 - stride * 3, 42);
+        ctx.moveTo(24, 31);
+        ctx.lineTo(30 + stride * 3, 42);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.72)";
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(12 - stride * 3, 42);
+        ctx.lineTo(7 - stride * 3, 42);
+        ctx.moveTo(30 + stride * 3, 42);
+        ctx.lineTo(35 + stride * 3, 42);
+        ctx.stroke();
+
+        drawRoundedRect(12, 18, 20, 18, 6);
+        ctx.fillStyle = "rgba(13, 28, 23, 0.98)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.78)";
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(143, 247, 210, 0.18)";
+        ctx.fillRect(21, 21, 8, 12);
+        ctx.fillStyle = "rgba(247, 250, 246, 0.9)";
+        ctx.font = "7px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.fillText("IT", 16, 29);
+
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.62)";
+        ctx.lineWidth = 2.4;
+        ctx.beginPath();
+        ctx.moveTo(14, 23);
+        ctx.lineTo(8, 30 + stride * 1.2);
+        ctx.moveTo(31, 23);
+        ctx.lineTo(35, 30 - stride * 1.2);
+        ctx.stroke();
+
+        drawRoundedRect(30, 29 - stride * 1.2, 13, 10, 2);
+        ctx.fillStyle = "rgba(255, 212, 138, 0.24)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(255, 212, 138, 0.82)";
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(34, 29 - stride * 1.2);
+        ctx.lineTo(39, 29 - stride * 1.2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(22, 10, 8, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(238, 198, 168, 0.96)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(247, 250, 246, 0.42)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(31, 10, 2.5, -Math.PI / 2, Math.PI / 2);
+        ctx.fillStyle = "rgba(238, 198, 168, 0.85)";
+        ctx.fill();
+
+        ctx.fillStyle = "rgba(8, 10, 9, 0.96)";
+        ctx.beginPath();
+        ctx.ellipse(22, 5, 9, 5, -0.08, Math.PI, Math.PI * 2);
+        ctx.fill();
+        drawRoundedRect(13, 5, 13, 4, 2);
+        ctx.fill();
+
+        ctx.fillStyle = "rgba(8, 10, 9, 0.78)";
+        ctx.fillRect(19, 10, 2, 2);
+        ctx.fillRect(26, 10, 2, 2);
+
+        ctx.strokeStyle = "rgba(85, 48, 39, 0.6)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(22, 14);
+        ctx.lineTo(25, 14);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(28, 12);
+        ctx.lineTo(36, 10);
+        ctx.lineTo(39, 12);
+        ctx.strokeStyle = "rgba(143, 247, 210, 0.52)";
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      function drawGame() {
+        ctx.clearRect(0, 0, width, height);
+
+        const background = ctx.createLinearGradient(0, 0, width, height);
+        background.addColorStop(0, "rgba(143, 247, 210, 0.055)");
+        background.addColorStop(0.6, "rgba(135, 168, 255, 0.035)");
+        background.addColorStop(1, "rgba(255, 212, 138, 0.026)");
+        ctx.fillStyle = background;
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.045)";
+        ctx.lineWidth = 1;
+        for (let x = 0; x < width; x += 34) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, height);
+          ctx.stroke();
+        }
+
+        bits.forEach((bit) => {
+          ctx.fillStyle = `rgba(184, 255, 232, ${bit.alpha})`;
+          ctx.font = "12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+          ctx.fillText(bit.value, bit.x, bit.y);
+        });
+
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.34)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(12, ground + 0.5);
+        ctx.lineTo(width - 12, ground + 0.5);
+        ctx.stroke();
+
+        obstacles.forEach(drawObstacle);
+        drawTechnician();
+
+        if (gameOver) {
+          ctx.fillStyle = "rgba(6, 9, 7, 0.56)";
+          ctx.fillRect(0, 0, width, height);
+          ctx.fillStyle = "rgba(247, 250, 246, 0.9)";
+          ctx.font = "700 16px ui-sans-serif, system-ui, sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillText(gameCopy("game.over"), width / 2, height / 2 - 5);
+          ctx.fillStyle = "rgba(184, 255, 232, 0.72)";
+          ctx.font = "12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+          ctx.fillText(`${gameCopy("game.score")}: ${Math.floor(score)}  BEST: ${best}`, width / 2, height / 2 + 20);
+          ctx.textAlign = "left";
+        }
+      }
+
+      function gameLoop(timestamp = performance.now()) {
+        frame = 0;
+        const elapsed = lastFrameTime ? timestamp - lastFrameTime : 16.67;
+        const seconds = Math.min(elapsed / 1000, 0.05);
+        lastFrameTime = timestamp;
+
+        if (running && !gameOver) {
+          updateGame(seconds);
+        }
+
+        drawGame();
+
+        if (running && !gameOver) {
+          frame = window.requestAnimationFrame(gameLoop);
+        } else {
+          lastFrameTime = 0;
+        }
+      }
+
+      function scheduleGame() {
+        if (!frame) frame = window.requestAnimationFrame(gameLoop);
+      }
+
+      function revealGame() {
+        if (!revealed) {
+          revealed = true;
+          panel.hidden = false;
+          trigger.setAttribute("aria-expanded", "true");
+          window.requestAnimationFrame(() => {
+            panel.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "end" });
+          });
+        }
+
+        resetGame();
+      }
+
+      function handleGamePress(event) {
+        event.preventDefault();
+        if (!revealed || gameOver) {
+          revealGame();
+          return;
+        }
+
+        jump();
+      }
+
+      trigger.addEventListener("click", handleGamePress);
+      canvas.addEventListener("pointerdown", handleGamePress);
+      window.addEventListener("resize", () => {
+        if (!revealed) return;
+        resizeGame();
+        drawGame();
+      }, { passive: true });
+
+      window.addEventListener("keydown", (event) => {
+        if (!revealed || (event.code !== "Space" && event.code !== "ArrowUp")) return;
+        event.preventDefault();
+        if (gameOver) {
+          revealGame();
+        } else {
+          jump();
+        }
+      });
+
+      window.addEventListener("site-language-applied", () => {
+        if (!revealed) {
+          setState("game.ready");
+          return;
+        }
+
+        setState(gameOver ? "game.over" : "game.running");
+        drawGame();
+      });
+    }
+
     function initDomCursorTech(layer) {
       const elements = [];
       let frame = 0;
       let lastSpawn = 0;
       let lastPoint = null;
+      let lastFrameTime = 0;
 
       function scheduleRender() {
         if (!frame) {
@@ -2255,12 +3038,15 @@
         });
       }
 
-      function render() {
+      function render(timestamp = performance.now()) {
         frame = 0;
+        const elapsed = lastFrameTime ? timestamp - lastFrameTime : 16.67;
+        const frameStep = Math.min(elapsed / 16.67, 2.5);
+        lastFrameTime = timestamp;
 
         for (let index = elements.length - 1; index >= 0; index -= 1) {
           const item = elements[index];
-          item.life -= item.type === "link" ? 0.022 : 0.016;
+          item.life -= (item.type === "link" ? 0.022 : 0.016) * frameStep;
 
           if (item.life <= 0) {
             item.el.remove();
@@ -2272,8 +3058,8 @@
             item.el.style.opacity = String(item.life * 0.82);
             item.el.style.transform = `translate3d(${item.x}px, ${item.y}px, 0) rotate(${item.angle}rad)`;
           } else {
-            item.x += item.vx;
-            item.y += item.vy;
+            item.x += item.vx * frameStep;
+            item.y += item.vy * frameStep;
             item.el.style.opacity = String(item.life);
             item.el.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
           }
@@ -2281,6 +3067,8 @@
 
         if (elements.length) {
           frame = window.requestAnimationFrame(render);
+        } else {
+          lastFrameTime = 0;
         }
       }
 
@@ -2301,8 +3089,140 @@
       window.__cursorTechEnabled = "dom";
     }
 
+    function initMobileAmbientTech() {
+    const canvas = document.getElementById('cursor-canvas');
+    if (!canvas || window.__cursorTechEnabled === "mobile") return;
+
+    const ctx = canvas.getContext('2d');
+    const nodes = [];
+    const bits = [];
+    let dpr = 1;
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+    let lastFrameTime = 0;
+    let lastSpawn = 0;
+
+    function resizeMobileCanvas() {
+        dpr = Math.min(window.devicePixelRatio || 1, 1.15);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function addNode() {
+        if (nodes.length > 10) nodes.shift();
+        const edge = Math.floor(Math.random() * 4);
+        const start = [
+            { x: Math.random() * width, y: -20 },
+            { x: width + 20, y: Math.random() * height },
+            { x: Math.random() * width, y: height + 20 },
+            { x: -20, y: Math.random() * height }
+        ][edge];
+        const target = {
+            x: width * (0.16 + Math.random() * 0.68),
+            y: height * (0.12 + Math.random() * 0.72)
+        };
+
+        nodes.push({
+            x: start.x,
+            y: start.y,
+            tx: target.x,
+            ty: target.y,
+            life: 1,
+            age: 0,
+            duration: 6.5 + Math.random() * 5,
+            size: 2 + Math.random() * 2
+        });
+    }
+
+    function addBit(node) {
+        if (bits.length > 18) bits.shift();
+        bits.push({
+            x: node.x + (Math.random() - 0.5) * 34,
+            y: node.y + (Math.random() - 0.5) * 34,
+            vy: -4 - Math.random() * 8,
+            life: 1,
+            bit: Math.random() > 0.5 ? '1' : '0'
+        });
+    }
+
+    function renderMobileAmbient(timestamp = performance.now()) {
+        frame = 0;
+        const elapsed = lastFrameTime ? timestamp - lastFrameTime : 16.67;
+        const seconds = Math.min(elapsed / 1000, 0.08);
+        lastFrameTime = timestamp;
+
+        ctx.clearRect(0, 0, width, height);
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.font = '11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+
+        if (timestamp - lastSpawn > 1050 + Math.random() * 520) {
+            addNode();
+            lastSpawn = timestamp;
+        }
+
+        for (let i = nodes.length - 1; i >= 0; i -= 1) {
+            const node = nodes[i];
+            node.age += seconds;
+            const progress = Math.min(node.age / node.duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 2.2);
+            node.x += (node.tx - node.x) * Math.min(seconds * 0.34, 0.06);
+            node.y += (node.ty - node.y) * Math.min(seconds * 0.34, 0.06);
+            node.life = Math.sin(progress * Math.PI);
+
+            if (Math.random() < seconds * 0.28) addBit(node);
+
+            for (let j = i - 1; j >= 0; j -= 1) {
+                const other = nodes[j];
+                const distance = Math.hypot(node.x - other.x, node.y - other.y);
+                if (distance < 210) {
+                    ctx.beginPath();
+                    ctx.moveTo(node.x, node.y);
+                    ctx.lineTo(other.x, other.y);
+                    ctx.strokeStyle = `rgba(143, 247, 210, ${(1 - distance / 210) * node.life * other.life * 0.16})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+            }
+
+            ctx.fillStyle = `rgba(184, 255, 232, ${node.life * 0.44})`;
+            ctx.fillRect(node.x - node.size / 2, node.y - node.size / 2, node.size, node.size);
+
+            if (progress >= 1) nodes.splice(i, 1);
+        }
+
+        for (let i = bits.length - 1; i >= 0; i -= 1) {
+            const bit = bits[i];
+            bit.y += bit.vy * seconds;
+            bit.life -= seconds * 0.55;
+            if (bit.life <= 0) {
+                bits.splice(i, 1);
+                continue;
+            }
+            ctx.fillStyle = `rgba(184, 255, 232, ${bit.life * 0.22})`;
+            ctx.fillText(bit.bit, bit.x, bit.y);
+        }
+
+        frame = window.requestAnimationFrame(renderMobileAmbient);
+    }
+
+    window.addEventListener('resize', resizeMobileCanvas, { passive: true });
+    resizeMobileCanvas();
+    for (let index = 0; index < 4; index += 1) addNode();
+    frame = window.requestAnimationFrame(renderMobileAmbient);
+    window.__cursorTechEnabled = "mobile";
+    }
+
     function initCursorTech() {
-    if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
+    if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+        initMobileAmbientTech();
+        return;
+    }
 
     const canvas = document.getElementById('cursor-canvas');
     if (!canvas) return;
@@ -2327,6 +3247,7 @@
     let height = 0;
     let frame = 0;
     let lastSpawn = 0;
+    let lastFrameTime = 0;
 
     function resetGhost(ghost) {
         ghost.tx = Math.random() * width;
@@ -2374,25 +3295,31 @@
         ctx.stroke();
     }
 
-    function render() {
+    function render(timestamp = performance.now()) {
         frame = 0;
+        const elapsed = lastFrameTime ? timestamp - lastFrameTime : 16.67;
+        const frameStep = Math.min(elapsed / 16.67, 2.5);
+        const chanceStep = Math.min(frameStep, 2);
+        lastFrameTime = timestamp;
         ctx.clearRect(0, 0, width, height);
         ctx.globalCompositeOperation = 'lighter';
         ctx.font = '12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
 
-        smoothPointer.x += (pointer.x - smoothPointer.x) * 0.045;
-        smoothPointer.y += (pointer.y - smoothPointer.y) * 0.045;
+        const pointerEase = 1 - Math.pow(1 - 0.045, frameStep);
+        smoothPointer.x += (pointer.x - smoothPointer.x) * pointerEase;
+        smoothPointer.y += (pointer.y - smoothPointer.y) * pointerEase;
 
         ghosts.forEach((ghost) => {
-            ghost.x += (ghost.tx - ghost.x) * ghost.speed;
-            ghost.y += (ghost.ty - ghost.y) * ghost.speed;
-            ghost.life -= 1;
+            const ghostEase = 1 - Math.pow(1 - ghost.speed, frameStep);
+            ghost.x += (ghost.tx - ghost.x) * ghostEase;
+            ghost.y += (ghost.ty - ghost.y) * ghostEase;
+            ghost.life -= frameStep;
 
             if (ghost.life <= 0 || Math.hypot(ghost.tx - ghost.x, ghost.ty - ghost.y) < 30) {
                 resetGhost(ghost);
             }
 
-            if (Math.random() < 0.06) {
+            if (Math.random() < 0.06 * chanceStep) {
                 spawnParticles(ghost.x, ghost.y, 1);
             }
         });
@@ -2401,9 +3328,9 @@
 
         for (let i = particles.length - 1; i >= 0; i -= 1) {
             const particle = particles[i];
-            particle.x += particle.vx;
-            particle.y += particle.vy;
-            particle.life -= 0.018;
+            particle.x += particle.vx * frameStep;
+            particle.y += particle.vy * frameStep;
+            particle.life -= 0.018 * frameStep;
 
             if (particle.life <= 0) {
                 particles.splice(i, 1);
@@ -2444,7 +3371,11 @@
             ctx.fillText(particle.bit, particle.x + 8, particle.y - 8);
         }
 
-        if (particles.length) frame = window.requestAnimationFrame(render);
+        if (particles.length) {
+            frame = window.requestAnimationFrame(render);
+        } else {
+            lastFrameTime = 0;
+        }
     }
 
     function scheduleRender() {
@@ -2482,6 +3413,7 @@
     window.setTimeout(initCursorTech, 300);
     window.addEventListener("pointermove", initCursorTech, { once: true, passive: true });
 
+    initBinaryRunner();
     detectLanguage();
   </script>
 </body>
