@@ -1143,58 +1143,39 @@
     }
 
     .binary-runner {
-      --glow-alpha: 0;
       position: relative;
-      overflow: hidden;
-      max-width: 720px;
-      margin: 18px auto 0;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 8px;
-      background:
-        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 46%),
-        linear-gradient(135deg, rgba(143, 247, 210, 0.08), rgba(135, 168, 255, 0.045)),
-        rgba(6, 9, 7, 0.74);
-      box-shadow: 0 18px 56px rgba(0, 0, 0, 0.24);
+      overflow: visible;
+      max-width: 640px;
+      margin: 12px auto 0;
       text-align: left;
-      transition: border-color 280ms ease, box-shadow 280ms ease, --glow-alpha 360ms ease;
-    }
-
-    .binary-runner:hover {
-      --glow-alpha: 0.065;
-      border-color: rgba(143, 247, 210, 0.26);
-      box-shadow: 0 20px 62px rgba(0, 0, 0, 0.28), 0 0 20px rgba(143, 247, 210, 0.035);
     }
 
     .binary-runner-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px 0;
-      color: rgba(247, 250, 246, 0.68);
+      position: absolute;
+      top: 6px;
+      left: 0;
+      z-index: 1;
+      color: rgba(247, 250, 246, 0.5);
       font-size: 12px;
       font-weight: 720;
+      pointer-events: none;
     }
 
     .binary-runner-score {
-      color: rgba(184, 255, 232, 0.92);
+      color: rgba(184, 255, 232, 0.74);
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     }
 
     .binary-runner-canvas {
       display: block;
       width: 100%;
-      height: clamp(146px, 20vw, 176px);
+      height: 128px;
       cursor: pointer;
       touch-action: manipulation;
     }
 
     .binary-runner-state {
-      min-height: 18px;
-      padding: 0 14px 12px;
-      color: rgba(255, 255, 255, 0.46);
-      font-size: 12px;
-      text-align: center;
+      display: none;
     }
 
     .reveal {
@@ -2367,7 +2348,7 @@
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
     if (finePointer.matches) {
-      document.querySelectorAll(".card, .rail-item, .experience-item, .contact-band, .binary-runner").forEach((card) => {
+      document.querySelectorAll(".card, .rail-item, .experience-item, .contact-band").forEach((card) => {
         card.addEventListener("pointermove", (event) => {
           const rect = card.getBoundingClientRect();
           card.style.setProperty("--x", `${((event.clientX - rect.left) / rect.width) * 100}%`);
@@ -2529,7 +2510,7 @@
           spawnTimer = Math.max(0.78, 1.28 - score / 260) + Math.random() * 0.42;
         }
 
-        if (Math.random() < seconds * 5.4) spawnBit();
+        if (Math.random() < seconds * 4.2) spawnBit();
 
         player.velocity += 1500 * seconds;
         player.y += player.velocity * seconds;
@@ -2848,21 +2829,12 @@
       function drawGame() {
         ctx.clearRect(0, 0, width, height);
 
-        const background = ctx.createLinearGradient(0, 0, width, height);
-        background.addColorStop(0, "rgba(143, 247, 210, 0.055)");
-        background.addColorStop(0.6, "rgba(135, 168, 255, 0.035)");
-        background.addColorStop(1, "rgba(255, 212, 138, 0.026)");
-        ctx.fillStyle = background;
-        ctx.fillRect(0, 0, width, height);
-
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.045)";
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.28)";
         ctx.lineWidth = 1;
-        for (let x = 0; x < width; x += 34) {
-          ctx.beginPath();
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, height);
-          ctx.stroke();
-        }
+        ctx.beginPath();
+        ctx.moveTo(0, ground + 0.5);
+        ctx.lineTo(width, ground + 0.5);
+        ctx.stroke();
 
         bits.forEach((bit) => {
           ctx.fillStyle = `rgba(184, 255, 232, ${bit.alpha})`;
@@ -2870,25 +2842,16 @@
           ctx.fillText(bit.value, bit.x, bit.y);
         });
 
-        ctx.strokeStyle = "rgba(184, 255, 232, 0.34)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(12, ground + 0.5);
-        ctx.lineTo(width - 12, ground + 0.5);
-        ctx.stroke();
-
         obstacles.forEach(drawObstacle);
         drawTechnician();
 
         if (gameOver) {
-          ctx.fillStyle = "rgba(6, 9, 7, 0.56)";
-          ctx.fillRect(0, 0, width, height);
           ctx.fillStyle = "rgba(247, 250, 246, 0.9)";
-          ctx.font = "700 16px ui-sans-serif, system-ui, sans-serif";
+          ctx.font = "700 14px ui-sans-serif, system-ui, sans-serif";
           ctx.textAlign = "center";
           ctx.fillText(gameCopy("game.over"), width / 2, height / 2 - 5);
           ctx.fillStyle = "rgba(184, 255, 232, 0.72)";
-          ctx.font = "12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+          ctx.font = "11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
           ctx.fillText(`${gameCopy("game.score")}: ${Math.floor(score)}  BEST: ${best}`, width / 2, height / 2 + 20);
           ctx.textAlign = "left";
         }
