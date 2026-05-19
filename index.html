@@ -42,6 +42,7 @@
         linear-gradient(315deg, rgba(135, 168, 255, 0.08), transparent 34%),
         var(--bg);
       overflow-x: hidden;
+      isolation: isolate;
     }
 
     body::before {
@@ -83,8 +84,8 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      opacity: 0.78;
-      mix-blend-mode: screen;
+      opacity: 0.42;
+      mix-blend-mode: normal;
     }
 
     #cursor-canvas {
@@ -108,23 +109,23 @@
       height: 14px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(184, 255, 232, 0.96) 0%, rgba(143, 247, 210, 0.8) 52%, rgba(143, 247, 210, 0) 100%);
-      box-shadow: 0 0 36px rgba(143, 247, 210, 0.76), 0 0 60px rgba(135, 168, 255, 0.32);
+      box-shadow: 0 0 30px rgba(143, 247, 210, 0.48), 0 0 52px rgba(143, 247, 210, 0.16);
       filter: blur(0.2px);
     }
 
     .cursor-bit {
-      color: rgba(135, 168, 255, 0.54);
+      color: rgba(184, 255, 232, 0.34);
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 18px;
       line-height: 1;
-      text-shadow: 0 0 18px rgba(135, 168, 255, 0.22);
+      text-shadow: 0 0 14px rgba(143, 247, 210, 0.14);
     }
 
     .cursor-link {
       height: 3px;
       transform-origin: left center;
-      background: linear-gradient(90deg, rgba(143, 247, 210, 0.55), rgba(135, 168, 255, 0.28), transparent);
-      box-shadow: 0 0 18px rgba(143, 247, 210, 0.28);
+      background: linear-gradient(90deg, rgba(143, 247, 210, 0.34), rgba(143, 247, 210, 0.16), transparent);
+      box-shadow: 0 0 14px rgba(143, 247, 210, 0.16);
     }
 
     .ambient-tech {
@@ -133,6 +134,7 @@
       z-index: 0;
       pointer-events: none;
       overflow: hidden;
+      opacity: 0.5;
     }
 
     .ambient-orb {
@@ -143,9 +145,9 @@
       opacity: 0;
       transform: translate(-50%, -50%) scale(0.72);
       background:
-        radial-gradient(circle, rgba(184, 255, 232, 0.32) 0%, rgba(143, 247, 210, 0.18) 38%, rgba(135, 168, 255, 0.08) 62%, transparent 78%),
-        radial-gradient(circle at 38% 38%, rgba(255, 255, 255, 0.36), transparent 28%);
-      box-shadow: 0 0 34px rgba(143, 247, 210, 0.18), 0 0 64px rgba(135, 168, 255, 0.1);
+        radial-gradient(circle, rgba(184, 255, 232, 0.24) 0%, rgba(143, 247, 210, 0.14) 42%, rgba(143, 247, 210, 0.05) 64%, transparent 78%),
+        radial-gradient(circle at 38% 38%, rgba(184, 255, 232, 0.22), transparent 28%);
+      box-shadow: 0 0 28px rgba(143, 247, 210, 0.14), 0 0 52px rgba(143, 247, 210, 0.06);
       filter: blur(0.3px);
       animation: ambientOrb 4s ease-in-out forwards;
       will-change: transform, opacity;
@@ -172,7 +174,7 @@
 
     .page {
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     .shell {
@@ -197,7 +199,7 @@
       padding: 8px 10px 8px 14px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(6, 9, 7, 0.68);
+      background: rgba(6, 9, 7, 0.82);
       box-shadow: 0 12px 50px rgba(0, 0, 0, 0.3);
     }
 
@@ -297,7 +299,7 @@
     .hero {
       min-height: calc(100vh - 92px);
       display: grid;
-      grid-template-columns: minmax(0, 1.06fr) minmax(180px, 0.74fr);
+      grid-template-columns: minmax(0, 1.18fr) minmax(170px, 0.62fr);
       gap: clamp(24px, 4vw, 54px);
       align-items: start;
       padding: 58px 0 86px;
@@ -305,21 +307,6 @@
 
     .hero-copy {
       position: relative;
-    }
-
-    .hero-copy::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: -24px;
-      display: block;
-      width: min(180px, 42vw);
-      height: 2px;
-      opacity: 0.92;
-      background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.14) 10%, var(--mint) 30%, rgba(255, 255, 255, 0.92) 48%, rgba(135, 168, 255, 0.72) 64%, rgba(143, 247, 210, 0.22) 82%, transparent 100%);
-      background-size: 220% 100%;
-      animation: neonStrip 4.8s linear infinite;
-      box-shadow: 0 0 28px rgba(143, 247, 210, 0.45), 0 0 44px rgba(135, 168, 255, 0.14);
     }
 
     .kicker {
@@ -352,22 +339,30 @@
 
     h1 {
       max-width: 830px;
-      font-size: clamp(46px, 8.5vw, 116px);
-      line-height: 0.9;
-      letter-spacing: -0.055em;
+      font-size: clamp(46px, 7.8vw, 104px);
+      line-height: 1.03;
+      letter-spacing: -0.028em;
       text-wrap: balance;
     }
 
     .tone {
+      display: inline-block;
+      max-width: 100%;
+      margin-top: 0.1em;
+      padding-bottom: 0.16em;
+      font-size: 0.82em;
+      line-height: 1.12;
+      letter-spacing: -0.012em;
+      white-space: nowrap;
       color: transparent;
-      background: linear-gradient(115deg, #ffffff 4%, #b8ffe8 42%, #a8bbff 72%, #ffd48a);
+      background: linear-gradient(115deg, #ffffff 4%, #b8ffe8 48%, #9fd7ff 92%);
       -webkit-background-clip: text;
       background-clip: text;
     }
 
     .lead {
       max-width: 680px;
-      margin-top: 28px;
+      margin-top: 40px;
       color: var(--muted);
       font-size: clamp(17px, 2vw, 21px);
       line-height: 1.72;
@@ -400,11 +395,36 @@
       left: 0;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.18) 8%, var(--mint) 28%, rgba(255, 255, 255, 0.86) 48%, rgba(135, 168, 255, 0.64) 64%, rgba(143, 247, 210, 0.2) 82%, transparent 100%);
-      background-size: 220% 100%;
-      opacity: 0.88;
-      animation: neonStrip 4.2s linear infinite;
-      box-shadow: 0 0 18px rgba(143, 247, 210, 0.24);
+      background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.12) 12%, rgba(143, 247, 210, 0.42) 45%, rgba(143, 247, 210, 0.16) 78%, transparent 100%);
+      opacity: 0.34;
+      box-shadow: 0 0 10px rgba(143, 247, 210, 0.08);
+    }
+
+    .rail-item::after {
+      content: "";
+      position: absolute;
+      left: -48%;
+      top: 0;
+      z-index: 0;
+      width: 38%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(143, 247, 210, 0.18), rgba(143, 247, 210, 0.64), rgba(143, 247, 210, 0.18), transparent);
+      box-shadow: 0 0 14px rgba(143, 247, 210, 0.18);
+      animation: neonSweep 10.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .rail-item:nth-child(2)::after {
+      animation-delay: 2.2s;
+    }
+
+    .rail-item:nth-child(3)::after {
+      animation-delay: 4.4s;
+    }
+
+    .rail-item:nth-child(4)::after {
+      animation-delay: 6.6s;
     }
 
     .rail-item strong,
@@ -705,11 +725,35 @@
       top: 0;
       width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.18) 8%, var(--mint) 28%, rgba(255, 255, 255, 0.86) 48%, rgba(135, 168, 255, 0.7) 66%, rgba(143, 247, 210, 0.16) 82%, transparent 100%);
-      background-size: 220% 100%;
-      opacity: 0.92;
-      animation: neonStrip 4.6s linear infinite;
-      box-shadow: 0 0 18px rgba(143, 247, 210, 0.22);
+      background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.1) 12%, rgba(143, 247, 210, 0.38) 46%, rgba(143, 247, 210, 0.14) 78%, transparent 100%);
+      opacity: 0.3;
+      box-shadow: 0 0 10px rgba(143, 247, 210, 0.08);
+    }
+
+    .metric::after {
+      content: "";
+      position: absolute;
+      left: -52%;
+      top: 0;
+      width: 40%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(143, 247, 210, 0.16), rgba(143, 247, 210, 0.58), rgba(143, 247, 210, 0.16), transparent);
+      box-shadow: 0 0 14px rgba(143, 247, 210, 0.16);
+      animation: neonSweep 12s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .metric:nth-child(2)::after {
+      animation-delay: 3s;
+    }
+
+    .metric:nth-child(3)::after {
+      animation-delay: 6s;
+    }
+
+    .metric:nth-child(4)::after {
+      animation-delay: 9s;
     }
 
     .metric strong {
@@ -735,8 +779,8 @@
       position: relative;
       overflow: hidden;
       display: grid;
-      grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
-      gap: 24px;
+      grid-template-columns: minmax(230px, 0.32fr) minmax(0, 1fr);
+      gap: clamp(18px, 3vw, 32px);
       padding: 24px;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -749,10 +793,37 @@
       position: absolute;
       left: 0;
       top: 0;
-      width: 36%;
+      width: 100%;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--mint), transparent);
-      opacity: 0.62;
+      background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.1) 12%, rgba(143, 247, 210, 0.34) 46%, rgba(143, 247, 210, 0.12) 78%, transparent 100%);
+      opacity: 0.28;
+      box-shadow: 0 0 10px rgba(143, 247, 210, 0.08);
+    }
+
+    .experience-item::after {
+      content: "";
+      position: absolute;
+      left: -34%;
+      top: 0;
+      width: 24%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(143, 247, 210, 0.14), rgba(143, 247, 210, 0.54), rgba(143, 247, 210, 0.14), transparent);
+      box-shadow: 0 0 14px rgba(143, 247, 210, 0.16);
+      animation: neonSweep 14s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .experience-item:nth-child(2)::after {
+      animation-delay: 3.5s;
+    }
+
+    .experience-item:nth-child(3)::after {
+      animation-delay: 7s;
+    }
+
+    .experience-item:nth-child(4)::after {
+      animation-delay: 10.5s;
     }
 
     .experience-meta {
@@ -783,20 +854,98 @@
     }
 
     .experience-skills {
-      display: flex;
-      flex-wrap: wrap;
+      counter-reset: experience-skill;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 8px;
-      align-content: start;
+      align-self: stretch;
+      align-content: stretch;
+      min-height: 74px;
+      overflow: visible;
     }
 
     .experience-skills span {
-      padding: 9px 11px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--muted);
-      background: rgba(255, 255, 255, 0.045);
-      font-size: 13px;
+      counter-increment: experience-skill;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      padding: 13px 11px;
+      border: 1px solid rgba(247, 250, 246, 0.1);
+      border-radius: 12px;
+      color: rgba(247, 250, 246, 0.82);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.026)),
+        rgba(6, 9, 7, 0.72);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.045);
+      transition: border-color 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .experience-skills b {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      color: inherit;
+      font-size: clamp(11px, 0.98vw, 13px);
+      font-weight: 760;
       line-height: 1.2;
+      letter-spacing: 0;
+      text-align: center;
+      text-wrap: balance;
+      overflow-wrap: anywhere;
+      text-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+    }
+
+    .experience-skills span::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      top: 10px;
+      height: 1px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(143, 247, 210, 0.42), transparent);
+      opacity: 0.32;
+    }
+
+    .experience-skills span::after {
+      content: "0" counter(experience-skill);
+      position: absolute;
+      right: 10px;
+      bottom: 8px;
+      color: rgba(143, 247, 210, 0.18);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+    }
+
+    .experience-skills span:hover {
+      z-index: 2;
+      color: rgba(247, 250, 246, 0.96);
+      border-color: rgba(143, 247, 210, 0.24);
+      background:
+        linear-gradient(180deg, rgba(143, 247, 210, 0.075), rgba(255, 255, 255, 0.032)),
+        rgba(255, 255, 255, 0.02);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        0 0 18px rgba(143, 247, 210, 0.055);
+    }
+
+    .experience-skills span:hover b {
+      color: inherit;
+    }
+
+    .rail-item,
+    .card,
+    .metric,
+    .experience-item,
+    .contact-band,
+    .status-card {
+      background-color: rgba(6, 9, 7, 0.78);
     }
 
     .contact-band {
@@ -838,12 +987,29 @@
       transform: translateY(0);
     }
 
-    @keyframes neonStrip {
+    @keyframes neonSweep {
       0% {
-        background-position: 200% 50%;
+        opacity: 0;
+        left: -52%;
+      }
+      8% {
+        opacity: 0;
+        left: -52%;
+      }
+      16% {
+        opacity: 0.72;
+      }
+      42% {
+        opacity: 0.72;
+        left: 108%;
+      }
+      50% {
+        opacity: 0;
+        left: 108%;
       }
       100% {
-        background-position: -40% 50%;
+        opacity: 0;
+        left: 108%;
       }
     }
 
@@ -883,6 +1049,19 @@
 
       .experience-item {
         grid-template-columns: 1fr;
+      }
+
+      .experience-skills {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        min-height: auto;
+      }
+
+      .experience-skills span {
+        min-height: 68px;
+      }
+
+      .experience-skills b {
+        font-size: clamp(11px, 3.1vw, 13px);
       }
     }
 
@@ -927,9 +1106,17 @@
       }
 
       h1 {
-        font-size: clamp(36px, 11vw, 50px);
-        line-height: 1;
-        letter-spacing: -0.035em;
+        font-size: clamp(35px, 9.1vw, 48px);
+        line-height: 1.08;
+        letter-spacing: -0.012em;
+      }
+
+      .tone {
+        font-size: 0.75em;
+      }
+
+      .lead {
+        margin-top: 34px;
       }
 
       .hero {
@@ -976,6 +1163,23 @@
         width: 100%;
       }
 
+      .experience-item {
+        padding: 18px;
+      }
+
+      .experience-skills {
+        gap: 10px;
+      }
+
+      .experience-skills span {
+        min-height: 64px;
+        padding: 12px 10px;
+      }
+
+      .experience-skills b {
+        font-size: clamp(10px, 3vw, 12px);
+      }
+
       section {
         padding: 62px 0;
       }
@@ -1015,7 +1219,6 @@
     <header class="topbar">
       <nav class="nav shell" aria-label="Primary navigation">
         <div class="nav-links">
-          <a href="#about" data-i18n="nav.about">O mne</a>
           <a href="#services" data-i18n="nav.services">Čo robím</a>
           <a href="#experience" data-i18n="nav.experience">Skúsenosti</a>
           <a href="#contact" data-i18n="nav.contact">Kontakt</a>
@@ -1033,7 +1236,7 @@
     <main id="top" class="shell">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy reveal">
-          <h1 id="hero-title" data-i18n-html="hero.title">IT support, opravy a digitálne riešenia <span class="tone">s citom pre detail.</span></h1>
+          <h1 id="hero-title" data-i18n-html="hero.title">IT support. Opravy. <span class="tone">Digitálne riešenia.</span></h1>
           <p class="lead" data-i18n="hero.lead">Pomáham udržať techniku, zariadenia a digitálne prostredia v chode. Spájam reálnu prax v IT podpore, troubleshootingu, opravách elektroniky, webdesigne a vývoji iOS aplikácií.</p>
           <div class="skill-rail" aria-label="Core skills">
             <div class="rail-item">
@@ -1076,50 +1279,12 @@
         </aside>
       </section>
 
-      <section id="about" class="reveal" aria-labelledby="about-title">
-        <div class="section-head">
-          <div>
-            <span class="label" data-i18n="about.label">Profil</span>
-            <h2 id="about-title" data-i18n="about.title">Praktický technický profil, ktorý pôsobí pokojne a rieši veci do konca.</h2>
-          </div>
-          <p class="section-copy" data-i18n="about.copy">Som technický typ, ktorý vie rýchlo pochopiť problém, rozložiť ho na konkrétne kroky a dotiahnuť riešenie bez zbytočného chaosu. Najsilnejší som tam, kde sa stretáva podpora používateľov, zariadenia, infraštruktúra a čistý digitálny výstup.</p>
-        </div>
-        <div class="stack" aria-label="Focus areas">
-          <span class="pill" data-i18n="tags.troubleshooting">Troubleshooting</span>
-          <span class="pill" data-i18n="tags.hardware">Hardware maintenance</span>
-          <span class="pill" data-i18n="tags.it">IT infraštruktúra</span>
-          <span class="pill" data-i18n="tags.repair">Opravy elektroniky</span>
-          <span class="pill" data-i18n="tags.webdesign">Webdesign</span>
-          <span class="pill" data-i18n="tags.ios">iOS app development</span>
-          <span class="pill" data-i18n="tags.design">Creative design</span>
-        </div>
-        <div class="metric-grid" aria-label="Professional highlights">
-          <div class="metric">
-            <strong data-i18n="metrics.current.value">Support</strong>
-            <span data-i18n="metrics.current.label">IT podpora, troubleshooting a komunikácia s používateľmi</span>
-          </div>
-          <div class="metric">
-            <strong data-i18n="metrics.infra.value">Infra</strong>
-            <span data-i18n="metrics.infra.label">Lokálne IT prostredie, zariadenia a spoľahlivá prevádzka</span>
-          </div>
-          <div class="metric">
-            <strong data-i18n="metrics.repair.value">Repair</strong>
-            <span data-i18n="metrics.repair.label">Diagnostika a opravy telefónov, tabletov, PC a elektroniky</span>
-          </div>
-          <div class="metric">
-            <strong data-i18n="metrics.digital.value">Digital</strong>
-            <span data-i18n="metrics.digital.label">Webdesign, responzívne stránky a iOS aplikácie</span>
-          </div>
-        </div>
-      </section>
-
       <section id="services" class="reveal" aria-labelledby="services-title">
         <div class="section-head">
           <div>
             <span class="label" data-i18n="services.label">Skills</span>
             <h2 id="services-title" data-i18n="services.title">Reálne schopnosti, ktoré sa dajú použiť hneď.</h2>
           </div>
-          <p class="section-copy" data-i18n="services.copy">Stránka je stručná, ale základ je jasný: technická podpora, hardvér, servisné myslenie, vizuálne cítenie a schopnosť tvoriť digitálne veci, ktoré nepôsobia náhodne.</p>
         </div>
 
         <div class="services">
@@ -1155,7 +1320,6 @@
             <span class="label" data-i18n="experience.label">Experience</span>
             <h2 id="experience-title" data-i18n="experience.title">Skúsenosti stručne. Detaily patria na LinkedIn.</h2>
           </div>
-          <p class="section-copy" data-i18n="experience.copy">Tu nechávam len prehľad reálnych pozícií a schopností. Presné pracovné opisy, projekty a kontext si vieš pozrieť cez LinkedIn.</p>
         </div>
 
         <div class="experience-list">
@@ -1167,10 +1331,10 @@
               <span class="location" data-i18n="experience.leo.location">Bratislava, Slovakia · Hybrid</span>
             </div>
             <div class="experience-skills">
-              <span data-i18n="experience.leo.skill1">IT support</span>
-              <span data-i18n="experience.leo.skill2">Infraštruktúra</span>
-              <span data-i18n="experience.leo.skill3">Incident handling</span>
-              <span data-i18n="experience.leo.skill4">Spoľahlivosť služieb</span>
+              <span><b data-i18n="experience.leo.skill1">IT support</b></span>
+              <span><b data-i18n="experience.leo.skill2">Infraštruktúra</b></span>
+              <span><b data-i18n="experience.leo.skill3">Incident handling</b></span>
+              <span><b data-i18n="experience.leo.skill4">Spoľahlivosť služieb</b></span>
             </div>
           </article>
 
@@ -1182,10 +1346,10 @@
               <span class="location" data-i18n="experience.ikea.location">Slovakia · On-site</span>
             </div>
             <div class="experience-skills">
-              <span data-i18n="experience.ikea.skill1">Device support</span>
-              <span data-i18n="experience.ikea.skill2">Lokálne IT</span>
-              <span data-i18n="experience.ikea.skill3">User training</span>
-              <span data-i18n="experience.ikea.skill4">Troubleshooting</span>
+              <span><b data-i18n="experience.ikea.skill1">Device support</b></span>
+              <span><b data-i18n="experience.ikea.skill2">Lokálne IT</b></span>
+              <span><b data-i18n="experience.ikea.skill3">User training</b></span>
+              <span><b data-i18n="experience.ikea.skill4">Troubleshooting</b></span>
             </div>
           </article>
 
@@ -1197,10 +1361,10 @@
               <span class="location" data-i18n="experience.pcexpres.location">On-site</span>
             </div>
             <div class="experience-skills">
-              <span data-i18n="experience.pcexpres.skill1">Mobile repair</span>
-              <span data-i18n="experience.pcexpres.skill2">PC repair</span>
-              <span data-i18n="experience.pcexpres.skill3">Customer care</span>
-              <span data-i18n="experience.pcexpres.skill4">On-site práca</span>
+              <span><b data-i18n="experience.pcexpres.skill1">Mobile repair</b></span>
+              <span><b data-i18n="experience.pcexpres.skill2">PC repair</b></span>
+              <span><b data-i18n="experience.pcexpres.skill3">Customer care</b></span>
+              <span><b data-i18n="experience.pcexpres.skill4">On-site práca</b></span>
             </div>
           </article>
 
@@ -1212,10 +1376,10 @@
               <span class="location" data-i18n="experience.fixservis.location">Nitra Region, Slovakia · On-site</span>
             </div>
             <div class="experience-skills">
-              <span data-i18n="experience.fixservis.skill1">Autorizované štandardy</span>
-              <span data-i18n="experience.fixservis.skill2">Diagnostika</span>
-              <span data-i18n="experience.fixservis.skill3">Menšia elektronika</span>
-              <span data-i18n="experience.fixservis.skill4">Zákaznícky servis</span>
+              <span><b data-i18n="experience.fixservis.skill1">Autorizované štandardy</b></span>
+              <span><b data-i18n="experience.fixservis.skill2">Diagnostika</b></span>
+              <span><b data-i18n="experience.fixservis.skill3">Menšia elektronika</b></span>
+              <span><b data-i18n="experience.fixservis.skill4">Zákaznícky servis</b></span>
             </div>
           </article>
         </div>
@@ -1264,7 +1428,6 @@
         "tags.design": "Creative design",
         "services.label": "Služby",
         "services.title": "Praktická technika, čisté riešenia.",
-        "services.copy": "Silná kombinácia používateľskej podpory, diagnostiky zariadení, opráv, webdesignu a vývoja iOS aplikácií.",
         "services.it.title": "IT Support",
         "services.it.copy": "Nastavenia, diagnostika, denné technické problémy, podpora používateľov a spoľahlivé udržiavanie systémov v chode.",
         "services.repair.title": "Opravy elektroniky",
@@ -1342,7 +1505,7 @@
 
     Object.assign(translations.sk, {
       "nav.experience": "Prax",
-      "hero.title": "IT support, opravy a digitálne riešenia <span class=\"tone\">s citom pre detail.</span>",
+      "hero.title": "IT support. Opravy. <span class=\"tone\">Digitálne riešenia.</span>",
       "hero.lead": "Pomáham udržať techniku, zariadenia a digitálne prostredia v chode. Spájam reálnu prax v IT podpore, troubleshootingu, opravách elektroniky, webdesigne a vývoji iOS aplikácií.",
       "hero.work": "Pozrieť prax",
       "rail.support.title": "IT Support",
@@ -1365,13 +1528,11 @@
       "metrics.digital.label": "Webdesign, responzívne stránky a iOS aplikácie",
       "services.label": "Skills",
       "services.title": "Reálne schopnosti, ktoré sa dajú použiť hneď.",
-      "services.copy": "Stránka je stručná, ale základ je jasný: technická podpora, hardvér, servisné myslenie, vizuálne cítenie a schopnosť tvoriť digitálne veci, ktoré nepôsobia náhodne.",
       "services.it.copy": "Troubleshooting, device support, lokálna infraštruktúra, používateľská podpora a schopnosť držať technické prostredie prehľadné.",
       "services.repair.copy": "Diagnostika telefónov, tabletov, počítačov a menšej elektroniky, práca s hardvérom, servisnými postupmi a detailom.",
       "services.design.copy": "Webdesign, landing pages, responzívne rozhrania a iOS aplikácie s dôrazom na použiteľnosť, vizuálnu čistotu a technický detail.",
       "experience.label": "Experience",
       "experience.title": "Skúsenosti stručne. Detaily patria na LinkedIn.",
-      "experience.copy": "Tu nechávam len prehľad reálnych pozícií a schopností. Presné pracovné opisy, projekty a kontext si vieš pozrieť cez LinkedIn.",
       "experience.leo.company": "Leo Express · Full-time",
       "experience.leo.role": "IT Support Specialist",
       "experience.leo.duration": "May 2025 - Present · 1 yr 1 mo",
@@ -1415,7 +1576,7 @@
 
     Object.assign(translations.cs, {
       "nav.experience": "Praxe",
-      "hero.title": "IT support, opravy a digitální řešení <span class=\"tone\">s citem pro detail.</span>",
+      "hero.title": "IT support. Opravy. <span class=\"tone\">Digitální řešení.</span>",
       "hero.lead": "Pomáhám udržet techniku, zařízení a digitální prostředí v chodu. Spojuji reálnou praxi v IT podpoře, troubleshootingu, opravách elektroniky, webdesignu a vývoji iOS aplikací.",
       "hero.work": "Prohlédnout praxi",
       "rail.support.title": "IT Support",
@@ -1444,7 +1605,6 @@
       "services.design.copy": "Webdesign, landing pages, responzivní rozhraní a iOS aplikace s důrazem na použitelnost, vizuální čistotu a technický detail.",
       "experience.label": "Experience",
       "experience.title": "Zkušenosti stručně. Detaily patří na LinkedIn.",
-      "experience.copy": "Tady nechávám jen přehled reálných pozic a schopností. Přesné pracovní popisy, projekty a kontext si můžeš prohlédnout přes LinkedIn.",
       "experience.leo.company": "Leo Express · Full-time",
       "experience.leo.role": "IT Support Specialist",
       "experience.leo.duration": "May 2025 - Present · 1 yr 1 mo",
@@ -1488,7 +1648,7 @@
 
     Object.assign(translations.en, {
       "nav.experience": "Experience",
-      "hero.title": "IT support, repair, and digital work <span class=\"tone\">with an eye for detail.</span>",
+      "hero.title": "IT support. Repair. <span class=\"tone\">Digital work.</span>",
       "hero.lead": "I help keep technology, devices, and digital environments running. I combine real experience in IT support, troubleshooting, electronics repair, webdesign, and iOS app development.",
       "hero.work": "View experience",
       "rail.support.title": "IT Support",
@@ -1962,7 +2122,7 @@
                 drawSize * 0.16
             );
 
-            ctx.fillStyle = `rgba(135, 168, 255, ${particle.life * (0.24 + strongestInfluence * 0.3)})`;
+            ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * (0.18 + strongestInfluence * 0.22)})`;
             ctx.fillText(particle.bit, particle.x + 8, particle.y - 8);
         }
 
