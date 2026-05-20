@@ -1156,6 +1156,26 @@
       transform: translateY(0);
     }
 
+    body.low-power .cursor-tech {
+      display: none;
+    }
+
+    body.low-power .ambient-tech {
+      opacity: 0.3;
+    }
+
+    body.low-power .ambient-tech::before,
+    body.low-power .ambient-tech::after {
+      animation: none !important;
+    }
+
+    body.low-power .reveal,
+    body.low-power .reveal.visible {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
     @keyframes neonSweep {
       0% {
         opacity: 0;
@@ -1677,6 +1697,14 @@
         border-color: var(--line);
       }
 
+      .rail-item:active,
+      .card:active,
+      .experience-item:active,
+      .contact-band:active {
+        transform: none;
+        border-color: var(--line);
+      }
+
       .card::before,
       .experience-item::before,
       .contact-band .button::before {
@@ -1687,6 +1715,21 @@
       .experience-item:hover::before,
       .contact-band .button:hover::before {
         opacity: 0.22;
+      }
+
+      .rail-item,
+      .card,
+      .experience-item,
+      .contact-band {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .rail-item *::selection,
+      .card *::selection,
+      .experience-item *::selection,
+      .contact-band *::selection {
+        background: rgba(143, 247, 210, 0.14);
+        color: inherit;
       }
     }
   </style>
@@ -1726,15 +1769,15 @@
               <span data-i18n="rail.support.copy">používatelia, zariadenia, infra</span>
             </div>
             <div class="rail-item">
-              <strong data-i18n="rail.repair.title">Repair</strong>
+              <strong data-i18n="rail.repair.title">Opravy</strong>
               <span data-i18n="rail.repair.copy">telefóny, tablety, PC</span>
             </div>
             <div class="rail-item">
-              <strong data-i18n="rail.web.title">Webdesign</strong>
+              <strong data-i18n="rail.web.title">Webdizajn</strong>
               <span data-i18n="rail.web.copy">čisté responzívne stránky</span>
             </div>
             <div class="rail-item">
-              <strong data-i18n="rail.ios.title">iOS Apps</strong>
+              <strong data-i18n="rail.ios.title">iOS aplikácie</strong>
               <span data-i18n="rail.ios.copy">nápady a vývoj aplikácií</span>
             </div>
           </div>
@@ -1764,7 +1807,7 @@
       <section id="services" class="reveal" aria-labelledby="services-title">
         <div class="section-head">
           <div>
-            <span class="label" data-i18n="services.label">Skills</span>
+            <span class="label" data-i18n="services.label">Služby</span>
             <h2 id="services-title" data-i18n="services.title">Od nápadu či problému po čisté riešenie.</h2>
           </div>
         </div>
@@ -1790,7 +1833,7 @@
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 1.9 5.8h6.1l-4.9 3.6 1.9 5.8-5-3.6-5 3.6 1.9-5.8-4.9-3.6h6.1z"/></svg>
             </div>
-            <h3 data-i18n="services.design.title">Webdesign & iOS Apps</h3>
+            <h3 data-i18n="services.design.title">Webdizajn a iOS aplikácie</h3>
           <p data-i18n="services.design.copy">Tvorím čisté weby, landing pages a app koncepty, ktoré majú zrozumiteľnú štruktúru, dobrý vizuálny cit a fungujú prirodzene na rôznych zariadeniach.</p>
           </article>
         </div>
@@ -1799,7 +1842,7 @@
       <section id="experience" class="reveal" aria-labelledby="experience-title">
         <div class="section-head">
           <div>
-            <span class="label" data-i18n="experience.label">Experience</span>
+            <span class="label" data-i18n="experience.label">Skúsenosti</span>
             <h2 id="experience-title" data-i18n="experience.title">Skúsenosti stručne. Detaily patria na LinkedIn.</h2>
           </div>
         </div>
@@ -1807,8 +1850,8 @@
         <div class="experience-list">
           <article class="experience-item">
             <div class="experience-meta">
-              <span class="company"><span class="company-brand leo" data-i18n="experience.leo.companyName">Leo Express</span> · <span data-i18n="experience.leo.workType">Full-time</span></span>
-              <h3 class="role" data-i18n="experience.leo.role">IT Support Specialist</h3>
+              <span class="company"><span class="company-brand leo" data-i18n="experience.leo.companyName">Leo Express</span> · <span data-i18n="experience.leo.workType">Plný úväzok</span></span>
+              <h3 class="role" data-i18n="experience.leo.role">Špecialista IT podpory</h3>
               <span class="duration" data-i18n="experience.leo.duration">May 2025 - Present</span>
               <span class="location" data-i18n="experience.leo.location">Bratislava, Slovakia · Hybrid</span>
             </div>
@@ -1825,8 +1868,8 @@
 
           <article class="experience-item">
             <div class="experience-meta">
-              <span class="company"><span class="company-brand ikea" data-i18n="experience.ikea.companyName">IKEA</span> · <span data-i18n="experience.ikea.workType">Full-time</span></span>
-              <h3 class="role" data-i18n="experience.ikea.role">Technical Support Specialist</h3>
+              <span class="company"><span class="company-brand ikea" data-i18n="experience.ikea.companyName">IKEA</span> · <span data-i18n="experience.ikea.workType">Plný úväzok</span></span>
+              <h3 class="role" data-i18n="experience.ikea.role">Špecialista technickej podpory</h3>
               <span class="duration" data-i18n="experience.ikea.duration">Apr 2023 - Apr 2025</span>
               <span class="location" data-i18n="experience.ikea.location">Bratislava, Slovakia · On-site</span>
             </div>
@@ -1843,8 +1886,8 @@
 
           <article class="experience-item">
             <div class="experience-meta">
-              <span class="company"><span class="company-brand pcexpres" data-i18n="experience.pcexpres.companyName">PCexpres</span> · <span data-i18n="experience.pcexpres.workType">Freelance</span></span>
-              <h3 class="role" data-i18n="experience.pcexpres.role">Freelance Mobile Device Repair Specialist</h3>
+              <span class="company"><span class="company-brand pcexpres" data-i18n="experience.pcexpres.companyName">PCexpres</span> · <span data-i18n="experience.pcexpres.workType">Živnosť</span></span>
+              <h3 class="role" data-i18n="experience.pcexpres.role">Špecialista opráv mobilných zariadení</h3>
               <span class="duration" data-i18n="experience.pcexpres.duration">Oct 2021 - Apr 2023</span>
               <span class="location" data-i18n="experience.pcexpres.location">Západné a stredné Slovensko · On-site</span>
             </div>
@@ -1861,7 +1904,7 @@
 
           <article class="experience-item">
             <div class="experience-meta">
-              <span class="company"><span class="company-brand fixservis" data-i18n="experience.fixservis.companyName">FixServis</span> · <span data-i18n="experience.fixservis.workType">Full-time</span></span>
+              <span class="company"><span class="company-brand fixservis" data-i18n="experience.fixservis.companyName">FixServis</span> · <span data-i18n="experience.fixservis.workType">Plný úväzok</span></span>
               <h3 class="role" data-i18n="experience.fixservis.role">Authorized Huawei Technician</h3>
               <span class="duration" data-i18n="experience.fixservis.duration">Oct 2019 - Oct 2021</span>
               <span class="location" data-i18n="experience.fixservis.location">Nitra, Slovakia · On-site</span>
@@ -1928,7 +1971,7 @@
         "services.it.copy": "Riešim technické problémy od prvého kontaktu po funkčné riešenie. Pomáham používateľom, zariadeniam aj lokálnemu IT prostrediu fungovať spoľahlivo a prehľadne.",
         "services.repair.title": "Opravy elektroniky",
         "services.repair.copy": "Diagnostika a opravy zariadení s dôrazom na presnosť, postup a detail. Skúsenosť s telefónmi, tabletmi, počítačmi aj menšou elektronikou.",
-        "services.design.title": "Webdesign & iOS Apps",
+        "services.design.title": "Webdizajn a iOS aplikácie",
         "services.design.copy": "Tvorím čisté weby, landing pages a app koncepty, ktoré majú zrozumiteľnú štruktúru, dobrý vizuálny cit a fungujú prirodzene na rôznych zariadeniach.",
         "contact.title": "Poďme niečo vyriešiť.",
         "contact.email": "Email",
@@ -1959,7 +2002,7 @@
         "services.it.copy": "Řeším technické problémy od prvního kontaktu po funkční řešení. Pomáhám uživatelům, zařízením i lokálnímu IT prostředí fungovat spolehlivě a přehledně.",
         "services.repair.title": "Opravy elektroniky",
         "services.repair.copy": "Diagnostika a opravy zařízení s důrazem na přesnost, postup a detail. Zkušenost s telefony, tablety, počítači i menší elektronikou.",
-        "services.design.title": "Webdesign & iOS Apps",
+        "services.design.title": "Webdesign a iOS aplikace",
         "services.design.copy": "Tvořím čisté weby, landing pages a app koncepty, které mají srozumitelnou strukturu, dobrý vizuální cit a fungují přirozeně na různých zařízeních.",
         "contact.title": "Pojďme něco vyřešit.",
         "contact.email": "Email",
@@ -2005,33 +2048,33 @@
       "hero.work": "Pozrieť prax",
       "rail.support.title": "IT podpora",
       "rail.support.copy": "používatelia, zariadenia, infra",
-      "rail.repair.title": "Repair",
+      "rail.repair.title": "Opravy",
       "rail.repair.copy": "telefóny, tablety, PC",
-      "rail.web.title": "Webdesign",
+      "rail.web.title": "Webdizajn",
       "rail.web.copy": "čisté responzívne stránky",
-      "rail.ios.title": "iOS Apps",
+      "rail.ios.title": "iOS aplikácie",
       "rail.ios.copy": "nápady a vývoj aplikácií",
       "about.title": "Praktický technický profil, ktorý pôsobí pokojne a rieši veci do konca.",
       "about.copy": "Som technický typ, ktorý vie rýchlo pochopiť problém, rozložiť ho na konkrétne kroky a dotiahnuť riešenie bez zbytočného chaosu. Najsilnejší som tam, kde sa stretáva podpora používateľov, zariadenia, infraštruktúra a čistý digitálny výstup.",
-      "metrics.current.value": "Support",
+      "metrics.current.value": "Podpora",
       "metrics.current.label": "IT podpora, troubleshooting a komunikácia s používateľmi",
       "metrics.infra.value": "Infra",
       "metrics.infra.label": "Lokálne IT prostredie, zariadenia a spoľahlivá prevádzka",
-      "metrics.repair.value": "Repair",
+      "metrics.repair.value": "Opravy",
       "metrics.repair.label": "Diagnostika a opravy telefónov, tabletov, PC a elektroniky",
-      "metrics.digital.value": "Digital",
+      "metrics.digital.value": "Digitál",
       "metrics.digital.label": "Webdesign, responzívne stránky a iOS aplikácie",
-      "services.label": "Skills",
+      "services.label": "Služby",
       "services.title": "Od nápadu či problému po čisté riešenie.",
       "services.it.copy": "Riešim technické problémy od prvého kontaktu po funkčné riešenie. Pomáham používateľom, zariadeniam aj lokálnemu IT prostrediu fungovať spoľahlivo a prehľadne.",
       "services.repair.copy": "Diagnostika a opravy zariadení s dôrazom na presnosť, postup a detail. Skúsenosť s telefónmi, tabletmi, počítačmi aj menšou elektronikou.",
       "services.design.copy": "Tvorím čisté weby, landing pages a app koncepty, ktoré majú zrozumiteľnú štruktúru, dobrý vizuálny cit a fungujú prirodzene na rôznych zariadeniach.",
-      "experience.label": "Experience",
+      "experience.label": "Skúsenosti",
       "experience.title": "Skúsenosti stručne. Detaily patria na LinkedIn.",
-      "experience.leo.company": "Leo Express · Full-time",
+      "experience.leo.company": "Leo Express · Plný úväzok",
       "experience.leo.companyName": "Leo Express",
-      "experience.leo.workType": "Full-time",
-      "experience.leo.role": "IT Support Specialist",
+      "experience.leo.workType": "Plný úväzok",
+      "experience.leo.role": "Špecialista IT podpory",
       "experience.leo.duration": "May 2025 - Present",
       "experience.leo.location": "Bratislava, Slovakia · Hybrid",
       "experience.leo.copy": "Podpora používateľov, zariadení a lokálneho IT prostredia v každodennej prevádzke.",
@@ -2039,10 +2082,10 @@
       "experience.leo.skill2": "Podpora používateľov",
       "experience.leo.skill3": "Správa zariadení",
       "experience.leo.skill4": "Lokálne IT prostredie",
-      "experience.ikea.company": "IKEA · Full-time",
+      "experience.ikea.company": "IKEA · Plný úväzok",
       "experience.ikea.companyName": "IKEA",
-      "experience.ikea.workType": "Full-time",
-      "experience.ikea.role": "Technical Support Specialist",
+      "experience.ikea.workType": "Plný úväzok",
+      "experience.ikea.role": "Špecialista technickej podpory",
       "experience.ikea.duration": "Apr 2023 - Apr 2025",
       "experience.ikea.location": "Bratislava, Slovakia · On-site",
       "experience.ikea.copy": "Technická podpora tímov, pracovísk a zariadení s dôrazom na rýchle riešenie problémov.",
@@ -2050,10 +2093,10 @@
       "experience.ikea.skill2": "Riešenie problémov pod tlakom",
       "experience.ikea.skill3": "Komunikácia s tímami",
       "experience.ikea.skill4": "Používateľské školenia",
-      "experience.pcexpres.company": "PCexpres · Freelance",
+      "experience.pcexpres.company": "PCexpres · Živnosť",
       "experience.pcexpres.companyName": "PCexpres",
-      "experience.pcexpres.workType": "Freelance",
-      "experience.pcexpres.role": "Freelance Mobile Device Repair Specialist",
+      "experience.pcexpres.workType": "Živnosť",
+      "experience.pcexpres.role": "Špecialista opráv mobilných zariadení",
       "experience.pcexpres.duration": "Oct 2021 - Apr 2023",
       "experience.pcexpres.location": "Západné a stredné Slovensko · On-site",
       "experience.pcexpres.copy": "Diagnostika a opravy mobilných zariadení, počítačov a hardvéru priamo pre zákazníkov.",
@@ -2061,10 +2104,10 @@
       "experience.pcexpres.skill2": "Opravy telefónov a PC",
       "experience.pcexpres.skill3": "Komunikácia so zákazníkom",
       "experience.pcexpres.skill4": "Zodpovednosť za výsledok",
-      "experience.fixservis.company": "FixServis · Full-time",
+      "experience.fixservis.company": "FixServis · Plný úväzok",
       "experience.fixservis.companyName": "FixServis",
-      "experience.fixservis.workType": "Full-time",
-      "experience.fixservis.role": "Authorized Huawei Technician",
+      "experience.fixservis.workType": "Plný úväzok",
+      "experience.fixservis.role": "Autorizovaný technik Huawei",
       "experience.fixservis.duration": "Oct 2019 - Oct 2021",
       "experience.fixservis.location": "Nitra, Slovakia · On-site",
       "experience.fixservis.copy": "Autorizovaný servis, diagnostika a opravy zariadení podľa štandardov výrobcu.",
@@ -2083,34 +2126,34 @@
       "hero.work": "Prohlédnout praxi",
       "rail.support.title": "IT podpora",
       "rail.support.copy": "uživatelé, zařízení, infra",
-      "rail.repair.title": "Repair",
+      "rail.repair.title": "Opravy",
       "rail.repair.copy": "telefony, tablety, PC",
       "rail.web.title": "Webdesign",
       "rail.web.copy": "čisté responzivní stránky",
-      "rail.ios.title": "iOS Apps",
+      "rail.ios.title": "iOS aplikace",
       "rail.ios.copy": "nápady a vývoj aplikací",
       "about.title": "Praktický technický profil, který působí klidně a dotahuje věci do konce.",
       "about.copy": "Jsem technický typ, který umí rychle pochopit problém, rozložit ho na konkrétní kroky a dotáhnout řešení bez zbytečného chaosu. Nejsilnější jsem tam, kde se potkává podpora uživatelů, zařízení, infrastruktura a čistý digitální výstup.",
-      "metrics.current.value": "Support",
+      "metrics.current.value": "Podpora",
       "metrics.current.label": "IT podpora, troubleshooting a komunikace s uživateli",
       "metrics.infra.value": "Infra",
       "metrics.infra.label": "Lokální IT prostředí, zařízení a spolehlivý provoz",
-      "metrics.repair.value": "Repair",
+      "metrics.repair.value": "Opravy",
       "metrics.repair.label": "Diagnostika a opravy telefonů, tabletů, PC a elektroniky",
-      "metrics.digital.value": "Digital",
+      "metrics.digital.value": "Digitál",
       "metrics.digital.label": "Webdesign, responzivní stránky a iOS aplikace",
-      "services.label": "Skills",
+      "services.label": "Služby",
       "services.title": "Od nápadu či problému k čistému řešení.",
       "services.copy": "Stránka je stručná, ale základ je jasný: technická podpora, hardware, servisní myšlení, vizuální cit a schopnost tvořit digitální věci, které nepůsobí náhodně.",
       "services.it.copy": "Řeším technické problémy od prvního kontaktu po funkční řešení. Pomáhám uživatelům, zařízením i lokálnímu IT prostředí fungovat spolehlivě a přehledně.",
       "services.repair.copy": "Diagnostika a opravy zařízení s důrazem na přesnost, postup a detail. Zkušenost s telefony, tablety, počítači i menší elektronikou.",
       "services.design.copy": "Tvořím čisté weby, landing pages a app koncepty, které mají srozumitelnou strukturu, dobrý vizuální cit a fungují přirozeně na různých zařízeních.",
-      "experience.label": "Experience",
+      "experience.label": "Zkušenosti",
       "experience.title": "Zkušenosti stručně. Detaily patří na LinkedIn.",
-      "experience.leo.company": "Leo Express · Full-time",
+      "experience.leo.company": "Leo Express · Plný úvazek",
       "experience.leo.companyName": "Leo Express",
-      "experience.leo.workType": "Full-time",
-      "experience.leo.role": "IT Support Specialist",
+      "experience.leo.workType": "Plný úvazek",
+      "experience.leo.role": "Specialista IT podpory",
       "experience.leo.duration": "May 2025 - Present",
       "experience.leo.location": "Bratislava, Slovakia · Hybrid",
       "experience.leo.copy": "Podpora uživatelů, zařízení a lokálního IT prostředí v každodenním provozu.",
@@ -2118,10 +2161,10 @@
       "experience.leo.skill2": "Podpora uživatelů",
       "experience.leo.skill3": "Správa zařízení",
       "experience.leo.skill4": "Lokální IT prostředí",
-      "experience.ikea.company": "IKEA · Full-time",
+      "experience.ikea.company": "IKEA · Plný úvazek",
       "experience.ikea.companyName": "IKEA",
-      "experience.ikea.workType": "Full-time",
-      "experience.ikea.role": "Technical Support Specialist",
+      "experience.ikea.workType": "Plný úvazek",
+      "experience.ikea.role": "Specialista technické podpory",
       "experience.ikea.duration": "Apr 2023 - Apr 2025",
       "experience.ikea.location": "Bratislava, Slovakia · On-site",
       "experience.ikea.copy": "Technická podpora týmů, pracovišť a zařízení s důrazem na rychlé řešení problémů.",
@@ -2129,10 +2172,10 @@
       "experience.ikea.skill2": "Řešení problémů pod tlakem",
       "experience.ikea.skill3": "Komunikace s týmy",
       "experience.ikea.skill4": "Školení uživatelů",
-      "experience.pcexpres.company": "PCexpres · Freelance",
+      "experience.pcexpres.company": "PCexpres · Na volné noze",
       "experience.pcexpres.companyName": "PCexpres",
-      "experience.pcexpres.workType": "Freelance",
-      "experience.pcexpres.role": "Freelance Mobile Device Repair Specialist",
+      "experience.pcexpres.workType": "Na volné noze",
+      "experience.pcexpres.role": "Specialista oprav mobilních zařízení",
       "experience.pcexpres.duration": "Oct 2021 - Apr 2023",
       "experience.pcexpres.location": "Západní a střední Slovensko · On-site",
       "experience.pcexpres.copy": "Diagnostika a opravy mobilních zařízení, počítačů a hardwaru přímo pro zákazníky.",
@@ -2140,10 +2183,10 @@
       "experience.pcexpres.skill2": "Opravy telefonů a PC",
       "experience.pcexpres.skill3": "Komunikace se zákazníkem",
       "experience.pcexpres.skill4": "Odpovědnost za výsledek",
-      "experience.fixservis.company": "FixServis · Full-time",
+      "experience.fixservis.company": "FixServis · Plný úvazek",
       "experience.fixservis.companyName": "FixServis",
-      "experience.fixservis.workType": "Full-time",
-      "experience.fixservis.role": "Authorized Huawei Technician",
+      "experience.fixservis.workType": "Plný úvazek",
+      "experience.fixservis.role": "Autorizovaný technik Huawei",
       "experience.fixservis.duration": "Oct 2019 - Oct 2021",
       "experience.fixservis.location": "Nitra, Slovakia · On-site",
       "experience.fixservis.copy": "Autorizovaný servis, diagnostika a opravy zařízení podle standardů výrobce.",
@@ -2252,8 +2295,20 @@
     const languageSwitcher = document.querySelector(".language-switcher");
     const languageIndicator = document.querySelector(".language-indicator");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const coarsePointer = window.matchMedia("(hover: none), (pointer: coarse)");
+    const lowPowerDevice = (
+      coarsePointer.matches && (
+        (typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4) ||
+        (typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 6) ||
+        Boolean(navigator.connection && navigator.connection.saveData)
+      )
+    );
     let currentLanguage = "";
     let languageChangeTimer = 0;
+
+    if (lowPowerDevice) {
+      document.body.classList.add("low-power");
+    }
 
     function browserLanguageFallback() {
       const language = (navigator.language || navigator.userLanguage || "").toLowerCase();
@@ -2384,19 +2439,22 @@
     document.getElementById("year").textContent = new Date().getFullYear();
 
     const revealElements = document.querySelectorAll(".reveal");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    }, { threshold: 0.14 });
-
-    revealElements.forEach((element) => observer.observe(element));
+    if (lowPowerDevice) {
+      revealElements.forEach((element) => element.classList.add("visible"));
+    } else {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, { threshold: 0.14 });
+      revealElements.forEach((element) => observer.observe(element));
+    }
 
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
-    if (finePointer.matches) {
+    if (finePointer.matches && !lowPowerDevice) {
       document.querySelectorAll(".card, .rail-item, .experience-item, .contact-band").forEach((card) => {
         card.addEventListener("pointermove", (event) => {
           const rect = card.getBoundingClientRect();
@@ -2862,9 +2920,11 @@
     }, 1400);
 }
 
-    initCursorTech();
-    window.setTimeout(initCursorTech, 300);
-    window.addEventListener("pointermove", initCursorTech, { once: true, passive: true });
+    if (!lowPowerDevice) {
+      initCursorTech();
+      window.setTimeout(initCursorTech, 300);
+      window.addEventListener("pointermove", initCursorTech, { once: true, passive: true });
+    }
 
     detectLanguage();
   </script>
