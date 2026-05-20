@@ -4,12 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Martin Nagy - IT support, electronics repair, webdesign, and iOS app development." />
+  <meta name="theme-color" content="#060907" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MN | Digital" />
+  <meta property="og:description" content="Martin Nagy - IT support, electronics repair, webdesign, and iOS app development." />
+  <meta property="og:locale" content="sk_SK" />
+  <meta property="og:site_name" content="MN | Digital" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MN | Digital" />
+  <meta name="twitter:description" content="Martin Nagy - IT support, electronics repair, webdesign, and iOS app development." />
   <title>MN | Digital</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #060907;
-      --bg-2: #0c1110;
+      --bg: #0b120f;
+      --bg-2: #141d19;
       --panel: rgba(247, 250, 246, 0.08);
       --panel-2: rgba(247, 250, 246, 0.12);
       --text: #f7faf6;
@@ -44,8 +53,10 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
       background:
-        linear-gradient(135deg, rgba(143, 247, 210, 0.08), transparent 28%),
-        linear-gradient(315deg, rgba(135, 168, 255, 0.08), transparent 34%),
+        radial-gradient(circle at 16% 12%, rgba(143, 247, 210, 0.24), transparent 38%),
+        radial-gradient(circle at 84% 26%, rgba(143, 247, 210, 0.12), transparent 42%),
+        linear-gradient(135deg, rgba(143, 247, 210, 0.16), transparent 34%),
+        linear-gradient(315deg, rgba(135, 168, 255, 0.1), transparent 40%),
         var(--bg);
       overflow-x: hidden;
       isolation: isolate;
@@ -57,11 +68,11 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.72;
+      opacity: 0.56;
       background:
-        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-        repeating-linear-gradient(115deg, transparent 0 88px, rgba(143, 247, 210, 0.045) 89px, transparent 92px);
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        repeating-linear-gradient(115deg, transparent 0 88px, rgba(143, 247, 210, 0.09) 89px, transparent 92px);
       background-size: 48px 48px, 48px 48px, 260px 260px;
       mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 78%);
     }
@@ -72,8 +83,8 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.13;
-      background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      opacity: 0.18;
+      background-image: radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px);
     }
 
     a {
@@ -261,6 +272,15 @@
 
     .nav-links a:hover {
       background: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-links a:focus-visible,
+    .lang-button:focus-visible,
+    .button:focus-visible,
+    .easter-trigger:focus-visible {
+      outline: 2px solid rgba(143, 247, 210, 0.9);
+      outline-offset: 3px;
+      box-shadow: 0 0 0 6px rgba(143, 247, 210, 0.18);
     }
 
     .language-switcher {
@@ -1224,6 +1244,11 @@
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
       }
+
+      .cursor-tech,
+      .ambient-tech {
+        opacity: 0.18;
+      }
     }
 
     @media (max-width: 900px) {
@@ -1293,14 +1318,15 @@
     @media (max-width: 700px) {
       body {
         background:
-          radial-gradient(circle at 15% 8%, rgba(143, 247, 210, 0.12), transparent 28%),
-          radial-gradient(circle at 92% 28%, rgba(135, 168, 255, 0.1), transparent 30%),
-          linear-gradient(135deg, rgba(143, 247, 210, 0.055), transparent 32%),
+          radial-gradient(circle at 14% 8%, rgba(143, 247, 210, 0.28), transparent 34%),
+          radial-gradient(circle at 88% 22%, rgba(143, 247, 210, 0.14), transparent 38%),
+          radial-gradient(circle at 92% 30%, rgba(135, 168, 255, 0.14), transparent 34%),
+          linear-gradient(135deg, rgba(143, 247, 210, 0.14), transparent 38%),
           var(--bg);
       }
 
       body::before {
-        opacity: 0.55;
+        opacity: 0.46;
         background-size: 48px 48px, 48px 48px, 220px 220px;
         mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.82), transparent 88%);
       }
@@ -1370,7 +1396,7 @@
       }
 
       .hero {
-        grid-template-columns: minmax(0, 1fr) minmax(118px, 34vw);
+        grid-template-columns: minmax(0, 1fr) minmax(164px, 42vw);
         min-height: auto;
         gap: 18px;
         align-items: start;
@@ -1382,7 +1408,7 @@
         grid-column: 2;
         grid-row: 1;
         justify-self: end;
-        width: min(170px, 34vw);
+        width: min(220px, 42vw);
       }
 
       .hero-copy {
@@ -1468,7 +1494,7 @@
       }
 
       .profile {
-        width: min(156px, 35vw);
+        width: min(212px, 46vw);
       }
 
       .portrait {
@@ -1477,7 +1503,7 @@
       }
 
       .portrait img {
-        object-position: center 18%;
+        object-position: center 14%;
       }
 
       .portrait::after {
@@ -1515,8 +1541,23 @@
         gap: 10px;
       }
 
+      .contact-band .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
       .button {
         width: 100%;
+      }
+
+      .contact-band h2 {
+        font-size: clamp(42px, 8.8vw, 54px);
+        line-height: 1.04;
+        overflow-wrap: anywhere;
+      }
+
+      .contact-keep {
+        white-space: normal;
       }
 
       .hero .actions a[href^="mailto:"] {
@@ -1578,13 +1619,34 @@
     }
 
     @media (max-width: 430px) {
+      .portrait img {
+        object-position: center 12%;
+      }
+
+      .nav {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .nav-links {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .nav-links a {
+        text-align: center;
+      }
+
+      .language-switcher {
+        justify-self: start;
+      }
+
       .hero {
-        grid-template-columns: minmax(0, 1fr) minmax(108px, 32vw);
+        grid-template-columns: minmax(0, 1fr) minmax(150px, 44vw);
         column-gap: 12px;
       }
 
       .profile {
-        width: min(132px, 32vw);
+        width: min(190px, 44vw);
       }
 
       h1 {
@@ -1617,7 +1679,7 @@
     @media (hover: none), (pointer: coarse) {
       .cursor-tech {
         display: block;
-        opacity: 0.3;
+        opacity: 0.24;
         mix-blend-mode: screen;
       }
     }
@@ -3055,6 +3117,7 @@
     function initMobileAmbientTech() {
     const canvas = document.getElementById('cursor-canvas');
     if (!canvas || window.__cursorTechEnabled === "mobile") return;
+    if (reducedMotion.matches) return;
 
     const ctx = canvas.getContext('2d');
     const nodes = [];
@@ -3078,7 +3141,7 @@
     }
 
     function addNode() {
-        if (nodes.length > 10) nodes.shift();
+        if (nodes.length > 8) nodes.shift();
         const edge = Math.floor(Math.random() * 4);
         const start = [
             { x: Math.random() * width, y: -20 },
@@ -3104,7 +3167,7 @@
     }
 
     function addBit(node) {
-        if (bits.length > 18) bits.shift();
+        if (bits.length > 14) bits.shift();
         bits.push({
             x: node.x + (Math.random() - 0.5) * 34,
             y: node.y + (Math.random() - 0.5) * 34,
@@ -3116,6 +3179,10 @@
 
     function renderMobileAmbient(timestamp = performance.now()) {
         frame = 0;
+        if (lastFrameTime && timestamp - lastFrameTime < 33) {
+            frame = window.requestAnimationFrame(renderMobileAmbient);
+            return;
+        }
         const elapsed = lastFrameTime ? timestamp - lastFrameTime : 16.67;
         const seconds = Math.min(elapsed / 1000, 0.08);
         lastFrameTime = timestamp;
@@ -3182,6 +3249,7 @@
     }
 
     function initCursorTech() {
+    if (reducedMotion.matches) return;
     if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
         initMobileAmbientTech();
         return;
@@ -3204,7 +3272,7 @@
         speed: 0.006 + Math.random() * 0.01
     }));
 
-    const maxParticles = 42;
+    const maxParticles = 34;
     let dpr = 1;
     let width = 0;
     let height = 0;
