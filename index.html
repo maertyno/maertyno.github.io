@@ -1034,6 +1034,31 @@
       color: inherit;
     }
 
+    @media (min-width: 901px) {
+      .experience-details {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .experience-summary {
+        max-width: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+      }
+
+      .experience-skills {
+        justify-content: center;
+      }
+
+      .experience-skills span {
+        flex: 1 1 calc(25% - 8px);
+        max-width: 260px;
+        justify-content: center;
+      }
+    }
+
     .rail-item,
     .card,
     .metric,
@@ -1079,7 +1104,7 @@
     }
 
     .contact-keep {
-      display: inline-block;
+      display: inline;
       white-space: nowrap;
     }
 
@@ -1094,7 +1119,17 @@
       min-height: 58px;
       padding: 0 24px;
       font-size: 16px;
+      font-weight: 820;
+      border-width: 1.5px;
       transition: transform 280ms ease, border-color 280ms ease, background 280ms ease, box-shadow 280ms ease;
+    }
+
+    @media (min-width: 901px) {
+      .contact-band .button {
+        min-height: 68px;
+        padding: 0 32px;
+        font-size: 19px;
+      }
     }
 
     .contact-band .button::before {
@@ -1547,6 +1582,7 @@
       }
 
       .contact-keep {
+        display: inline;
         white-space: normal;
       }
 
@@ -1663,6 +1699,48 @@
     }
 
     @media (hover: none), (pointer: coarse) {
+      .skill-rail .rail-item,
+      .skill-rail .rail-item strong,
+      .skill-rail .rail-item span {
+        text-align: center;
+      }
+
+      .services .card {
+        text-align: center;
+      }
+
+      .services .card .icon {
+        margin-inline: auto;
+      }
+
+      .services .card p {
+        text-align: center;
+      }
+
+      .experience-item,
+      .experience-meta,
+      .experience-details,
+      .experience-summary,
+      .company,
+      .role,
+      .duration,
+      .location {
+        text-align: center;
+      }
+
+      .experience-skills {
+        justify-content: center;
+      }
+
+      .experience-skills span {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .experience-skills b {
+        text-align: center;
+      }
+
       .cursor-tech {
         display: block;
         opacity: 0.24;
@@ -1924,7 +2002,7 @@
 
       <section id="contact" class="contact-band reveal" aria-labelledby="contact-title">
         <div>
-          <h2 id="contact-title" data-i18n-html="contact.title">Nápad, problém<br>alebo technická výzva?<br><span class="contact-keep">Môžeme sa na to pozrieť.</span></h2>
+          <h2 id="contact-title" data-i18n-html="contact.title">Nápad, problém alebo<br>technická výzva?<br><span class="contact-keep">Môžeme sa na to pozrieť.</span></h2>
         </div>
         <div class="actions">
           <a class="button primary" href="mailto:martinus.nagy@gmail.com">
@@ -1973,7 +2051,7 @@
         "services.repair.copy": "Diagnostika a opravy zariadení s dôrazom na presnosť, postup a detail. Skúsenosť s telefónmi, tabletmi, počítačmi aj menšou elektronikou.",
         "services.design.title": "Webdizajn a iOS aplikácie",
         "services.design.copy": "Tvorím čisté weby, landing pages a app koncepty, ktoré majú zrozumiteľnú štruktúru, dobrý vizuálny cit a fungujú prirodzene na rôznych zariadeniach.",
-        "contact.title": "Poďme niečo vyriešiť.",
+        "contact.title": "Nápad, problém alebo<br>technická výzva?<br><span class=\"contact-keep\">Môžeme sa na to pozrieť.</span>",
         "contact.email": "Email",
         "footer.note": "Custom landing page"
       },
@@ -2004,7 +2082,7 @@
         "services.repair.copy": "Diagnostika a opravy zařízení s důrazem na přesnost, postup a detail. Zkušenost s telefony, tablety, počítači i menší elektronikou.",
         "services.design.title": "Webdesign a iOS aplikace",
         "services.design.copy": "Tvořím čisté weby, landing pages a app koncepty, které mají srozumitelnou strukturu, dobrý vizuální cit a fungují přirozeně na různých zařízeních.",
-        "contact.title": "Pojďme něco vyřešit.",
+        "contact.title": "Nápad, problém nebo<br>technická výzva?<br><span class=\"contact-keep\">Můžeme se na to podívat.</span>",
         "contact.email": "Email",
         "footer.note": "Custom landing page"
       },
@@ -2035,7 +2113,7 @@
         "services.repair.copy": "Device diagnostics and repair with attention to accuracy, process, and detail. Hands-on experience with phones, tablets, computers, and small electronics.",
         "services.design.title": "Webdesign & iOS Apps",
         "services.design.copy": "I create clean websites, landing pages, and app concepts with clear structure, visual care, and natural usability across devices.",
-        "contact.title": "Let’s solve something.",
+        "contact.title": "An idea, problem<br>or a technical challenge?<br><span class=\"contact-keep\">We can take a look.</span>",
         "contact.email": "Email",
         "footer.note": "Custom landing page"
       }
@@ -2115,7 +2193,7 @@
       "experience.fixservis.skill2": "Diagnostika zariadení",
       "experience.fixservis.skill3": "Opravy podľa štandardov",
       "experience.fixservis.skill4": "Kontrola kvality",
-      "contact.title": "Nápad, problém<br>alebo technická výzva?<br><span class=\"contact-keep\">Môžeme sa na to pozrieť.</span>",
+      "contact.title": "Nápad, problém alebo<br>technická výzva?<br><span class=\"contact-keep\">Môžeme sa na to pozrieť.</span>",
       "footer.note": ""
     });
 
@@ -2194,7 +2272,7 @@
       "experience.fixservis.skill2": "Diagnostika zařízení",
       "experience.fixservis.skill3": "Opravy podle standardů",
       "experience.fixservis.skill4": "Kontrola kvality",
-      "contact.title": "Nápad, problém<br>nebo technická výzva?<br><span class=\"contact-keep\">Můžeme se na to podívat.</span>",
+      "contact.title": "Nápad, problém nebo<br>technická výzva?<br><span class=\"contact-keep\">Můžeme se na to podívat.</span>",
       "footer.note": ""
     });
 
@@ -2274,7 +2352,7 @@
       "experience.fixservis.skill2": "Device diagnostics",
       "experience.fixservis.skill3": "Repairs by standards",
       "experience.fixservis.skill4": "Quality control",
-      "contact.title": "An idea, problem,<br>or a technical challenge?<br><span class=\"contact-keep\">We can take a look.</span>",
+      "contact.title": "An idea, problem<br>or a technical challenge?<br><span class=\"contact-keep\">We can take a look.</span>",
       "footer.note": ""
     });
 
