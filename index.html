@@ -2430,17 +2430,8 @@
     const memoryLow = typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4;
     const coresLow = typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 4;
     const saveData = Boolean(navigator.connection && navigator.connection.saveData);
-    const androidVersionMatch = ua.match(/Android\s+(\d+(?:\.\d+)?)/i);
-    const androidVersion = androidVersionMatch ? Number(androidVersionMatch[1]) : 0;
-    const oldAndroid = androidVersion > 0 && androidVersion < 12;
-    const samsungLightAndroid = /\bSM-A(?:0|1|2)\d{2}/i.test(ua);
-    const androidLite = isAndroid && coarsePointer.matches && (
-      saveData ||
-      memoryLow ||
-      coresLow ||
-      oldAndroid ||
-      samsungLightAndroid
-    );
+    const premiumSamsungAndroid = /\bSM-(?:S|F)\d{3}/i.test(ua);
+    const androidLite = isAndroid && coarsePointer.matches && !premiumSamsungAndroid;
     const lowPowerDevice = coarsePointer.matches && (
       saveData ||
       androidLite ||
