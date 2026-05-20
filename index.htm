@@ -1,0 +1,3451 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Martin Nagy - IT support, electronics repair, webdesign, and iOS app development." />
+  <meta name="theme-color" content="#060907" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MN | Digital" />
+  <meta property="og:description" content="Martin Nagy - IT support, electronics repair, webdesign, and iOS app development." />
+  <meta property="og:locale" content="sk_SK" />
+  <meta property="og:site_name" content="MN | Digital" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MN | Digital" />
+  <meta name="twitter:description" content="Martin Nagy - IT support, electronics repair, webdesign, and iOS app development." />
+  <title>MN | Digital</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b120f;
+      --bg-2: #141d19;
+      --panel: rgba(247, 250, 246, 0.08);
+      --panel-2: rgba(247, 250, 246, 0.12);
+      --text: #f7faf6;
+      --muted: #a8b5ae;
+      --quiet: #728078;
+      --line: rgba(247, 250, 246, 0.16);
+      --line-strong: rgba(180, 255, 225, 0.28);
+      --mint: #8ff7d2;
+      --blue: #87a8ff;
+      --amber: #ffd48a;
+      --rose: #ff8ead;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.46);
+    }
+
+    @property --glow-alpha {
+      syntax: "<number>";
+      inherits: false;
+      initial-value: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 16% 12%, rgba(143, 247, 210, 0.24), transparent 38%),
+        radial-gradient(circle at 84% 26%, rgba(143, 247, 210, 0.12), transparent 42%),
+        linear-gradient(135deg, rgba(143, 247, 210, 0.16), transparent 34%),
+        linear-gradient(315deg, rgba(135, 168, 255, 0.1), transparent 40%),
+        var(--bg);
+      overflow-x: hidden;
+      isolation: isolate;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.56;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        repeating-linear-gradient(115deg, transparent 0 88px, rgba(143, 247, 210, 0.09) 89px, transparent 92px);
+      background-size: 48px 48px, 48px 48px, 260px 260px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 78%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.18;
+      background-image: radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .cursor-tech {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.42;
+      mix-blend-mode: normal;
+    }
+
+    #cursor-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .cursor-node,
+    .cursor-bit,
+    .cursor-link {
+      position: absolute;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+
+    .cursor-node {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 255, 232, 0.96) 0%, rgba(143, 247, 210, 0.8) 52%, rgba(143, 247, 210, 0) 100%);
+      box-shadow: 0 0 30px rgba(143, 247, 210, 0.48), 0 0 52px rgba(143, 247, 210, 0.16);
+      filter: blur(0.2px);
+    }
+
+    .cursor-bit {
+      color: rgba(184, 255, 232, 0.34);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 18px;
+      line-height: 1;
+      text-shadow: 0 0 14px rgba(143, 247, 210, 0.14);
+    }
+
+    .cursor-link {
+      height: 3px;
+      transform-origin: left center;
+      background: linear-gradient(90deg, rgba(143, 247, 210, 0.34), rgba(143, 247, 210, 0.16), transparent);
+      box-shadow: 0 0 14px rgba(143, 247, 210, 0.16);
+    }
+
+    .ambient-tech {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0.5;
+    }
+
+    .ambient-tech::before,
+    .ambient-tech::after {
+      content: none;
+    }
+
+    .ambient-orb {
+      position: absolute;
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.72);
+      background:
+        radial-gradient(circle, rgba(184, 255, 232, 0.24) 0%, rgba(143, 247, 210, 0.14) 42%, rgba(143, 247, 210, 0.05) 64%, transparent 78%),
+        radial-gradient(circle at 38% 38%, rgba(184, 255, 232, 0.22), transparent 28%);
+      box-shadow: 0 0 28px rgba(143, 247, 210, 0.14), 0 0 52px rgba(143, 247, 210, 0.06);
+      filter: blur(0.3px);
+      animation: ambientOrb 4s ease-in-out forwards;
+      will-change: transform, opacity;
+    }
+
+    @keyframes ambientOrb {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.68);
+      }
+      18% {
+        opacity: 0.96;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      72% {
+        opacity: 0.84;
+        transform: translate(-50%, -50%) scale(1.12);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.3);
+      }
+    }
+
+    @keyframes mobileSignalDrift {
+      0% {
+        opacity: 0.22;
+        transform: translate3d(-3%, -2%, 0) scale(1);
+      }
+      50% {
+        opacity: 0.38;
+        transform: translate3d(3%, 2%, 0) scale(1.04);
+      }
+      100% {
+        opacity: 0.22;
+        transform: translate3d(-3%, -2%, 0) scale(1);
+      }
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+    }
+
+    .shell {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 16px 0;
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 16px;
+      min-height: 58px;
+      padding: 8px 10px 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(6, 9, 7, 0.82);
+      box-shadow: 0 12px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: flex-start;
+      gap: 4px;
+    }
+
+    .nav-links a,
+    .lang-button {
+      border: 0;
+      border-radius: 999px;
+      color: var(--muted);
+      background: transparent;
+      text-decoration: none;
+      font: inherit;
+      font-size: 13px;
+      line-height: 1;
+      cursor: pointer;
+      transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+    }
+
+    .nav-links a {
+      padding: 12px 13px;
+    }
+
+    .nav-links a:hover,
+    .lang-button:hover,
+    .lang-button.active {
+      color: var(--text);
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-links a:focus-visible,
+    .lang-button:focus-visible,
+    .button:focus-visible,
+    .easter-trigger:focus-visible {
+      outline: 2px solid rgba(143, 247, 210, 0.9);
+      outline-offset: 3px;
+      box-shadow: 0 0 0 6px rgba(143, 247, 210, 0.18);
+    }
+
+    .language-switcher {
+      position: relative;
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .language-indicator {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 0;
+      width: 42px;
+      height: 34px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.22), transparent 38%),
+        linear-gradient(135deg, rgba(143, 247, 210, 0.22), rgba(135, 168, 255, 0.18));
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.09),
+        0 10px 28px rgba(0, 0, 0, 0.28);
+      transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), width 380ms cubic-bezier(0.22, 1, 0.36, 1), height 380ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 240ms ease;
+    }
+
+    .language-switcher.switching .language-indicator {
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+        0 0 22px rgba(143, 247, 210, 0.22),
+        0 12px 34px rgba(0, 0, 0, 0.32);
+    }
+
+    .lang-button {
+      position: relative;
+      z-index: 1;
+      width: 42px;
+      height: 34px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    [data-i18n],
+    [data-i18n-html] {
+      transition: opacity 240ms ease, transform 240ms ease, filter 240ms ease;
+    }
+
+    body.language-changing [data-i18n],
+    body.language-changing [data-i18n-html] {
+      opacity: 0.28;
+      transform: translateY(5px);
+      filter: blur(3px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(170px, 0.62fr);
+      gap: clamp(24px, 4vw, 54px);
+      align-items: start;
+      padding: clamp(48px, 7vh, 68px) 0 clamp(72px, 9vh, 104px);
+    }
+
+    .hero-copy {
+      position: relative;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--mint);
+      box-shadow: 0 0 22px rgba(143, 247, 210, 0.9);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: min(700px, 100%);
+      font-size: clamp(44px, 6.5vw, 88px);
+      line-height: 1.06;
+      letter-spacing: -0.028em;
+      text-wrap: balance;
+    }
+
+    .tone {
+      display: block;
+      max-width: 100%;
+      margin-top: -0.04em;
+      padding-top: 0.08em;
+      padding-bottom: 0.26em;
+      font-size: inherit;
+      line-height: 1.16;
+      letter-spacing: inherit;
+      white-space: normal;
+      overflow-wrap: normal;
+      color: transparent;
+      background: linear-gradient(115deg, #ffffff 4%, #b8ffe8 48%, #9fd7ff 92%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .detail-tone {
+      font-size: 0.58em;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-top: -0.2em;
+      padding-bottom: 0.18em;
+      max-width: 11.8em;
+      white-space: normal;
+      text-align: left;
+      text-wrap: balance;
+      background: linear-gradient(115deg, #b8ffe8 4%, #a9bcff 46%, #f0dcff 70%, #ffd48a 96%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .lead {
+      max-width: 680px;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.72;
+      overflow-wrap: break-word;
+    }
+
+    .skill-rail {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 680px;
+      margin-top: 28px;
+    }
+
+    .rail-item {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      --glow-alpha: 0;
+      min-height: 76px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 44%),
+        rgba(255, 255, 255, 0.055);
+      transition: transform 280ms ease, border-color 280ms ease, background-color 280ms ease, box-shadow 280ms ease, --glow-alpha 360ms ease;
+    }
+
+    .rail-item:hover {
+      --glow-alpha: 0.1;
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 44%),
+        rgba(255, 255, 255, 0.066);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.18), 0 0 18px rgba(143, 247, 210, 0.035);
+    }
+
+    .rail-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.12) 12%, rgba(143, 247, 210, 0.42) 45%, rgba(143, 247, 210, 0.16) 78%, transparent 100%);
+      opacity: 0.34;
+      box-shadow: 0 0 10px rgba(143, 247, 210, 0.08);
+    }
+
+    .rail-item::after {
+      content: "";
+      position: absolute;
+      left: -48%;
+      top: 0;
+      z-index: 0;
+      width: 38%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(143, 247, 210, 0.18), rgba(143, 247, 210, 0.64), rgba(143, 247, 210, 0.18), transparent);
+      box-shadow: 0 0 14px rgba(143, 247, 210, 0.18);
+      animation: neonSweep 10.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .rail-item:nth-child(2)::after {
+      animation-delay: 2.2s;
+    }
+
+    .rail-item:nth-child(3)::after {
+      animation-delay: 4.4s;
+    }
+
+    .rail-item:nth-child(4)::after {
+      animation-delay: 6.6s;
+    }
+
+    .rail-item strong,
+    .rail-item span {
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .rail-item strong {
+      margin-bottom: 6px;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .rail-item span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      overflow-wrap: break-word;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 20px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      text-decoration: none;
+      text-align: center;
+      font-weight: 750;
+      white-space: normal;
+      transition: transform 200ms ease, border-color 200ms ease, background 200ms ease, box-shadow 200ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.26);
+    }
+
+    .button.primary {
+      color: #07100d;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--mint), #d8ffe7 56%, var(--amber));
+    }
+
+    .button svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .profile {
+      position: relative;
+      display: grid;
+      gap: 16px;
+      justify-self: end;
+      width: min(420px, 100%);
+    }
+
+    .portrait {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 0.82;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .portrait::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background:
+        linear-gradient(145deg, rgba(143, 247, 210, 0.1), transparent 34%),
+        linear-gradient(to top, rgba(0, 0, 0, 0.54), transparent 50%);
+      pointer-events: none;
+    }
+
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      z-index: 3;
+      border: 1px solid rgba(255, 255, 255, 0.17);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.035);
+      filter: saturate(0.96) contrast(1.06);
+    }
+
+    .status-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.075);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.24);
+    }
+
+    .status-card strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 18px;
+    }
+
+    .status-card span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .signal {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background:
+        linear-gradient(135deg, rgba(143, 247, 210, 0.32), rgba(135, 168, 255, 0.14)),
+        rgba(255, 255, 255, 0.08);
+      display: grid;
+      place-items: center;
+      color: var(--mint);
+    }
+
+    .signal svg {
+      width: 25px;
+      height: 25px;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+
+    .label {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-top: 12px;
+      font-size: clamp(32px, 4.6vw, 62px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.72;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      min-height: 232px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.045));
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.24);
+      transition: transform 280ms ease, border-color 280ms ease, background 280ms ease, box-shadow 280ms ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      opacity: 0;
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgba(143, 247, 210, 0.14), transparent 38%);
+      transition: opacity 320ms ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.108), rgba(255, 255, 255, 0.048));
+      box-shadow: 0 18px 54px rgba(0, 0, 0, 0.24), 0 0 20px rgba(143, 247, 210, 0.035);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .icon {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      margin-bottom: 34px;
+      border-radius: 14px;
+      color: var(--mint);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
+    }
+
+    .icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 18px;
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .pill {
+      padding: 10px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.045);
+      font-size: 14px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .metric {
+      position: relative;
+      overflow: hidden;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .metric::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.1) 12%, rgba(143, 247, 210, 0.38) 46%, rgba(143, 247, 210, 0.14) 78%, transparent 100%);
+      opacity: 0.3;
+      box-shadow: 0 0 10px rgba(143, 247, 210, 0.08);
+    }
+
+    .metric::after {
+      content: "";
+      position: absolute;
+      left: -52%;
+      top: 0;
+      width: 40%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(143, 247, 210, 0.16), rgba(143, 247, 210, 0.58), rgba(143, 247, 210, 0.16), transparent);
+      box-shadow: 0 0 14px rgba(143, 247, 210, 0.16);
+      animation: neonSweep 12s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .metric:nth-child(2)::after {
+      animation-delay: 3s;
+    }
+
+    .metric:nth-child(3)::after {
+      animation-delay: 6s;
+    }
+
+    .metric:nth-child(4)::after {
+      animation-delay: 9s;
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 24px;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .experience-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .experience-item {
+      position: relative;
+      overflow: hidden;
+      --glow-alpha: 0;
+      display: grid;
+      grid-template-columns: minmax(260px, 0.34fr) minmax(0, 1fr);
+      gap: clamp(22px, 4vw, 48px);
+      align-items: center;
+      padding: clamp(20px, 2.4vw, 26px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 40%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.035)),
+        rgba(6, 9, 7, 0.82);
+      box-shadow: 0 12px 42px rgba(0, 0, 0, 0.18);
+      transition: transform 280ms ease, border-color 280ms ease, background-color 280ms ease, box-shadow 280ms ease, --glow-alpha 360ms ease;
+    }
+
+    .experience-item:hover {
+      --glow-alpha: 0.08;
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 40%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.078), rgba(255, 255, 255, 0.038)),
+        rgba(6, 9, 7, 0.86);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2), 0 0 18px rgba(143, 247, 210, 0.028);
+    }
+
+    .experience-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.1) 12%, rgba(143, 247, 210, 0.34) 46%, rgba(143, 247, 210, 0.12) 78%, transparent 100%);
+      opacity: 0.28;
+      box-shadow: 0 0 10px rgba(143, 247, 210, 0.08);
+    }
+
+    .experience-item::after {
+      content: "";
+      position: absolute;
+      left: -34%;
+      top: 0;
+      width: 24%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(143, 247, 210, 0.14), rgba(143, 247, 210, 0.54), rgba(143, 247, 210, 0.14), transparent);
+      box-shadow: 0 0 14px rgba(143, 247, 210, 0.16);
+      animation: neonSweep 14s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .experience-item:nth-child(2)::after {
+      animation-delay: 3.5s;
+    }
+
+    .experience-item:nth-child(3)::after {
+      animation-delay: 7s;
+    }
+
+    .experience-item:nth-child(4)::after {
+      animation-delay: 10.5s;
+    }
+
+    .experience-meta {
+      display: grid;
+      gap: 8px;
+      align-items: start;
+      max-width: none;
+    }
+
+    .company {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .company-brand.leo {
+      color: #f2a12a;
+    }
+
+    .company-brand.ikea {
+      color: #ffd23c;
+    }
+
+    .company-brand.pcexpres {
+      color: #f28a2e;
+    }
+
+    .company-brand.fixservis {
+      color: #44c7ee;
+    }
+
+    .role {
+      font-size: clamp(22px, 2.35vw, 30px);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+    }
+
+    .duration,
+    .location {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    .experience-details {
+      min-width: 0;
+    }
+
+    .experience-summary {
+      max-width: 68ch;
+      color: rgba(247, 250, 246, 0.7);
+      font-size: 15px;
+      line-height: 1.58;
+    }
+
+    .experience-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(247, 250, 246, 0.1);
+      overflow: visible;
+    }
+
+    .experience-skills span {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 6px 10px;
+      border: 1px solid rgba(247, 250, 246, 0.11);
+      border-radius: 6px;
+      color: rgba(247, 250, 246, 0.74);
+      background: rgba(255, 255, 255, 0.035);
+      transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .experience-skills b {
+      position: relative;
+      z-index: 1;
+      display: block;
+      color: inherit;
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.2;
+      letter-spacing: 0;
+      text-align: center;
+      text-shadow: none;
+    }
+
+    .experience-skills span::before {
+      content: none;
+    }
+
+    .experience-skills span:hover {
+      color: rgba(247, 250, 246, 0.96);
+      border-color: rgba(143, 247, 210, 0.24);
+      background: rgba(143, 247, 210, 0.055);
+    }
+
+    .experience-skills span:hover b {
+      color: inherit;
+    }
+
+    .rail-item,
+    .card,
+    .metric,
+    .experience-item,
+    .contact-band,
+    .status-card {
+      background-color: rgba(6, 9, 7, 0.78);
+    }
+
+    .contact-band {
+      display: grid;
+      --glow-alpha: 0;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 34px;
+      align-items: center;
+      margin: 70px 0 46px;
+      padding: clamp(30px, 4vw, 44px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 44%),
+        linear-gradient(135deg, rgba(143, 247, 210, 0.16), rgba(135, 168, 255, 0.08) 48%, rgba(255, 212, 138, 0.08)),
+        rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow);
+      transition: transform 280ms ease, border-color 280ms ease, background-color 280ms ease, box-shadow 280ms ease, --glow-alpha 360ms ease;
+    }
+
+    .contact-band:hover {
+      --glow-alpha: 0.09;
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 44%),
+        linear-gradient(135deg, rgba(143, 247, 210, 0.16), rgba(135, 168, 255, 0.085) 48%, rgba(255, 212, 138, 0.085)),
+        rgba(255, 255, 255, 0.07);
+      box-shadow: 0 20px 66px rgba(0, 0, 0, 0.28), 0 0 22px rgba(143, 247, 210, 0.035);
+    }
+
+    .contact-band h2 {
+      max-width: none;
+      margin: 0;
+      white-space: normal;
+    }
+
+    .contact-keep {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .contact-band .actions {
+      justify-content: flex-end;
+      margin-top: 0;
+    }
+
+    .contact-band .button {
+      position: relative;
+      overflow: hidden;
+      min-height: 58px;
+      padding: 0 24px;
+      font-size: 16px;
+      transition: transform 280ms ease, border-color 280ms ease, background 280ms ease, box-shadow 280ms ease;
+    }
+
+    .contact-band .button::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      opacity: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(143, 247, 210, 0.18), transparent 58%);
+      transition: opacity 320ms ease;
+      pointer-events: none;
+    }
+
+    .contact-band .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24), 0 0 22px rgba(143, 247, 210, 0.055);
+    }
+
+    .contact-band .button:hover::before {
+      opacity: 1;
+    }
+
+    .contact-band .button > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-band .button.primary:hover {
+      background: linear-gradient(135deg, #9ffbdd, #e3ffed 56%, #ffe0a3);
+    }
+
+    .contact-band .button:not(.primary) {
+      border-color: rgba(247, 250, 246, 0.24);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .contact-band .button:not(.primary):hover {
+      border-color: rgba(143, 247, 210, 0.34);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 0 0 36px;
+      color: rgba(255, 255, 255, 0.44);
+      font-size: 13px;
+    }
+
+    .easter-egg {
+      padding: 0 0 42px;
+      text-align: center;
+    }
+
+    .easter-trigger {
+      appearance: none;
+      border: 0;
+      border-bottom: 1px solid rgba(143, 247, 210, 0.34);
+      padding: 0 0 4px;
+      color: rgba(247, 250, 246, 0.56);
+      background: transparent;
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      transition: color 220ms ease, border-color 220ms ease, text-shadow 220ms ease;
+    }
+
+    .easter-trigger:hover {
+      color: rgba(184, 255, 232, 0.9);
+      border-color: rgba(184, 255, 232, 0.72);
+      text-shadow: 0 0 18px rgba(143, 247, 210, 0.26);
+    }
+
+    .binary-runner {
+      position: relative;
+      overflow: visible;
+      max-width: 640px;
+      margin: 12px auto 0;
+      text-align: left;
+    }
+
+    .binary-runner-head {
+      position: absolute;
+      top: 6px;
+      left: 0;
+      z-index: 1;
+      color: rgba(247, 250, 246, 0.5);
+      font-size: 12px;
+      font-weight: 720;
+      pointer-events: none;
+    }
+
+    .binary-runner-score {
+      color: rgba(184, 255, 232, 0.74);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .binary-runner-canvas {
+      display: block;
+      width: 100%;
+      height: 128px;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .binary-runner-state {
+      display: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes neonSweep {
+      0% {
+        opacity: 0;
+        left: -52%;
+      }
+      8% {
+        opacity: 0;
+        left: -52%;
+      }
+      16% {
+        opacity: 0.72;
+      }
+      42% {
+        opacity: 0.72;
+        left: 108%;
+      }
+      50% {
+        opacity: 0;
+        left: 108%;
+      }
+      100% {
+        opacity: 0;
+        left: 108%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+
+      .cursor-tech,
+      .ambient-tech {
+        opacity: 0.18;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        grid-template-columns: 1fr auto;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .section-head,
+      .contact-band {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-band h2 {
+        white-space: normal;
+      }
+
+      .contact-band .actions {
+        justify-content: flex-start;
+      }
+
+      .services,
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skill-rail {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .experience-item {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .experience-meta {
+        gap: 8px;
+      }
+
+      .duration,
+      .location {
+        white-space: normal;
+      }
+
+      .experience-skills {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-top: 18px;
+        gap: 8px;
+      }
+
+      .experience-skills span {
+        width: 100%;
+        min-height: 24px;
+        justify-content: flex-start;
+        text-align: left;
+      }
+
+      .experience-skills b {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 700px) {
+      body {
+        background:
+          radial-gradient(circle at 14% 8%, rgba(143, 247, 210, 0.28), transparent 34%),
+          radial-gradient(circle at 88% 22%, rgba(143, 247, 210, 0.14), transparent 38%),
+          radial-gradient(circle at 92% 30%, rgba(135, 168, 255, 0.14), transparent 34%),
+          linear-gradient(135deg, rgba(143, 247, 210, 0.14), transparent 38%),
+          var(--bg);
+      }
+
+      body::before {
+        opacity: 0.46;
+        background-size: 48px 48px, 48px 48px, 220px 220px;
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.82), transparent 88%);
+      }
+
+      .ambient-tech {
+        opacity: 0.72;
+      }
+
+      .ambient-tech::before,
+      .ambient-tech::after {
+        content: "";
+        position: absolute;
+        inset: -12%;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(143, 247, 210, 0.32) 0 2px, transparent 3px),
+          radial-gradient(circle at 74% 24%, rgba(184, 255, 232, 0.24) 0 2px, transparent 3px),
+          radial-gradient(circle at 55% 62%, rgba(135, 168, 255, 0.2) 0 2px, transparent 3px),
+          linear-gradient(115deg, transparent 0 26%, rgba(143, 247, 210, 0.08) 26.3%, transparent 27% 58%, rgba(135, 168, 255, 0.065) 58.4%, transparent 59%);
+        background-size: 220px 220px, 180px 180px, 260px 260px, 260px 260px;
+        filter: blur(0.1px);
+        animation: mobileSignalDrift 9s ease-in-out infinite;
+      }
+
+      .ambient-tech::after {
+        opacity: 0.55;
+        transform: rotate(10deg);
+        animation-duration: 13s;
+        animation-direction: reverse;
+      }
+
+      .topbar {
+        padding: 10px 0 6px;
+      }
+
+      .nav {
+        grid-template-columns: 1fr auto;
+        min-height: auto;
+        padding: 8px;
+        border-radius: 20px;
+      }
+
+      .nav-links {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, auto));
+        gap: 2px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .nav-links::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-links a {
+        padding: 10px 8px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      .language-switcher {
+        padding: 3px;
+      }
+
+      .lang-button {
+        width: 34px;
+        height: 30px;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr) minmax(164px, 42vw);
+        min-height: auto;
+        gap: 18px;
+        align-items: start;
+        padding-top: 30px;
+        padding-bottom: 46px;
+      }
+
+      .profile {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+        width: min(220px, 42vw);
+      }
+
+      .hero-copy {
+        display: contents;
+      }
+
+      .hero-copy h1 {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .hero-copy .lead,
+      .hero-copy .skill-rail,
+      .hero-copy .actions {
+        grid-column: 1 / -1;
+      }
+
+      .lead {
+        max-width: 100%;
+      }
+
+      .skill-rail {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .topbar {
+        padding: 8px 0 6px;
+      }
+
+      .nav {
+        gap: 8px;
+      }
+
+      .language-switcher {
+        gap: 2px;
+      }
+
+      .lang-button {
+        width: 36px;
+        height: 32px;
+        font-size: 12px;
+      }
+
+      h1 {
+        max-width: 100%;
+        font-size: clamp(30px, 8.6vw, 46px);
+        line-height: 1.1;
+        letter-spacing: -0.012em;
+      }
+
+      .tone {
+        font-size: inherit;
+        margin-top: -0.02em;
+        padding-top: 0.06em;
+        padding-bottom: 0.24em;
+        line-height: 1.16;
+      }
+
+      .detail-tone {
+        font-size: 0.62em;
+        line-height: 1.2;
+        margin-top: -0.12em;
+        padding-bottom: 0.22em;
+        text-align: left;
+        white-space: normal;
+      }
+
+      .lead {
+        margin-top: 10px;
+      }
+
+      .hero {
+        gap: 18px;
+        padding-top: 26px;
+        padding-bottom: 42px;
+      }
+
+      .profile {
+        width: min(212px, 46vw);
+      }
+
+      .portrait {
+        aspect-ratio: 0.82;
+        border-radius: 18px;
+      }
+
+      .portrait img {
+        object-position: center 14%;
+      }
+
+      .portrait::after {
+        inset: 11px;
+        border-radius: 14px;
+      }
+
+      .lead {
+        margin-top: 10px;
+        font-size: 16px;
+        line-height: 1.68;
+      }
+
+      .skill-rail {
+        gap: 8px;
+        margin-top: 22px;
+      }
+
+      .rail-item {
+        min-height: 72px;
+        padding: 12px;
+      }
+
+      .rail-item strong {
+        font-size: 12px;
+      }
+
+      .rail-item span {
+        font-size: 11px;
+      }
+
+      .actions,
+      .contact-band .actions {
+        width: 100%;
+        gap: 10px;
+      }
+
+      .contact-band .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .contact-band h2 {
+        font-size: clamp(42px, 8.8vw, 54px);
+        line-height: 1.04;
+        overflow-wrap: anywhere;
+      }
+
+      .contact-keep {
+        white-space: normal;
+      }
+
+      .hero .actions a[href^="mailto:"] {
+        order: 1;
+      }
+
+      .hero .actions a[href*="linkedin.com"] {
+        order: 2;
+      }
+
+      .hero .actions a[href="#experience"] {
+        order: 3;
+      }
+
+      .experience-item {
+        padding: 20px;
+      }
+
+      .role {
+        font-size: clamp(21px, 7vw, 28px);
+      }
+
+      .experience-skills span {
+        min-height: 24px;
+      }
+
+      section {
+        padding: 54px 0;
+      }
+
+      .contact-band {
+        margin: 48px 0 34px;
+        padding: 24px;
+      }
+
+      .contact-band .button {
+        min-height: 54px;
+      }
+
+      .footer {
+        flex-direction: column;
+        padding-bottom: 26px;
+      }
+
+      .easter-egg {
+        padding-bottom: 34px;
+      }
+
+      .binary-runner {
+        margin-top: 16px;
+      }
+
+      .binary-runner-head {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+    }
+
+    @media (max-width: 430px) {
+      .portrait img {
+        object-position: center 12%;
+      }
+
+      .nav {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .nav-links {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .nav-links a {
+        text-align: center;
+      }
+
+      .language-switcher {
+        justify-self: start;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr) minmax(150px, 44vw);
+        column-gap: 12px;
+      }
+
+      .profile {
+        width: min(190px, 44vw);
+      }
+
+      h1 {
+        font-size: clamp(28px, 8.2vw, 38px);
+      }
+
+      .skill-rail {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .rail-item {
+        min-height: 70px;
+      }
+
+      .nav-links a {
+        padding-inline: 7px;
+        font-size: 11px;
+      }
+
+      .lang-button {
+        width: 31px;
+        height: 29px;
+      }
+
+      h2 {
+        font-size: clamp(30px, 10vw, 42px);
+      }
+    }
+
+    @media (hover: none), (pointer: coarse) {
+      .cursor-tech {
+        display: block;
+        opacity: 0.24;
+        mix-blend-mode: screen;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="cursor-tech" aria-hidden="true">
+    <canvas id="cursor-canvas"></canvas>
+  </div>
+  <div class="ambient-tech" aria-hidden="true"></div>
+  <div class="page">
+    <header class="topbar">
+      <nav class="nav shell" aria-label="Primary navigation">
+        <div class="nav-links">
+          <a href="#top" data-i18n="nav.home">Úvod</a>
+          <a href="#services" data-i18n="nav.services">Čo robím</a>
+          <a href="#experience" data-i18n="nav.experience">Skúsenosti</a>
+          <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+        </div>
+
+        <div class="language-switcher" aria-label="Language switcher">
+          <span class="language-indicator" aria-hidden="true"></span>
+          <button class="lang-button" type="button" data-lang="sk" aria-label="Slovensky">SK</button>
+          <button class="lang-button" type="button" data-lang="cs" aria-label="Česky">CZ</button>
+          <button class="lang-button" type="button" data-lang="en" aria-label="English">EN</button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="shell">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <h1 id="hero-title" data-i18n-html="hero.title">IT podpora.<br>Opravy.<br><span class="tone">Digitálne riešenia.</span><span class="tone detail-tone">s citom pre detail.</span></h1>
+          <p class="lead" data-i18n="hero.lead">Pomáham udržať techniku, zariadenia a digitálne prostredia v chode. Spájam reálnu prax v IT podpore, troubleshootingu, opravách elektroniky, webdesigne a vývoji iOS aplikácií.</p>
+          <div class="skill-rail" aria-label="Core skills">
+            <div class="rail-item">
+              <strong data-i18n="rail.support.title">IT podpora</strong>
+              <span data-i18n="rail.support.copy">používatelia, zariadenia, infra</span>
+            </div>
+            <div class="rail-item">
+              <strong data-i18n="rail.repair.title">Repair</strong>
+              <span data-i18n="rail.repair.copy">telefóny, tablety, PC</span>
+            </div>
+            <div class="rail-item">
+              <strong data-i18n="rail.web.title">Webdesign</strong>
+              <span data-i18n="rail.web.copy">čisté responzívne stránky</span>
+            </div>
+            <div class="rail-item">
+              <strong data-i18n="rail.ios.title">iOS Apps</strong>
+              <span data-i18n="rail.ios.copy">nápady a vývoj aplikácií</span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="mailto:martinus.nagy@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+              <span data-i18n="hero.email">Napísať email</span>
+            </a>
+            <a class="button" href="#experience">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+              <span data-i18n="hero.work">Pozrieť skúsenosti</span>
+            </a>
+            <a class="button" href="https://www.linkedin.com/in/nagymartinus/" data-linkedin-app="linkedin://in/nagymartinus" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="profile reveal" aria-label="Profile">
+          <div class="portrait">
+            <img src="./avat.jpg" alt="Martin Nagy portrait" />
+          </div>
+        </aside>
+      </section>
+
+      <section id="services" class="reveal" aria-labelledby="services-title">
+        <div class="section-head">
+          <div>
+            <span class="label" data-i18n="services.label">Skills</span>
+            <h2 id="services-title" data-i18n="services.title">Od nápadu či problému po čisté riešenie.</h2>
+          </div>
+        </div>
+
+        <div class="services">
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/></svg>
+            </div>
+          <h3 data-i18n="services.it.title">IT podpora</h3>
+          <p data-i18n="services.it.copy">Riešim technické problémy od prvého kontaktu po funkčné riešenie. Pomáham používateľom, zariadeniam aj lokálnemu IT prostrediu fungovať spoľahlivo a prehľadne.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+            </div>
+            <h3 data-i18n="services.repair.title">Opravy elektroniky</h3>
+          <p data-i18n="services.repair.copy">Diagnostika a opravy zariadení s dôrazom na presnosť, postup a detail. Skúsenosť s telefónmi, tabletmi, počítačmi aj menšou elektronikou.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 1.9 5.8h6.1l-4.9 3.6 1.9 5.8-5-3.6-5 3.6 1.9-5.8-4.9-3.6h6.1z"/></svg>
+            </div>
+            <h3 data-i18n="services.design.title">Webdesign & iOS Apps</h3>
+          <p data-i18n="services.design.copy">Tvorím čisté weby, landing pages a app koncepty, ktoré majú zrozumiteľnú štruktúru, dobrý vizuálny cit a fungujú prirodzene na rôznych zariadeniach.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="experience" class="reveal" aria-labelledby="experience-title">
+        <div class="section-head">
+          <div>
+            <span class="label" data-i18n="experience.label">Experience</span>
+            <h2 id="experience-title" data-i18n="experience.title">Skúsenosti stručne. Detaily patria na LinkedIn.</h2>
+          </div>
+        </div>
+
+        <div class="experience-list">
+          <article class="experience-item">
+            <div class="experience-meta">
+              <span class="company"><span class="company-brand leo" data-i18n="experience.leo.companyName">Leo Express</span> · <span data-i18n="experience.leo.workType">Full-time</span></span>
+              <h3 class="role" data-i18n="experience.leo.role">IT Support Specialist</h3>
+              <span class="duration" data-i18n="experience.leo.duration">May 2025 - Present</span>
+              <span class="location" data-i18n="experience.leo.location">Bratislava, Slovakia · Hybrid</span>
+            </div>
+            <div class="experience-details">
+              <p class="experience-summary" data-i18n="experience.leo.copy">Podpora používateľov, zariadení a lokálneho IT prostredia v každodennej prevádzke.</p>
+              <div class="experience-skills">
+                <span><b data-i18n="experience.leo.skill1">Samostatné riešenie</b></span>
+                <span><b data-i18n="experience.leo.skill2">Podpora používateľov</b></span>
+                <span><b data-i18n="experience.leo.skill3">Správa zariadení</b></span>
+                <span><b data-i18n="experience.leo.skill4">Lokálne IT prostredie</b></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-item">
+            <div class="experience-meta">
+              <span class="company"><span class="company-brand ikea" data-i18n="experience.ikea.companyName">IKEA</span> · <span data-i18n="experience.ikea.workType">Full-time</span></span>
+              <h3 class="role" data-i18n="experience.ikea.role">Technical Support Specialist</h3>
+              <span class="duration" data-i18n="experience.ikea.duration">Apr 2023 - Apr 2025</span>
+              <span class="location" data-i18n="experience.ikea.location">Bratislava, Slovakia · On-site</span>
+            </div>
+            <div class="experience-details">
+              <p class="experience-summary" data-i18n="experience.ikea.copy">Technická podpora tímov, pracovísk a zariadení s dôrazom na rýchle riešenie problémov.</p>
+              <div class="experience-skills">
+                <span><b data-i18n="experience.ikea.skill1">Denná technická podpora</b></span>
+                <span><b data-i18n="experience.ikea.skill2">Riešenie problémov pod tlakom</b></span>
+                <span><b data-i18n="experience.ikea.skill3">Komunikácia s tímami</b></span>
+                <span><b data-i18n="experience.ikea.skill4">Používateľské školenia</b></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-item">
+            <div class="experience-meta">
+              <span class="company"><span class="company-brand pcexpres" data-i18n="experience.pcexpres.companyName">PCexpres</span> · <span data-i18n="experience.pcexpres.workType">Freelance</span></span>
+              <h3 class="role" data-i18n="experience.pcexpres.role">Freelance Mobile Device Repair Specialist</h3>
+              <span class="duration" data-i18n="experience.pcexpres.duration">Oct 2021 - Apr 2023</span>
+              <span class="location" data-i18n="experience.pcexpres.location">Západné a stredné Slovensko · On-site</span>
+            </div>
+            <div class="experience-details">
+              <p class="experience-summary" data-i18n="experience.pcexpres.copy">Diagnostika a opravy mobilných zariadení, počítačov a hardvéru priamo pre zákazníkov.</p>
+              <div class="experience-skills">
+                <span><b data-i18n="experience.pcexpres.skill1">Diagnostika porúch</b></span>
+                <span><b data-i18n="experience.pcexpres.skill2">Opravy telefónov a PC</b></span>
+                <span><b data-i18n="experience.pcexpres.skill3">Komunikácia so zákazníkom</b></span>
+                <span><b data-i18n="experience.pcexpres.skill4">Zodpovednosť za výsledok</b></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-item">
+            <div class="experience-meta">
+              <span class="company"><span class="company-brand fixservis" data-i18n="experience.fixservis.companyName">FixServis</span> · <span data-i18n="experience.fixservis.workType">Full-time</span></span>
+              <h3 class="role" data-i18n="experience.fixservis.role">Authorized Huawei Technician</h3>
+              <span class="duration" data-i18n="experience.fixservis.duration">Oct 2019 - Oct 2021</span>
+              <span class="location" data-i18n="experience.fixservis.location">Nitra, Slovakia · On-site</span>
+            </div>
+            <div class="experience-details">
+              <p class="experience-summary" data-i18n="experience.fixservis.copy">Autorizovaný servis, diagnostika a opravy zariadení podľa štandardov výrobcu.</p>
+              <div class="experience-skills">
+                <span><b data-i18n="experience.fixservis.skill1">Autorizované servisné postupy</b></span>
+                <span><b data-i18n="experience.fixservis.skill2">Diagnostika zariadení</b></span>
+                <span><b data-i18n="experience.fixservis.skill3">Opravy podľa štandardov</b></span>
+                <span><b data-i18n="experience.fixservis.skill4">Kontrola kvality</b></span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-band reveal" aria-labelledby="contact-title">
+        <div>
+          <h2 id="contact-title" data-i18n-html="contact.title">Nápad, problém<br>alebo technická výzva?<br><span class="contact-keep">Môžeme sa na to pozrieť.</span></h2>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="mailto:martinus.nagy@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+            <span data-i18n="contact.email">Email</span>
+          </a>
+          <a class="button" href="https://www.linkedin.com/in/nagymartinus/" data-linkedin-app="linkedin://in/nagymartinus" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <span>LinkedIn</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer shell">
+      <span>© <span id="year"></span> Martin Nagy</span>
+    </footer>
+
+    <section class="easter-egg shell reveal" aria-label="Mini game" data-runner>
+      <button class="easter-trigger" type="button" data-game-trigger aria-expanded="false" aria-controls="binary-runner" data-i18n="game.prompt">Chceš si zahrať mini hru? Klikni sem.</button>
+      <div class="binary-runner" id="binary-runner" hidden>
+        <div class="binary-runner-head">
+          <span><span data-i18n="game.score">Skóre</span>: <span class="binary-runner-score" data-game-score>0</span></span>
+        </div>
+        <canvas class="binary-runner-canvas" data-game-canvas aria-label="Binary runner mini game"></canvas>
+        <div class="binary-runner-state" data-game-state aria-live="polite" data-i18n="game.ready">Klikni a preskakuj vírusy, bugy, výpadky aj update chaos.</div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const translations = {
+      sk: {
+        "nav.about": "O mne",
+        "nav.home": "Úvod",
+        "nav.services": "Čo robím",
+        "nav.contact": "Kontakt",
+        "hero.title": "Technika, ktorá funguje.<br><span class=\"tone\">Dizajn, ktorý drží.</span><span class=\"tone detail-tone\">s citom pre detail.</span>",
+        "hero.lead": "Som Martin Nagy, technický nadšenec s praxou v IT podpore, opravách elektroniky, webdesigne a vývoji iOS aplikácií. Rád riešim problémy, skladám veci do poriadku a dávam digitálnym nápadom čistú vizuálnu formu.",
+        "hero.email": "Napísať email",
+        "hero.work": "Pozrieť prácu",
+        "about.label": "Profil",
+        "about.title": "Krátka digitálna vizitka s ostrejším charakterom.",
+        "tags.troubleshooting": "Troubleshooting",
+        "tags.hardware": "Hardware maintenance",
+        "tags.it": "IT infraštruktúra",
+        "tags.repair": "Opravy elektroniky",
+        "tags.webdesign": "Webdesign",
+        "tags.ios": "iOS app development",
+        "tags.design": "Creative design",
+        "services.label": "Služby",
+        "services.title": "Od nápadu či problému po čisté riešenie.",
+        "services.it.title": "IT podpora",
+        "services.it.copy": "Riešim technické problémy od prvého kontaktu po funkčné riešenie. Pomáham používateľom, zariadeniam aj lokálnemu IT prostrediu fungovať spoľahlivo a prehľadne.",
+        "services.repair.title": "Opravy elektroniky",
+        "services.repair.copy": "Diagnostika a opravy zariadení s dôrazom na presnosť, postup a detail. Skúsenosť s telefónmi, tabletmi, počítačmi aj menšou elektronikou.",
+        "services.design.title": "Webdesign & iOS Apps",
+        "services.design.copy": "Tvorím čisté weby, landing pages a app koncepty, ktoré majú zrozumiteľnú štruktúru, dobrý vizuálny cit a fungujú prirodzene na rôznych zariadeniach.",
+        "contact.title": "Poďme niečo vyriešiť.",
+        "contact.email": "Email",
+        "footer.note": "Custom landing page"
+      },
+      cs: {
+        "nav.about": "O mně",
+        "nav.home": "Úvod",
+        "nav.services": "Co dělám",
+        "nav.contact": "Kontakt",
+        "hero.title": "Technika, která funguje.<br><span class=\"tone\">Design, který drží.</span><span class=\"tone detail-tone\">s citem pro detail.</span>",
+        "hero.lead": "Jsem Martin Nagy, technický nadšenec s praxí v IT podpoře, opravách elektroniky, webdesignu a vývoji iOS aplikací. Rád řeším problémy, dávám věci do pořádku a převádím digitální nápady do čisté vizuální formy.",
+        "hero.email": "Napsat email",
+        "hero.work": "Prohlédnout práci",
+        "about.label": "Profil",
+        "about.title": "Krátká digitální vizitka s ostřejším charakterem.",
+        "tags.troubleshooting": "Troubleshooting",
+        "tags.hardware": "Hardware maintenance",
+        "tags.it": "IT infrastruktura",
+        "tags.repair": "Opravy elektroniky",
+        "tags.webdesign": "Webdesign",
+        "tags.ios": "iOS app development",
+        "tags.design": "Creative design",
+        "services.label": "Služby",
+        "services.title": "Od nápadu či problému k čistému řešení.",
+        "services.copy": "Silná kombinace uživatelské podpory, diagnostiky zařízení, oprav, webdesignu a vývoje iOS aplikací.",
+        "services.it.title": "IT podpora",
+        "services.it.copy": "Řeším technické problémy od prvního kontaktu po funkční řešení. Pomáhám uživatelům, zařízením i lokálnímu IT prostředí fungovat spolehlivě a přehledně.",
+        "services.repair.title": "Opravy elektroniky",
+        "services.repair.copy": "Diagnostika a opravy zařízení s důrazem na přesnost, postup a detail. Zkušenost s telefony, tablety, počítači i menší elektronikou.",
+        "services.design.title": "Webdesign & iOS Apps",
+        "services.design.copy": "Tvořím čisté weby, landing pages a app koncepty, které mají srozumitelnou strukturu, dobrý vizuální cit a fungují přirozeně na různých zařízeních.",
+        "contact.title": "Pojďme něco vyřešit.",
+        "contact.email": "Email",
+        "footer.note": "Custom landing page"
+      },
+      en: {
+        "nav.about": "About",
+        "nav.home": "Home",
+        "nav.services": "What I do",
+        "nav.contact": "Contact",
+        "hero.title": "Tech that works.<br><span class=\"tone\">Design that holds up.</span><span class=\"tone detail-tone\">with an eye for detail.</span>",
+        "hero.lead": "I am Martin Nagy, a tech enthusiast with hands-on experience in IT support, electronics repair, webdesign, and iOS app development. I like solving problems, bringing devices back into shape, and giving digital ideas a clean visual form.",
+        "hero.email": "Send email",
+        "hero.work": "View work",
+        "about.label": "Profile",
+        "about.title": "A compact digital card with a sharper character.",
+        "tags.troubleshooting": "Troubleshooting",
+        "tags.hardware": "Hardware maintenance",
+        "tags.it": "IT infrastructure",
+        "tags.repair": "Electronics repair",
+        "tags.webdesign": "Webdesign",
+        "tags.ios": "iOS app development",
+        "tags.design": "Creative design",
+        "services.label": "Services",
+        "services.title": "From an idea or problem to a clean solution.",
+        "services.copy": "A strong mix of user support, device diagnostics, repair experience, webdesign, and iOS app development.",
+        "services.it.title": "IT Support",
+        "services.it.copy": "I solve technical issues from first contact to a working fix, helping users, devices, and local IT environments stay reliable and easy to understand.",
+        "services.repair.title": "Electronics Repair",
+        "services.repair.copy": "Device diagnostics and repair with attention to accuracy, process, and detail. Hands-on experience with phones, tablets, computers, and small electronics.",
+        "services.design.title": "Webdesign & iOS Apps",
+        "services.design.copy": "I create clean websites, landing pages, and app concepts with clear structure, visual care, and natural usability across devices.",
+        "contact.title": "Let’s solve something.",
+        "contact.email": "Email",
+        "footer.note": "Custom landing page"
+      }
+    };
+
+    Object.assign(translations.sk, {
+      "nav.experience": "Prax",
+      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone\">Digitálne riešenia.</span><span class=\"tone detail-tone\">s citom pre detail.</span>",
+      "hero.lead": "Pomáham udržať techniku, zariadenia a digitálne prostredia v chode. Spájam reálnu prax v IT podpore, troubleshootingu, opravách elektroniky, webdesigne a vývoji iOS aplikácií.",
+      "hero.work": "Pozrieť prax",
+      "rail.support.title": "IT podpora",
+      "rail.support.copy": "používatelia, zariadenia, infra",
+      "rail.repair.title": "Repair",
+      "rail.repair.copy": "telefóny, tablety, PC",
+      "rail.web.title": "Webdesign",
+      "rail.web.copy": "čisté responzívne stránky",
+      "rail.ios.title": "iOS Apps",
+      "rail.ios.copy": "nápady a vývoj aplikácií",
+      "about.title": "Praktický technický profil, ktorý pôsobí pokojne a rieši veci do konca.",
+      "about.copy": "Som technický typ, ktorý vie rýchlo pochopiť problém, rozložiť ho na konkrétne kroky a dotiahnuť riešenie bez zbytočného chaosu. Najsilnejší som tam, kde sa stretáva podpora používateľov, zariadenia, infraštruktúra a čistý digitálny výstup.",
+      "metrics.current.value": "Support",
+      "metrics.current.label": "IT podpora, troubleshooting a komunikácia s používateľmi",
+      "metrics.infra.value": "Infra",
+      "metrics.infra.label": "Lokálne IT prostredie, zariadenia a spoľahlivá prevádzka",
+      "metrics.repair.value": "Repair",
+      "metrics.repair.label": "Diagnostika a opravy telefónov, tabletov, PC a elektroniky",
+      "metrics.digital.value": "Digital",
+      "metrics.digital.label": "Webdesign, responzívne stránky a iOS aplikácie",
+      "services.label": "Skills",
+      "services.title": "Od nápadu či problému po čisté riešenie.",
+      "services.it.copy": "Riešim technické problémy od prvého kontaktu po funkčné riešenie. Pomáham používateľom, zariadeniam aj lokálnemu IT prostrediu fungovať spoľahlivo a prehľadne.",
+      "services.repair.copy": "Diagnostika a opravy zariadení s dôrazom na presnosť, postup a detail. Skúsenosť s telefónmi, tabletmi, počítačmi aj menšou elektronikou.",
+      "services.design.copy": "Tvorím čisté weby, landing pages a app koncepty, ktoré majú zrozumiteľnú štruktúru, dobrý vizuálny cit a fungujú prirodzene na rôznych zariadeniach.",
+      "experience.label": "Experience",
+      "experience.title": "Skúsenosti stručne. Detaily patria na LinkedIn.",
+      "experience.leo.company": "Leo Express · Full-time",
+      "experience.leo.companyName": "Leo Express",
+      "experience.leo.workType": "Full-time",
+      "experience.leo.role": "IT Support Specialist",
+      "experience.leo.duration": "May 2025 - Present",
+      "experience.leo.location": "Bratislava, Slovakia · Hybrid",
+      "experience.leo.copy": "Podpora používateľov, zariadení a lokálneho IT prostredia v každodennej prevádzke.",
+      "experience.leo.skill1": "Samostatné riešenie",
+      "experience.leo.skill2": "Podpora používateľov",
+      "experience.leo.skill3": "Správa zariadení",
+      "experience.leo.skill4": "Lokálne IT prostredie",
+      "experience.ikea.company": "IKEA · Full-time",
+      "experience.ikea.companyName": "IKEA",
+      "experience.ikea.workType": "Full-time",
+      "experience.ikea.role": "Technical Support Specialist",
+      "experience.ikea.duration": "Apr 2023 - Apr 2025",
+      "experience.ikea.location": "Bratislava, Slovakia · On-site",
+      "experience.ikea.copy": "Technická podpora tímov, pracovísk a zariadení s dôrazom na rýchle riešenie problémov.",
+      "experience.ikea.skill1": "Denná technická podpora",
+      "experience.ikea.skill2": "Riešenie problémov pod tlakom",
+      "experience.ikea.skill3": "Komunikácia s tímami",
+      "experience.ikea.skill4": "Používateľské školenia",
+      "experience.pcexpres.company": "PCexpres · Freelance",
+      "experience.pcexpres.companyName": "PCexpres",
+      "experience.pcexpres.workType": "Freelance",
+      "experience.pcexpres.role": "Freelance Mobile Device Repair Specialist",
+      "experience.pcexpres.duration": "Oct 2021 - Apr 2023",
+      "experience.pcexpres.location": "Západné a stredné Slovensko · On-site",
+      "experience.pcexpres.copy": "Diagnostika a opravy mobilných zariadení, počítačov a hardvéru priamo pre zákazníkov.",
+      "experience.pcexpres.skill1": "Diagnostika porúch",
+      "experience.pcexpres.skill2": "Opravy telefónov a PC",
+      "experience.pcexpres.skill3": "Komunikácia so zákazníkom",
+      "experience.pcexpres.skill4": "Zodpovednosť za výsledok",
+      "experience.fixservis.company": "FixServis · Full-time",
+      "experience.fixservis.companyName": "FixServis",
+      "experience.fixservis.workType": "Full-time",
+      "experience.fixservis.role": "Authorized Huawei Technician",
+      "experience.fixservis.duration": "Oct 2019 - Oct 2021",
+      "experience.fixservis.location": "Nitra, Slovakia · On-site",
+      "experience.fixservis.copy": "Autorizovaný servis, diagnostika a opravy zariadení podľa štandardov výrobcu.",
+      "experience.fixservis.skill1": "Autorizované servisné postupy",
+      "experience.fixservis.skill2": "Diagnostika zariadení",
+      "experience.fixservis.skill3": "Opravy podľa štandardov",
+      "experience.fixservis.skill4": "Kontrola kvality",
+      "contact.title": "Nápad, problém<br>alebo technická výzva?<br><span class=\"contact-keep\">Môžeme sa na to pozrieť.</span>",
+      "game.prompt": "Chceš si zahrať mini hru? Klikni sem.",
+      "game.score": "Skóre",
+      "game.ready": "Klikni a preskakuj vírusy, bugy, výpadky aj update chaos.",
+      "game.running": "Technik v teréne.",
+      "game.over": "Koniec hry. Klikni pre reštart.",
+      "footer.note": ""
+    });
+
+    Object.assign(translations.cs, {
+      "nav.experience": "Praxe",
+      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone\">Digitální řešení.</span><span class=\"tone detail-tone\">s citem pro detail.</span>",
+      "hero.lead": "Pomáhám udržet techniku, zařízení a digitální prostředí v chodu. Spojuji reálnou praxi v IT podpoře, troubleshootingu, opravách elektroniky, webdesignu a vývoji iOS aplikací.",
+      "hero.work": "Prohlédnout praxi",
+      "rail.support.title": "IT podpora",
+      "rail.support.copy": "uživatelé, zařízení, infra",
+      "rail.repair.title": "Repair",
+      "rail.repair.copy": "telefony, tablety, PC",
+      "rail.web.title": "Webdesign",
+      "rail.web.copy": "čisté responzivní stránky",
+      "rail.ios.title": "iOS Apps",
+      "rail.ios.copy": "nápady a vývoj aplikací",
+      "about.title": "Praktický technický profil, který působí klidně a dotahuje věci do konce.",
+      "about.copy": "Jsem technický typ, který umí rychle pochopit problém, rozložit ho na konkrétní kroky a dotáhnout řešení bez zbytečného chaosu. Nejsilnější jsem tam, kde se potkává podpora uživatelů, zařízení, infrastruktura a čistý digitální výstup.",
+      "metrics.current.value": "Support",
+      "metrics.current.label": "IT podpora, troubleshooting a komunikace s uživateli",
+      "metrics.infra.value": "Infra",
+      "metrics.infra.label": "Lokální IT prostředí, zařízení a spolehlivý provoz",
+      "metrics.repair.value": "Repair",
+      "metrics.repair.label": "Diagnostika a opravy telefonů, tabletů, PC a elektroniky",
+      "metrics.digital.value": "Digital",
+      "metrics.digital.label": "Webdesign, responzivní stránky a iOS aplikace",
+      "services.label": "Skills",
+      "services.title": "Od nápadu či problému k čistému řešení.",
+      "services.copy": "Stránka je stručná, ale základ je jasný: technická podpora, hardware, servisní myšlení, vizuální cit a schopnost tvořit digitální věci, které nepůsobí náhodně.",
+      "services.it.copy": "Řeším technické problémy od prvního kontaktu po funkční řešení. Pomáhám uživatelům, zařízením i lokálnímu IT prostředí fungovat spolehlivě a přehledně.",
+      "services.repair.copy": "Diagnostika a opravy zařízení s důrazem na přesnost, postup a detail. Zkušenost s telefony, tablety, počítači i menší elektronikou.",
+      "services.design.copy": "Tvořím čisté weby, landing pages a app koncepty, které mají srozumitelnou strukturu, dobrý vizuální cit a fungují přirozeně na různých zařízeních.",
+      "experience.label": "Experience",
+      "experience.title": "Zkušenosti stručně. Detaily patří na LinkedIn.",
+      "experience.leo.company": "Leo Express · Full-time",
+      "experience.leo.companyName": "Leo Express",
+      "experience.leo.workType": "Full-time",
+      "experience.leo.role": "IT Support Specialist",
+      "experience.leo.duration": "May 2025 - Present",
+      "experience.leo.location": "Bratislava, Slovakia · Hybrid",
+      "experience.leo.copy": "Podpora uživatelů, zařízení a lokálního IT prostředí v každodenním provozu.",
+      "experience.leo.skill1": "Samostatné řešení",
+      "experience.leo.skill2": "Podpora uživatelů",
+      "experience.leo.skill3": "Správa zařízení",
+      "experience.leo.skill4": "Lokální IT prostředí",
+      "experience.ikea.company": "IKEA · Full-time",
+      "experience.ikea.companyName": "IKEA",
+      "experience.ikea.workType": "Full-time",
+      "experience.ikea.role": "Technical Support Specialist",
+      "experience.ikea.duration": "Apr 2023 - Apr 2025",
+      "experience.ikea.location": "Bratislava, Slovakia · On-site",
+      "experience.ikea.copy": "Technická podpora týmů, pracovišť a zařízení s důrazem na rychlé řešení problémů.",
+      "experience.ikea.skill1": "Denní technická podpora",
+      "experience.ikea.skill2": "Řešení problémů pod tlakem",
+      "experience.ikea.skill3": "Komunikace s týmy",
+      "experience.ikea.skill4": "Školení uživatelů",
+      "experience.pcexpres.company": "PCexpres · Freelance",
+      "experience.pcexpres.companyName": "PCexpres",
+      "experience.pcexpres.workType": "Freelance",
+      "experience.pcexpres.role": "Freelance Mobile Device Repair Specialist",
+      "experience.pcexpres.duration": "Oct 2021 - Apr 2023",
+      "experience.pcexpres.location": "Západní a střední Slovensko · On-site",
+      "experience.pcexpres.copy": "Diagnostika a opravy mobilních zařízení, počítačů a hardwaru přímo pro zákazníky.",
+      "experience.pcexpres.skill1": "Diagnostika závad",
+      "experience.pcexpres.skill2": "Opravy telefonů a PC",
+      "experience.pcexpres.skill3": "Komunikace se zákazníkem",
+      "experience.pcexpres.skill4": "Odpovědnost za výsledek",
+      "experience.fixservis.company": "FixServis · Full-time",
+      "experience.fixservis.companyName": "FixServis",
+      "experience.fixservis.workType": "Full-time",
+      "experience.fixservis.role": "Authorized Huawei Technician",
+      "experience.fixservis.duration": "Oct 2019 - Oct 2021",
+      "experience.fixservis.location": "Nitra, Slovakia · On-site",
+      "experience.fixservis.copy": "Autorizovaný servis, diagnostika a opravy zařízení podle standardů výrobce.",
+      "experience.fixservis.skill1": "Autorizované servisní postupy",
+      "experience.fixservis.skill2": "Diagnostika zařízení",
+      "experience.fixservis.skill3": "Opravy podle standardů",
+      "experience.fixservis.skill4": "Kontrola kvality",
+      "contact.title": "Nápad, problém<br>nebo technická výzva?<br><span class=\"contact-keep\">Můžeme se na to podívat.</span>",
+      "game.prompt": "Chceš si zahrát mini hru? Klikni sem.",
+      "game.score": "Skóre",
+      "game.ready": "Klikni a přeskakuj viry, bugy, výpadky i update chaos.",
+      "game.running": "Technik v terénu.",
+      "game.over": "Konec hry. Klikni pro restart.",
+      "footer.note": ""
+    });
+
+    Object.assign(translations.en, {
+      "nav.experience": "Experience",
+      "hero.title": "IT support.<br>Repair.<br><span class=\"tone\">Digital work.</span><span class=\"tone detail-tone\">with an eye for detail.</span>",
+      "hero.lead": "I help keep technology, devices, and digital environments running. I combine real experience in IT support, troubleshooting, electronics repair, webdesign, and iOS app development.",
+      "hero.work": "View experience",
+      "rail.support.title": "IT Support",
+      "rail.support.copy": "users, devices, infra",
+      "rail.repair.title": "Repair",
+      "rail.repair.copy": "phones, tablets, PCs",
+      "rail.web.title": "Webdesign",
+      "rail.web.copy": "clean responsive pages",
+      "rail.ios.title": "iOS Apps",
+      "rail.ios.copy": "app ideas and builds",
+      "about.title": "A practical technical profile that stays calm and follows through.",
+      "about.copy": "I am a hands-on technical person who can understand a problem quickly, break it into clear steps, and move it toward a clean solution. I am strongest where user support, devices, infrastructure, and polished digital output meet.",
+      "metrics.current.value": "Support",
+      "metrics.current.label": "IT support, troubleshooting, and user communication",
+      "metrics.infra.value": "Infra",
+      "metrics.infra.label": "Local IT environments, devices, and reliable operations",
+      "metrics.repair.value": "Repair",
+      "metrics.repair.label": "Diagnostics and repair for phones, tablets, PCs, and electronics",
+      "metrics.digital.value": "Digital",
+      "metrics.digital.label": "Webdesign, responsive pages, and iOS apps",
+      "services.label": "Skills",
+      "services.title": "From an idea or problem to a clean solution.",
+      "services.copy": "This page is compact, but the base is clear: technical support, hardware, repair thinking, visual taste, and the ability to build digital things that feel intentional.",
+      "services.it.copy": "I solve technical issues from first contact to a working fix, helping users, devices, and local IT environments stay reliable and easy to understand.",
+      "services.repair.copy": "Device diagnostics and repair with attention to accuracy, process, and detail. Hands-on experience with phones, tablets, computers, and small electronics.",
+      "services.design.copy": "I create clean websites, landing pages, and app concepts with clear structure, visual care, and natural usability across devices.",
+      "experience.label": "Experience",
+      "experience.title": "Experience in brief. Details belong on LinkedIn.",
+      "experience.copy": "This is a simple overview of real roles and skills. Full job descriptions, projects, and context can live on LinkedIn.",
+      "experience.leo.company": "Leo Express · Full-time",
+      "experience.leo.companyName": "Leo Express",
+      "experience.leo.workType": "Full-time",
+      "experience.leo.role": "IT Support Specialist",
+      "experience.leo.duration": "May 2025 - Present",
+      "experience.leo.location": "Bratislava, Slovakia · Hybrid",
+      "experience.leo.copy": "Supporting users, devices, and local IT environments in daily operations.",
+      "experience.leo.skill1": "Independent solving",
+      "experience.leo.skill2": "User support",
+      "experience.leo.skill3": "Device management",
+      "experience.leo.skill4": "Local IT environment",
+      "experience.ikea.company": "IKEA · Full-time",
+      "experience.ikea.companyName": "IKEA",
+      "experience.ikea.workType": "Full-time",
+      "experience.ikea.role": "Technical Support Specialist",
+      "experience.ikea.duration": "Apr 2023 - Apr 2025",
+      "experience.ikea.location": "Bratislava, Slovakia · On-site",
+      "experience.ikea.copy": "Technical support for teams, workplaces, and devices with a focus on fast problem solving.",
+      "experience.ikea.skill1": "Daily technical support",
+      "experience.ikea.skill2": "Solving issues under pressure",
+      "experience.ikea.skill3": "Team communication",
+      "experience.ikea.skill4": "User training",
+      "experience.pcexpres.company": "PCexpres · Freelance",
+      "experience.pcexpres.companyName": "PCexpres",
+      "experience.pcexpres.workType": "Freelance",
+      "experience.pcexpres.role": "Freelance Mobile Device Repair Specialist",
+      "experience.pcexpres.duration": "Oct 2021 - Apr 2023",
+      "experience.pcexpres.location": "West and Central Slovakia · On-site",
+      "experience.pcexpres.copy": "Diagnostics and repair for mobile devices, computers, and hardware directly for customers.",
+      "experience.pcexpres.skill1": "Fault diagnostics",
+      "experience.pcexpres.skill2": "Phone and PC repair",
+      "experience.pcexpres.skill3": "Customer communication",
+      "experience.pcexpres.skill4": "Responsibility for results",
+      "experience.fixservis.company": "FixServis · Full-time",
+      "experience.fixservis.companyName": "FixServis",
+      "experience.fixservis.workType": "Full-time",
+      "experience.fixservis.role": "Authorized Huawei Technician",
+      "experience.fixservis.duration": "Oct 2019 - Oct 2021",
+      "experience.fixservis.location": "Nitra, Slovakia · On-site",
+      "experience.fixservis.copy": "Authorized service, diagnostics, and device repairs following manufacturer standards.",
+      "experience.fixservis.skill1": "Authorized service procedures",
+      "experience.fixservis.skill2": "Device diagnostics",
+      "experience.fixservis.skill3": "Repairs by standards",
+      "experience.fixservis.skill4": "Quality control",
+      "contact.title": "An idea, problem,<br>or a technical challenge?<br><span class=\"contact-keep\">We can take a look.</span>",
+      "game.prompt": "Want to play a mini game? Click here.",
+      "game.score": "Score",
+      "game.ready": "Click and jump over viruses, bugs, outages, and update chaos.",
+      "game.running": "Technician on the run.",
+      "game.over": "Game over. Click to restart.",
+      "footer.note": ""
+    });
+
+    const countryLanguageMap = {
+      SK: "sk",
+      CZ: "cs"
+    };
+
+    const languageNames = {
+      sk: "Slovensky",
+      cs: "Česky",
+      en: "English"
+    };
+
+    const supportedLanguages = Object.keys(translations);
+    const html = document.documentElement;
+    const buttons = document.querySelectorAll("[data-lang]");
+    const languageSwitcher = document.querySelector(".language-switcher");
+    const languageIndicator = document.querySelector(".language-indicator");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let currentLanguage = "";
+    let languageChangeTimer = 0;
+
+    function browserLanguageFallback() {
+      const language = (navigator.language || navigator.userLanguage || "").toLowerCase();
+      if (language.startsWith("sk")) return "sk";
+      if (language.startsWith("cs") || language.startsWith("cz")) return "cs";
+      return "en";
+    }
+
+    function updateLanguageIndicator() {
+      const activeButton = document.querySelector(".lang-button.active");
+      if (!languageSwitcher || !languageIndicator || !activeButton) return;
+
+      const switcherRect = languageSwitcher.getBoundingClientRect();
+      const buttonRect = activeButton.getBoundingClientRect();
+      languageIndicator.style.width = `${buttonRect.width}px`;
+      languageIndicator.style.height = `${buttonRect.height}px`;
+      languageIndicator.style.transform = `translate3d(${buttonRect.left - switcherRect.left}px, ${buttonRect.top - switcherRect.top}px, 0)`;
+    }
+
+    function applyLanguage(language, persist = false) {
+      const nextLanguage = supportedLanguages.includes(language) ? language : "en";
+      const dictionary = translations[nextLanguage];
+
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.dataset.i18n;
+        if (dictionary[key]) node.textContent = dictionary[key];
+      });
+
+      document.querySelectorAll("[data-i18n-html]").forEach((node) => {
+        const key = node.dataset.i18nHtml;
+        if (dictionary[key]) node.innerHTML = dictionary[key];
+      });
+
+      html.lang = nextLanguage === "cs" ? "cs" : nextLanguage;
+      document.title = "MN | Digital";
+
+      buttons.forEach((button) => {
+        const active = button.dataset.lang === nextLanguage;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+        button.title = languageNames[button.dataset.lang];
+      });
+
+      currentLanguage = nextLanguage;
+      updateLanguageIndicator();
+      window.dispatchEvent(new CustomEvent("site-language-applied"));
+
+      if (persist) {
+        localStorage.setItem("martin-nagy-language", nextLanguage);
+      }
+    }
+
+    function setLanguage(language, persist = false, options = {}) {
+      const nextLanguage = supportedLanguages.includes(language) ? language : "en";
+      const shouldAnimate = options.animate && currentLanguage && currentLanguage !== nextLanguage && !reducedMotion.matches;
+
+      window.clearTimeout(languageChangeTimer);
+
+      if (!shouldAnimate) {
+        document.body.classList.remove("language-changing");
+        applyLanguage(nextLanguage, persist);
+        return;
+      }
+
+      languageSwitcher?.classList.add("switching");
+      window.setTimeout(() => languageSwitcher?.classList.remove("switching"), 460);
+      document.body.classList.add("language-changing");
+      languageChangeTimer = window.setTimeout(() => {
+        applyLanguage(nextLanguage, persist);
+        window.requestAnimationFrame(() => {
+          document.body.classList.remove("language-changing");
+        });
+      }, 240);
+    }
+
+    async function detectLanguage() {
+      const storedLanguage = localStorage.getItem("martin-nagy-language");
+      if (supportedLanguages.includes(storedLanguage)) {
+        setLanguage(storedLanguage);
+        return;
+      }
+
+      setLanguage(browserLanguageFallback());
+
+      try {
+        const timeout = window.setTimeout(() => controller.abort(), 1200);
+        window.clearTimeout(timeout);
+        if (!response.ok) return;
+        const detectedLanguage = countryLanguageMap[String(data.country_code || "").toUpperCase()] || "en";
+        setLanguage(detectedLanguage);
+      } catch (error) {
+        setLanguage(browserLanguageFallback());
+      }
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setLanguage(button.dataset.lang, true, { animate: true });
+      });
+    });
+
+    const mobileLinkedIn = window.matchMedia("(hover: none), (pointer: coarse)");
+
+    document.querySelectorAll("[data-linkedin-app]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (!mobileLinkedIn.matches) return;
+
+        event.preventDefault();
+        const webUrl = link.href;
+        window.location.href = link.dataset.linkedinApp;
+
+        window.setTimeout(() => {
+          if (document.visibilityState === "visible") {
+            window.location.href = webUrl;
+          }
+        }, 900);
+      });
+    });
+
+    window.addEventListener("resize", updateLanguageIndicator, { passive: true });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const revealElements = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.14 });
+
+    revealElements.forEach((element) => observer.observe(element));
+
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+    if (finePointer.matches) {
+      document.querySelectorAll(".card, .rail-item, .experience-item, .contact-band").forEach((card) => {
+        card.addEventListener("pointermove", (event) => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--x", `${((event.clientX - rect.left) / rect.width) * 100}%`);
+          card.style.setProperty("--y", `${((event.clientY - rect.top) / rect.height) * 100}%`);
+        });
+      });
+    }
+
+    function initBinaryRunner() {
+      const shell = document.querySelector("[data-runner]");
+      if (!shell) return;
+
+      const trigger = shell.querySelector("[data-game-trigger]");
+      const panel = shell.querySelector("#binary-runner");
+      const canvas = shell.querySelector("[data-game-canvas]");
+      const scoreNode = shell.querySelector("[data-game-score]");
+      const stateNode = shell.querySelector("[data-game-state]");
+      if (!trigger || !panel || !canvas || !scoreNode || !stateNode) return;
+
+      const ctx = canvas.getContext("2d");
+      const player = {
+        x: 48,
+        y: 0,
+        width: 36,
+        height: 44,
+        velocity: 0,
+        grounded: true
+      };
+
+      let width = 0;
+      let height = 0;
+      let ground = 0;
+      let dpr = 1;
+      let frame = 0;
+      let lastFrameTime = 0;
+      let revealed = false;
+      let running = false;
+      let gameOver = false;
+      let score = 0;
+      let best = 0;
+      let speed = 215;
+      let spawnTimer = 1.1;
+      let obstacles = [];
+      let bits = [];
+      let obstacleBag = [];
+      let lastObstacleKind = "";
+
+      const obstacleTypes = [
+        { kind: "virus", width: 32, height: 32 },
+        { kind: "bug", width: 42, height: 28 },
+        { kind: "wifi", width: 36, height: 32 },
+        { kind: "update", width: 38, height: 36 },
+        { kind: "bsod", width: 44, height: 32 }
+      ];
+
+      function gameCopy(key) {
+        const language = currentLanguage || html.lang || browserLanguageFallback();
+        return translations[language]?.[key] || translations.en[key] || "";
+      }
+
+      function setState(key) {
+        stateNode.textContent = gameCopy(key);
+      }
+
+      function resizeGame() {
+        const rect = canvas.getBoundingClientRect();
+        width = Math.max(280, rect.width || 320);
+        height = Math.max(126, rect.height || 142);
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ground = height - 30;
+
+        if (player.grounded || player.y <= 0) {
+          player.y = ground - player.height;
+        }
+      }
+
+      function resetGame() {
+        resizeGame();
+        obstacles = [];
+        bits = [];
+        obstacleBag = [];
+        lastObstacleKind = "";
+        score = 0;
+        speed = width < 460 ? 188 : 215;
+        spawnTimer = 0.9;
+        gameOver = false;
+        running = true;
+        lastFrameTime = 0;
+        player.y = ground - player.height;
+        player.velocity = 0;
+        player.grounded = true;
+        scoreNode.textContent = "0";
+        setState("game.running");
+        scheduleGame();
+      }
+
+      function nextObstacleType() {
+        if (!obstacleBag.length) {
+          obstacleBag = [...obstacleTypes].sort(() => Math.random() - 0.5);
+
+          if (obstacleBag[0]?.kind === lastObstacleKind) {
+            obstacleBag.push(obstacleBag.shift());
+          }
+        }
+
+        const next = obstacleBag.shift();
+        lastObstacleKind = next.kind;
+        return next;
+      }
+
+      function spawnObstacle() {
+        const obstacle = nextObstacleType();
+        obstacles.push({
+          x: width + 12,
+          y: ground - obstacle.height,
+          width: obstacle.width,
+          height: obstacle.height,
+          kind: obstacle.kind
+        });
+      }
+
+      function spawnBit() {
+        bits.push({
+          x: width + Math.random() * 80,
+          y: 18 + Math.random() * (height * 0.42),
+          speed: 18 + Math.random() * 26,
+          value: Math.random() > 0.5 ? "1" : "0",
+          alpha: 0.16 + Math.random() * 0.18
+        });
+
+        if (bits.length > 22) bits.shift();
+      }
+
+      function jump() {
+        if (!running || gameOver || !player.grounded) return;
+        player.velocity = width < 460 ? -610 : -665;
+        player.grounded = false;
+      }
+
+      function overlap(a, b) {
+        return (
+          a.x < b.x + b.width &&
+          a.x + a.width > b.x &&
+          a.y < b.y + b.height &&
+          a.y + a.height > b.y
+        );
+      }
+
+      function updateGame(seconds) {
+        score += seconds * 14;
+        speed = Math.min(width < 460 ? 260 : 315, speed + seconds * 5.2);
+        spawnTimer -= seconds;
+
+        if (spawnTimer <= 0) {
+          spawnObstacle();
+          spawnTimer = Math.max(0.78, 1.28 - score / 260) + Math.random() * 0.42;
+        }
+
+        if (Math.random() < seconds * 4.2) spawnBit();
+
+        player.velocity += 1500 * seconds;
+        player.y += player.velocity * seconds;
+
+        if (player.y >= ground - player.height) {
+          player.y = ground - player.height;
+          player.velocity = 0;
+          player.grounded = true;
+        }
+
+        obstacles.forEach((obstacle) => {
+          obstacle.x -= speed * seconds;
+        });
+
+        bits.forEach((bit) => {
+          bit.x -= bit.speed * seconds;
+        });
+
+        obstacles = obstacles.filter((obstacle) => obstacle.x + obstacle.width > -20);
+        bits = bits.filter((bit) => bit.x > -20);
+
+        const playerBox = {
+          x: player.x + 7,
+          y: player.y + 5,
+          width: player.width - 13,
+          height: player.height - 7
+        };
+
+        if (obstacles.some((obstacle) => overlap(playerBox, obstacle))) {
+          running = false;
+          gameOver = true;
+          best = Math.max(best, Math.floor(score));
+          setState("game.over");
+        }
+
+        scoreNode.textContent = `${Math.floor(score)}`;
+      }
+
+      function drawRoundedRect(x, y, rectWidth, rectHeight, radius) {
+        if (ctx.roundRect) {
+          ctx.beginPath();
+          ctx.roundRect(x, y, rectWidth, rectHeight, radius);
+          return;
+        }
+
+        ctx.beginPath();
+        ctx.rect(x, y, rectWidth, rectHeight);
+      }
+
+      function drawVirus(obstacle) {
+        const cx = obstacle.x + obstacle.width / 2;
+        const cy = obstacle.y + obstacle.height / 2;
+        const radius = 10;
+
+        ctx.strokeStyle = "rgba(255, 96, 96, 0.7)";
+        ctx.lineWidth = 1.4;
+        for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 4) {
+          ctx.beginPath();
+          ctx.moveTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
+          ctx.lineTo(cx + Math.cos(angle) * (radius + 6), cy + Math.sin(angle) * (radius + 6));
+          ctx.stroke();
+        }
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 68, 68, 0.28)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(255, 112, 112, 0.82)";
+        ctx.stroke();
+        ctx.fillStyle = "rgba(255, 220, 220, 0.82)";
+        ctx.fillRect(cx - 4, cy - 2, 3, 3);
+        ctx.fillRect(cx + 3, cy + 2, 3, 3);
+      }
+
+      function drawBug(obstacle) {
+        const x = obstacle.x;
+        const y = obstacle.y;
+        const cx = x + obstacle.width / 2;
+        const bodyY = y + 15;
+
+        ctx.strokeStyle = "rgba(255, 97, 97, 0.72)";
+        ctx.lineWidth = 1.4;
+
+        for (let index = 0; index < 3; index += 1) {
+          const offset = -8 + index * 8;
+          ctx.beginPath();
+          ctx.moveTo(cx - 9, bodyY + offset * 0.18);
+          ctx.lineTo(cx - 17, bodyY + offset - 2);
+          ctx.lineTo(cx - 21, bodyY + offset + 3);
+          ctx.moveTo(cx + 9, bodyY + offset * 0.18);
+          ctx.lineTo(cx + 17, bodyY + offset - 2);
+          ctx.lineTo(cx + 21, bodyY + offset + 3);
+          ctx.stroke();
+        }
+
+        ctx.beginPath();
+        ctx.ellipse(cx, bodyY, 12, 9, 0, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(45, 11, 15, 0.94)";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.ellipse(cx, y + 6, 7, 5, 0, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(35, 8, 11, 0.98)";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(cx - 4, y + 3);
+        ctx.lineTo(cx - 10, y - 3);
+        ctx.moveTo(cx + 4, y + 3);
+        ctx.lineTo(cx + 10, y - 3);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgba(255, 130, 130, 0.5)";
+        ctx.beginPath();
+        ctx.moveTo(cx, bodyY - 7);
+        ctx.lineTo(cx, bodyY + 7);
+        ctx.moveTo(cx - 7, bodyY - 5);
+        ctx.lineTo(cx + 7, bodyY + 5);
+        ctx.moveTo(cx + 7, bodyY - 5);
+        ctx.lineTo(cx - 7, bodyY + 5);
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(255, 232, 232, 0.92)";
+        ctx.fillRect(cx - 3, y + 5, 2, 2);
+        ctx.fillRect(cx + 2, y + 5, 2, 2);
+      }
+
+      function drawNoWifi(obstacle) {
+        const cx = obstacle.x + obstacle.width / 2;
+        const cy = obstacle.y + obstacle.height - 5;
+
+        ctx.strokeStyle = "rgba(247, 250, 246, 0.7)";
+        ctx.lineWidth = 1.7;
+        for (let radius = 8; radius <= 22; radius += 7) {
+          ctx.beginPath();
+          ctx.arc(cx, cy, radius, Math.PI * 1.15, Math.PI * 1.85);
+          ctx.stroke();
+        }
+
+        ctx.fillStyle = "rgba(247, 250, 246, 0.78)";
+        ctx.beginPath();
+        ctx.arc(cx, cy, 2.6, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = "rgba(255, 96, 96, 0.84)";
+        ctx.lineWidth = 2.2;
+        ctx.beginPath();
+        ctx.moveTo(obstacle.x + 5, obstacle.y + 4);
+        ctx.lineTo(obstacle.x + obstacle.width - 5, obstacle.y + obstacle.height - 3);
+        ctx.stroke();
+      }
+
+      function drawUpdate(obstacle) {
+        const x = obstacle.x + 2;
+        const y = obstacle.y + 2;
+        const size = obstacle.width - 4;
+
+        drawRoundedRect(x, y, size, size, 5);
+        ctx.fillStyle = "rgba(58, 140, 255, 0.34)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(103, 176, 255, 0.86)";
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(224, 241, 255, 0.78)";
+        ctx.fillRect(x + 7, y + 7, 7, 7);
+        ctx.fillRect(x + 16, y + 7, 7, 7);
+        ctx.fillRect(x + 7, y + 16, 7, 7);
+        ctx.fillRect(x + 16, y + 16, 7, 7);
+        ctx.fillStyle = "rgba(103, 176, 255, 0.92)";
+        ctx.font = "8px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.fillText("UPD", x + 7, y + size - 4);
+      }
+
+      function drawBsod(obstacle) {
+        const x = obstacle.x;
+        const y = obstacle.y;
+
+        drawRoundedRect(x, y, obstacle.width, obstacle.height, 4);
+        ctx.fillStyle = "rgba(35, 92, 226, 0.72)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(132, 185, 255, 0.9)";
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(235, 246, 255, 0.9)";
+        ctx.font = "700 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.fillText(":(", x + 7, y + 13);
+        ctx.font = "7px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.fillText("BSOD", x + 7, y + 24);
+      }
+
+      function drawObstacle(obstacle) {
+        if (obstacle.kind === "virus") {
+          drawVirus(obstacle);
+        } else if (obstacle.kind === "bug") {
+          drawBug(obstacle);
+        } else if (obstacle.kind === "wifi") {
+          drawNoWifi(obstacle);
+        } else if (obstacle.kind === "update") {
+          drawUpdate(obstacle);
+        } else {
+          drawBsod(obstacle);
+        }
+      }
+
+      function drawTechnician() {
+        const stride = player.grounded && running ? Math.sin(score * 5.1) : -0.55;
+        const bob = player.grounded && running ? Math.abs(Math.sin(score * 5.1)) * 1.4 : 0;
+        const x = player.x;
+        const y = player.y;
+
+        ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+        ctx.beginPath();
+        ctx.ellipse(x + 20, ground + 4, 19, 4, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.save();
+        ctx.translate(x, y - bob);
+
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        ctx.strokeStyle = "rgba(31, 46, 42, 0.96)";
+        ctx.lineWidth = 4.2;
+        ctx.beginPath();
+        ctx.moveTo(18, 31);
+        ctx.lineTo(12 - stride * 3, 42);
+        ctx.moveTo(24, 31);
+        ctx.lineTo(30 + stride * 3, 42);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.72)";
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(12 - stride * 3, 42);
+        ctx.lineTo(7 - stride * 3, 42);
+        ctx.moveTo(30 + stride * 3, 42);
+        ctx.lineTo(35 + stride * 3, 42);
+        ctx.stroke();
+
+        drawRoundedRect(12, 18, 20, 18, 6);
+        ctx.fillStyle = "rgba(13, 28, 23, 0.98)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.78)";
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(143, 247, 210, 0.18)";
+        ctx.fillRect(21, 21, 8, 12);
+        ctx.fillStyle = "rgba(247, 250, 246, 0.9)";
+        ctx.font = "7px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.fillText("IT", 16, 29);
+
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.62)";
+        ctx.lineWidth = 2.4;
+        ctx.beginPath();
+        ctx.moveTo(14, 23);
+        ctx.lineTo(8, 30 + stride * 1.2);
+        ctx.moveTo(31, 23);
+        ctx.lineTo(35, 30 - stride * 1.2);
+        ctx.stroke();
+
+        drawRoundedRect(30, 29 - stride * 1.2, 13, 10, 2);
+        ctx.fillStyle = "rgba(255, 212, 138, 0.24)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(255, 212, 138, 0.82)";
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(34, 29 - stride * 1.2);
+        ctx.lineTo(39, 29 - stride * 1.2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(22, 10, 8, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(238, 198, 168, 0.96)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(247, 250, 246, 0.42)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(31, 10, 2.5, -Math.PI / 2, Math.PI / 2);
+        ctx.fillStyle = "rgba(238, 198, 168, 0.85)";
+        ctx.fill();
+
+        ctx.fillStyle = "rgba(8, 10, 9, 0.96)";
+        ctx.beginPath();
+        ctx.ellipse(22, 5, 9, 5, -0.08, Math.PI, Math.PI * 2);
+        ctx.fill();
+        drawRoundedRect(13, 5, 13, 4, 2);
+        ctx.fill();
+
+        ctx.fillStyle = "rgba(8, 10, 9, 0.78)";
+        ctx.fillRect(19, 10, 2, 2);
+        ctx.fillRect(26, 10, 2, 2);
+
+        ctx.strokeStyle = "rgba(85, 48, 39, 0.6)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(22, 14);
+        ctx.lineTo(25, 14);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(28, 12);
+        ctx.lineTo(36, 10);
+        ctx.lineTo(39, 12);
+        ctx.strokeStyle = "rgba(143, 247, 210, 0.52)";
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      function drawGame() {
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.28)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(0, ground + 0.5);
+        ctx.lineTo(width, ground + 0.5);
+        ctx.stroke();
+
+        bits.forEach((bit) => {
+          ctx.fillStyle = `rgba(184, 255, 232, ${bit.alpha})`;
+          ctx.font = "12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+          ctx.fillText(bit.value, bit.x, bit.y);
+        });
+
+        obstacles.forEach(drawObstacle);
+        drawTechnician();
+
+        if (gameOver) {
+          ctx.fillStyle = "rgba(247, 250, 246, 0.9)";
+          ctx.font = "700 14px ui-sans-serif, system-ui, sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillText(gameCopy("game.over"), width / 2, height / 2 - 5);
+          ctx.fillStyle = "rgba(184, 255, 232, 0.72)";
+          ctx.font = "11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+          ctx.fillText(`${gameCopy("game.score")}: ${Math.floor(score)}  BEST: ${best}`, width / 2, height / 2 + 20);
+          ctx.textAlign = "left";
+        }
+      }
+
+      function gameLoop(timestamp = performance.now()) {
+        frame = 0;
+        const elapsed = lastFrameTime ? timestamp - lastFrameTime : 16.67;
+        const seconds = Math.min(elapsed / 1000, 0.05);
+        lastFrameTime = timestamp;
+
+        if (running && !gameOver) {
+          updateGame(seconds);
+        }
+
+        drawGame();
+
+        if (running && !gameOver) {
+          frame = window.requestAnimationFrame(gameLoop);
+        } else {
+          lastFrameTime = 0;
+        }
+      }
+
+      function scheduleGame() {
+        if (!frame) frame = window.requestAnimationFrame(gameLoop);
+      }
+
+      function revealGame() {
+        if (!revealed) {
+          revealed = true;
+          panel.hidden = false;
+          trigger.setAttribute("aria-expanded", "true");
+          window.requestAnimationFrame(() => {
+            panel.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "end" });
+          });
+        }
+
+        resetGame();
+      }
+
+      function handleGamePress(event) {
+        event.preventDefault();
+        if (!revealed || gameOver) {
+          revealGame();
+          return;
+        }
+
+        jump();
+      }
+
+      trigger.addEventListener("click", handleGamePress);
+      canvas.addEventListener("pointerdown", handleGamePress);
+      window.addEventListener("resize", () => {
+        if (!revealed) return;
+        resizeGame();
+        drawGame();
+      }, { passive: true });
+
+      window.addEventListener("keydown", (event) => {
+        if (!revealed || (event.code !== "Space" && event.code !== "ArrowUp")) return;
+        event.preventDefault();
+        if (gameOver) {
+          revealGame();
+        } else {
+          jump();
+        }
+      });
+
+      window.addEventListener("site-language-applied", () => {
+        if (!revealed) {
+          setState("game.ready");
+          return;
+        }
+
+        setState(gameOver ? "game.over" : "game.running");
+        drawGame();
+      });
+    }
+
+    function initDomCursorTech(layer) {
+      const elements = [];
+      let frame = 0;
+      let lastSpawn = 0;
+      let lastPoint = null;
+      let lastFrameTime = 0;
+
+      function scheduleRender() {
+        if (!frame) {
+          frame = window.requestAnimationFrame(render);
+        }
+      }
+
+      function trimElements() {
+        while (elements.length > 34) {
+          const item = elements.shift();
+          item.el.remove();
+        }
+      }
+
+      function addNode(x, y) {
+        const node = document.createElement("span");
+        node.className = "cursor-node";
+        layer.appendChild(node);
+        elements.push({
+          el: node,
+          type: "node",
+          x,
+          y,
+          vx: (Math.random() - 0.5) * 0.32,
+          vy: (Math.random() - 0.5) * 0.32,
+          life: 1
+        });
+      }
+
+      function addBit(x, y) {
+        const bit = document.createElement("span");
+        bit.className = "cursor-bit";
+        bit.textContent = Math.random() > 0.5 ? "1" : "0";
+        layer.appendChild(bit);
+        elements.push({
+          el: bit,
+          type: "bit",
+          x: x + 8 + Math.random() * 18,
+          y: y - 12 + Math.random() * 22,
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: -0.09 - Math.random() * 0.12,
+          life: 1
+        });
+      }
+
+      function addLink(from, to) {
+        const length = Math.hypot(to.x - from.x, to.y - from.y);
+        if (length < 8 || length > 210) return;
+
+        const link = document.createElement("span");
+        link.className = "cursor-link";
+        link.style.width = `${length}px`;
+        layer.appendChild(link);
+        elements.push({
+          el: link,
+          type: "link",
+          x: from.x,
+          y: from.y,
+          angle: Math.atan2(to.y - from.y, to.x - from.x),
+          life: 1
+        });
+      }
+
+      function render(timestamp = performance.now()) {
+        frame = 0;
+        const elapsed = lastFrameTime ? timestamp - lastFrameTime : 16.67;
+        const frameStep = Math.min(elapsed / 16.67, 2.5);
+        lastFrameTime = timestamp;
+
+        for (let index = elements.length - 1; index >= 0; index -= 1) {
+          const item = elements[index];
+          item.life -= (item.type === "link" ? 0.022 : 0.016) * frameStep;
+
+          if (item.life <= 0) {
+            item.el.remove();
+            elements.splice(index, 1);
+            continue;
+          }
+
+          if (item.type === "link") {
+            item.el.style.opacity = String(item.life * 0.82);
+            item.el.style.transform = `translate3d(${item.x}px, ${item.y}px, 0) rotate(${item.angle}rad)`;
+          } else {
+            item.x += item.vx * frameStep;
+            item.y += item.vy * frameStep;
+            item.el.style.opacity = String(item.life);
+            item.el.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
+          }
+        }
+
+        if (elements.length) {
+          frame = window.requestAnimationFrame(render);
+        } else {
+          lastFrameTime = 0;
+        }
+      }
+
+      window.addEventListener("pointermove", (event) => {
+        const now = performance.now();
+        if (now - lastSpawn < 78) return;
+
+        const point = { x: event.clientX, y: event.clientY };
+        addNode(point.x, point.y);
+        addBit(point.x, point.y);
+        if (lastPoint) addLink(lastPoint, point);
+        lastPoint = point;
+        lastSpawn = now;
+        trimElements();
+        scheduleRender();
+      }, { passive: true });
+
+      window.__cursorTechEnabled = "dom";
+    }
+
+    function initMobileAmbientTech() {
+    const canvas = document.getElementById('cursor-canvas');
+    if (!canvas || window.__cursorTechEnabled === "mobile") return;
+    if (reducedMotion.matches) return;
+
+    const ctx = canvas.getContext('2d');
+    const nodes = [];
+    const bits = [];
+    let dpr = 1;
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+    let lastFrameTime = 0;
+    let lastSpawn = 0;
+
+    function resizeMobileCanvas() {
+        dpr = Math.min(window.devicePixelRatio || 1, 1.15);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function addNode() {
+        if (nodes.length > 8) nodes.shift();
+        const edge = Math.floor(Math.random() * 4);
+        const start = [
+            { x: Math.random() * width, y: -20 },
+            { x: width + 20, y: Math.random() * height },
+            { x: Math.random() * width, y: height + 20 },
+            { x: -20, y: Math.random() * height }
+        ][edge];
+        const target = {
+            x: width * (0.16 + Math.random() * 0.68),
+            y: height * (0.12 + Math.random() * 0.72)
+        };
+
+        nodes.push({
+            x: start.x,
+            y: start.y,
+            tx: target.x,
+            ty: target.y,
+            life: 1,
+            age: 0,
+            duration: 6.5 + Math.random() * 5,
+            size: 2 + Math.random() * 2
+        });
+    }
+
+    function addBit(node) {
+        if (bits.length > 14) bits.shift();
+        bits.push({
+            x: node.x + (Math.random() - 0.5) * 34,
+            y: node.y + (Math.random() - 0.5) * 34,
+            vy: -4 - Math.random() * 8,
+            life: 1,
+            bit: Math.random() > 0.5 ? '1' : '0'
+        });
+    }
+
+    function renderMobileAmbient(timestamp = performance.now()) {
+        frame = 0;
+        if (lastFrameTime && timestamp - lastFrameTime < 33) {
+            frame = window.requestAnimationFrame(renderMobileAmbient);
+            return;
+        }
+        const elapsed = lastFrameTime ? timestamp - lastFrameTime : 16.67;
+        const seconds = Math.min(elapsed / 1000, 0.08);
+        lastFrameTime = timestamp;
+
+        ctx.clearRect(0, 0, width, height);
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.font = '11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+
+        if (timestamp - lastSpawn > 1050 + Math.random() * 520) {
+            addNode();
+            lastSpawn = timestamp;
+        }
+
+        for (let i = nodes.length - 1; i >= 0; i -= 1) {
+            const node = nodes[i];
+            node.age += seconds;
+            const progress = Math.min(node.age / node.duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 2.2);
+            node.x += (node.tx - node.x) * Math.min(seconds * 0.34, 0.06);
+            node.y += (node.ty - node.y) * Math.min(seconds * 0.34, 0.06);
+            node.life = Math.sin(progress * Math.PI);
+
+            if (Math.random() < seconds * 0.28) addBit(node);
+
+            for (let j = i - 1; j >= 0; j -= 1) {
+                const other = nodes[j];
+                const distance = Math.hypot(node.x - other.x, node.y - other.y);
+                if (distance < 210) {
+                    ctx.beginPath();
+                    ctx.moveTo(node.x, node.y);
+                    ctx.lineTo(other.x, other.y);
+                    ctx.strokeStyle = `rgba(143, 247, 210, ${(1 - distance / 210) * node.life * other.life * 0.16})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+            }
+
+            ctx.fillStyle = `rgba(184, 255, 232, ${node.life * 0.44})`;
+            ctx.fillRect(node.x - node.size / 2, node.y - node.size / 2, node.size, node.size);
+
+            if (progress >= 1) nodes.splice(i, 1);
+        }
+
+        for (let i = bits.length - 1; i >= 0; i -= 1) {
+            const bit = bits[i];
+            bit.y += bit.vy * seconds;
+            bit.life -= seconds * 0.55;
+            if (bit.life <= 0) {
+                bits.splice(i, 1);
+                continue;
+            }
+            ctx.fillStyle = `rgba(184, 255, 232, ${bit.life * 0.22})`;
+            ctx.fillText(bit.bit, bit.x, bit.y);
+        }
+
+        frame = window.requestAnimationFrame(renderMobileAmbient);
+    }
+
+    window.addEventListener('resize', resizeMobileCanvas, { passive: true });
+    resizeMobileCanvas();
+    for (let index = 0; index < 4; index += 1) addNode();
+    frame = window.requestAnimationFrame(renderMobileAmbient);
+    window.__cursorTechEnabled = "mobile";
+    }
+
+    function initCursorTech() {
+    if (reducedMotion.matches) return;
+    if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+        initMobileAmbientTech();
+        return;
+    }
+
+    const canvas = document.getElementById('cursor-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const particles = [];
+    const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const smoothPointer = { x: pointer.x, y: pointer.y };
+    const ghostCount = 4;
+    const ghosts = Array.from({ length: ghostCount }, () => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        tx: Math.random() * window.innerWidth,
+        ty: Math.random() * window.innerHeight,
+        life: 80 + Math.random() * 180,
+        speed: 0.006 + Math.random() * 0.01
+    }));
+
+    const maxParticles = 34;
+    let dpr = 1;
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+    let lastSpawn = 0;
+    let lastFrameTime = 0;
+
+    function resetGhost(ghost) {
+        ghost.tx = Math.random() * width;
+        ghost.ty = Math.random() * height;
+        ghost.life = 90 + Math.random() * 220;
+        ghost.speed = 0.004 + Math.random() * 0.008;
+    }
+
+    function resizeCanvas() {
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function spawnParticles(x, y, count = 3) {
+        while (particles.length > maxParticles - count) particles.shift();
+
+        for (let index = 0; index < count; index += 1) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 0.18 + Math.random() * 0.28;
+
+            particles.push({
+                x: x + (Math.random() - 0.5) * 40,
+                y: y + (Math.random() - 0.5) * 40,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                life: 1,
+                size: 16 + Math.random() * 8,
+                bit: Math.random() > 0.5 ? '1' : '0'
+            });
+        }
+    }
+
+    function drawLine(a, b, alpha, widthBoost = 1) {
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `rgba(143, 247, 210, ${alpha})`;
+        ctx.lineWidth = widthBoost;
+        ctx.stroke();
+    }
+
+    function render(timestamp = performance.now()) {
+        frame = 0;
+        const elapsed = lastFrameTime ? timestamp - lastFrameTime : 16.67;
+        const frameStep = Math.min(elapsed / 16.67, 2.5);
+        const chanceStep = Math.min(frameStep, 2);
+        lastFrameTime = timestamp;
+        ctx.clearRect(0, 0, width, height);
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.font = '12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+
+        const pointerEase = 1 - Math.pow(1 - 0.045, frameStep);
+        smoothPointer.x += (pointer.x - smoothPointer.x) * pointerEase;
+        smoothPointer.y += (pointer.y - smoothPointer.y) * pointerEase;
+
+        ghosts.forEach((ghost) => {
+            const ghostEase = 1 - Math.pow(1 - ghost.speed, frameStep);
+            ghost.x += (ghost.tx - ghost.x) * ghostEase;
+            ghost.y += (ghost.ty - ghost.y) * ghostEase;
+            ghost.life -= frameStep;
+
+            if (ghost.life <= 0 || Math.hypot(ghost.tx - ghost.x, ghost.ty - ghost.y) < 30) {
+                resetGhost(ghost);
+            }
+
+            if (Math.random() < 0.06 * chanceStep) {
+                spawnParticles(ghost.x, ghost.y, 1);
+            }
+        });
+
+        const effectPoints = [smoothPointer, ...ghosts];
+
+        for (let i = particles.length - 1; i >= 0; i -= 1) {
+            const particle = particles[i];
+            particle.x += particle.vx * frameStep;
+            particle.y += particle.vy * frameStep;
+            particle.life -= 0.018 * frameStep;
+
+            if (particle.life <= 0) {
+                particles.splice(i, 1);
+                continue;
+            }
+
+            let strongestInfluence = 0;
+
+            effectPoints.forEach((point) => {
+                const dist = Math.hypot(particle.x - point.x, particle.y - point.y);
+                if (dist < 300) {
+                    const influence = 1 - dist / 300;
+                    strongestInfluence = Math.max(strongestInfluence, influence);
+                    drawLine(particle, point, influence * particle.life * 0.24, 1 + influence * 2);
+                }
+            });
+
+            for (let j = i - 1; j >= 0; j -= 1) {
+                const other = particles[j];
+                const distance = Math.hypot(particle.x - other.x, particle.y - other.y);
+
+                if (distance < 230) {
+                    drawLine(particle, other, (1 - distance / 230) * particle.life * 0.16, 0.8);
+                }
+            }
+
+            const drawSize = particle.size * (1 + strongestInfluence * 2);
+
+            ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * 0.55})`;
+            ctx.fillRect(
+                particle.x - drawSize * 0.08,
+                particle.y - drawSize * 0.08,
+                drawSize * 0.16,
+                drawSize * 0.16
+            );
+
+            ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * (0.18 + strongestInfluence * 0.22)})`;
+            ctx.fillText(particle.bit, particle.x + 8, particle.y - 8);
+        }
+
+        if (particles.length) {
+            frame = window.requestAnimationFrame(render);
+        } else {
+            lastFrameTime = 0;
+        }
+    }
+
+    function scheduleRender() {
+        if (!frame) frame = window.requestAnimationFrame(render);
+    }
+
+    window.addEventListener('pointermove', (event) => {
+        pointer.x = event.clientX;
+        pointer.y = event.clientY;
+
+        const now = performance.now();
+        if (now - lastSpawn > 90) {
+            spawnParticles(pointer.x, pointer.y, 2);
+            lastSpawn = now;
+        }
+
+        scheduleRender();
+    }, { passive: true });
+
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+
+    resizeCanvas();
+    ghosts.forEach((ghost) => resetGhost(ghost));
+
+    setInterval(() => {
+        ghosts.forEach((ghost) => {
+            if (Math.random() < 0.35) resetGhost(ghost);
+            spawnParticles(ghost.x, ghost.y, 1);
+        });
+        scheduleRender();
+    }, 900);
+}
+
+    initCursorTech();
+    window.setTimeout(initCursorTech, 300);
+    window.addEventListener("pointermove", initCursorTech, { once: true, passive: true });
+
+    initBinaryRunner();
+    detectLanguage();
+  </script>
+</body>
+</html>
