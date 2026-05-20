@@ -2296,12 +2296,16 @@
     const languageIndicator = document.querySelector(".language-indicator");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const coarsePointer = window.matchMedia("(hover: none), (pointer: coarse)");
-    const lowPowerDevice = (
-      coarsePointer.matches && (
-        (typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4) ||
-        (typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 6) ||
-        Boolean(navigator.connection && navigator.connection.saveData)
-      )
+    const ua = navigator.userAgent || "";
+    const isAndroid = /Android/i.test(ua);
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
+    const memoryLow = typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4;
+    const coresLow = typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 4;
+    const saveData = Boolean(navigator.connection && navigator.connection.saveData);
+    const lowPowerDevice = coarsePointer.matches && (
+      saveData ||
+      (isAndroid && (memoryLow || coresLow || !("deviceMemory" in navigator))) ||
+      (!isIOS && (memoryLow || coresLow))
     );
     let currentLanguage = "";
     let languageChangeTimer = 0;
