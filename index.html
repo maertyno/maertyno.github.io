@@ -1245,14 +1245,27 @@
       transition: none;
     }
 
-    body.android-lite .cursor-tech,
-    body.android-lite .ambient-tech {
+    body.android-lite .cursor-tech {
       display: none !important;
     }
 
-    body.android-lite::before,
+    body.android-lite::before {
+      opacity: 0.34;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.68), transparent 84%);
+    }
+
     body.android-lite::after {
-      display: none !important;
+      opacity: 0.12;
+    }
+
+    body.android-lite .ambient-tech {
+      display: block;
+      opacity: 0.28;
+    }
+
+    body.android-lite .ambient-tech::before,
+    body.android-lite .ambient-tech::after {
+      animation: none !important;
     }
 
     body.android-lite .topbar {
@@ -1262,7 +1275,7 @@
 
     body.android-lite .nav::after {
       transition: none;
-      opacity: 0;
+      opacity: 0.95;
     }
 
     body.android-lite .reveal,
@@ -2583,14 +2596,10 @@
       }
     }
 
-    if (!androidLite) {
-      window.addEventListener("scroll", scheduleNavScrollProgress, { passive: true });
-      window.addEventListener("resize", scheduleNavScrollProgress, { passive: true });
-      window.addEventListener("orientationchange", scheduleNavScrollProgress, { passive: true });
-      scheduleNavScrollProgress();
-    } else if (navProgressElement) {
-      navProgressElement.style.setProperty("--scroll-progress", "0");
-    }
+    window.addEventListener("scroll", scheduleNavScrollProgress, { passive: true });
+    window.addEventListener("resize", scheduleNavScrollProgress, { passive: true });
+    window.addEventListener("orientationchange", scheduleNavScrollProgress, { passive: true });
+    scheduleNavScrollProgress();
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
