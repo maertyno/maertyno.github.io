@@ -735,8 +735,8 @@
       padding: 24px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.045));
-      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.24);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+      box-shadow: 0 18px 52px rgba(0, 0, 0, 0.2);
       transition: transform 280ms ease, border-color 280ms ease, background 280ms ease, box-shadow 280ms ease;
     }
 
@@ -753,8 +753,8 @@
     .card:hover {
       transform: translateY(-3px);
       border-color: var(--line-strong);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.108), rgba(255, 255, 255, 0.048));
-      box-shadow: 0 18px 54px rgba(0, 0, 0, 0.24), 0 0 20px rgba(143, 247, 210, 0.035);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.132), rgba(255, 255, 255, 0.068));
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2), 0 0 20px rgba(143, 247, 210, 0.035);
     }
 
     .card:hover::before {
@@ -1781,7 +1781,55 @@
       }
 
       .services .card {
+        --glow-alpha: 0.075;
         text-align: center;
+        background:
+          radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 40%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.052)),
+          rgba(6, 9, 7, 0.7);
+        box-shadow: 0 12px 38px rgba(0, 0, 0, 0.15);
+      }
+
+      .services .card:hover,
+      .services .card:active {
+        background:
+          radial-gradient(circle at var(--x, 50%) var(--y, 0%), rgb(143 247 210 / var(--glow-alpha)), transparent 40%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.052)),
+          rgba(6, 9, 7, 0.7);
+        box-shadow: 0 12px 38px rgba(0, 0, 0, 0.15);
+      }
+
+      .services .card::before {
+        inset: auto;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, rgba(143, 247, 210, 0.1) 12%, rgba(143, 247, 210, 0.34) 46%, rgba(143, 247, 210, 0.12) 78%, transparent 100%);
+        opacity: 0.28;
+        box-shadow: 0 0 10px rgba(143, 247, 210, 0.08);
+      }
+
+      .services .card::after {
+        content: "";
+        position: absolute;
+        left: -34%;
+        top: 0;
+        width: 24%;
+        height: 2px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, transparent, rgba(143, 247, 210, 0.14), rgba(143, 247, 210, 0.54), rgba(143, 247, 210, 0.14), transparent);
+        box-shadow: 0 0 14px rgba(143, 247, 210, 0.16);
+        animation: neonSweep 14s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      .services .card:nth-child(2)::after {
+        animation-delay: 3.5s;
+      }
+
+      .services .card:nth-child(3)::after {
+        animation-delay: 7s;
       }
 
       .services .card .icon {
@@ -2385,11 +2433,13 @@
     const androidVersionMatch = ua.match(/Android\s+(\d+(?:\.\d+)?)/i);
     const androidVersion = androidVersionMatch ? Number(androidVersionMatch[1]) : 0;
     const oldAndroid = androidVersion > 0 && androidVersion < 12;
+    const samsungLightAndroid = /\bSM-A(?:0|1|2)\d{2}/i.test(ua);
     const androidLite = isAndroid && coarsePointer.matches && (
       saveData ||
       memoryLow ||
       coresLow ||
-      oldAndroid
+      oldAndroid ||
+      samsungLightAndroid
     );
     const lowPowerDevice = coarsePointer.matches && (
       saveData ||
