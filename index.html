@@ -1245,28 +1245,28 @@
       transition: none;
     }
 
-    body.mobile-lite .cursor-tech,
-    body.mobile-lite .ambient-tech {
+    body.android-lite .cursor-tech,
+    body.android-lite .ambient-tech {
       display: none !important;
     }
 
-    body.mobile-lite::before,
-    body.mobile-lite::after {
+    body.android-lite::before,
+    body.android-lite::after {
       display: none !important;
     }
 
-    body.mobile-lite .topbar {
+    body.android-lite .topbar {
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
     }
 
-    body.mobile-lite .nav::after {
+    body.android-lite .nav::after {
       transition: none;
       opacity: 0;
     }
 
-    body.mobile-lite .reveal,
-    body.mobile-lite .reveal.visible {
+    body.android-lite .reveal,
+    body.android-lite .reveal.visible {
       opacity: 1;
       transform: none;
       transition: none;
@@ -2384,7 +2384,6 @@
     const ua = navigator.userAgent || "";
     const isAndroid = /Android/i.test(ua);
     const isIOS = /iPhone|iPad|iPod/i.test(ua);
-    const mobileLite = coarsePointer.matches;
     const androidLite = isAndroid && coarsePointer.matches;
     const memoryLow = typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4;
     const coresLow = typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 4;
@@ -2399,9 +2398,6 @@
 
     if (lowPowerDevice) {
       document.body.classList.add("low-power");
-    }
-    if (mobileLite) {
-      document.body.classList.add("mobile-lite");
     }
     if (androidLite) {
       document.body.classList.add("android-lite");
@@ -2553,7 +2549,7 @@
       }
     }
 
-    if (!mobileLite) {
+    if (!androidLite) {
       window.addEventListener("scroll", scheduleNavScrollProgress, { passive: true });
       window.addEventListener("resize", scheduleNavScrollProgress, { passive: true });
       window.addEventListener("orientationchange", scheduleNavScrollProgress, { passive: true });
