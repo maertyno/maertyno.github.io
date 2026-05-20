@@ -1431,8 +1431,8 @@
 
       h1 {
         max-width: 100%;
-        font-size: clamp(30px, 8.6vw, 46px);
-        line-height: 1.1;
+        font-size: clamp(35px, 10.8vw, 50px);
+        line-height: 1.04;
         letter-spacing: -0.012em;
       }
 
@@ -1445,7 +1445,7 @@
       }
 
       .detail-tone {
-        font-size: 0.62em;
+        font-size: 0.58em;
         line-height: 1.2;
         margin-top: -0.12em;
         padding-bottom: 0.22em;
@@ -1615,8 +1615,8 @@
       }
 
       .hero {
-        grid-template-columns: minmax(0, 1fr) minmax(148px, 39vw);
-        column-gap: 10px;
+        grid-template-columns: minmax(0, 1fr) minmax(136px, 36vw);
+        column-gap: 9px;
       }
 
       .profile {
@@ -1625,7 +1625,8 @@
       }
 
       h1 {
-        font-size: clamp(28px, 8.2vw, 38px);
+        font-size: clamp(33px, 10.4vw, 44px);
+        line-height: 1.03;
       }
 
       .skill-rail {
@@ -1646,6 +1647,46 @@
         display: block;
         opacity: 0.24;
         mix-blend-mode: screen;
+      }
+
+      .rail-item,
+      .card,
+      .experience-item,
+      .contact-band {
+        --x: 50%;
+        --y: 0%;
+        --glow-alpha: 0.075;
+      }
+
+      .rail-item,
+      .card,
+      .experience-item,
+      .contact-band,
+      .rail-item:hover,
+      .card:hover,
+      .experience-item:hover,
+      .contact-band:hover {
+        transform: none;
+        box-shadow: var(--shadow);
+      }
+
+      .rail-item:hover,
+      .card:hover,
+      .experience-item:hover,
+      .contact-band:hover {
+        border-color: var(--line);
+      }
+
+      .card::before,
+      .experience-item::before,
+      .contact-band .button::before {
+        opacity: 0.22;
+      }
+
+      .card:hover::before,
+      .experience-item:hover::before,
+      .contact-band .button:hover::before {
+        opacity: 0.22;
       }
     }
   </style>
