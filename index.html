@@ -277,8 +277,7 @@
 
     .nav-links a:focus-visible,
     .lang-button:focus-visible,
-    .button:focus-visible,
-    .easter-trigger:focus-visible {
+    .button:focus-visible {
       outline: 2px solid rgba(143, 247, 210, 0.9);
       outline-offset: 3px;
       box-shadow: 0 0 0 6px rgba(143, 247, 210, 0.18);
@@ -607,7 +606,7 @@
     .portrait::after {
       content: "";
       position: absolute;
-      inset: 16px;
+      inset: 10px;
       z-index: 3;
       border: 1px solid rgba(255, 255, 255, 0.17);
       border-radius: 20px;
@@ -1145,65 +1144,6 @@
       font-size: 13px;
     }
 
-    .easter-egg {
-      padding: 0 0 42px;
-      text-align: center;
-    }
-
-    .easter-trigger {
-      appearance: none;
-      border: 0;
-      border-bottom: 1px solid rgba(143, 247, 210, 0.34);
-      padding: 0 0 4px;
-      color: rgba(247, 250, 246, 0.56);
-      background: transparent;
-      font: inherit;
-      font-size: 13px;
-      cursor: pointer;
-      transition: color 220ms ease, border-color 220ms ease, text-shadow 220ms ease;
-    }
-
-    .easter-trigger:hover {
-      color: rgba(184, 255, 232, 0.9);
-      border-color: rgba(184, 255, 232, 0.72);
-      text-shadow: 0 0 18px rgba(143, 247, 210, 0.26);
-    }
-
-    .binary-runner {
-      position: relative;
-      overflow: visible;
-      max-width: 640px;
-      margin: 12px auto 0;
-      text-align: left;
-    }
-
-    .binary-runner-head {
-      position: absolute;
-      top: 6px;
-      left: 0;
-      z-index: 1;
-      color: rgba(247, 250, 246, 0.5);
-      font-size: 12px;
-      font-weight: 720;
-      pointer-events: none;
-    }
-
-    .binary-runner-score {
-      color: rgba(184, 255, 232, 0.74);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    }
-
-    .binary-runner-canvas {
-      display: block;
-      width: 100%;
-      height: 128px;
-      cursor: pointer;
-      touch-action: manipulation;
-    }
-
-    .binary-runner-state {
-      display: none;
-    }
 
     .reveal {
       opacity: 0;
@@ -1366,22 +1306,23 @@
       }
 
       .topbar {
-        padding: 10px 0 6px;
+        padding: 8px 0 6px;
       }
 
       .nav {
         grid-template-columns: 1fr auto;
         min-height: auto;
-        padding: 8px;
-        border-radius: 20px;
+        padding: 7px 8px;
+        border-radius: 18px;
       }
 
       .nav-links {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, auto));
-        gap: 2px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
         overflow-x: auto;
         scrollbar-width: none;
+        padding-right: 2px;
       }
 
       .nav-links::-webkit-scrollbar {
@@ -1389,27 +1330,34 @@
       }
 
       .nav-links a {
-        padding: 10px 8px;
-        font-size: 12px;
+        padding: 9px 10px;
+        font-size: 11.5px;
         white-space: nowrap;
       }
 
       .language-switcher {
-        padding: 3px;
+        gap: 2px;
+        padding: 2px;
+      }
+
+      .language-indicator {
+        width: 33px;
+        height: 29px;
       }
 
       .lang-button {
-        width: 34px;
-        height: 30px;
+        width: 33px;
+        height: 29px;
+        font-size: 11px;
       }
 
       .hero {
         grid-template-columns: minmax(0, 1fr) minmax(154px, 39vw);
         min-height: auto;
-        gap: 18px;
+        gap: 14px;
         align-items: start;
         padding-top: 30px;
-        padding-bottom: 46px;
+        padding-bottom: 34px;
       }
 
       .profile {
@@ -1417,7 +1365,7 @@
         grid-row: 1;
         justify-self: end;
         width: min(200px, 39vw);
-        margin-top: 10px;
+        margin-top: 4px;
       }
 
       .hero-copy {
@@ -1437,11 +1385,19 @@
 
       .lead {
         max-width: 100%;
+        color: rgba(231, 239, 235, 0.86);
+        line-height: 1.62;
       }
 
       .skill-rail {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         max-width: 100%;
+        margin-top: 18px;
+      }
+
+      .rail-item span,
+      .card p {
+        color: rgba(232, 240, 236, 0.82);
       }
     }
 
@@ -1451,21 +1407,26 @@
       }
 
       .topbar {
-        padding: 8px 0 6px;
+        padding: 7px 0 5px;
       }
 
       .nav {
-        gap: 8px;
+        gap: 7px;
       }
 
       .language-switcher {
         gap: 2px;
       }
 
+      .language-indicator {
+        width: 31px;
+        height: 28px;
+      }
+
       .lang-button {
-        width: 36px;
-        height: 32px;
-        font-size: 12px;
+        width: 31px;
+        height: 28px;
+        font-size: 10.5px;
       }
 
       h1 {
@@ -1497,13 +1458,13 @@
       }
 
       .hero {
-        gap: 18px;
+        gap: 12px;
         padding-top: 26px;
-        padding-bottom: 42px;
+        padding-bottom: 30px;
       }
 
       .profile {
-        width: min(188px, 40vw);
+        width: min(178px, 38vw);
       }
 
       .portrait {
@@ -1516,19 +1477,19 @@
       }
 
       .portrait::after {
-        inset: 11px;
+        inset: 7px;
         border-radius: 14px;
       }
 
       .lead {
         margin-top: 10px;
-        font-size: 16px;
-        line-height: 1.68;
+        font-size: 15.5px;
+        line-height: 1.58;
       }
 
       .skill-rail {
         gap: 8px;
-        margin-top: 22px;
+        margin-top: 16px;
       }
 
       .rail-item {
@@ -1594,7 +1555,7 @@
       }
 
       section {
-        padding: 54px 0;
+        padding: 50px 0;
       }
 
       .contact-band {
@@ -1611,20 +1572,6 @@
         padding-bottom: 26px;
       }
 
-      .easter-egg {
-        padding-bottom: 34px;
-      }
-
-      .binary-runner {
-        margin-top: 16px;
-      }
-
-      .binary-runner-head {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 4px;
-      }
-
     }
 
     @media (max-width: 430px) {
@@ -1639,26 +1586,32 @@
       }
 
       .nav-links {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 4px;
         min-width: 0;
       }
 
       .nav-links a {
-        padding-inline: 7px;
-        padding-block: 9px;
-        font-size: 11px;
+        padding-inline: 6px;
+        padding-block: 8px;
+        font-size: 10.5px;
         text-align: center;
       }
 
       .language-switcher {
         justify-self: end;
         gap: 2px;
-        padding: 3px;
+        padding: 2px;
+      }
+
+      .language-indicator {
+        width: 30px;
+        height: 27px;
       }
 
       .lang-button {
-        width: 31px;
-        height: 29px;
+        width: 30px;
+        height: 27px;
+        font-size: 10px;
       }
 
       .hero {
@@ -1668,7 +1621,7 @@
 
       .profile {
         width: min(176px, 39vw);
-        margin-top: 8px;
+        margin-top: 2px;
       }
 
       h1 {
@@ -1906,16 +1859,6 @@
       <span>© <span id="year"></span> Martin Nagy</span>
     </footer>
 
-    <section class="easter-egg shell reveal" aria-label="Mini game" data-runner>
-      <button class="easter-trigger" type="button" data-game-trigger aria-expanded="false" aria-controls="binary-runner" data-i18n="game.prompt">Chceš si zahrať mini hru? Klikni sem.</button>
-      <div class="binary-runner" id="binary-runner" hidden>
-        <div class="binary-runner-head">
-          <span><span data-i18n="game.score">Skóre</span>: <span class="binary-runner-score" data-game-score>0</span></span>
-        </div>
-        <canvas class="binary-runner-canvas" data-game-canvas aria-label="Binary runner mini game"></canvas>
-        <div class="binary-runner-state" data-game-state aria-live="polite" data-i18n="game.ready">Klikni a preskakuj vírusy, bugy, výpadky aj update chaos.</div>
-      </div>
-    </section>
   </div>
 
   <script>
@@ -2089,11 +2032,6 @@
       "experience.fixservis.skill3": "Opravy podľa štandardov",
       "experience.fixservis.skill4": "Kontrola kvality",
       "contact.title": "Nápad, problém<br>alebo technická výzva?<br><span class=\"contact-keep\">Môžeme sa na to pozrieť.</span>",
-      "game.prompt": "Chceš si zahrať mini hru? Klikni sem.",
-      "game.score": "Skóre",
-      "game.ready": "Klikni a preskakuj vírusy, bugy, výpadky aj update chaos.",
-      "game.running": "Technik v teréne.",
-      "game.over": "Koniec hry. Klikni pre reštart.",
       "footer.note": ""
     });
 
@@ -2173,11 +2111,6 @@
       "experience.fixservis.skill3": "Opravy podle standardů",
       "experience.fixservis.skill4": "Kontrola kvality",
       "contact.title": "Nápad, problém<br>nebo technická výzva?<br><span class=\"contact-keep\">Můžeme se na to podívat.</span>",
-      "game.prompt": "Chceš si zahrát mini hru? Klikni sem.",
-      "game.score": "Skóre",
-      "game.ready": "Klikni a přeskakuj viry, bugy, výpadky i update chaos.",
-      "game.running": "Technik v terénu.",
-      "game.over": "Konec hry. Klikni pro restart.",
       "footer.note": ""
     });
 
@@ -2258,11 +2191,6 @@
       "experience.fixservis.skill3": "Repairs by standards",
       "experience.fixservis.skill4": "Quality control",
       "contact.title": "An idea, problem,<br>or a technical challenge?<br><span class=\"contact-keep\">We can take a look.</span>",
-      "game.prompt": "Want to play a mini game? Click here.",
-      "game.score": "Score",
-      "game.ready": "Click and jump over viruses, bugs, outages, and update chaos.",
-      "game.running": "Technician on the run.",
-      "game.over": "Game over. Click to restart.",
       "footer.note": ""
     });
 
@@ -2434,581 +2362,6 @@
           card.style.setProperty("--x", `${((event.clientX - rect.left) / rect.width) * 100}%`);
           card.style.setProperty("--y", `${((event.clientY - rect.top) / rect.height) * 100}%`);
         });
-      });
-    }
-
-    function initBinaryRunner() {
-      const shell = document.querySelector("[data-runner]");
-      if (!shell) return;
-
-      const trigger = shell.querySelector("[data-game-trigger]");
-      const panel = shell.querySelector("#binary-runner");
-      const canvas = shell.querySelector("[data-game-canvas]");
-      const scoreNode = shell.querySelector("[data-game-score]");
-      const stateNode = shell.querySelector("[data-game-state]");
-      if (!trigger || !panel || !canvas || !scoreNode || !stateNode) return;
-
-      const ctx = canvas.getContext("2d");
-      const player = {
-        x: 48,
-        y: 0,
-        width: 36,
-        height: 44,
-        velocity: 0,
-        grounded: true
-      };
-
-      let width = 0;
-      let height = 0;
-      let ground = 0;
-      let dpr = 1;
-      let frame = 0;
-      let lastFrameTime = 0;
-      let revealed = false;
-      let running = false;
-      let gameOver = false;
-      let score = 0;
-      let best = 0;
-      let speed = 215;
-      let spawnTimer = 1.1;
-      let obstacles = [];
-      let bits = [];
-      let obstacleBag = [];
-      let lastObstacleKind = "";
-
-      const obstacleTypes = [
-        { kind: "virus", width: 32, height: 32 },
-        { kind: "bug", width: 42, height: 28 },
-        { kind: "wifi", width: 36, height: 32 },
-        { kind: "update", width: 38, height: 36 },
-        { kind: "bsod", width: 44, height: 32 }
-      ];
-
-      function gameCopy(key) {
-        const language = currentLanguage || html.lang || browserLanguageFallback();
-        return translations[language]?.[key] || translations.en[key] || "";
-      }
-
-      function setState(key) {
-        stateNode.textContent = gameCopy(key);
-      }
-
-      function resizeGame() {
-        const rect = canvas.getBoundingClientRect();
-        width = Math.max(280, rect.width || 320);
-        height = Math.max(126, rect.height || 142);
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = Math.floor(width * dpr);
-        canvas.height = Math.floor(height * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        ground = height - 30;
-
-        if (player.grounded || player.y <= 0) {
-          player.y = ground - player.height;
-        }
-      }
-
-      function resetGame() {
-        resizeGame();
-        obstacles = [];
-        bits = [];
-        obstacleBag = [];
-        lastObstacleKind = "";
-        score = 0;
-        speed = width < 460 ? 188 : 215;
-        spawnTimer = 0.9;
-        gameOver = false;
-        running = true;
-        lastFrameTime = 0;
-        player.y = ground - player.height;
-        player.velocity = 0;
-        player.grounded = true;
-        scoreNode.textContent = "0";
-        setState("game.running");
-        scheduleGame();
-      }
-
-      function nextObstacleType() {
-        if (!obstacleBag.length) {
-          obstacleBag = [...obstacleTypes].sort(() => Math.random() - 0.5);
-
-          if (obstacleBag[0]?.kind === lastObstacleKind) {
-            obstacleBag.push(obstacleBag.shift());
-          }
-        }
-
-        const next = obstacleBag.shift();
-        lastObstacleKind = next.kind;
-        return next;
-      }
-
-      function spawnObstacle() {
-        const obstacle = nextObstacleType();
-        obstacles.push({
-          x: width + 12,
-          y: ground - obstacle.height,
-          width: obstacle.width,
-          height: obstacle.height,
-          kind: obstacle.kind
-        });
-      }
-
-      function spawnBit() {
-        bits.push({
-          x: width + Math.random() * 80,
-          y: 18 + Math.random() * (height * 0.42),
-          speed: 18 + Math.random() * 26,
-          value: Math.random() > 0.5 ? "1" : "0",
-          alpha: 0.16 + Math.random() * 0.18
-        });
-
-        if (bits.length > 22) bits.shift();
-      }
-
-      function jump() {
-        if (!running || gameOver || !player.grounded) return;
-        player.velocity = width < 460 ? -610 : -665;
-        player.grounded = false;
-      }
-
-      function overlap(a, b) {
-        return (
-          a.x < b.x + b.width &&
-          a.x + a.width > b.x &&
-          a.y < b.y + b.height &&
-          a.y + a.height > b.y
-        );
-      }
-
-      function updateGame(seconds) {
-        score += seconds * 14;
-        speed = Math.min(width < 460 ? 260 : 315, speed + seconds * 5.2);
-        spawnTimer -= seconds;
-
-        if (spawnTimer <= 0) {
-          spawnObstacle();
-          spawnTimer = Math.max(0.78, 1.28 - score / 260) + Math.random() * 0.42;
-        }
-
-        if (Math.random() < seconds * 4.2) spawnBit();
-
-        player.velocity += 1500 * seconds;
-        player.y += player.velocity * seconds;
-
-        if (player.y >= ground - player.height) {
-          player.y = ground - player.height;
-          player.velocity = 0;
-          player.grounded = true;
-        }
-
-        obstacles.forEach((obstacle) => {
-          obstacle.x -= speed * seconds;
-        });
-
-        bits.forEach((bit) => {
-          bit.x -= bit.speed * seconds;
-        });
-
-        obstacles = obstacles.filter((obstacle) => obstacle.x + obstacle.width > -20);
-        bits = bits.filter((bit) => bit.x > -20);
-
-        const playerBox = {
-          x: player.x + 7,
-          y: player.y + 5,
-          width: player.width - 13,
-          height: player.height - 7
-        };
-
-        if (obstacles.some((obstacle) => overlap(playerBox, obstacle))) {
-          running = false;
-          gameOver = true;
-          best = Math.max(best, Math.floor(score));
-          setState("game.over");
-        }
-
-        scoreNode.textContent = `${Math.floor(score)}`;
-      }
-
-      function drawRoundedRect(x, y, rectWidth, rectHeight, radius) {
-        if (ctx.roundRect) {
-          ctx.beginPath();
-          ctx.roundRect(x, y, rectWidth, rectHeight, radius);
-          return;
-        }
-
-        ctx.beginPath();
-        ctx.rect(x, y, rectWidth, rectHeight);
-      }
-
-      function drawVirus(obstacle) {
-        const cx = obstacle.x + obstacle.width / 2;
-        const cy = obstacle.y + obstacle.height / 2;
-        const radius = 10;
-
-        ctx.strokeStyle = "rgba(255, 96, 96, 0.7)";
-        ctx.lineWidth = 1.4;
-        for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 4) {
-          ctx.beginPath();
-          ctx.moveTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
-          ctx.lineTo(cx + Math.cos(angle) * (radius + 6), cy + Math.sin(angle) * (radius + 6));
-          ctx.stroke();
-        }
-
-        ctx.beginPath();
-        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255, 68, 68, 0.28)";
-        ctx.fill();
-        ctx.strokeStyle = "rgba(255, 112, 112, 0.82)";
-        ctx.stroke();
-        ctx.fillStyle = "rgba(255, 220, 220, 0.82)";
-        ctx.fillRect(cx - 4, cy - 2, 3, 3);
-        ctx.fillRect(cx + 3, cy + 2, 3, 3);
-      }
-
-      function drawBug(obstacle) {
-        const x = obstacle.x;
-        const y = obstacle.y;
-        const cx = x + obstacle.width / 2;
-        const bodyY = y + 15;
-
-        ctx.strokeStyle = "rgba(255, 97, 97, 0.72)";
-        ctx.lineWidth = 1.4;
-
-        for (let index = 0; index < 3; index += 1) {
-          const offset = -8 + index * 8;
-          ctx.beginPath();
-          ctx.moveTo(cx - 9, bodyY + offset * 0.18);
-          ctx.lineTo(cx - 17, bodyY + offset - 2);
-          ctx.lineTo(cx - 21, bodyY + offset + 3);
-          ctx.moveTo(cx + 9, bodyY + offset * 0.18);
-          ctx.lineTo(cx + 17, bodyY + offset - 2);
-          ctx.lineTo(cx + 21, bodyY + offset + 3);
-          ctx.stroke();
-        }
-
-        ctx.beginPath();
-        ctx.ellipse(cx, bodyY, 12, 9, 0, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(45, 11, 15, 0.94)";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.ellipse(cx, y + 6, 7, 5, 0, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(35, 8, 11, 0.98)";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(cx - 4, y + 3);
-        ctx.lineTo(cx - 10, y - 3);
-        ctx.moveTo(cx + 4, y + 3);
-        ctx.lineTo(cx + 10, y - 3);
-        ctx.stroke();
-
-        ctx.strokeStyle = "rgba(255, 130, 130, 0.5)";
-        ctx.beginPath();
-        ctx.moveTo(cx, bodyY - 7);
-        ctx.lineTo(cx, bodyY + 7);
-        ctx.moveTo(cx - 7, bodyY - 5);
-        ctx.lineTo(cx + 7, bodyY + 5);
-        ctx.moveTo(cx + 7, bodyY - 5);
-        ctx.lineTo(cx - 7, bodyY + 5);
-        ctx.stroke();
-
-        ctx.fillStyle = "rgba(255, 232, 232, 0.92)";
-        ctx.fillRect(cx - 3, y + 5, 2, 2);
-        ctx.fillRect(cx + 2, y + 5, 2, 2);
-      }
-
-      function drawNoWifi(obstacle) {
-        const cx = obstacle.x + obstacle.width / 2;
-        const cy = obstacle.y + obstacle.height - 5;
-
-        ctx.strokeStyle = "rgba(247, 250, 246, 0.7)";
-        ctx.lineWidth = 1.7;
-        for (let radius = 8; radius <= 22; radius += 7) {
-          ctx.beginPath();
-          ctx.arc(cx, cy, radius, Math.PI * 1.15, Math.PI * 1.85);
-          ctx.stroke();
-        }
-
-        ctx.fillStyle = "rgba(247, 250, 246, 0.78)";
-        ctx.beginPath();
-        ctx.arc(cx, cy, 2.6, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.strokeStyle = "rgba(255, 96, 96, 0.84)";
-        ctx.lineWidth = 2.2;
-        ctx.beginPath();
-        ctx.moveTo(obstacle.x + 5, obstacle.y + 4);
-        ctx.lineTo(obstacle.x + obstacle.width - 5, obstacle.y + obstacle.height - 3);
-        ctx.stroke();
-      }
-
-      function drawUpdate(obstacle) {
-        const x = obstacle.x + 2;
-        const y = obstacle.y + 2;
-        const size = obstacle.width - 4;
-
-        drawRoundedRect(x, y, size, size, 5);
-        ctx.fillStyle = "rgba(58, 140, 255, 0.34)";
-        ctx.fill();
-        ctx.strokeStyle = "rgba(103, 176, 255, 0.86)";
-        ctx.stroke();
-
-        ctx.fillStyle = "rgba(224, 241, 255, 0.78)";
-        ctx.fillRect(x + 7, y + 7, 7, 7);
-        ctx.fillRect(x + 16, y + 7, 7, 7);
-        ctx.fillRect(x + 7, y + 16, 7, 7);
-        ctx.fillRect(x + 16, y + 16, 7, 7);
-        ctx.fillStyle = "rgba(103, 176, 255, 0.92)";
-        ctx.font = "8px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-        ctx.fillText("UPD", x + 7, y + size - 4);
-      }
-
-      function drawBsod(obstacle) {
-        const x = obstacle.x;
-        const y = obstacle.y;
-
-        drawRoundedRect(x, y, obstacle.width, obstacle.height, 4);
-        ctx.fillStyle = "rgba(35, 92, 226, 0.72)";
-        ctx.fill();
-        ctx.strokeStyle = "rgba(132, 185, 255, 0.9)";
-        ctx.stroke();
-
-        ctx.fillStyle = "rgba(235, 246, 255, 0.9)";
-        ctx.font = "700 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-        ctx.fillText(":(", x + 7, y + 13);
-        ctx.font = "7px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-        ctx.fillText("BSOD", x + 7, y + 24);
-      }
-
-      function drawObstacle(obstacle) {
-        if (obstacle.kind === "virus") {
-          drawVirus(obstacle);
-        } else if (obstacle.kind === "bug") {
-          drawBug(obstacle);
-        } else if (obstacle.kind === "wifi") {
-          drawNoWifi(obstacle);
-        } else if (obstacle.kind === "update") {
-          drawUpdate(obstacle);
-        } else {
-          drawBsod(obstacle);
-        }
-      }
-
-      function drawTechnician() {
-        const stride = player.grounded && running ? Math.sin(score * 5.1) : -0.55;
-        const bob = player.grounded && running ? Math.abs(Math.sin(score * 5.1)) * 1.4 : 0;
-        const x = player.x;
-        const y = player.y;
-
-        ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
-        ctx.beginPath();
-        ctx.ellipse(x + 20, ground + 4, 19, 4, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.save();
-        ctx.translate(x, y - bob);
-
-        ctx.lineCap = "round";
-        ctx.lineJoin = "round";
-
-        ctx.strokeStyle = "rgba(31, 46, 42, 0.96)";
-        ctx.lineWidth = 4.2;
-        ctx.beginPath();
-        ctx.moveTo(18, 31);
-        ctx.lineTo(12 - stride * 3, 42);
-        ctx.moveTo(24, 31);
-        ctx.lineTo(30 + stride * 3, 42);
-        ctx.stroke();
-
-        ctx.strokeStyle = "rgba(184, 255, 232, 0.72)";
-        ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        ctx.moveTo(12 - stride * 3, 42);
-        ctx.lineTo(7 - stride * 3, 42);
-        ctx.moveTo(30 + stride * 3, 42);
-        ctx.lineTo(35 + stride * 3, 42);
-        ctx.stroke();
-
-        drawRoundedRect(12, 18, 20, 18, 6);
-        ctx.fillStyle = "rgba(13, 28, 23, 0.98)";
-        ctx.fill();
-        ctx.strokeStyle = "rgba(184, 255, 232, 0.78)";
-        ctx.stroke();
-
-        ctx.fillStyle = "rgba(143, 247, 210, 0.18)";
-        ctx.fillRect(21, 21, 8, 12);
-        ctx.fillStyle = "rgba(247, 250, 246, 0.9)";
-        ctx.font = "7px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-        ctx.fillText("IT", 16, 29);
-
-        ctx.strokeStyle = "rgba(184, 255, 232, 0.62)";
-        ctx.lineWidth = 2.4;
-        ctx.beginPath();
-        ctx.moveTo(14, 23);
-        ctx.lineTo(8, 30 + stride * 1.2);
-        ctx.moveTo(31, 23);
-        ctx.lineTo(35, 30 - stride * 1.2);
-        ctx.stroke();
-
-        drawRoundedRect(30, 29 - stride * 1.2, 13, 10, 2);
-        ctx.fillStyle = "rgba(255, 212, 138, 0.24)";
-        ctx.fill();
-        ctx.strokeStyle = "rgba(255, 212, 138, 0.82)";
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(34, 29 - stride * 1.2);
-        ctx.lineTo(39, 29 - stride * 1.2);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(22, 10, 8, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(238, 198, 168, 0.96)";
-        ctx.fill();
-        ctx.strokeStyle = "rgba(247, 250, 246, 0.42)";
-        ctx.lineWidth = 1;
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(31, 10, 2.5, -Math.PI / 2, Math.PI / 2);
-        ctx.fillStyle = "rgba(238, 198, 168, 0.85)";
-        ctx.fill();
-
-        ctx.fillStyle = "rgba(8, 10, 9, 0.96)";
-        ctx.beginPath();
-        ctx.ellipse(22, 5, 9, 5, -0.08, Math.PI, Math.PI * 2);
-        ctx.fill();
-        drawRoundedRect(13, 5, 13, 4, 2);
-        ctx.fill();
-
-        ctx.fillStyle = "rgba(8, 10, 9, 0.78)";
-        ctx.fillRect(19, 10, 2, 2);
-        ctx.fillRect(26, 10, 2, 2);
-
-        ctx.strokeStyle = "rgba(85, 48, 39, 0.6)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(22, 14);
-        ctx.lineTo(25, 14);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(28, 12);
-        ctx.lineTo(36, 10);
-        ctx.lineTo(39, 12);
-        ctx.strokeStyle = "rgba(143, 247, 210, 0.52)";
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-
-        ctx.restore();
-      }
-
-      function drawGame() {
-        ctx.clearRect(0, 0, width, height);
-
-        ctx.strokeStyle = "rgba(184, 255, 232, 0.28)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(0, ground + 0.5);
-        ctx.lineTo(width, ground + 0.5);
-        ctx.stroke();
-
-        bits.forEach((bit) => {
-          ctx.fillStyle = `rgba(184, 255, 232, ${bit.alpha})`;
-          ctx.font = "12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-          ctx.fillText(bit.value, bit.x, bit.y);
-        });
-
-        obstacles.forEach(drawObstacle);
-        drawTechnician();
-
-        if (gameOver) {
-          ctx.fillStyle = "rgba(247, 250, 246, 0.9)";
-          ctx.font = "700 14px ui-sans-serif, system-ui, sans-serif";
-          ctx.textAlign = "center";
-          ctx.fillText(gameCopy("game.over"), width / 2, height / 2 - 5);
-          ctx.fillStyle = "rgba(184, 255, 232, 0.72)";
-          ctx.font = "11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-          ctx.fillText(`${gameCopy("game.score")}: ${Math.floor(score)}  BEST: ${best}`, width / 2, height / 2 + 20);
-          ctx.textAlign = "left";
-        }
-      }
-
-      function gameLoop(timestamp = performance.now()) {
-        frame = 0;
-        const elapsed = lastFrameTime ? timestamp - lastFrameTime : 16.67;
-        const seconds = Math.min(elapsed / 1000, 0.05);
-        lastFrameTime = timestamp;
-
-        if (running && !gameOver) {
-          updateGame(seconds);
-        }
-
-        drawGame();
-
-        if (running && !gameOver) {
-          frame = window.requestAnimationFrame(gameLoop);
-        } else {
-          lastFrameTime = 0;
-        }
-      }
-
-      function scheduleGame() {
-        if (!frame) frame = window.requestAnimationFrame(gameLoop);
-      }
-
-      function revealGame() {
-        if (!revealed) {
-          revealed = true;
-          panel.hidden = false;
-          trigger.setAttribute("aria-expanded", "true");
-          window.requestAnimationFrame(() => {
-            panel.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "end" });
-          });
-        }
-
-        resetGame();
-      }
-
-      function handleGamePress(event) {
-        event.preventDefault();
-        if (!revealed || gameOver) {
-          revealGame();
-          return;
-        }
-
-        jump();
-      }
-
-      trigger.addEventListener("click", handleGamePress);
-      canvas.addEventListener("pointerdown", handleGamePress);
-      window.addEventListener("resize", () => {
-        if (!revealed) return;
-        resizeGame();
-        drawGame();
-      }, { passive: true });
-
-      window.addEventListener("keydown", (event) => {
-        if (!revealed || (event.code !== "Space" && event.code !== "ArrowUp")) return;
-        event.preventDefault();
-        if (gameOver) {
-          revealGame();
-        } else {
-          jump();
-        }
-      });
-
-      window.addEventListener("site-language-applied", () => {
-        if (!revealed) {
-          setState("game.ready");
-          return;
-        }
-
-        setState(gameOver ? "game.over" : "game.running");
-        drawGame();
       });
     }
 
@@ -3472,7 +2825,6 @@
     window.setTimeout(initCursorTech, 300);
     window.addEventListener("pointermove", initCursorTech, { once: true, passive: true });
 
-    initBinaryRunner();
     detectLanguage();
   </script>
 </body>
