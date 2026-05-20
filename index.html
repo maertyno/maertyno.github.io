@@ -54,8 +54,9 @@
       color: var(--text);
       background:
         radial-gradient(circle at 16% 12%, rgba(143, 247, 210, 0.24), transparent 38%),
-        radial-gradient(circle at 84% 26%, rgba(143, 247, 210, 0.12), transparent 42%),
-        linear-gradient(135deg, rgba(143, 247, 210, 0.16), transparent 34%),
+        radial-gradient(circle at 84% 26%, rgba(143, 247, 210, 0.09), transparent 42%),
+        radial-gradient(circle at 94% 92%, rgba(88, 146, 255, 0.18), transparent 44%),
+        linear-gradient(135deg, rgba(143, 247, 210, 0.13), transparent 34%),
         linear-gradient(315deg, rgba(135, 168, 255, 0.1), transparent 40%),
         var(--bg);
       overflow-x: hidden;
@@ -288,6 +289,8 @@
       justify-self: end;
       display: flex;
       align-items: center;
+      width: max-content;
+      flex-shrink: 0;
       gap: 4px;
       padding: 4px;
       border: 1px solid var(--line);
@@ -324,6 +327,10 @@
     .lang-button {
       position: relative;
       z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
       width: 42px;
       height: 34px;
       font-weight: 800;
@@ -1318,21 +1325,22 @@
     @media (max-width: 700px) {
       body {
         background:
-          radial-gradient(circle at 14% 8%, rgba(143, 247, 210, 0.28), transparent 34%),
-          radial-gradient(circle at 88% 22%, rgba(143, 247, 210, 0.14), transparent 38%),
-          radial-gradient(circle at 92% 30%, rgba(135, 168, 255, 0.14), transparent 34%),
-          linear-gradient(135deg, rgba(143, 247, 210, 0.14), transparent 38%),
+          radial-gradient(circle at 16% 8%, rgba(143, 247, 210, 0.2), transparent 32%),
+          radial-gradient(circle at 82% 18%, rgba(143, 247, 210, 0.08), transparent 34%),
+          radial-gradient(circle at 96% 86%, rgba(88, 146, 255, 0.14), transparent 42%),
+          linear-gradient(180deg, rgba(143, 247, 210, 0.08), rgba(11, 18, 15, 0.18) 46%, transparent 82%),
+          linear-gradient(135deg, rgba(143, 247, 210, 0.075), transparent 40%),
           var(--bg);
       }
 
       body::before {
-        opacity: 0.46;
+        opacity: 0.38;
         background-size: 48px 48px, 48px 48px, 220px 220px;
-        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.82), transparent 88%);
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.72), transparent 82%);
       }
 
       .ambient-tech {
-        opacity: 0.72;
+        opacity: 0.48;
       }
 
       .ambient-tech::before,
@@ -1396,7 +1404,7 @@
       }
 
       .hero {
-        grid-template-columns: minmax(0, 1fr) minmax(164px, 42vw);
+        grid-template-columns: minmax(0, 1fr) minmax(154px, 39vw);
         min-height: auto;
         gap: 18px;
         align-items: start;
@@ -1408,7 +1416,8 @@
         grid-column: 2;
         grid-row: 1;
         justify-self: end;
-        width: min(220px, 42vw);
+        width: min(200px, 39vw);
+        margin-top: 10px;
       }
 
       .hero-copy {
@@ -1494,7 +1503,7 @@
       }
 
       .profile {
-        width: min(212px, 46vw);
+        width: min(188px, 40vw);
       }
 
       .portrait {
@@ -1624,29 +1633,42 @@
       }
 
       .nav {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr) auto;
         gap: 6px;
+        align-items: center;
       }
 
       .nav-links {
         grid-template-columns: repeat(4, minmax(0, 1fr));
+        min-width: 0;
       }
 
       .nav-links a {
+        padding-inline: 7px;
+        padding-block: 9px;
+        font-size: 11px;
         text-align: center;
       }
 
       .language-switcher {
-        justify-self: start;
+        justify-self: end;
+        gap: 2px;
+        padding: 3px;
+      }
+
+      .lang-button {
+        width: 31px;
+        height: 29px;
       }
 
       .hero {
-        grid-template-columns: minmax(0, 1fr) minmax(150px, 44vw);
-        column-gap: 12px;
+        grid-template-columns: minmax(0, 1fr) minmax(148px, 39vw);
+        column-gap: 10px;
       }
 
       .profile {
-        width: min(190px, 44vw);
+        width: min(176px, 39vw);
+        margin-top: 8px;
       }
 
       h1 {
@@ -1659,16 +1681,6 @@
 
       .rail-item {
         min-height: 70px;
-      }
-
-      .nav-links a {
-        padding-inline: 7px;
-        font-size: 11px;
-      }
-
-      .lang-button {
-        width: 31px;
-        height: 29px;
       }
 
       h2 {
@@ -2393,6 +2405,12 @@
     });
 
     window.addEventListener("resize", updateLanguageIndicator, { passive: true });
+    window.addEventListener("orientationchange", () => {
+      window.setTimeout(updateLanguageIndicator, 120);
+    }, { passive: true });
+    if (document.fonts && typeof document.fonts.ready?.then === "function") {
+      document.fonts.ready.then(updateLanguageIndicator).catch(() => {});
+    }
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -3249,11 +3267,14 @@
     }
 
     function initCursorTech() {
+    if (window.__cursorTechEngineStarted) return;
     if (reducedMotion.matches) return;
     if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+        window.__cursorTechEngineStarted = true;
         initMobileAmbientTech();
         return;
     }
+    window.__cursorTechEngineStarted = true;
 
     const canvas = document.getElementById('cursor-canvas');
     if (!canvas) return;
@@ -3262,7 +3283,7 @@
     const particles = [];
     const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
     const smoothPointer = { x: pointer.x, y: pointer.y };
-    const ghostCount = 4;
+    const ghostCount = 3;
     const ghosts = Array.from({ length: ghostCount }, () => ({
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
@@ -3272,7 +3293,7 @@
         speed: 0.006 + Math.random() * 0.01
     }));
 
-    const maxParticles = 34;
+    const maxParticles = 26;
     let dpr = 1;
     let width = 0;
     let height = 0;
@@ -3328,6 +3349,10 @@
 
     function render(timestamp = performance.now()) {
         frame = 0;
+        if (lastFrameTime && timestamp - lastFrameTime < 22) {
+            frame = window.requestAnimationFrame(render);
+            return;
+        }
         const elapsed = lastFrameTime ? timestamp - lastFrameTime : 16.67;
         const frameStep = Math.min(elapsed / 16.67, 2.5);
         const chanceStep = Math.min(frameStep, 2);
@@ -3370,16 +3395,18 @@
 
             let strongestInfluence = 0;
 
-            effectPoints.forEach((point) => {
+            for (let p = 0; p < effectPoints.length; p += 1) {
+                const point = effectPoints[p];
                 const dist = Math.hypot(particle.x - point.x, particle.y - point.y);
                 if (dist < 300) {
                     const influence = 1 - dist / 300;
                     strongestInfluence = Math.max(strongestInfluence, influence);
                     drawLine(particle, point, influence * particle.life * 0.24, 1 + influence * 2);
                 }
-            });
+            }
 
-            for (let j = i - 1; j >= 0; j -= 1) {
+            const minJ = Math.max(0, i - 12);
+            for (let j = i - 1; j >= minJ; j -= 1) {
                 const other = particles[j];
                 const distance = Math.hypot(particle.x - other.x, particle.y - other.y);
 
@@ -3418,8 +3445,8 @@
         pointer.y = event.clientY;
 
         const now = performance.now();
-        if (now - lastSpawn > 90) {
-            spawnParticles(pointer.x, pointer.y, 2);
+        if (now - lastSpawn > 120) {
+            spawnParticles(pointer.x, pointer.y, 1);
             lastSpawn = now;
         }
 
@@ -3432,12 +3459,13 @@
     ghosts.forEach((ghost) => resetGhost(ghost));
 
     setInterval(() => {
+        if (document.visibilityState !== "visible") return;
         ghosts.forEach((ghost) => {
-            if (Math.random() < 0.35) resetGhost(ghost);
-            spawnParticles(ghost.x, ghost.y, 1);
+            if (Math.random() < 0.28) resetGhost(ghost);
+            if (particles.length < maxParticles - 2) spawnParticles(ghost.x, ghost.y, 1);
         });
         scheduleRender();
-    }, 900);
+    }, 1400);
 }
 
     initCursorTech();
