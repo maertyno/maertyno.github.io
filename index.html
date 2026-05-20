@@ -1049,13 +1049,21 @@
       }
 
       .experience-skills {
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        justify-content: stretch;
       }
 
       .experience-skills span {
-        flex: 1 1 calc(25% - 8px);
-        max-width: 260px;
+        width: 100%;
         justify-content: center;
+        min-height: 34px;
+        padding: 6px 8px;
+      }
+
+      .experience-skills b {
+        white-space: nowrap;
+        font-size: 11px;
       }
     }
 
@@ -1699,6 +1707,20 @@
     }
 
     @media (hover: none), (pointer: coarse) {
+      .skill-rail .rail-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .skill-rail .rail-item strong,
+      .skill-rail .rail-item span {
+        width: 100%;
+        text-align: center;
+      }
+
       .skill-rail .rail-item,
       .skill-rail .rail-item strong,
       .skill-rail .rail-item span {
