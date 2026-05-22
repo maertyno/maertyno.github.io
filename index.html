@@ -1319,6 +1319,22 @@
       display: none !important;
     }
 
+    body.desktop-effects .cursor-tech {
+      display: block !important;
+      opacity: 0.42 !important;
+      mix-blend-mode: normal !important;
+    }
+
+    body.desktop-effects .ambient-tech {
+      display: block !important;
+      opacity: 0.72 !important;
+    }
+
+    body.desktop-effects .ambient-tech::before,
+    body.desktop-effects .ambient-tech::after {
+      animation: mobileSignalDrift 9s ease-in-out infinite;
+    }
+
     body.android-lite::before {
       opacity: 0.34;
       mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.68), transparent 84%);
@@ -2578,6 +2594,7 @@
     }
 
     function shouldUseTouchOnlyExperience() {
+      if (window.__forceDesktopEffects) return false;
       if (hasDesktopPointer()) return false;
       if (hasDesktopViewport()) return false;
 
@@ -2601,6 +2618,16 @@
 
     let currentLanguage = "";
     let languageChangeTimer = 0;
+
+    function forceDesktopEffects() {
+      window.__forceDesktopEffects = true;
+      document.body.classList.remove("low-power", "android-lite");
+      document.body.classList.add("desktop-effects");
+      window.__deviceExperience.forcedDesktop = true;
+      if (window.__cursorTechEnabled === "mobile") {
+        window.__cursorTechEngineStarted = false;
+      }
+    }
 
     if (lowPowerDevice) {
       document.body.classList.add("low-power");
@@ -3731,6 +3758,11 @@
     }
 
     function renderMobileAmbient(timestamp = performance.now()) {
+        if (window.__forceDesktopEffects) {
+            frame = 0;
+            return;
+        }
+
         frame = 0;
         if (lastFrameTime && timestamp - lastFrameTime < 33) {
             frame = window.requestAnimationFrame(renderMobileAmbient);
@@ -4005,11 +4037,22 @@
 
     initBinaryRunner();
 
+    function handleDesktopPointerWake(event) {
+      if (event.pointerType && event.pointerType !== "mouse") return;
+      forceDesktopEffects();
+      initCursorTech();
+    }
+
     if (!lowPowerDevice) {
       initCursorTech();
       window.setTimeout(initCursorTech, 300);
-      window.addEventListener("pointermove", initCursorTech, { once: true, passive: true });
     }
+
+    window.addEventListener("pointermove", handleDesktopPointerWake, { once: true, passive: true });
+    window.addEventListener("mousemove", () => {
+      forceDesktopEffects();
+      initCursorTech();
+    }, { once: true, passive: true });
 
     detectLanguage();
   </script>
