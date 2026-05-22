@@ -1411,6 +1411,20 @@
       .ambient-tech {
         opacity: 0.18;
       }
+
+      body.desktop-effects .cursor-tech {
+        opacity: 0.42 !important;
+      }
+
+      body.desktop-effects .ambient-tech {
+        opacity: 0.72 !important;
+      }
+
+      body.desktop-effects .ambient-tech::before,
+      body.desktop-effects .ambient-tech::after {
+        animation-duration: 9s !important;
+        animation-iteration-count: infinite !important;
+      }
     }
 
     @media (max-width: 900px) {
@@ -2629,6 +2643,10 @@
       }
     }
 
+    if (hasDesktopViewport()) {
+      forceDesktopEffects();
+    }
+
     if (lowPowerDevice) {
       document.body.classList.add("low-power");
     }
@@ -3835,7 +3853,7 @@
 
     function initCursorTech() {
     if (window.__cursorTechEngineStarted) return;
-    if (reducedMotion.matches) return;
+    if (reducedMotion.matches && !window.__forceDesktopEffects && !hasDesktopViewport()) return;
     if (shouldUseTouchOnlyExperience()) {
         window.__cursorTechEngineStarted = true;
         initMobileAmbientTech();
