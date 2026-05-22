@@ -1250,7 +1250,11 @@
       position: absolute;
       top: 6px;
       left: 0;
+      right: 0;
       z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
       color: rgba(247, 250, 246, 0.5);
       font-size: 12px;
       font-weight: 720;
@@ -1262,10 +1266,16 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     }
 
+    .binary-runner-meta {
+      color: rgba(255, 212, 138, 0.64);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: right;
+    }
+
     .binary-runner-canvas {
       display: block;
       width: 100%;
-      height: 128px;
+      height: 154px;
       cursor: pointer;
       touch-action: manipulation;
     }
@@ -1832,7 +1842,7 @@
       }
     }
 
-    @media (hover: none) and (pointer: coarse) {
+    @media (max-width: 900px) and (hover: none) and (pointer: coarse) {
       .skill-rail .rail-item {
         display: flex;
         flex-direction: column;
@@ -2217,14 +2227,18 @@
       <span>© <span id="year"></span> Martin Nagy</span>
     </footer>
 
-  
-
     <section class="easter-egg shell reveal" aria-label="Mini game" data-runner>
       <button class="easter-trigger" type="button" data-game-trigger aria-expanded="false" aria-controls="binary-runner" data-i18n="game.prompt">Chceš si zahrať mini hru? Klikni sem.</button>
       <div class="binary-runner" id="binary-runner" hidden>
         <div class="binary-runner-head">
-          <span><span data-i18n="game.score">Skóre</span>: <span class="binary-runner-score" data-game-score>0</span></span>
+          <span><span data-i18n="game.score">Vyriešené tickety</span>: <span class="binary-runner-score" data-game-score>0</span></span>
+          <span class="binary-runner-meta" data-game-meta>Support desk</span>
+        </div>
+        <canvas class="binary-runner-canvas" data-game-canvas aria-label="Ticket Run mini game"></canvas>
+        <div class="binary-runner-state" data-game-state aria-live="polite" data-i18n="game.ready">Klikni a preskakuj incidenty. Patch, káva a firewall pomáhajú.</div>
       </div>
+    </section>
+  </div>
 
   <script>
     const translations = {
@@ -2356,10 +2370,18 @@
       "experience.fixservis.skill4": "Kontrola kvality",
       "contact.title": "Nápad, problém alebo<br>technická výzva?<br><span class=\"contact-keep\">Môžeme sa na to pozrieť.</span>",
       "game.prompt": "Chceš si zahrať mini hru? Klikni sem.",
-      "game.score": "Skóre",
-      "game.ready": "Klikni a preskakuj vírusy, bugy, výpadky aj update chaos.",
-      "game.running": "Technik v teréne.",
-      "game.over": "Koniec hry. Klikni pre reštart.",
+      "game.score": "Vyriešené tickety",
+      "game.ready": "Klikni a preskakuj incidenty. Patch, káva a firewall pomáhajú.",
+      "game.running": "Ticket Run",
+      "game.over": "Koniec incidentu. Klikni pre reštart.",
+      "game.over.ticket": "Ticket sa znovu otvoril.",
+      "game.over.coffee": "Došla káva.",
+      "game.over.reboot": "Systém chce reštart.",
+      "game.over.escalated": "Incident eskalovaný.",
+      "game.chapter.support": "Support desk",
+      "game.chapter.repair": "Repair bench",
+      "game.chapter.server": "Server room",
+      "game.chapter.deploy": "Late-night deploy",
     });
 
     Object.assign(translations.cs, {
@@ -2428,10 +2450,18 @@
       "experience.fixservis.skill4": "Kontrola kvality",
       "contact.title": "Nápad, problém nebo<br>technická výzva?<br><span class=\"contact-keep\">Můžeme se na to podívat.</span>",
       "game.prompt": "Chceš si zahrát mini hru? Klikni sem.",
-      "game.score": "Skóre",
-      "game.ready": "Klikni a přeskakuj viry, bugy, výpadky i update chaos.",
-      "game.running": "Technik v terénu.",
-      "game.over": "Konec hry. Klikni pro restart.",
+      "game.score": "Vyřešené tickety",
+      "game.ready": "Klikni a přeskakuj incidenty. Patch, káva a firewall pomáhají.",
+      "game.running": "Ticket Run",
+      "game.over": "Konec incidentu. Klikni pro restart.",
+      "game.over.ticket": "Ticket se znovu otevřel.",
+      "game.over.coffee": "Došla káva.",
+      "game.over.reboot": "Systém chce restart.",
+      "game.over.escalated": "Incident eskalován.",
+      "game.chapter.support": "Support desk",
+      "game.chapter.repair": "Repair bench",
+      "game.chapter.server": "Server room",
+      "game.chapter.deploy": "Late-night deploy",
     });
 
     Object.assign(translations.en, {
@@ -2500,10 +2530,18 @@
       "experience.fixservis.skill4": "Quality control",
       "contact.title": "An idea, problem<br>or a technical challenge?<br><span class=\"contact-keep\">We can take a look.</span>",
       "game.prompt": "Want to play a mini game? Click here.",
-      "game.score": "Score",
-      "game.ready": "Click and jump over viruses, bugs, outages, and update chaos.",
-      "game.running": "Technician on the run.",
-      "game.over": "Game over. Click to restart.",
+      "game.score": "Tickets fixed",
+      "game.ready": "Click through incidents. Patches, coffee, and firewall help.",
+      "game.running": "Ticket Run",
+      "game.over": "Incident over. Click to restart.",
+      "game.over.ticket": "Ticket reopened.",
+      "game.over.coffee": "Coffee depleted.",
+      "game.over.reboot": "System wants a reboot.",
+      "game.over.escalated": "Incident escalated.",
+      "game.chapter.support": "Support desk",
+      "game.chapter.repair": "Repair bench",
+      "game.chapter.server": "Server room",
+      "game.chapter.deploy": "Late-night deploy",
     });
 
     const languageNames = {
@@ -2526,12 +2564,6 @@
     const coresLow = typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 4;
     const saveData = Boolean(navigator.connection && navigator.connection.saveData);
     const premiumSamsungAndroid = /\bSM-(?:S|F)\d{3}/i.test(ua);
-    const androidLite = isAndroid && coarsePointer.matches && !hasDesktopPointer() && !premiumSamsungAndroid;
-    const lowPowerDevice = !hasDesktopPointer() && coarsePointer.matches && (
-      saveData ||
-      androidLite ||
-      (!isIOS && !isAndroid && (memoryLow || coresLow))
-    );
     function hasDesktopPointer() {
       return (
         window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
@@ -2539,12 +2571,33 @@
       );
     }
 
+    function hasDesktopViewport() {
+      const screenWidth = window.screen?.width || window.innerWidth;
+      const screenHeight = window.screen?.height || window.innerHeight;
+      return Math.max(window.innerWidth, screenWidth, screenHeight) >= 900;
+    }
+
     function shouldUseTouchOnlyExperience() {
       if (hasDesktopPointer()) return false;
+      if (hasDesktopViewport()) return false;
 
       const mobileUserAgent = /Android|iPhone|iPad|iPod|Mobile|Windows Phone/i.test(ua);
       return mobileUserAgent || coarsePointer.matches || window.innerWidth <= 760;
     }
+
+    const androidLite = isAndroid && !hasDesktopViewport() && coarsePointer.matches && !hasDesktopPointer() && !premiumSamsungAndroid;
+    const lowPowerDevice = !hasDesktopViewport() && !hasDesktopPointer() && coarsePointer.matches && (
+      saveData ||
+      androidLite ||
+      (!isIOS && !isAndroid && (memoryLow || coresLow))
+    );
+    window.__deviceExperience = {
+      androidLite,
+      lowPowerDevice,
+      desktopPointer: hasDesktopPointer(),
+      desktopViewport: hasDesktopViewport(),
+      touchOnly: shouldUseTouchOnlyExperience()
+    };
 
     let currentLanguage = "";
     let languageChangeTimer = 0;
@@ -2729,8 +2782,9 @@
       const panel = shell.querySelector("#binary-runner");
       const canvas = shell.querySelector("[data-game-canvas]");
       const scoreNode = shell.querySelector("[data-game-score]");
+      const metaNode = shell.querySelector("[data-game-meta]");
       const stateNode = shell.querySelector("[data-game-state]");
-      if (!trigger || !panel || !canvas || !scoreNode || !stateNode) return;
+      if (!trigger || !panel || !canvas || !scoreNode || !metaNode || !stateNode) return;
 
       const ctx = canvas.getContext("2d");
       const player = {
@@ -2753,19 +2807,39 @@
       let gameOver = false;
       let score = 0;
       let best = 0;
+      let combo = 0;
+      let shield = false;
+      let coffeeTimer = 0;
       let speed = 215;
       let spawnTimer = 1.1;
+      let collectibleTimer = 2.2;
       let obstacles = [];
+      let collectibles = [];
       let bits = [];
       let obstacleBag = [];
       let lastObstacleKind = "";
+      let currentChapter = 0;
+      let endMessage = "";
 
       const obstacleTypes = [
-        { kind: "virus", width: 32, height: 32 },
-        { kind: "bug", width: 42, height: 28 },
-        { kind: "wifi", width: 36, height: 32 },
-        { kind: "update", width: 38, height: 36 },
-        { kind: "bsod", width: 44, height: 32 }
+        { kind: "virus", width: 32, height: 32, label: "malware" },
+        { kind: "bug", width: 42, height: 28, label: "bug" },
+        { kind: "wifi", width: 36, height: 32, label: "wifi down" },
+        { kind: "update", width: 38, height: 36, label: "update" },
+        { kind: "bsod", width: 44, height: 32, label: "bsod" }
+      ];
+
+      const collectibleTypes = [
+        { kind: "patch", label: "+patch" },
+        { kind: "coffee", label: "coffee" },
+        { kind: "shield", label: "firewall" }
+      ];
+
+      const chapters = [
+        { min: 0, key: "game.chapter.support", color: "rgba(143, 247, 210, 0.26)" },
+        { min: 18, key: "game.chapter.repair", color: "rgba(255, 212, 138, 0.26)" },
+        { min: 38, key: "game.chapter.server", color: "rgba(135, 168, 255, 0.26)" },
+        { min: 64, key: "game.chapter.deploy", color: "rgba(214, 176, 255, 0.24)" }
       ];
 
       function gameCopy(key) {
@@ -2775,6 +2849,21 @@
 
       function setState(key) {
         stateNode.textContent = gameCopy(key);
+      }
+
+      function chapterForScore() {
+        let chapter = chapters[0];
+        chapters.forEach((candidate) => {
+          if (score >= candidate.min) chapter = candidate;
+        });
+        return chapter;
+      }
+
+      function updateMeta() {
+        const chapter = chapterForScore();
+        currentChapter = chapters.indexOf(chapter);
+        const activeBoost = shield ? "FW" : coffeeTimer > 0 ? "COFFEE" : combo > 1 ? `x${combo}` : "";
+        metaNode.textContent = activeBoost ? `${gameCopy(chapter.key)} · ${activeBoost}` : gameCopy(chapter.key);
       }
 
       function resizeGame() {
@@ -2795,19 +2884,26 @@
       function resetGame() {
         resizeGame();
         obstacles = [];
+        collectibles = [];
         bits = [];
         obstacleBag = [];
         lastObstacleKind = "";
         score = 0;
+        combo = 0;
+        shield = false;
+        coffeeTimer = 0;
         speed = width < 460 ? 188 : 215;
         spawnTimer = 0.9;
+        collectibleTimer = 1.9;
         gameOver = false;
         running = true;
+        endMessage = "";
         lastFrameTime = 0;
         player.y = ground - player.height;
         player.velocity = 0;
         player.grounded = true;
         scoreNode.textContent = "0";
+        updateMeta();
         setState("game.running");
         scheduleGame();
       }
@@ -2833,7 +2929,22 @@
           y: ground - obstacle.height,
           width: obstacle.width,
           height: obstacle.height,
-          kind: obstacle.kind
+          kind: obstacle.kind,
+          label: obstacle.label,
+          scored: false
+        });
+      }
+
+      function spawnCollectible() {
+        const collectible = collectibleTypes[Math.floor(Math.random() * collectibleTypes.length)];
+        collectibles.push({
+          x: width + 18,
+          y: Math.max(28, ground - 74 - Math.random() * 18),
+          width: 22,
+          height: 22,
+          kind: collectible.kind,
+          label: collectible.label,
+          bob: Math.random() * Math.PI * 2
         });
       }
 
@@ -2851,7 +2962,8 @@
 
       function jump() {
         if (!running || gameOver || !player.grounded) return;
-        player.velocity = width < 460 ? -610 : -665;
+        const boost = coffeeTimer > 0 ? 52 : 0;
+        player.velocity = width < 460 ? -610 - boost : -665 - boost;
         player.grounded = false;
       }
 
@@ -2865,13 +2977,20 @@
       }
 
       function updateGame(seconds) {
-        score += seconds * 14;
+        score += seconds * 5.2;
         speed = Math.min(width < 460 ? 260 : 315, speed + seconds * 5.2);
         spawnTimer -= seconds;
+        collectibleTimer -= seconds;
+        coffeeTimer = Math.max(0, coffeeTimer - seconds);
 
         if (spawnTimer <= 0) {
           spawnObstacle();
           spawnTimer = Math.max(0.78, 1.28 - score / 260) + Math.random() * 0.42;
+        }
+
+        if (collectibleTimer <= 0) {
+          spawnCollectible();
+          collectibleTimer = 3.4 + Math.random() * 2.2;
         }
 
         if (Math.random() < seconds * 4.2) spawnBit();
@@ -2887,6 +3006,16 @@
 
         obstacles.forEach((obstacle) => {
           obstacle.x -= speed * seconds;
+          if (!obstacle.scored && obstacle.x + obstacle.width < player.x) {
+            obstacle.scored = true;
+            combo = Math.min(combo + 1, 9);
+            score += 2 + combo;
+          }
+        });
+
+        collectibles.forEach((collectible) => {
+          collectible.x -= (speed * 0.82) * seconds;
+          collectible.bob += seconds * 4;
         });
 
         bits.forEach((bit) => {
@@ -2894,6 +3023,7 @@
         });
 
         obstacles = obstacles.filter((obstacle) => obstacle.x + obstacle.width > -20);
+        collectibles = collectibles.filter((collectible) => collectible.x + collectible.width > -20);
         bits = bits.filter((bit) => bit.x > -20);
 
         const playerBox = {
@@ -2903,14 +3033,54 @@
           height: player.height - 7
         };
 
-        if (obstacles.some((obstacle) => overlap(playerBox, obstacle))) {
+        for (let index = collectibles.length - 1; index >= 0; index -= 1) {
+          const collectible = collectibles[index];
+          const collectibleBox = {
+            x: collectible.x + 2,
+            y: collectible.y + 2,
+            width: collectible.width - 4,
+            height: collectible.height - 4
+          };
+
+          if (!overlap(playerBox, collectibleBox)) continue;
+
+          if (collectible.kind === "patch") {
+            score += 6;
+            combo = Math.min(combo + 2, 9);
+          } else if (collectible.kind === "coffee") {
+            coffeeTimer = 7;
+            score += 3;
+          } else {
+            shield = true;
+            score += 3;
+          }
+          collectibles.splice(index, 1);
+        }
+
+        for (let index = obstacles.length - 1; index >= 0; index -= 1) {
+          const obstacle = obstacles[index];
+          if (!overlap(playerBox, obstacle)) continue;
+
+          if (shield) {
+            shield = false;
+            combo = 0;
+            obstacles.splice(index, 1);
+            score += 2;
+            continue;
+          }
+
           running = false;
           gameOver = true;
+          combo = 0;
           best = Math.max(best, Math.floor(score));
+          const endings = ["game.over.ticket", "game.over.coffee", "game.over.reboot", "game.over.escalated"];
+          endMessage = gameCopy(endings[Math.floor(Math.random() * endings.length)]);
           setState("game.over");
+          break;
         }
 
         scoreNode.textContent = `${Math.floor(score)}`;
+        updateMeta();
       }
 
       function drawRoundedRect(x, y, rectWidth, rectHeight, radius) {
@@ -3067,6 +3237,60 @@
         ctx.fillText("BSOD", x + 7, y + 24);
       }
 
+      function drawCollectible(collectible) {
+        const x = collectible.x;
+        const y = collectible.y + Math.sin(collectible.bob) * 3;
+        const cx = x + collectible.width / 2;
+        const cy = y + collectible.height / 2;
+
+        ctx.save();
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = collectible.kind === "patch" ? "rgba(143, 247, 210, 0.4)" : collectible.kind === "coffee" ? "rgba(255, 212, 138, 0.38)" : "rgba(135, 168, 255, 0.4)";
+
+        if (collectible.kind === "patch") {
+          drawRoundedRect(x + 3, y + 3, 16, 16, 4);
+          ctx.fillStyle = "rgba(143, 247, 210, 0.22)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(184, 255, 232, 0.82)";
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(x + 7, y + 11);
+          ctx.lineTo(x + 10, y + 14);
+          ctx.lineTo(x + 16, y + 8);
+          ctx.stroke();
+        } else if (collectible.kind === "coffee") {
+          drawRoundedRect(x + 5, y + 7, 12, 10, 3);
+          ctx.fillStyle = "rgba(255, 212, 138, 0.25)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(255, 225, 170, 0.84)";
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(x + 17, y + 12, 3, -Math.PI / 2, Math.PI / 2);
+          ctx.stroke();
+          ctx.fillStyle = "rgba(255, 225, 170, 0.5)";
+          ctx.fillRect(x + 7, y + 4, 2, 2);
+          ctx.fillRect(x + 12, y + 3, 2, 2);
+        } else {
+          ctx.font = "7px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+          ctx.beginPath();
+          ctx.moveTo(cx, y + 2);
+          ctx.lineTo(x + 18, y + 7);
+          ctx.lineTo(x + 16, y + 17);
+          ctx.lineTo(cx, y + 21);
+          ctx.lineTo(x + 6, y + 17);
+          ctx.lineTo(x + 4, y + 7);
+          ctx.closePath();
+          ctx.fillStyle = "rgba(135, 168, 255, 0.22)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(165, 195, 255, 0.84)";
+          ctx.stroke();
+          ctx.fillStyle = "rgba(184, 255, 232, 0.72)";
+          ctx.fillText("FW", x + 7, y + 14);
+        }
+
+        ctx.restore();
+      }
+
       function drawObstacle(obstacle) {
         if (obstacle.kind === "virus") {
           drawVirus(obstacle);
@@ -3079,6 +3303,10 @@
         } else {
           drawBsod(obstacle);
         }
+
+        ctx.fillStyle = "rgba(247, 250, 246, 0.36)";
+        ctx.font = "8px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.fillText(obstacle.label, obstacle.x, obstacle.y - 5);
       }
 
       function drawTechnician() {
@@ -3091,6 +3319,14 @@
         ctx.beginPath();
         ctx.ellipse(x + 20, ground + 4, 19, 4, 0, 0, Math.PI * 2);
         ctx.fill();
+
+        if (shield || coffeeTimer > 0) {
+          ctx.beginPath();
+          ctx.arc(x + 22, y + 20, shield ? 28 : 23, 0, Math.PI * 2);
+          ctx.strokeStyle = shield ? "rgba(135, 168, 255, 0.36)" : "rgba(255, 212, 138, 0.32)";
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
 
         ctx.save();
         ctx.translate(x, y - bob);
@@ -3193,6 +3429,20 @@
       function drawGame() {
         ctx.clearRect(0, 0, width, height);
 
+        const chapter = chapters[currentChapter] || chapterForScore();
+        ctx.strokeStyle = chapter.color;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(width * 0.12, ground - 66);
+        ctx.lineTo(width * 0.34, ground - 88);
+        ctx.lineTo(width * 0.58, ground - 70);
+        ctx.lineTo(width * 0.82, ground - 92);
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(247, 250, 246, 0.18)";
+        ctx.font = "9px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.fillText(gameCopy(chapter.key), Math.max(0, width - 140), 34);
+
         ctx.strokeStyle = "rgba(184, 255, 232, 0.28)";
         ctx.lineWidth = 1;
         ctx.beginPath();
@@ -3207,13 +3457,14 @@
         });
 
         obstacles.forEach(drawObstacle);
+        collectibles.forEach(drawCollectible);
         drawTechnician();
 
         if (gameOver) {
           ctx.fillStyle = "rgba(247, 250, 246, 0.9)";
           ctx.font = "700 14px ui-sans-serif, system-ui, sans-serif";
           ctx.textAlign = "center";
-          ctx.fillText(gameCopy("game.over"), width / 2, height / 2 - 5);
+          ctx.fillText(endMessage || gameCopy("game.over"), width / 2, height / 2 - 5);
           ctx.fillStyle = "rgba(184, 255, 232, 0.72)";
           ctx.font = "11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
           ctx.fillText(`${gameCopy("game.score")}: ${Math.floor(score)}  BEST: ${best}`, width / 2, height / 2 + 20);
