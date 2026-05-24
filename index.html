@@ -1275,13 +1275,18 @@
     .binary-runner-canvas {
       display: block;
       width: 100%;
-      height: 154px;
+      height: 204px;
       cursor: pointer;
       touch-action: manipulation;
     }
 
     .binary-runner-state {
       display: none;
+    }
+
+    body.game-focus .cursor-tech,
+    body.game-focus .ambient-tech {
+      display: none !important;
     }
 
     .reveal {
@@ -1333,6 +1338,15 @@
     body.desktop-effects .ambient-tech::before,
     body.desktop-effects .ambient-tech::after {
       animation: mobileSignalDrift 9s ease-in-out infinite;
+    }
+
+    body.game-focus.desktop-effects .cursor-tech,
+    body.game-focus.desktop-effects .ambient-tech,
+    body.game-focus .cursor-tech,
+    body.game-focus .ambient-tech {
+      display: none !important;
+      opacity: 0 !important;
+      animation: none !important;
     }
 
     body.android-lite::before {
@@ -2258,14 +2272,14 @@
     </footer>
 
     <section class="easter-egg shell reveal" aria-label="Mini game" data-runner>
-      <button class="easter-trigger" type="button" data-game-trigger aria-expanded="false" aria-controls="binary-runner" data-i18n="game.prompt">Chceš si zahrať mini hru? Klikni sem.</button>
+          <button class="easter-trigger" type="button" data-game-trigger aria-expanded="false" aria-controls="binary-runner" data-i18n="game.prompt">Toto určite nie je skrytá minihra</button>
       <div class="binary-runner" id="binary-runner" hidden>
         <div class="binary-runner-head">
-          <span><span data-i18n="game.score">Vyriešené tickety</span>: <span class="binary-runner-score" data-game-score>0</span></span>
-          <span class="binary-runner-meta" data-game-meta>Support desk</span>
+          <span><span data-i18n="game.score">Skóre</span>: <span class="binary-runner-score" data-game-score>0</span></span>
+          <span class="binary-runner-meta" data-game-meta>Helpdesk floor</span>
         </div>
         <canvas class="binary-runner-canvas" data-game-canvas aria-label="Ticket Run mini game"></canvas>
-        <div class="binary-runner-state" data-game-state aria-live="polite" data-i18n="game.ready">Klikni a preskakuj incidenty. Patch, káva a firewall pomáhajú.</div>
+            <div class="binary-runner-state" data-game-state aria-live="polite" data-i18n="game.ready">Jeden klik skok. Dvojklik vo vzduchu salto. Shield drží 5 sekúnd alebo jeden hit.</div>
       </div>
     </section>
   </div>
@@ -2399,19 +2413,27 @@
       "experience.fixservis.skill3": "Opravy podľa štandardov",
       "experience.fixservis.skill4": "Kontrola kvality",
       "contact.title": "Nápad, problém alebo<br>technická výzva?<br><span class=\"contact-keep\">Môžeme sa na to pozrieť.</span>",
-      "game.prompt": "Chceš si zahrať mini hru? Klikni sem.",
-      "game.score": "Vyriešené tickety",
-      "game.ready": "Klikni a preskakuj incidenty. Patch, káva a firewall pomáhajú.",
-      "game.running": "Ticket Run",
-      "game.over": "Koniec incidentu. Klikni pre reštart.",
-      "game.over.ticket": "Ticket sa znovu otvoril.",
+      "game.prompt": "Toto určite nie je skrytá minihra",
+      "game.prompt.active": "Dobre no... možno trochu je.",
+      "game.score": "Skóre",
+      "game.ready": "Jeden klik skok. Dvojklik vo vzduchu salto. Shield drží 5 sekúnd alebo jeden hit.",
+      "game.running": "Run beží",
+      "game.over": "Smena skončila. Klikni pre reštart.",
+      "game.over.ticket": "Technik zakopol o bug.",
       "game.over.coffee": "Došla káva.",
       "game.over.reboot": "Systém chce reštart.",
-      "game.over.escalated": "Incident eskalovaný.",
-      "game.chapter.support": "Support desk",
-      "game.chapter.repair": "Repair bench",
-      "game.chapter.server": "Server room",
-      "game.chapter.deploy": "Late-night deploy",
+      "game.over.escalated": "Ticket sa vrátil späť.",
+      "game.win": "Výborne. Celá smena je vyriešená.",
+      "game.chapter.support": "Helpdesk",
+      "game.chapter.repair": "Servisný stôl",
+      "game.chapter.network": "Sieťový kút",
+      "game.chapter.storage": "Zálohy",
+      "game.chapter.server": "Serverovňa",
+      "game.chapter.monitoring": "Monitoring",
+      "game.chapter.deploy": "Nočný deploy",
+      "game.chapter.security": "Security check",
+      "game.chapter.datacenter": "Datacentrum",
+      "game.chapter.final": "Finálny incident",
     });
 
     Object.assign(translations.cs, {
@@ -2479,19 +2501,27 @@
       "experience.fixservis.skill3": "Opravy podle standardů",
       "experience.fixservis.skill4": "Kontrola kvality",
       "contact.title": "Nápad, problém nebo<br>technická výzva?<br><span class=\"contact-keep\">Můžeme se na to podívat.</span>",
-      "game.prompt": "Chceš si zahrát mini hru? Klikni sem.",
-      "game.score": "Vyřešené tickety",
-      "game.ready": "Klikni a přeskakuj incidenty. Patch, káva a firewall pomáhají.",
-      "game.running": "Ticket Run",
-      "game.over": "Konec incidentu. Klikni pro restart.",
-      "game.over.ticket": "Ticket se znovu otevřel.",
+      "game.prompt": "Tohle určitě není skrytá minihra",
+      "game.prompt.active": "Dobře no... možná trochu je.",
+      "game.score": "Skóre",
+      "game.ready": "Jeden klik skok. Dvojklik ve vzduchu salto. Shield drží 5 sekund nebo jeden hit.",
+      "game.running": "Run běží",
+      "game.over": "Směna skončila. Klikni pro restart.",
+      "game.over.ticket": "Technik zakopl o bug.",
       "game.over.coffee": "Došla káva.",
       "game.over.reboot": "Systém chce restart.",
-      "game.over.escalated": "Incident eskalován.",
-      "game.chapter.support": "Support desk",
-      "game.chapter.repair": "Repair bench",
-      "game.chapter.server": "Server room",
-      "game.chapter.deploy": "Late-night deploy",
+      "game.over.escalated": "Ticket se vrátil zpět.",
+      "game.win": "Výborně. Celá směna je vyřešená.",
+      "game.chapter.support": "Helpdesk",
+      "game.chapter.repair": "Servisní stůl",
+      "game.chapter.network": "Síťový kout",
+      "game.chapter.storage": "Zálohy",
+      "game.chapter.server": "Serverovna",
+      "game.chapter.monitoring": "Monitoring",
+      "game.chapter.deploy": "Noční deploy",
+      "game.chapter.security": "Security check",
+      "game.chapter.datacenter": "Datacentrum",
+      "game.chapter.final": "Finální incident",
     });
 
     Object.assign(translations.en, {
@@ -2559,19 +2589,27 @@
       "experience.fixservis.skill3": "Repairs by standards",
       "experience.fixservis.skill4": "Quality control",
       "contact.title": "An idea, problem<br>or a technical challenge?<br><span class=\"contact-keep\">We can take a look.</span>",
-      "game.prompt": "Want to play a mini game? Click here.",
-      "game.score": "Tickets fixed",
-      "game.ready": "Click through incidents. Patches, coffee, and firewall help.",
-      "game.running": "Ticket Run",
-      "game.over": "Incident over. Click to restart.",
-      "game.over.ticket": "Ticket reopened.",
+      "game.prompt": "This is definitely not a hidden minigame",
+      "game.prompt.active": "Fine... maybe it kind of is.",
+      "game.score": "Score",
+      "game.ready": "One click to jump. Double click in air to flip. Shield lasts 5 seconds or one hit.",
+      "game.running": "Run active",
+      "game.over": "Shift over. Click to restart.",
+      "game.over.ticket": "The tech tripped over a bug.",
       "game.over.coffee": "Coffee depleted.",
       "game.over.reboot": "System wants a reboot.",
-      "game.over.escalated": "Incident escalated.",
-      "game.chapter.support": "Support desk",
+      "game.over.escalated": "Ticket came back.",
+      "game.win": "Well done. The whole shift is solved.",
+      "game.chapter.support": "Helpdesk",
       "game.chapter.repair": "Repair bench",
+      "game.chapter.network": "Network corner",
+      "game.chapter.storage": "Backups",
       "game.chapter.server": "Server room",
-      "game.chapter.deploy": "Late-night deploy",
+      "game.chapter.monitoring": "Monitoring",
+      "game.chapter.deploy": "Night deploy",
+      "game.chapter.security": "Security check",
+      "game.chapter.datacenter": "Datacenter",
+      "game.chapter.final": "Final incident",
     });
 
     const languageNames = {
@@ -2822,7 +2860,7 @@
     function initBinaryRunner() {
       const shell = document.querySelector("[data-runner]");
       if (!shell) return;
-
+    
       const trigger = shell.querySelector("[data-game-trigger]");
       const panel = shell.querySelector("#binary-runner");
       const canvas = shell.querySelector("[data-game-canvas]");
@@ -2830,17 +2868,143 @@
       const metaNode = shell.querySelector("[data-game-meta]");
       const stateNode = shell.querySelector("[data-game-state]");
       if (!trigger || !panel || !canvas || !scoreNode || !metaNode || !stateNode) return;
-
+    
       const ctx = canvas.getContext("2d");
-      const player = {
-        x: 48,
-        y: 0,
-        width: 36,
-        height: 44,
-        velocity: 0,
-        grounded: true
-      };
+      const player = { x: 58, y: 0, width: 38, height: 46, velocity: 0, grounded: true, runTime: 0, squash: 1, flipAngle: 0, flipVelocity: 0, flipAvailable: false };
+    
+      const maxScore = 10000;
+      const chapters = [
+        { min: 0, key: "game.chapter.support", color: "rgba(143, 247, 210, 0.34)", ground: "rgba(143, 247, 210, 0.32)" },
+        { min: 1000, key: "game.chapter.repair", color: "rgba(255, 212, 138, 0.34)", ground: "rgba(255, 212, 138, 0.3)" },
+        { min: 2000, key: "game.chapter.network", color: "rgba(126, 215, 255, 0.34)", ground: "rgba(126, 215, 255, 0.3)" },
+        { min: 3000, key: "game.chapter.storage", color: "rgba(176, 205, 255, 0.34)", ground: "rgba(176, 205, 255, 0.3)" },
+        { min: 4000, key: "game.chapter.server", color: "rgba(135, 168, 255, 0.36)", ground: "rgba(135, 168, 255, 0.32)" },
+        { min: 5000, key: "game.chapter.monitoring", color: "rgba(143, 247, 210, 0.28)", ground: "rgba(143, 247, 210, 0.26)" },
+        { min: 6000, key: "game.chapter.deploy", color: "rgba(214, 176, 255, 0.32)", ground: "rgba(214, 176, 255, 0.28)" },
+        { min: 7000, key: "game.chapter.security", color: "rgba(255, 212, 138, 0.3)", ground: "rgba(255, 212, 138, 0.26)" },
+        { min: 8000, key: "game.chapter.datacenter", color: "rgba(255, 116, 116, 0.28)", ground: "rgba(255, 116, 116, 0.28)" },
+        { min: 9000, key: "game.chapter.final", color: "rgba(247, 250, 246, 0.32)", ground: "rgba(247, 250, 246, 0.26)" }
+      ];
+    
+      const incidentTypes = [
+        { kind: "virus", width: 32, height: 32 },
+        { kind: "bug", width: 44, height: 30 },
+        { kind: "wifi", width: 38, height: 34 },
+        { kind: "update", width: 40, height: 38 },
+        { kind: "fire", width: 34, height: 30 },
+        { kind: "crash", width: 46, height: 34 }
+      ];
+      const pickupTypes = [
+        { kind: "shield" }
+      ];
 
+      const runnerSpeech = {
+        sk: {
+          idle: [
+            "Toto malo byt rychle.",
+            "Klasika. Fungovalo to vcera.",
+            "Som pokojny. Zatial.",
+            "Kto sem dal ohen?",
+            "Toto nie je v popise prace.",
+            "Ak to spadne, restartujem seba.",
+            "Len bez paniky. Mozno.",
+            "Dneska bez kavy, odvazne.",
+            "Tento bug sa tvari osobne.",
+            "Este jeden skok a davam fakturu.",
+            "Mam to pod kontrolou. Asi.",
+            "Toto vyzera ako pondelok.",
+            "Kde je safe mode?",
+            "Niekto testoval v produkcii.",
+            "Nechcem ukazovat prstom, ale update.",
+            "Ticho, diagnostikujem za behu.",
+            "Mam laptop, teda autoritu.",
+            "Toto je velmi lokalna infrastruktura.",
+            "Ak preskocim toto, beriem obed.",
+            "Nie je to bug, je to prekazka."
+          ],
+          jump: [
+            "Hop. Profesionalne.",
+            "Servisny skok.",
+            "Preskocene, zapisane.",
+            "Elegantne ako workaround."
+          ],
+          flip: [
+            "Salto nebolo v SLA.",
+            "Toto som sa v servise nenaucil.",
+            "Backflip deployment.",
+            "Auditor to nevidel."
+          ],
+          shield: [
+            "Shield? Konecne benefit.",
+            "Firewall na telo.",
+            "Teraz som certifikovany.",
+            "Päť sekund sebavedomia."
+          ],
+          tier: [
+            "Aha, sprint review.",
+            "Rychlost plus, pokoj minus.",
+            "Level up. Nervy tiez.",
+            "Teraz to zacina byt zaujimave."
+          ]
+        },
+        cs: {
+          idle: [
+            "Tohle melo byt rychle.",
+            "Klasika. Vcera to fungovalo.",
+            "Jsem v klidu. Zatim.",
+            "Kdo sem dal ohen?",
+            "Tohle neni v popisu prace.",
+            "Jestli to spadne, restartuju sebe.",
+            "Bez paniky. Mozna.",
+            "Dnes bez kavy, odvazne.",
+            "Tenhle bug to bere osobne.",
+            "Jeste jeden skok a pisu fakturu.",
+            "Mam to pod kontrolou. Asi.",
+            "Tohle vypada jako pondeli.",
+            "Kde je safe mode?",
+            "Nekdo testoval v produkci.",
+            "Nechci ukazovat prstem, ale update.",
+            "Ticho, diagnostikuju za behu.",
+            "Mam laptop, tedy autoritu.",
+            "Tohle je hodne lokalni infrastruktura.",
+            "Jestli to preskocim, beru obed.",
+            "Neni to bug, je to prekazka."
+          ],
+          jump: ["Hop. Profesionalne.", "Servisni skok.", "Preskoceno, zapsano.", "Elegantni workaround."],
+          flip: ["Salto nebylo v SLA.", "Tohle me v servisu neucili.", "Backflip deployment.", "Auditor to nevidel."],
+          shield: ["Shield? Konecne benefit.", "Firewall na telo.", "Ted jsem certifikovany.", "Pet sekund sebevedomi."],
+          tier: ["Aha, sprint review.", "Rychlost plus, klid minus.", "Level up. Nervy taky.", "Ted to zacina byt zajimave."]
+        },
+        en: {
+          idle: [
+            "This was supposed to be quick.",
+            "Classic. It worked yesterday.",
+            "I'm calm. For now.",
+            "Who put fire here?",
+            "This was not in the job description.",
+            "If it crashes, I reboot myself.",
+            "No panic. Probably.",
+            "No coffee today. Brave choice.",
+            "This bug feels personal.",
+            "One more jump and I invoice it.",
+            "I have this under control. Maybe.",
+            "This looks like a Monday.",
+            "Where is safe mode?",
+            "Someone tested in production.",
+            "Not pointing fingers, but update.",
+            "Quiet, diagnosing while running.",
+            "I have a laptop, therefore authority.",
+            "Very local infrastructure today.",
+            "If I clear this, I take lunch.",
+            "It's not a bug, it's an obstacle."
+          ],
+          jump: ["Hop. Professional.", "Service jump.", "Cleared and logged.", "Elegant workaround."],
+          flip: ["Backflip was not in the SLA.", "They did not teach this in service.", "Backflip deployment.", "Audit did not see that."],
+          shield: ["Shield? Finally, a benefit.", "Wearable firewall.", "Now I am certified.", "Five seconds of confidence."],
+          tier: ["Ah, sprint review.", "More speed, less peace.", "Level up. Stress too.", "Now it gets interesting."]
+        }
+      };
+    
       let width = 0;
       let height = 0;
       let ground = 0;
@@ -2852,741 +3016,827 @@
       let gameOver = false;
       let score = 0;
       let best = 0;
-      let combo = 0;
+      let streak = 0;
+      let speed = 320;
+      let spawnTimer = 0.7;
+      let pickupTimer = 1.8;
       let shield = false;
-      let coffeeTimer = 0;
-      let speed = 215;
-      let spawnTimer = 1.1;
-      let collectibleTimer = 2.2;
-      let obstacles = [];
-      let collectibles = [];
+      let shieldTimer = 0;
+      let shake = 0;
+      let speedFlash = 0;
+      let lastIncident = "";
+      let lastPressTime = 0;
+      let incidents = [];
+      let pickups = [];
       let bits = [];
-      let obstacleBag = [];
-      let lastObstacleKind = "";
-      let currentChapter = 0;
+      let sparks = [];
+      let notes = [];
+      let speech = null;
+      let speechCooldown = 0;
+      let recentSpeech = [];
+      let chapterIndex = 0;
       let endMessage = "";
-
-      const obstacleTypes = [
-        { kind: "virus", width: 32, height: 32, label: "malware" },
-        { kind: "bug", width: 42, height: 28, label: "bug" },
-        { kind: "wifi", width: 36, height: 32, label: "wifi down" },
-        { kind: "update", width: 38, height: 36, label: "update" },
-        { kind: "bsod", width: 44, height: 32, label: "bsod" }
-      ];
-
-      const collectibleTypes = [
-        { kind: "patch", label: "+patch" },
-        { kind: "coffee", label: "coffee" },
-        { kind: "shield", label: "firewall" }
-      ];
-
-      const chapters = [
-        { min: 0, key: "game.chapter.support", color: "rgba(143, 247, 210, 0.26)" },
-        { min: 18, key: "game.chapter.repair", color: "rgba(255, 212, 138, 0.26)" },
-        { min: 38, key: "game.chapter.server", color: "rgba(135, 168, 255, 0.26)" },
-        { min: 64, key: "game.chapter.deploy", color: "rgba(214, 176, 255, 0.24)" }
-      ];
-
+    
       function gameCopy(key) {
         const language = currentLanguage || html.lang || browserLanguageFallback();
         return translations[language]?.[key] || translations.en[key] || "";
       }
-
+    
       function setState(key) {
         stateNode.textContent = gameCopy(key);
       }
 
+      function setTriggerCopy(active = revealed) {
+        trigger.textContent = gameCopy(active ? "game.prompt.active" : "game.prompt");
+      }
+
+      function languageSpeech() {
+        const language = currentLanguage || html.lang || browserLanguageFallback();
+        return runnerSpeech[language] || runnerSpeech.en;
+      }
+
+      function speak(group = "idle", force = false) {
+        if (!running || gameOver) return;
+        if (!force && speechCooldown > 0) return;
+        const copy = languageSpeech();
+        const pool = [...(copy[group] || []), ...(group === "idle" ? [] : copy.idle)];
+        const available = pool.filter((line) => !recentSpeech.includes(line));
+        const source = available.length ? available : pool;
+        const text = source[Math.floor(Math.random() * source.length)];
+        if (!text) return;
+        speech = { text, life: 2.7, max: 2.7 };
+        recentSpeech.push(text);
+        if (recentSpeech.length > 9) recentSpeech.shift();
+        speechCooldown = force ? 4.8 + Math.random() * 3.2 : 7.5 + Math.random() * 6.5;
+      }
+    
       function chapterForScore() {
         let chapter = chapters[0];
-        chapters.forEach((candidate) => {
+        for (const candidate of chapters) {
           if (score >= candidate.min) chapter = candidate;
-        });
+        }
         return chapter;
       }
-
-      function updateMeta() {
+    
+      function updateHud() {
         const chapter = chapterForScore();
-        currentChapter = chapters.indexOf(chapter);
-        const activeBoost = shield ? "FW" : coffeeTimer > 0 ? "COFFEE" : combo > 1 ? `x${combo}` : "";
-        metaNode.textContent = activeBoost ? `${gameCopy(chapter.key)} · ${activeBoost}` : gameCopy(chapter.key);
+        const previousChapter = chapterIndex;
+        chapterIndex = chapters.indexOf(chapter);
+        if (running && previousChapter !== chapterIndex && score > 0) {
+          speedFlash = 0.55;
+          const baseSpeed = width < 460 ? 205 : 245;
+          const tierStep = width < 460 ? 30 : 38;
+          speed = Math.max(speed, baseSpeed + chapterIndex * tierStep);
+          speak("tier", true);
+          burst(Math.min(width - 90, player.x + 78), ground - 66, chapter.color);
+        }
+        metaNode.textContent = "";
+        scoreNode.textContent = String(Math.min(maxScore, Math.floor(score)));
       }
-
+    
       function resizeGame() {
         const rect = canvas.getBoundingClientRect();
-        width = Math.max(280, rect.width || 320);
-        height = Math.max(126, rect.height || 142);
+        width = Math.max(300, rect.width || 360);
+        height = Math.max(144, rect.height || 154);
         dpr = Math.min(window.devicePixelRatio || 1, 2);
         canvas.width = Math.floor(width * dpr);
         canvas.height = Math.floor(height * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        ground = height - 30;
-
-        if (player.grounded || player.y <= 0) {
-          player.y = ground - player.height;
-        }
+        ground = height - 8;
+        if (player.grounded || player.y <= 0) player.y = ground - player.height;
       }
-
+    
+      function focusGame() {
+        document.body.classList.add("game-focus");
+        document.body.classList.remove("desktop-effects");
+        if (window.__deviceExperience) window.__deviceExperience.gameFocus = true;
+      }
+    
       function resetGame() {
         resizeGame();
-        obstacles = [];
-        collectibles = [];
+        incidents = [];
+        pickups = [];
         bits = [];
-        obstacleBag = [];
-        lastObstacleKind = "";
+        sparks = [];
+        notes = [];
+        speech = null;
+        speechCooldown = 2.4 + Math.random() * 2.8;
+        recentSpeech = [];
         score = 0;
-        combo = 0;
+        streak = 0;
+        speed = width < 460 ? 205 : 245;
+        spawnTimer = 1.05 + Math.random() * 0.85;
+        pickupTimer = 10.5 + Math.random() * 5.5;
         shield = false;
-        coffeeTimer = 0;
-        speed = width < 460 ? 188 : 215;
-        spawnTimer = 0.9;
-        collectibleTimer = 1.9;
-        gameOver = false;
-        running = true;
+        shieldTimer = 0;
+        shake = 0;
+        speedFlash = 0;
+        lastIncident = "";
+        lastPressTime = 0;
+        chapterIndex = 0;
         endMessage = "";
+        running = true;
+        gameOver = false;
         lastFrameTime = 0;
         player.y = ground - player.height;
         player.velocity = 0;
         player.grounded = true;
-        scoreNode.textContent = "0";
-        updateMeta();
+        player.runTime = 0;
+        player.squash = 1;
+        player.flipAngle = 0;
+        player.flipVelocity = 0;
+        player.flipAvailable = false;
+        updateHud();
         setState("game.running");
         scheduleGame();
       }
-
-      function nextObstacleType() {
-        if (!obstacleBag.length) {
-          obstacleBag = [...obstacleTypes].sort(() => Math.random() - 0.5);
-
-          if (obstacleBag[0]?.kind === lastObstacleKind) {
-            obstacleBag.push(obstacleBag.shift());
-          }
-        }
-
-        const next = obstacleBag.shift();
-        lastObstacleKind = next.kind;
+    
+      function chooseIncident() {
+        let available = incidentTypes.filter((incident) => incident.kind !== lastIncident);
+        if (!available.length) available = incidentTypes;
+        const pool = available.flatMap((incident) => incident.kind === "fire" ? [incident] : [incident, incident]);
+        const next = pool[Math.floor(Math.random() * pool.length)];
+        lastIncident = next.kind;
         return next;
       }
-
-      function spawnObstacle() {
-        const obstacle = nextObstacleType();
-        obstacles.push({
-          x: width + 12,
-          y: ground - obstacle.height,
-          width: obstacle.width,
-          height: obstacle.height,
-          kind: obstacle.kind,
-          label: obstacle.label,
-          scored: false
-        });
+    
+      function addNote(text, x, y, color = "rgba(184, 255, 232, 0.86)") {
+        notes.push({ text, x, y, life: 1, color });
+        if (notes.length > 8) notes.shift();
       }
-
-      function spawnCollectible() {
-        const collectible = collectibleTypes[Math.floor(Math.random() * collectibleTypes.length)];
-        collectibles.push({
-          x: width + 18,
-          y: Math.max(28, ground - 74 - Math.random() * 18),
-          width: 22,
-          height: 22,
-          kind: collectible.kind,
-          label: collectible.label,
-          bob: Math.random() * Math.PI * 2
-        });
+    
+      function spawnIncident() {
+        const incident = chooseIncident();
+        incidents.push({ ...incident, x: width + 24 + Math.random() * 80, y: ground - incident.height, wobble: Math.random() * Math.PI * 2, scored: false });
       }
-
+    
+      function spawnPickup() {
+        if (shield || pickups.length) return;
+        const pickup = pickupTypes[Math.floor(Math.random() * pickupTypes.length)];
+        pickups.push({ ...pickup, x: width + 20, y: Math.max(34, ground - 72 - Math.random() * 20), width: 22, height: 22, spin: Math.random() * Math.PI * 2 });
+      }
+    
       function spawnBit() {
-        bits.push({
-          x: width + Math.random() * 80,
-          y: 18 + Math.random() * (height * 0.42),
-          speed: 18 + Math.random() * 26,
-          value: Math.random() > 0.5 ? "1" : "0",
-          alpha: 0.16 + Math.random() * 0.18
-        });
-
-        if (bits.length > 22) bits.shift();
+        bits.push({ x: width + Math.random() * 90, y: 20 + Math.random() * (height * 0.45), speed: 24 + Math.random() * 32, value: Math.random() > 0.5 ? "1" : "0", alpha: 0.14 + Math.random() * 0.22 });
+        if (bits.length > 28) bits.shift();
       }
-
+    
+      function burst(x, y, color) {
+        for (let index = 0; index < 9; index += 1) {
+          const angle = Math.random() * Math.PI * 2;
+          sparks.push({ x, y, vx: Math.cos(angle) * (32 + Math.random() * 60), vy: Math.sin(angle) * (24 + Math.random() * 50), life: 1, color });
+        }
+      }
+    
       function jump() {
         if (!running || gameOver || !player.grounded) return;
-        const boost = coffeeTimer > 0 ? 52 : 0;
-        player.velocity = width < 460 ? -610 - boost : -665 - boost;
+        player.velocity = width < 460 ? -620 : -650;
         player.grounded = false;
+        player.squash = 0.86;
+        player.flipAvailable = true;
+        player.flipAngle = 0;
+        player.flipVelocity = 0;
+        if (Math.random() < 0.22) speak("jump", true);
       }
 
+      function flip() {
+        if (!running || gameOver || player.grounded || !player.flipAvailable) return;
+        player.flipAvailable = false;
+        player.flipVelocity = -12.5;
+        player.velocity = Math.min(player.velocity, width < 460 ? -300 : -340);
+        speak("flip", true);
+        burst(player.x + player.width / 2, player.y + 18, "rgba(184, 255, 232, 0.5)");
+      }
+    
       function overlap(a, b) {
-        return (
-          a.x < b.x + b.width &&
-          a.x + a.width > b.x &&
-          a.y < b.y + b.height &&
-          a.y + a.height > b.y
-        );
+        return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
       }
-
+    
       function updateGame(seconds) {
-        score += seconds * 5.2;
-        speed = Math.min(width < 460 ? 260 : 315, speed + seconds * 5.2);
+        const progress = Math.min(score / maxScore, 1);
+        const speedTier = Math.min(9, Math.floor(score / 1000));
+        const multiplier = 1 + Math.min(streak, 9) * 0.018;
+        const difficulty = speedTier / 9;
+        const baseRate = 25 + progress * 17;
+        const targetSpeed = (width < 460 ? 205 : 245) + speedTier * (width < 460 ? 30 : 38);
+        score += seconds * baseRate * multiplier;
+        speed += (targetSpeed - speed) * Math.min(seconds * 5.4, 1);
         spawnTimer -= seconds;
-        collectibleTimer -= seconds;
-        coffeeTimer = Math.max(0, coffeeTimer - seconds);
-
+        pickupTimer -= seconds;
+        speechCooldown = Math.max(0, speechCooldown - seconds);
+        if (speech) {
+          speech.life -= seconds;
+          if (speech.life <= 0) speech = null;
+        }
+        if (!speech && speechCooldown <= 0 && Math.random() < seconds * 0.55) {
+          speak("idle");
+        }
+        if (shield) {
+          shieldTimer = Math.max(0, shieldTimer - seconds);
+          if (shieldTimer <= 0) {
+            shield = false;
+            burst(player.x + player.width / 2, player.y + 20, "rgba(135, 168, 255, 0.42)");
+          }
+        }
+        shake = Math.max(0, shake - seconds * 18);
+        speedFlash = Math.max(0, speedFlash - seconds);
+        player.runTime += seconds * (player.grounded ? 1 : 0.45);
+        player.squash += (1 - player.squash) * Math.min(seconds * 10, 1);
+        if (!player.grounded && player.flipVelocity !== 0) {
+          player.flipAngle += player.flipVelocity * seconds;
+          if (player.flipVelocity > 0 && player.flipAngle >= Math.PI * 2) {
+            player.flipAngle = Math.PI * 2;
+            player.flipVelocity = 0;
+          } else if (player.flipVelocity < 0 && player.flipAngle <= -Math.PI * 2) {
+            player.flipAngle = -Math.PI * 2;
+            player.flipVelocity = 0;
+          }
+        }
+    
         if (spawnTimer <= 0) {
-          spawnObstacle();
-          spawnTimer = Math.max(0.78, 1.28 - score / 260) + Math.random() * 0.42;
+          spawnIncident();
+          const minGap = Math.max(0.38, 0.92 - difficulty * 0.5);
+          const maxGap = Math.max(0.72, 1.78 - difficulty * 0.68);
+          const pause = Math.random() < 0.18 ? Math.random() * 0.58 : 0;
+          spawnTimer = minGap + Math.random() * (maxGap - minGap) + pause;
         }
-
-        if (collectibleTimer <= 0) {
-          spawnCollectible();
-          collectibleTimer = 3.4 + Math.random() * 2.2;
+        if (pickupTimer <= 0) {
+          spawnPickup();
+          pickupTimer = 14.5 + Math.random() * 7.5;
         }
-
-        if (Math.random() < seconds * 4.2) spawnBit();
-
-        player.velocity += 1500 * seconds;
+        
+    
+        player.velocity += 1720 * seconds;
         player.y += player.velocity * seconds;
-
         if (player.y >= ground - player.height) {
+          if (!player.grounded && player.velocity > 180) player.squash = 1.14;
           player.y = ground - player.height;
           player.velocity = 0;
           player.grounded = true;
+          player.flipAngle = 0;
+          player.flipVelocity = 0;
+          player.flipAvailable = false;
         }
-
-        obstacles.forEach((obstacle) => {
-          obstacle.x -= speed * seconds;
-          if (!obstacle.scored && obstacle.x + obstacle.width < player.x) {
-            obstacle.scored = true;
-            combo = Math.min(combo + 1, 9);
-            score += 2 + combo;
+    
+        for (const incident of incidents) {
+          incident.x -= speed * seconds;
+          incident.wobble += seconds * 5;
+          if (!incident.scored && incident.x + incident.width < player.x) {
+            incident.scored = true;
+            streak = Math.min(streak + 1, 12);
+            const reward = Math.round(8 + streak * 1.8);
+            score += reward;
           }
-        });
-
-        collectibles.forEach((collectible) => {
-          collectible.x -= (speed * 0.82) * seconds;
-          collectible.bob += seconds * 4;
-        });
-
-        bits.forEach((bit) => {
-          bit.x -= bit.speed * seconds;
-        });
-
-        obstacles = obstacles.filter((obstacle) => obstacle.x + obstacle.width > -20);
-        collectibles = collectibles.filter((collectible) => collectible.x + collectible.width > -20);
-        bits = bits.filter((bit) => bit.x > -20);
-
-        const playerBox = {
-          x: player.x + 7,
-          y: player.y + 5,
-          width: player.width - 13,
-          height: player.height - 7
-        };
-
-        for (let index = collectibles.length - 1; index >= 0; index -= 1) {
-          const collectible = collectibles[index];
-          const collectibleBox = {
-            x: collectible.x + 2,
-            y: collectible.y + 2,
-            width: collectible.width - 4,
-            height: collectible.height - 4
-          };
-
-          if (!overlap(playerBox, collectibleBox)) continue;
-
-          if (collectible.kind === "patch") {
-            score += 6;
-            combo = Math.min(combo + 2, 9);
-          } else if (collectible.kind === "coffee") {
-            coffeeTimer = 7;
-            score += 3;
-          } else {
-            shield = true;
-            score += 3;
-          }
-          collectibles.splice(index, 1);
         }
-
-        for (let index = obstacles.length - 1; index >= 0; index -= 1) {
-          const obstacle = obstacles[index];
-          if (!overlap(playerBox, obstacle)) continue;
-
+        for (const pickup of pickups) {
+          pickup.x -= speed * 0.88 * seconds;
+          pickup.spin += seconds * 5.5;
+        }
+        for (const bit of bits) bit.x -= bit.speed * seconds;
+        for (const spark of sparks) {
+          spark.x += spark.vx * seconds;
+          spark.y += spark.vy * seconds;
+          spark.vy += 80 * seconds;
+          spark.life -= seconds * 1.8;
+        }
+        for (const note of notes) {
+          note.y -= 26 * seconds;
+          note.life -= seconds * 0.9;
+        }
+    
+        incidents = incidents.filter((incident) => incident.x + incident.width > -30);
+        pickups = pickups.filter((pickup) => pickup.x + pickup.width > -30);
+        bits = bits.filter((bit) => bit.x > -25);
+        sparks = sparks.filter((spark) => spark.life > 0);
+        notes = notes.filter((note) => note.life > 0);
+    
+        const playerBox = { x: player.x + 8, y: player.y + 6, width: player.width - 15, height: player.height - 8 };
+        for (let index = pickups.length - 1; index >= 0; index -= 1) {
+          const pickup = pickups[index];
+          const box = { x: pickup.x + 2, y: pickup.y + 2, width: pickup.width - 4, height: pickup.height - 4 };
+          if (!overlap(playerBox, box)) continue;
+          shield = true;
+          shieldTimer = 5;
+          score += 18;
+          speak("shield", true);
+          burst(pickup.x + 11, pickup.y + 11, "rgba(135, 168, 255, 0.85)");
+          pickups.splice(index, 1);
+        }
+    
+        for (let index = incidents.length - 1; index >= 0; index -= 1) {
+          const incident = incidents[index];
+          const box = { x: incident.x + 3, y: incident.y + 3, width: incident.width - 6, height: incident.height - 5 };
+          if (!overlap(playerBox, box)) continue;
           if (shield) {
             shield = false;
-            combo = 0;
-            obstacles.splice(index, 1);
-            score += 2;
+            shieldTimer = 0;
+            streak = 0;
+            score += 18;
+            burst(incident.x + incident.width / 2, incident.y + incident.height / 2, "rgba(135, 168, 255, 0.85)");
+            incidents.splice(index, 1);
             continue;
           }
-
+          streak = 0;
+          shake = 5;
+          burst(incident.x + incident.width / 2, incident.y + incident.height / 2, "rgba(255, 116, 116, 0.85)");
+          incidents.splice(index, 1);
           running = false;
           gameOver = true;
-          combo = 0;
-          best = Math.max(best, Math.floor(score));
-          const endings = ["game.over.ticket", "game.over.coffee", "game.over.reboot", "game.over.escalated"];
+          best = Math.max(best, Math.min(maxScore, Math.floor(score)));
+          const endings = ["game.over.ticket", "game.over.reboot", "game.over.escalated"];
           endMessage = gameCopy(endings[Math.floor(Math.random() * endings.length)]);
           setState("game.over");
           break;
         }
-
-        scoreNode.textContent = `${Math.floor(score)}`;
-        updateMeta();
+        if (score >= maxScore && running && !gameOver) {
+          score = maxScore;
+          running = false;
+          gameOver = true;
+          best = Math.max(best, maxScore);
+          endMessage = gameCopy("game.win");
+          setState("game.win");
+          burst(player.x + player.width / 2, player.y + 8, "rgba(184, 255, 232, 0.92)");
+        }
+        updateHud();
       }
-
-      function drawRoundedRect(x, y, rectWidth, rectHeight, radius) {
+    
+      function roundedRect(x, y, rectWidth, rectHeight, radius) {
         if (ctx.roundRect) {
           ctx.beginPath();
           ctx.roundRect(x, y, rectWidth, rectHeight, radius);
-          return;
-        }
-
-        ctx.beginPath();
-        ctx.rect(x, y, rectWidth, rectHeight);
-      }
-
-      function drawVirus(obstacle) {
-        const cx = obstacle.x + obstacle.width / 2;
-        const cy = obstacle.y + obstacle.height / 2;
-        const radius = 10;
-
-        ctx.strokeStyle = "rgba(255, 96, 96, 0.7)";
-        ctx.lineWidth = 1.4;
-        for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 4) {
-          ctx.beginPath();
-          ctx.moveTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
-          ctx.lineTo(cx + Math.cos(angle) * (radius + 6), cy + Math.sin(angle) * (radius + 6));
-          ctx.stroke();
-        }
-
-        ctx.beginPath();
-        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255, 68, 68, 0.28)";
-        ctx.fill();
-        ctx.strokeStyle = "rgba(255, 112, 112, 0.82)";
-        ctx.stroke();
-        ctx.fillStyle = "rgba(255, 220, 220, 0.82)";
-        ctx.fillRect(cx - 4, cy - 2, 3, 3);
-        ctx.fillRect(cx + 3, cy + 2, 3, 3);
-      }
-
-      function drawBug(obstacle) {
-        const x = obstacle.x;
-        const y = obstacle.y;
-        const cx = x + obstacle.width / 2;
-        const bodyY = y + 15;
-
-        ctx.strokeStyle = "rgba(255, 97, 97, 0.72)";
-        ctx.lineWidth = 1.4;
-
-        for (let index = 0; index < 3; index += 1) {
-          const offset = -8 + index * 8;
-          ctx.beginPath();
-          ctx.moveTo(cx - 9, bodyY + offset * 0.18);
-          ctx.lineTo(cx - 17, bodyY + offset - 2);
-          ctx.lineTo(cx - 21, bodyY + offset + 3);
-          ctx.moveTo(cx + 9, bodyY + offset * 0.18);
-          ctx.lineTo(cx + 17, bodyY + offset - 2);
-          ctx.lineTo(cx + 21, bodyY + offset + 3);
-          ctx.stroke();
-        }
-
-        ctx.beginPath();
-        ctx.ellipse(cx, bodyY, 12, 9, 0, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(45, 11, 15, 0.94)";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.ellipse(cx, y + 6, 7, 5, 0, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(35, 8, 11, 0.98)";
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(cx - 4, y + 3);
-        ctx.lineTo(cx - 10, y - 3);
-        ctx.moveTo(cx + 4, y + 3);
-        ctx.lineTo(cx + 10, y - 3);
-        ctx.stroke();
-
-        ctx.strokeStyle = "rgba(255, 130, 130, 0.5)";
-        ctx.beginPath();
-        ctx.moveTo(cx, bodyY - 7);
-        ctx.lineTo(cx, bodyY + 7);
-        ctx.moveTo(cx - 7, bodyY - 5);
-        ctx.lineTo(cx + 7, bodyY + 5);
-        ctx.moveTo(cx + 7, bodyY - 5);
-        ctx.lineTo(cx - 7, bodyY + 5);
-        ctx.stroke();
-
-        ctx.fillStyle = "rgba(255, 232, 232, 0.92)";
-        ctx.fillRect(cx - 3, y + 5, 2, 2);
-        ctx.fillRect(cx + 2, y + 5, 2, 2);
-      }
-
-      function drawNoWifi(obstacle) {
-        const cx = obstacle.x + obstacle.width / 2;
-        const cy = obstacle.y + obstacle.height - 5;
-
-        ctx.strokeStyle = "rgba(247, 250, 246, 0.7)";
-        ctx.lineWidth = 1.7;
-        for (let radius = 8; radius <= 22; radius += 7) {
-          ctx.beginPath();
-          ctx.arc(cx, cy, radius, Math.PI * 1.15, Math.PI * 1.85);
-          ctx.stroke();
-        }
-
-        ctx.fillStyle = "rgba(247, 250, 246, 0.78)";
-        ctx.beginPath();
-        ctx.arc(cx, cy, 2.6, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.strokeStyle = "rgba(255, 96, 96, 0.84)";
-        ctx.lineWidth = 2.2;
-        ctx.beginPath();
-        ctx.moveTo(obstacle.x + 5, obstacle.y + 4);
-        ctx.lineTo(obstacle.x + obstacle.width - 5, obstacle.y + obstacle.height - 3);
-        ctx.stroke();
-      }
-
-      function drawUpdate(obstacle) {
-        const x = obstacle.x + 2;
-        const y = obstacle.y + 2;
-        const size = obstacle.width - 4;
-
-        drawRoundedRect(x, y, size, size, 5);
-        ctx.fillStyle = "rgba(58, 140, 255, 0.34)";
-        ctx.fill();
-        ctx.strokeStyle = "rgba(103, 176, 255, 0.86)";
-        ctx.stroke();
-
-        ctx.fillStyle = "rgba(224, 241, 255, 0.78)";
-        ctx.fillRect(x + 7, y + 7, 7, 7);
-        ctx.fillRect(x + 16, y + 7, 7, 7);
-        ctx.fillRect(x + 7, y + 16, 7, 7);
-        ctx.fillRect(x + 16, y + 16, 7, 7);
-        ctx.fillStyle = "rgba(103, 176, 255, 0.92)";
-        ctx.font = "8px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-        ctx.fillText("UPD", x + 7, y + size - 4);
-      }
-
-      function drawBsod(obstacle) {
-        const x = obstacle.x;
-        const y = obstacle.y;
-
-        drawRoundedRect(x, y, obstacle.width, obstacle.height, 4);
-        ctx.fillStyle = "rgba(35, 92, 226, 0.72)";
-        ctx.fill();
-        ctx.strokeStyle = "rgba(132, 185, 255, 0.9)";
-        ctx.stroke();
-
-        ctx.fillStyle = "rgba(235, 246, 255, 0.9)";
-        ctx.font = "700 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-        ctx.fillText(":(", x + 7, y + 13);
-        ctx.font = "7px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-        ctx.fillText("BSOD", x + 7, y + 24);
-      }
-
-      function drawCollectible(collectible) {
-        const x = collectible.x;
-        const y = collectible.y + Math.sin(collectible.bob) * 3;
-        const cx = x + collectible.width / 2;
-        const cy = y + collectible.height / 2;
-
-        ctx.save();
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = collectible.kind === "patch" ? "rgba(143, 247, 210, 0.4)" : collectible.kind === "coffee" ? "rgba(255, 212, 138, 0.38)" : "rgba(135, 168, 255, 0.4)";
-
-        if (collectible.kind === "patch") {
-          drawRoundedRect(x + 3, y + 3, 16, 16, 4);
-          ctx.fillStyle = "rgba(143, 247, 210, 0.22)";
-          ctx.fill();
-          ctx.strokeStyle = "rgba(184, 255, 232, 0.82)";
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(x + 7, y + 11);
-          ctx.lineTo(x + 10, y + 14);
-          ctx.lineTo(x + 16, y + 8);
-          ctx.stroke();
-        } else if (collectible.kind === "coffee") {
-          drawRoundedRect(x + 5, y + 7, 12, 10, 3);
-          ctx.fillStyle = "rgba(255, 212, 138, 0.25)";
-          ctx.fill();
-          ctx.strokeStyle = "rgba(255, 225, 170, 0.84)";
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.arc(x + 17, y + 12, 3, -Math.PI / 2, Math.PI / 2);
-          ctx.stroke();
-          ctx.fillStyle = "rgba(255, 225, 170, 0.5)";
-          ctx.fillRect(x + 7, y + 4, 2, 2);
-          ctx.fillRect(x + 12, y + 3, 2, 2);
         } else {
-          ctx.font = "7px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
           ctx.beginPath();
-          ctx.moveTo(cx, y + 2);
-          ctx.lineTo(x + 18, y + 7);
-          ctx.lineTo(x + 16, y + 17);
-          ctx.lineTo(cx, y + 21);
-          ctx.lineTo(x + 6, y + 17);
-          ctx.lineTo(x + 4, y + 7);
-          ctx.closePath();
-          ctx.fillStyle = "rgba(135, 168, 255, 0.22)";
-          ctx.fill();
-          ctx.strokeStyle = "rgba(165, 195, 255, 0.84)";
-          ctx.stroke();
-          ctx.fillStyle = "rgba(184, 255, 232, 0.72)";
-          ctx.fillText("FW", x + 7, y + 14);
+          ctx.rect(x, y, rectWidth, rectHeight);
         }
-
+      }
+    
+      function drawLocation(chapter) {
+        return;
+      }
+    
+      function drawIncident(incident) {
+        const x = incident.x;
+        const y = incident.y + Math.sin(incident.wobble) * 1.5;
+        const cx = x + incident.width / 2;
+        const cy = y + incident.height / 2;
+        ctx.save();
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = incident.kind === "virus" || incident.kind === "bug" ? "rgba(255, 86, 86, 0.35)" : "rgba(135, 168, 255, 0.28)";
+        if (incident.kind === "virus") {
+          ctx.strokeStyle = "rgba(255, 96, 96, 0.78)";
+          ctx.lineWidth = 1.4;
+          for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 4) {
+            ctx.beginPath();
+            ctx.moveTo(cx + Math.cos(angle) * 10, cy + Math.sin(angle) * 10);
+            ctx.lineTo(cx + Math.cos(angle) * 17, cy + Math.sin(angle) * 17);
+            ctx.stroke();
+          }
+          ctx.beginPath();
+          ctx.arc(cx, cy, 11, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(255, 68, 68, 0.28)";
+          ctx.fill();
+          ctx.stroke();
+          ctx.fillStyle = "rgba(255, 230, 230, 0.9)";
+          ctx.fillRect(cx - 4, cy - 3, 3, 3);
+          ctx.fillRect(cx + 3, cy + 2, 3, 3);
+        } else if (incident.kind === "bug") {
+          ctx.strokeStyle = "rgba(255, 97, 97, 0.72)";
+          ctx.lineWidth = 1.4;
+          for (let index = 0; index < 3; index += 1) {
+            const offset = -8 + index * 8;
+            ctx.beginPath();
+            ctx.moveTo(cx - 9, cy + offset * 0.15);
+            ctx.lineTo(cx - 21, cy + offset + 3);
+            ctx.moveTo(cx + 9, cy + offset * 0.15);
+            ctx.lineTo(cx + 21, cy + offset + 3);
+            ctx.stroke();
+          }
+          ctx.beginPath();
+          ctx.ellipse(cx, cy + 2, 13, 9, 0, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(42, 10, 14, 0.96)";
+          ctx.fill();
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.ellipse(cx, cy - 10, 7, 5, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        } else if (incident.kind === "wifi") {
+          ctx.strokeStyle = "rgba(247, 250, 246, 0.72)";
+          ctx.lineWidth = 1.8;
+          for (let radius = 8; radius <= 22; radius += 7) {
+            ctx.beginPath();
+            ctx.arc(cx, cy + 9, radius, Math.PI * 1.16, Math.PI * 1.84);
+            ctx.stroke();
+          }
+          ctx.fillStyle = "rgba(247, 250, 246, 0.78)";
+          ctx.beginPath();
+          ctx.arc(cx, cy + 10, 2.8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = "rgba(255, 96, 96, 0.9)";
+          ctx.lineWidth = 2.4;
+          ctx.beginPath();
+          ctx.moveTo(x + 4, y + 3);
+          ctx.lineTo(x + incident.width - 4, y + incident.height - 3);
+          ctx.stroke();
+        } else if (incident.kind === "update") {
+          roundedRect(x + 2, y + 2, incident.width - 4, incident.height - 4, 5);
+          ctx.fillStyle = "rgba(58, 140, 255, 0.34)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(103, 176, 255, 0.86)";
+          ctx.stroke();
+          ctx.fillStyle = "rgba(224, 241, 255, 0.78)";
+          ctx.fillRect(x + 9, y + 9, 7, 7);
+          ctx.fillRect(x + 20, y + 9, 7, 7);
+          ctx.fillRect(x + 9, y + 20, 7, 7);
+          ctx.fillRect(x + 20, y + 20, 7, 7);
+        } else if (incident.kind === "fire") {
+          ctx.shadowColor = "rgba(255, 126, 58, 0.42)";
+          ctx.strokeStyle = "rgba(255, 168, 84, 0.82)";
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(cx - 13, y + incident.height - 2);
+          ctx.quadraticCurveTo(cx - 18, y + 12, cx - 5, y + 11);
+          ctx.quadraticCurveTo(cx - 7, y + 1, cx + 3, y + 8);
+          ctx.quadraticCurveTo(cx + 12, y + 12, cx + 10, y + incident.height - 2);
+          ctx.closePath();
+          ctx.fillStyle = "rgba(255, 92, 42, 0.36)";
+          ctx.fill();
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(cx - 5, y + incident.height - 3);
+          ctx.quadraticCurveTo(cx - 7, y + 16, cx + 1, y + 15);
+          ctx.quadraticCurveTo(cx + 7, y + 17, cx + 5, y + incident.height - 3);
+          ctx.closePath();
+          ctx.fillStyle = "rgba(255, 216, 123, 0.72)";
+          ctx.fill();
+        } else {
+          roundedRect(x + 1, y + 2, incident.width - 2, incident.height - 4, 5);
+          ctx.fillStyle = "rgba(32, 88, 210, 0.72)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(132, 185, 255, 0.9)";
+          ctx.stroke();
+          ctx.fillStyle = "rgba(235, 246, 255, 0.85)";
+          ctx.fillRect(x + 8, y + 9, 18, 3);
+          ctx.fillRect(x + 8, y + 16, 30, 3);
+          ctx.strokeStyle = "rgba(255, 116, 116, 0.82)";
+          ctx.lineWidth = 1.6;
+          ctx.beginPath();
+          ctx.moveTo(x + 31, y + 8);
+          ctx.lineTo(x + 39, y + 16);
+          ctx.moveTo(x + 39, y + 8);
+          ctx.lineTo(x + 31, y + 16);
+          ctx.stroke();
+          ctx.strokeStyle = "rgba(184, 255, 232, 0.34)";
+          ctx.beginPath();
+          ctx.moveTo(x + 6, y + incident.height - 8);
+          ctx.lineTo(x + 17, y + incident.height - 18);
+          ctx.lineTo(x + 27, y + incident.height - 11);
+          ctx.lineTo(x + 40, y + incident.height - 23);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+    
+      function drawPickup(pickup) {
+        const x = pickup.x;
+        const y = pickup.y + Math.sin(pickup.spin) * 3;
+        const cx = x + pickup.width / 2;
+        ctx.save();
+        ctx.translate(cx, y + pickup.height / 2);
+        ctx.rotate(Math.sin(pickup.spin) * 0.16);
+        ctx.translate(-cx, -(y + pickup.height / 2));
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = "rgba(135, 168, 255, 0.42)";
+        ctx.beginPath();
+        ctx.moveTo(cx, y + 2);
+        ctx.lineTo(x + 18, y + 7);
+        ctx.lineTo(x + 16, y + 17);
+        ctx.lineTo(cx, y + 21);
+        ctx.lineTo(x + 6, y + 17);
+        ctx.lineTo(x + 4, y + 7);
+        ctx.closePath();
+        ctx.fillStyle = "rgba(135, 168, 255, 0.22)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(165, 195, 255, 0.86)";
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(cx, y + 11, 5, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.72)";
+        ctx.stroke();
         ctx.restore();
       }
 
-      function drawObstacle(obstacle) {
-        if (obstacle.kind === "virus") {
-          drawVirus(obstacle);
-        } else if (obstacle.kind === "bug") {
-          drawBug(obstacle);
-        } else if (obstacle.kind === "wifi") {
-          drawNoWifi(obstacle);
-        } else if (obstacle.kind === "update") {
-          drawUpdate(obstacle);
-        } else {
-          drawBsod(obstacle);
+      function wrapSpeech(text, maxWidth) {
+        const words = text.split(" ");
+        const lines = [];
+        let line = "";
+        for (const word of words) {
+          const test = line ? `${line} ${word}` : word;
+          if (ctx.measureText(test).width > maxWidth && line) {
+            lines.push(line);
+            line = word;
+          } else {
+            line = test;
+          }
         }
-
-        ctx.fillStyle = "rgba(247, 250, 246, 0.36)";
-        ctx.font = "8px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-        ctx.fillText(obstacle.label, obstacle.x, obstacle.y - 5);
+        if (line) lines.push(line);
+        return lines.slice(0, 3);
       }
 
-      function drawTechnician() {
-        const stride = player.grounded && running ? Math.sin(score * 5.1) : -0.55;
-        const bob = player.grounded && running ? Math.abs(Math.sin(score * 5.1)) * 1.4 : 0;
-        const x = player.x;
-        const y = player.y;
-
-        ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
-        ctx.beginPath();
-        ctx.ellipse(x + 20, ground + 4, 19, 4, 0, 0, Math.PI * 2);
+      function drawSpeech() {
+        if (!speech) return;
+        ctx.save();
+        const alpha = Math.min(1, speech.life / 0.35, (speech.max - speech.life) / 0.25);
+        ctx.globalAlpha = Math.max(0, alpha);
+        ctx.font = "700 10px ui-sans-serif, system-ui, sans-serif";
+        const maxTextWidth = width < 460 ? 118 : 152;
+        const lines = wrapSpeech(speech.text, maxTextWidth);
+        const textWidth = Math.max(...lines.map((line) => ctx.measureText(line).width), 40);
+        const bubbleWidth = Math.min(maxTextWidth + 18, textWidth + 18);
+        const bubbleHeight = 16 + lines.length * 13;
+        const anchorX = player.x + 34;
+        const anchorY = Math.max(12, player.y - 8);
+        const x = Math.min(width - bubbleWidth - 8, Math.max(8, anchorX));
+        const y = Math.max(8, anchorY - bubbleHeight);
+        roundedRect(x, y, bubbleWidth, bubbleHeight, 8);
+        ctx.fillStyle = "rgba(6, 12, 10, 0.86)";
         ctx.fill();
-
-        if (shield || coffeeTimer > 0) {
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.36)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(Math.min(x + 24, bubbleWidth + x - 18), y + bubbleHeight);
+        ctx.lineTo(Math.min(x + 36, bubbleWidth + x - 10), y + bubbleHeight);
+        ctx.lineTo(player.x + 27, Math.max(18, player.y + 8));
+        ctx.closePath();
+        ctx.fillStyle = "rgba(6, 12, 10, 0.86)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.26)";
+        ctx.stroke();
+        ctx.fillStyle = "rgba(247, 250, 246, 0.9)";
+        lines.forEach((line, index) => {
+          ctx.fillText(line, x + 9, y + 15 + index * 13);
+        });
+        ctx.restore();
+      }
+    
+      function drawTechnician() {
+        const stride = player.grounded && running ? Math.sin(player.runTime * 17) : -0.48;
+        const bob = player.grounded && running ? Math.abs(Math.sin(player.runTime * 17)) * 1.4 : 0;
+        const tilt = player.grounded ? stride * 0.022 : Math.max(-0.14, Math.min(0.14, player.velocity / 2800)) + player.flipAngle;
+        const x = player.x;
+        const y = Math.max(player.y, 6);
+        ctx.fillStyle = "rgba(0, 0, 0, 0.22)";
+        ctx.beginPath();
+        ctx.ellipse(x + 22, ground + 4, 22, 4.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+        if (shield) {
+          const shieldRatio = Math.max(0, Math.min(1, shieldTimer / 5));
+          const pulse = Math.sin(player.runTime * 10) * 1.6;
           ctx.beginPath();
-          ctx.arc(x + 22, y + 20, shield ? 28 : 23, 0, Math.PI * 2);
-          ctx.strokeStyle = shield ? "rgba(135, 168, 255, 0.36)" : "rgba(255, 212, 138, 0.32)";
-          ctx.lineWidth = 2;
+          ctx.arc(x + 23, y + 21, 29 + pulse, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * shieldRatio);
+          ctx.strokeStyle = "rgba(135, 168, 255, 0.56)";
+          ctx.lineWidth = 2.4;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(x + 23, y + 21, 32 + pulse * 0.5, 0, Math.PI * 2);
+          ctx.strokeStyle = "rgba(135, 168, 255, 0.18)";
+          ctx.lineWidth = 1.2;
           ctx.stroke();
         }
-
         ctx.save();
-        ctx.translate(x, y - bob);
-
+        ctx.translate(x + 22, y + 24 - bob);
+        ctx.rotate(tilt);
+        ctx.scale(1 / player.squash, player.squash);
+        ctx.translate(-22, -24);
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
 
-        ctx.strokeStyle = "rgba(31, 46, 42, 0.96)";
-        ctx.lineWidth = 4.2;
+        ctx.strokeStyle = "rgba(6, 10, 10, 0.98)";
+        ctx.lineWidth = 4.8;
         ctx.beginPath();
-        ctx.moveTo(18, 31);
-        ctx.lineTo(12 - stride * 3, 42);
-        ctx.moveTo(24, 31);
-        ctx.lineTo(30 + stride * 3, 42);
+        ctx.moveTo(17, 34);
+        ctx.lineTo(9 - stride * 3.4, 44);
+        ctx.moveTo(27, 34);
+        ctx.lineTo(35 + stride * 3.4, 44);
+        ctx.stroke();
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.64)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(9 - stride * 3.4, 44);
+        ctx.lineTo(4 - stride * 3.4, 44);
+        ctx.moveTo(35 + stride * 3.4, 44);
+        ctx.lineTo(41 + stride * 3.4, 44);
         ctx.stroke();
 
-        ctx.strokeStyle = "rgba(184, 255, 232, 0.72)";
-        ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        ctx.moveTo(12 - stride * 3, 42);
-        ctx.lineTo(7 - stride * 3, 42);
-        ctx.moveTo(30 + stride * 3, 42);
-        ctx.lineTo(35 + stride * 3, 42);
-        ctx.stroke();
-
-        drawRoundedRect(12, 18, 20, 18, 6);
-        ctx.fillStyle = "rgba(13, 28, 23, 0.98)";
+        roundedRect(9, 18, 27, 21, 8);
+        ctx.fillStyle = "rgba(7, 18, 17, 0.98)";
         ctx.fill();
-        ctx.strokeStyle = "rgba(184, 255, 232, 0.78)";
+        ctx.strokeStyle = "rgba(143, 247, 210, 0.76)";
         ctx.stroke();
-
-        ctx.fillStyle = "rgba(143, 247, 210, 0.18)";
-        ctx.fillRect(21, 21, 8, 12);
-        ctx.fillStyle = "rgba(247, 250, 246, 0.9)";
-        ctx.font = "7px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-        ctx.fillText("IT", 16, 29);
-
-        ctx.strokeStyle = "rgba(184, 255, 232, 0.62)";
-        ctx.lineWidth = 2.4;
-        ctx.beginPath();
-        ctx.moveTo(14, 23);
-        ctx.lineTo(8, 30 + stride * 1.2);
-        ctx.moveTo(31, 23);
-        ctx.lineTo(35, 30 - stride * 1.2);
-        ctx.stroke();
-
-        drawRoundedRect(30, 29 - stride * 1.2, 13, 10, 2);
-        ctx.fillStyle = "rgba(255, 212, 138, 0.24)";
+        roundedRect(13, 22, 18, 12, 4);
+        ctx.fillStyle = "rgba(184, 255, 232, 0.08)";
         ctx.fill();
-        ctx.strokeStyle = "rgba(255, 212, 138, 0.82)";
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(34, 29 - stride * 1.2);
-        ctx.lineTo(39, 29 - stride * 1.2);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(22, 10, 8, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(238, 198, 168, 0.96)";
-        ctx.fill();
-        ctx.strokeStyle = "rgba(247, 250, 246, 0.42)";
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.36)";
         ctx.lineWidth = 1;
         ctx.stroke();
-
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.6)";
         ctx.beginPath();
-        ctx.arc(31, 10, 2.5, -Math.PI / 2, Math.PI / 2);
-        ctx.fillStyle = "rgba(238, 198, 168, 0.85)";
-        ctx.fill();
+        ctx.moveTo(22, 18);
+        ctx.lineTo(22, 38);
+        ctx.stroke();
 
-        ctx.fillStyle = "rgba(8, 10, 9, 0.96)";
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.66)";
+        ctx.lineWidth = 2.8;
         ctx.beginPath();
-        ctx.ellipse(22, 5, 9, 5, -0.08, Math.PI, Math.PI * 2);
-        ctx.fill();
-        drawRoundedRect(13, 5, 13, 4, 2);
-        ctx.fill();
+        ctx.moveTo(13, 24);
+        ctx.lineTo(7, 31 + stride);
+        ctx.moveTo(32, 24);
+        ctx.lineTo(38, 29 - stride * 0.7);
+        ctx.stroke();
 
-        ctx.fillStyle = "rgba(8, 10, 9, 0.78)";
-        ctx.fillRect(19, 10, 2, 2);
-        ctx.fillRect(26, 10, 2, 2);
+        roundedRect(29, 23 - stride * 0.7, 21, 13, 3);
+        ctx.fillStyle = "rgba(106, 132, 155, 0.62)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(207, 232, 238, 0.92)";
+        ctx.stroke();
+        ctx.fillStyle = "rgba(184, 255, 232, 0.54)";
+        ctx.fillRect(33, 27 - stride * 0.7, 10, 1.3);
+        ctx.fillRect(33, 30 - stride * 0.7, 6, 1.2);
+        ctx.fillStyle = "rgba(247, 250, 246, 0.28)";
+        ctx.fillRect(31, 34 - stride * 0.7, 20, 2);
 
-        ctx.strokeStyle = "rgba(85, 48, 39, 0.6)";
+        roundedRect(14, 5, 18, 9, 4);
+        ctx.fillStyle = "rgba(7, 12, 12, 0.98)";
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(22, 12, 9, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(232, 190, 160, 0.98)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(247, 250, 246, 0.38)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.fillStyle = "rgba(8, 10, 9, 0.98)";
+        ctx.beginPath();
+        ctx.ellipse(22, 6, 9.8, 5.5, -0.12, Math.PI, Math.PI * 2);
+        ctx.fill();
+        roundedRect(13, 5, 17, 4, 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(17, 8);
+        ctx.lineTo(12, 13);
+        ctx.lineTo(18, 12);
+        ctx.fill();
+        ctx.strokeStyle = "rgba(19, 34, 31, 0.92)";
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(14, 12);
+        ctx.lineTo(30, 12);
+        ctx.stroke();
+        roundedRect(16, 10, 13, 5, 2.5);
+        ctx.fillStyle = "rgba(8, 17, 15, 0.66)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.48)";
+        ctx.stroke();
+        ctx.fillStyle = "rgba(8, 10, 9, 0.82)";
+        ctx.fillRect(18, 12, 2, 1.5);
+        ctx.fillRect(25, 12, 2, 1.5);
+        ctx.strokeStyle = "rgba(90, 47, 36, 0.54)";
         ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.moveTo(22, 14);
-        ctx.lineTo(25, 14);
+        ctx.moveTo(20, 17);
+        ctx.quadraticCurveTo(23, 18.2, 27, 17);
         ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(28, 12);
-        ctx.lineTo(36, 10);
-        ctx.lineTo(39, 12);
-        ctx.strokeStyle = "rgba(143, 247, 210, 0.52)";
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-
         ctx.restore();
       }
-
+    
       function drawGame() {
         ctx.clearRect(0, 0, width, height);
-
-        const chapter = chapters[currentChapter] || chapterForScore();
-        ctx.strokeStyle = chapter.color;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(width * 0.12, ground - 66);
-        ctx.lineTo(width * 0.34, ground - 88);
-        ctx.lineTo(width * 0.58, ground - 70);
-        ctx.lineTo(width * 0.82, ground - 92);
-        ctx.stroke();
-
-        ctx.fillStyle = "rgba(247, 250, 246, 0.18)";
-        ctx.font = "9px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-        ctx.fillText(gameCopy(chapter.key), Math.max(0, width - 140), 34);
-
-        ctx.strokeStyle = "rgba(184, 255, 232, 0.28)";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(0, ground + 0.5);
-        ctx.lineTo(width, ground + 0.5);
-        ctx.stroke();
-
-        bits.forEach((bit) => {
-          ctx.fillStyle = `rgba(184, 255, 232, ${bit.alpha})`;
-          ctx.font = "12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-          ctx.fillText(bit.value, bit.x, bit.y);
-        });
-
-        obstacles.forEach(drawObstacle);
-        collectibles.forEach(drawCollectible);
+        const chapter = chapters[chapterIndex] || chapterForScore();
+        ctx.save();
+        if (shake) ctx.translate((Math.random() - 0.5) * shake, (Math.random() - 0.5) * shake);
+        drawLocation(chapter);
+        if (speedFlash > 0) {
+          ctx.save();
+          ctx.globalAlpha = Math.min(0.55, speedFlash);
+          ctx.strokeStyle = chapter.color;
+          ctx.lineWidth = 1.2;
+          for (let index = 0; index < 8; index += 1) {
+            const y = 26 + index * 20;
+            const x = width - ((speedFlash * 260 + index * 73) % (width + 120));
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x - 72, y + 10);
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+        incidents.forEach(drawIncident);
+        pickups.forEach(drawPickup);
         drawTechnician();
-
+        drawSpeech();
+        sparks.forEach((spark) => {
+          ctx.fillStyle = spark.color;
+          ctx.globalAlpha = Math.max(0, spark.life);
+          ctx.fillRect(spark.x, spark.y, 3, 3);
+          ctx.globalAlpha = 1;
+        });
+        notes.forEach((note) => {
+          ctx.globalAlpha = Math.max(0, note.life);
+          ctx.fillStyle = note.color;
+          ctx.font = "700 10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+          ctx.fillText(note.text, note.x, note.y);
+          ctx.globalAlpha = 1;
+        });
         if (gameOver) {
-          ctx.fillStyle = "rgba(247, 250, 246, 0.9)";
-          ctx.font = "700 14px ui-sans-serif, system-ui, sans-serif";
+          ctx.fillStyle = "rgba(6, 9, 7, 0.48)";
+          ctx.fillRect(0, 0, width, height);
+          ctx.fillStyle = "rgba(247, 250, 246, 0.94)";
+          ctx.font = "700 15px ui-sans-serif, system-ui, sans-serif";
           ctx.textAlign = "center";
-          ctx.fillText(endMessage || gameCopy("game.over"), width / 2, height / 2 - 5);
-          ctx.fillStyle = "rgba(184, 255, 232, 0.72)";
+          ctx.fillText(endMessage || gameCopy("game.over"), width / 2, height / 2 - 8);
+          ctx.fillStyle = "rgba(184, 255, 232, 0.76)";
           ctx.font = "11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-          ctx.fillText(`${gameCopy("game.score")}: ${Math.floor(score)}  BEST: ${best}`, width / 2, height / 2 + 20);
+          ctx.fillText(`${gameCopy("game.score")}: ${Math.min(maxScore, Math.floor(score))}  BEST: ${best}`, width / 2, height / 2 + 18);
           ctx.textAlign = "left";
         }
+        ctx.restore();
       }
-
+    
       function gameLoop(timestamp = performance.now()) {
         frame = 0;
         const elapsed = lastFrameTime ? timestamp - lastFrameTime : 16.67;
         const seconds = Math.min(elapsed / 1000, 0.05);
         lastFrameTime = timestamp;
-
-        if (running && !gameOver) {
-          updateGame(seconds);
-        }
-
+        if (running && !gameOver) updateGame(seconds);
         drawGame();
-
         if (running && !gameOver) {
           frame = window.requestAnimationFrame(gameLoop);
         } else {
           lastFrameTime = 0;
         }
       }
-
+    
       function scheduleGame() {
         if (!frame) frame = window.requestAnimationFrame(gameLoop);
       }
-
+    
       function revealGame() {
         if (!revealed) {
           revealed = true;
+          focusGame();
           panel.hidden = false;
           trigger.setAttribute("aria-expanded", "true");
+          setTriggerCopy(true);
           window.requestAnimationFrame(() => {
             panel.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "end" });
           });
         }
-
         resetGame();
       }
-
+    
       function handleGamePress(event) {
         event.preventDefault();
         if (!revealed || gameOver) {
           revealGame();
           return;
         }
-
-        jump();
+        const now = performance.now();
+        if (player.grounded) {
+          lastPressTime = now;
+          jump();
+          return;
+        }
+        if (now - lastPressTime < 360) {
+          flip();
+        }
+        lastPressTime = now;
       }
-
+    
       trigger.addEventListener("click", handleGamePress);
       canvas.addEventListener("pointerdown", handleGamePress);
+      canvas.addEventListener("dblclick", (event) => {
+        event.preventDefault();
+        flip();
+      });
       window.addEventListener("resize", () => {
         if (!revealed) return;
         resizeGame();
         drawGame();
       }, { passive: true });
-
       window.addEventListener("keydown", (event) => {
         if (!revealed || (event.code !== "Space" && event.code !== "ArrowUp")) return;
         event.preventDefault();
-        if (gameOver) {
-          revealGame();
-        } else {
-          jump();
-        }
+        if (gameOver) revealGame(); else jump();
       });
-
       window.addEventListener("site-language-applied", () => {
         if (!revealed) {
           setState("game.ready");
+          setTriggerCopy(false);
           return;
         }
-
+        setTriggerCopy(true);
+        updateHud();
         setState(gameOver ? "game.over" : "game.running");
         drawGame();
       });
