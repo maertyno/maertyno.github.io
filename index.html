@@ -1661,10 +1661,45 @@
         font-size: 11px;
       }
 
+      h1 {
+        max-width: min(700px, 100%);
+        font-size: clamp(44px, 6.5vw, 88px);
+        line-height: 1.06;
+        letter-spacing: -0.028em;
+        text-wrap: balance;
+      }
+
+      .tone {
+        margin-top: -0.04em;
+        padding-top: 0.08em;
+        padding-bottom: 0.26em;
+        line-height: 1.16;
+        white-space: normal;
+        overflow-wrap: normal;
+      }
+
+      .hero-fit-line {
+        white-space: normal;
+        text-wrap: wrap;
+        overflow-wrap: anywhere;
+      }
+
+      .detail-tone {
+        font-size: 0.58em;
+        line-height: 1.12;
+        letter-spacing: -0.02em;
+        margin-top: -0.2em;
+        padding-bottom: 0.18em;
+        max-width: 11.8em;
+        white-space: normal;
+        text-align: left;
+        text-wrap: balance;
+      }
+
       .hero {
-        grid-template-columns: minmax(0, 1fr) minmax(118px, 30vw);
+        grid-template-columns: minmax(0, 1fr) minmax(154px, 39vw);
         min-height: auto;
-        gap: 10px;
+        gap: 14px;
         align-items: start;
         padding-top: 30px;
         padding-bottom: 34px;
@@ -1674,9 +1709,8 @@
         grid-column: 2;
         grid-row: 1;
         justify-self: end;
-        width: min(132px, 30vw);
-        margin-top: -4px;
-        transform: translateX(8px);
+        width: min(200px, 39vw);
+        margin-top: 4px;
       }
 
       .hero-copy {
@@ -1703,7 +1737,7 @@
       .skill-rail {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         max-width: 100%;
-        margin-top: 16px;
+        margin-top: 18px;
       }
 
       .rail-item span,
@@ -1742,31 +1776,32 @@
 
       h1 {
         max-width: 100%;
-        font-size: clamp(52px, 13.2vw, 72px);
-        line-height: 0.94;
-        letter-spacing: -0.045em;
+        font-size: clamp(35px, 10.8vw, 50px);
+        line-height: 1.04;
+        letter-spacing: -0.012em;
       }
 
       .tone {
         font-size: inherit;
         margin-top: -0.02em;
         padding-top: 0.06em;
-        padding-bottom: 0.18em;
-        line-height: 1.04;
+        padding-bottom: 0.24em;
+        line-height: 1.16;
       }
 
       .hero-fit-line {
-      white-space: nowrap;
-      text-wrap: nowrap;
-    }
+        white-space: normal;
+        text-wrap: wrap;
+        overflow-wrap: anywhere;
+      }
 
-    .detail-tone {
-        font-size: 0.54em;
-        line-height: 1.04;
-        margin-top: 0.02em;
-        padding-bottom: 0.24em;
+      .detail-tone {
+        font-size: 0.58em;
+        line-height: 1.2;
+        margin-top: -0.12em;
+        padding-bottom: 0.22em;
         text-align: left;
-        white-space: nowrap;
+        white-space: normal;
       }
 
       .lead {
@@ -1780,7 +1815,7 @@
       }
 
       .profile {
-        width: min(124px, 30vw);
+        width: min(178px, 38vw);
       }
 
       .portrait {
@@ -1932,19 +1967,18 @@
       }
 
       .hero {
-        grid-template-columns: minmax(0, 1fr) minmax(106px, 29vw);
-        column-gap: 6px;
+        grid-template-columns: minmax(0, 1fr) minmax(136px, 36vw);
+        column-gap: 9px;
       }
 
       .profile {
-        width: min(118px, 30vw);
-        margin-top: -6px;
-        transform: translateX(10px);
+        width: min(176px, 39vw);
+        margin-top: 2px;
       }
 
       h1 {
-        font-size: clamp(48px, 13.5vw, 62px);
-        line-height: 0.96;
+        font-size: clamp(33px, 10.4vw, 44px);
+        line-height: 1.03;
       }
 
       .skill-rail {
@@ -2132,113 +2166,6 @@
       .contact-band *::selection {
         background: rgba(143, 247, 210, 0.14);
         color: inherit;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .hero {
-        position: relative;
-        grid-template-columns: 1fr !important;
-        gap: 14px !important;
-        padding-top: 24px !important;
-        padding-bottom: 24px !important;
-      }
-
-      .hero-copy {
-        display: block !important;
-      }
-
-      .hero-copy h1,
-      .hero-copy .lead,
-      .hero-copy .skill-rail,
-      .hero-copy .actions {
-        grid-column: auto !important;
-        grid-row: auto !important;
-      }
-
-      .hero-copy h1 {
-        max-width: 100%;
-        padding-right: min(122px, 33vw);
-      }
-
-      h1 {
-        font-size: clamp(44px, 11.6vw, 56px) !important;
-        line-height: 0.96 !important;
-        letter-spacing: -0.036em !important;
-      }
-
-      .tone {
-        line-height: 1.02 !important;
-        padding-bottom: 0.14em !important;
-      }
-
-      .hero-fit-line {
-        display: block !important;
-        width: auto !important;
-        max-width: 100% !important;
-        white-space: normal !important;
-        text-wrap: wrap !important;
-      }
-
-      .detail-tone {
-        font-size: 0.56em !important;
-        margin-top: 0.02em !important;
-        padding-bottom: 0.16em !important;
-      }
-
-      .profile {
-        position: absolute;
-        top: 16px;
-        right: 0;
-        grid-column: auto !important;
-        grid-row: auto !important;
-        justify-self: auto !important;
-        width: min(102px, 28vw) !important;
-        margin: 0 !important;
-        transform: translateX(4px) !important;
-        z-index: 2;
-      }
-
-      .portrait {
-        border-radius: 16px;
-      }
-
-      .portrait::after {
-        inset: 6px;
-        border-radius: 12px;
-      }
-
-      .lead {
-        max-width: 100% !important;
-        margin-top: 8px !important;
-        font-size: 15px !important;
-        line-height: 1.56 !important;
-      }
-
-      .skill-rail {
-        margin-top: 14px !important;
-        gap: 8px !important;
-      }
-
-      .rail-item {
-        min-height: 68px !important;
-        padding: 11px !important;
-      }
-    }
-
-    @media (max-width: 430px) {
-      .profile {
-        width: min(96px, 27vw) !important;
-        top: 16px;
-        transform: translateX(4px) !important;
-      }
-
-      h1 {
-        font-size: clamp(42px, 13.1vw, 52px) !important;
-      }
-
-      .detail-tone {
-        font-size: 0.54em !important;
       }
     }
   </style>
@@ -3136,222 +3063,106 @@
       const runnerSpeech = {
         sk: {
           idle: [
-            "Toto urcite nie je bug. Len prekvapenie.",
-            "Wi-Fi odisla skor ako moja motivacia.",
-            "Ak to nespadne, neklikam do toho.",
-            "Ticket otvoreny. Ja tiez.",
-            "Kabel vyzera podozrivo. Ako vzdy.",
-            "Restart je odpoved, nie otazka.",
-            "Cache klame. Citim to.",
-            "Toto ma energiu pondelka.",
-            "Server dycha. Zatial.",
-            "Popupy patria do muzeaa.",
-            "Bug sa tvari nenapadne. Slabo.",
-            "Najprv panika, potom dokumentacia.",
-            "Nie je to pád, je to debug landing.",
-            "Skusim sa tvarit, ze viem co robim.",
-            "Keby tu bol log, obvinim ho.",
-            "System hovori nie. Ja hovorim hop.",
-            "Dnes opravujem pohybom.",
-            "Stlacil som nic a aj tak sa nieco stalo.",
-            "To bude len maly incident. Slavne slova.",
-            "Niekto nechal zapnuty chaos.",
-            "Antivirus by teraz tiez utekal.",
-            "Toto vyzera ako update bez varovania.",
-            "Neutekam. Robim mobilnu diagnostiku.",
-            "Keby som mal manual, preskocim ho.",
-            "Gravitacia nema admin prava.",
-            "Tento bug chce osobny pristup.",
-            "Mam plan. Je to velmi kratky plan.",
-            "Ked neviem, skocim. Ked viem, tiez.",
-            "Toto nie je hra, to je stav systemu.",
-            "CPU vo mne bezi na 100 percent.",
-            "Batéria slaba, sebavedomie plne.",
-            "Firewall drzi. Moja nervozita nie.",
-            "Zamok? Jasne, dalsi nazor systemu.",
-            "Klikol by som support, ale bezim.",
-            "Toto je presne preco existuje helpdesk.",
-            "Ak to bliká, je to dolezite. Asi.",
-            "Problem sa priblizuje velmi aktivne.",
-            "Minimalizujem riziko. Maximalne rychlo.",
-            "Nie som zaseknuty. Len renderujem rozhodnutie.",
-            "Ticho, pocuvam ako pada system.",
-            "Skusil som optimizmus. Nepomohlo.",
-            "Toto by chcelo tlacidlo Spat.",
-            "Chyba medzi nebom a zemou.",
-            "Zatial vsetko funguje. Podozrive.",
-            "Ak to prezijem, zatvorim ticket.",
-            "Ziadny problem, len vela problemov naraz.",
-            "Toto je speedrun technickej podpory.",
-            "Oprava za behu je stale oprava.",
-            "Keby to malo kabel, potknem sa oň.",
-            "Sledovanie problemu: problem sleduje mna."
+            "Ticket beží. Ja tiež.",
+            "Kábel vyzerá podozrivo, čiže normálny deň.",
+            "Najprv preverím logy, potom panika.",
+            "Reštart nechávam ako elegantnú možnosť.",
+            "Zatiaľ to funguje. To je podozrivé.",
+            "Helpdesk mode: pokojný výraz, rýchle nohy.",
+            "Tento incident má dobrý timing. Zlý, ale dobrý.",
+            "Ak to bliká, tvárim sa, že to je plánované.",
+            "Systém protestuje, ja pokračujem.",
+            "Nie je to útek. Je to terénna diagnostika.",
+            "Bug sa tvári nenápadne. Neprešlo mu to.",
+            "Oprava za behu je stále oprava.",
+            "Dnes riešim veci skôr, než ma dobehnú.",
+            "Keby tu bol manuál, otvorím ho hneď po smene."
           ],
           jump: [
-            "Hop, ticket obideny.",
-            "Preskocene. Zavriet bez komentara.",
-            "Problem pod nohami. Doslova.",
-            "Takto vyzera rychly workaround.",
-            "Skok schvaleny helpdeskom.",
-            "Prekazka bola optional.",
-            "Urobil som fyzicky escape.",
-            "Toto bol cloud jump.",
-            "Bug ma nedobehol.",
-            "Skok hotovy, logy neskor.",
-            "Preskocit je tiez riesenie.",
-            "Elegantne? Nie. Funkcne? Ano.",
-            "Nehoda odlozena.",
-            "Vypol som gravitaciu na sekundu.",
-            "O jeden problem menej v ceste.",
-            "Hop a tvarim sa kludne."
+            "Hop. Incident obídený.",
+            "Prekážka preskočená, ticket zatiaľ žije.",
+            "Rýchly workaround v praxi.",
+            "Problém zostal pod nohami.",
+            "Elegantné nie. Funkčné áno.",
+            "Skok schválený zdravým rozumom.",
+            "O jeden problém menej v ceste.",
+            "Hop a tvárim sa pokojne."
           ],
           flip: [
-            "Salto nasadene do produkcie.",
-            "Toto nebolo v changelogu.",
-            "Fyzika dostala timeout.",
-            "Backflip patch aplikovany.",
-            "Ak sa pytas, bol to test.",
-            "Toto bol restart s animaciou.",
-            "Hore nohami vidim menej problemov.",
-            "Salto zvysilo morale.",
-            "Bug je zmäteny. Vyborne.",
-            "To bolo zbytocne, ale stylove.",
-            "Toto si nezasluzilo unit test.",
-            "Zapisujem: funguje aj v otocke."
+            "Salto mimo dokumentácie.",
+            "Ak sa niekto pýta, bol to test.",
+            "Fyzika dostala krátky timeout.",
+            "Bug je zmätený. Výborne.",
+            "Zbytočné? Možno. Štýlové? Určite.",
+            "Zapisujem: funguje aj v otočke."
           ],
           shield: [
-            "Firewall na nohach aktivny.",
-            "Teraz som kratko neporazitelny.",
-            "Stit zapnuty, odvaha tiez.",
-            "Problem sa odrazil. Pekne.",
-            "Toto je moj oblubeny update.",
-            "Päť sekund bez zodpovednosti.",
-            "Bezpecnostny rezim: frajer.",
-            "Konecne ochrana pred realitou.",
-            "Toto by som si nechal.",
-            "Bug narazil na administrátora."
+            "Štít zapnutý, tempo drží.",
+            "Firewall v teréne aktívny.",
+            "Problém sa odrazil. Pekne.",
+            "Tento update si nechám.",
+            "Krátke okno bez stresu.",
+            "Bug narazil na oprávnenia."
           ],
           tier: [
-            "Aha, hra pritvrdzuje.",
-            "Viac rychlosti, menej rozmyslania.",
+            "Priorita stúpa.",
+            "Viac rýchlosti, menej priestoru na omyl.",
             "Level hore, tep hore.",
-            "System pridal problemy.",
-            "Teraz uz treba obidve oci.",
-            "Prekazky mali meeting.",
-            "Rychlost sa rozhodla byt problem.",
-            "Toto uz vyzera ako incident.",
-            "Kava by bola dobra architektura.",
-            "Prichadza vyssia priorita."
+            "Systém práve pridal prácu.",
+            "Teraz už treba obe oči.",
+            "Toto už vyzerá ako incident."
           ]
         },
         cs: {
           idle: [
-            "Tohle určitě není bug. Jen překvapení.",
-            "Wi-Fi odešla dřív než moje motivace.",
-            "Když to nespadne, neklikám do toho.",
-            "Ticket otevřený. Já taky.",
-            "Kabel vypadá podezřele. Jako vždy.",
-            "Restart je odpověď, ne otázka.",
-            "Cache lže. Cítím to.",
-            "Tohle má energii pondělí.",
-            "Server dýchá. Zatím.",
-            "Popupy patří do muzea.",
-            "Bug se tváří nenápadně. Slabě.",
-            "Nejdřív panika, potom dokumentace.",
-            "Není to pád, je to debug landing.",
-            "Zkusím se tvářit, že vím co dělám.",
-            "Kdyby tu byl log, obviním ho.",
-            "Systém říká ne. Já říkám hop.",
-            "Dnes opravuju pohybem.",
-            "Stiskl jsem nic a stejně se něco stalo.",
-            "To bude jen malý incident. Slavná slova.",
-            "Někdo nechal zapnutý chaos.",
-            "Antivirus by teď taky utíkal.",
-            "Tohle vypadá jako update bez varování.",
-            "Neutíkám. Dělám mobilní diagnostiku.",
-            "Kdybych měl manuál, přeskočím ho.",
-            "Gravitace nemá admin práva.",
-            "Tenhle bug chce osobní přístup.",
-            "Mám plán. Je velmi krátký.",
-            "Když nevím, skočím. Když vím, taky.",
-            "Tohle není hra, to je stav systému.",
-            "CPU ve mně běží na 100 procent.",
-            "Baterie slabá, sebevědomí plné.",
-            "Firewall drží. Moje nervozita ne.",
-            "Zámek? Jasně, další názor systému.",
-            "Klikl bych support, ale běžím.",
-            "Tohle je přesně proč existuje helpdesk.",
-            "Když to bliká, je to důležité. Asi.",
-            "Problém se přibližuje velmi aktivně.",
-            "Minimalizuju riziko. Maximálně rychle.",
-            "Nejsem zaseknutý. Jen renderuju rozhodnutí.",
-            "Ticho, poslouchám jak padá systém.",
-            "Zkusil jsem optimismus. Nepomohlo.",
-            "Tohle by chtělo tlačítko Zpět.",
-            "Chyba mezi nebem a zemí.",
-            "Zatím všechno funguje. Podezřelé.",
-            "Jestli to přežiju, zavřu ticket.",
-            "Žádný problém, jen hodně problémů najednou.",
-            "Tohle je speedrun technické podpory.",
+            "Ticket běží. Já taky.",
+            "Kabel vypadá podezřele, takže normální den.",
+            "Nejdřív zkontroluju logy, potom panika.",
+            "Restart nechávám jako elegantní možnost.",
+            "Zatím to funguje. To je podezřelé.",
+            "Helpdesk mode: klidný výraz, rychlé nohy.",
+            "Tenhle incident má dobré načasování. Špatné, ale dobré.",
+            "Když to bliká, tvářím se, že je to plánované.",
+            "Systém protestuje, já pokračuju.",
+            "Neutíkám. Dělám terénní diagnostiku.",
+            "Bug se tváří nenápadně. Neprošlo mu to.",
             "Oprava za běhu je pořád oprava.",
-            "Kdyby to mělo kabel, zakopnu o něj.",
-            "Sledování problému: problém sleduje mě."
+            "Dnes řeším věci dřív, než mě doběhnou.",
+            "Kdyby tu byl manuál, otevřu ho hned po směně."
           ],
           jump: [
-            "Hop, ticket obejitý.",
-            "Přeskočeno. Zavřít bez komentáře.",
-            "Problém pod nohama. Doslova.",
-            "Takhle vypadá rychlý workaround.",
-            "Skok schválen helpdeskem.",
-            "Překážka byla optional.",
-            "Udělal jsem fyzický escape.",
-            "Tohle byl cloud jump.",
-            "Bug mě nedoběhl.",
-            "Skok hotový, logy později.",
-            "Přeskočit je taky řešení.",
-            "Elegantní? Ne. Funkční? Ano.",
-            "Nehoda odložena.",
-            "Vypnul jsem gravitaci na sekundu.",
+            "Hop. Incident obejitý.",
+            "Překážka přeskočená, ticket zatím žije.",
+            "Rychlý workaround v praxi.",
+            "Problém zůstal pod nohama.",
+            "Elegantní ne. Funkční ano.",
+            "Skok schválen zdravým rozumem.",
             "O jeden problém méně v cestě.",
             "Hop a tvářím se klidně."
           ],
           flip: [
-            "Salto nasazeno do produkce.",
-            "Tohle nebylo v changelogu.",
-            "Fyzika dostala timeout.",
-            "Backflip patch aplikován.",
-            "Jestli se ptáš, byl to test.",
-            "Tohle byl restart s animací.",
-            "Vzhůru nohama vidím méně problémů.",
-            "Salto zvedlo morálku.",
+            "Salto mimo dokumentaci.",
+            "Jestli se někdo ptá, byl to test.",
+            "Fyzika dostala krátký timeout.",
             "Bug je zmatený. Výborně.",
-            "To bylo zbytečné, ale stylové.",
-            "Tohle si nezasloužilo unit test.",
+            "Zbytečné? Možná. Stylové? Určitě.",
             "Zapisuju: funguje i v otočce."
           ],
           shield: [
-            "Firewall na nohách aktivní.",
-            "Teď jsem krátce neporazitelný.",
-            "Štít zapnutý, odvaha taky.",
+            "Štít zapnutý, tempo drží.",
+            "Firewall v terénu aktivní.",
             "Problém se odrazil. Hezky.",
-            "Tohle je můj oblíbený update.",
-            "Pět sekund bez zodpovědnosti.",
-            "Bezpečnostní režim: frajer.",
-            "Konečně ochrana před realitou.",
-            "Tohle bych si nechal.",
-            "Bug narazil na administrátora."
+            "Tenhle update si nechám.",
+            "Krátké okno bez stresu.",
+            "Bug narazil na oprávnění."
           ],
           tier: [
-            "Aha, hra přitvrzuje.",
-            "Více rychlosti, méně přemýšlení.",
+            "Priorita stoupá.",
+            "Více rychlosti, méně prostoru na omyl.",
             "Level nahoru, tep nahoru.",
-            "Systém přidal problémy.",
+            "Systém právě přidal práci.",
             "Teď už to chce obě oči.",
-            "Překážky měly meeting.",
-            "Rychlost se rozhodla být problém.",
-            "Tohle už vypadá jako incident.",
-            "Káva by byla dobrá architektura.",
-            "Přichází vyšší priorita."
+            "Tohle už vypadá jako incident."
           ]
         },
         en: {
@@ -3540,10 +3351,10 @@
         const source = available.length ? available : pool;
         const text = source[Math.floor(Math.random() * source.length)];
         if (!text) return;
-        speech = { text, life: 5, max: 5 };
+        speech = { text, life: 4.2, max: 4.2 };
         recentSpeech.push(text);
         if (recentSpeech.length > 18) recentSpeech.shift();
-        speechCooldown = force ? 6 + Math.random() * 4.5 : 8 + Math.random() * 6;
+        speechCooldown = force ? 13 + Math.random() * 7 : 20 + Math.random() * 10;
       }
     
       function chapterForScore() {
@@ -3563,7 +3374,7 @@
           const baseSpeed = width < 460 ? 205 : 245;
           const tierStep = width < 460 ? 30 : 38;
           speed = Math.max(speed, baseSpeed + chapterIndex * tierStep);
-          if (Math.random() < 0.45) speak("tier", true);
+          if (Math.random() < 0.25) speak("tier", true);
           burst(Math.min(width - 90, player.x + 78), ground - 66, chapter.color);
         }
         metaNode.textContent = "";
@@ -3596,7 +3407,7 @@
         sparks = [];
         notes = [];
         speech = null;
-        speechCooldown = 3.2 + Math.random() * 3.2;
+        speechCooldown = 8 + Math.random() * 5;
         recentSpeech = [];
         score = 0;
         streak = 0;
@@ -3684,7 +3495,7 @@
         player.flipAvailable = true;
         player.flipAngle = 0;
         player.flipVelocity = 0;
-        if (Math.random() < 0.13) speak("jump");
+        if (Math.random() < 0.05) speak("jump");
       }
 
       function flip() {
@@ -3692,7 +3503,7 @@
         player.flipAvailable = false;
         player.flipVelocity = -12.5;
         player.velocity = Math.min(player.velocity, width < 460 ? -300 : -340);
-        if (Math.random() < 0.18) speak("flip");
+        if (Math.random() < 0.07) speak("flip");
         burst(player.x + player.width / 2, player.y + 18, "rgba(184, 255, 232, 0.5)");
       }
     
@@ -3721,7 +3532,7 @@
           speech.life -= seconds;
           if (speech.life <= 0) speech = null;
         }
-        if (!speech && speechCooldown <= 0 && Math.random() < seconds * 0.32) {
+        if (!speech && speechCooldown <= 0 && Math.random() < seconds * 0.1) {
           speak("idle");
         }
         if (shield) {
@@ -3811,7 +3622,7 @@
           shield = true;
           shieldTimer = 5;
           score += 18;
-          if (Math.random() < 0.55) speak("shield", true);
+          if (Math.random() < 0.22) speak("shield", true);
           burst(pickup.x + 11, pickup.y + 11, "rgba(135, 168, 255, 0.85)");
           pickups.splice(index, 1);
         }
