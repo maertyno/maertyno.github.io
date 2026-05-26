@@ -69,13 +69,15 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.56;
+      opacity: 0.46;
       background:
-        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        repeating-linear-gradient(115deg, transparent 0 88px, rgba(143, 247, 210, 0.09) 89px, transparent 92px);
-      background-size: 48px 48px, 48px 48px, 260px 260px;
-      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 78%);
+        linear-gradient(rgba(247, 250, 246, 0.042) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(247, 250, 246, 0.042) 1px, transparent 1px),
+        linear-gradient(rgba(143, 247, 210, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(143, 247, 210, 0.05) 1px, transparent 1px);
+      background-size: 56px 56px, 56px 56px, 224px 224px, 224px 224px;
+      background-position: center top;
+      mask-image: radial-gradient(ellipse at 50% 20%, rgba(0, 0, 0, 0.82), transparent 76%);
     }
 
     body::after {
@@ -84,8 +86,13 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.18;
-      background-image: radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px);
+      opacity: 0.24;
+      background:
+        radial-gradient(circle, rgba(184, 255, 232, 0.16) 0 1px, transparent 1.5px),
+        linear-gradient(90deg, transparent 0 24%, rgba(143, 247, 210, 0.045) 24% 24.25%, transparent 24.25% 76%, rgba(143, 247, 210, 0.035) 76% 76.25%, transparent 76.25%);
+      background-size: 112px 112px, 100% 100%;
+      background-position: center top;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.56), transparent 72%);
     }
 
     a {
@@ -1069,8 +1076,8 @@
       .experience-summary {
         max-width: none;
         white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        overflow: visible;
+        text-overflow: clip;
         text-align: center;
       }
 
@@ -1518,8 +1525,8 @@
 
       body::before {
         opacity: 0.38;
-        background-size: 48px 48px, 48px 48px, 220px 220px;
-        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.72), transparent 82%);
+        background-size: 56px 56px, 56px 56px, 224px 224px, 224px 224px;
+        mask-image: radial-gradient(ellipse at 50% 18%, rgba(0, 0, 0, 0.72), transparent 82%);
       }
 
       .ambient-tech {
@@ -1532,13 +1539,13 @@
         position: absolute;
         inset: -12%;
         background:
-          radial-gradient(circle at 18% 18%, rgba(143, 247, 210, 0.32) 0 2px, transparent 3px),
-          radial-gradient(circle at 74% 24%, rgba(184, 255, 232, 0.24) 0 2px, transparent 3px),
-          radial-gradient(circle at 55% 62%, rgba(135, 168, 255, 0.2) 0 2px, transparent 3px),
-          linear-gradient(115deg, transparent 0 26%, rgba(143, 247, 210, 0.08) 26.3%, transparent 27% 58%, rgba(135, 168, 255, 0.065) 58.4%, transparent 59%);
-        background-size: 220px 220px, 180px 180px, 260px 260px, 260px 260px;
+          radial-gradient(circle, rgba(184, 255, 232, 0.18) 0 1px, transparent 1.5px),
+          linear-gradient(rgba(143, 247, 210, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(143, 247, 210, 0.045) 1px, transparent 1px);
+        background-size: 104px 104px, 208px 208px, 208px 208px;
+        background-position: center top;
         filter: blur(0.1px);
-        animation: mobileSignalDrift 9s ease-in-out infinite;
+        animation: mobileSignalDrift 12s ease-in-out infinite;
       }
 
       .ambient-tech::after {
@@ -2184,12 +2191,12 @@
               <span class="location" data-i18n="experience.leo.location">Bratislava, Slovakia · Hybrid</span>
             </div>
             <div class="experience-details">
-              <p class="experience-summary" data-i18n="experience.leo.copy">Každodenná podpora používateľov, koncových zariadení a lokálneho IT prostredia; veci riešim tak, aby po mne ostal jasný postup.</p>
+              <p class="experience-summary" data-i18n="experience.leo.copy">Samostatná IT podpora používateľov, správa zariadení a lokálneho IT prostredia.</p>
               <div class="experience-skills">
-                <span><b data-i18n="experience.leo.skill1">Samostatné riešenie</b></span>
+                <span><b data-i18n="experience.leo.skill1">Samostatnosť</b></span>
                 <span><b data-i18n="experience.leo.skill2">Podpora používateľov</b></span>
                 <span><b data-i18n="experience.leo.skill3">Správa zariadení</b></span>
-                <span><b data-i18n="experience.leo.skill4">Lokálne IT prostredie</b></span>
+                <span><b data-i18n="experience.leo.skill4">Lokálne IT</b></span>
               </div>
             </div>
           </article>
@@ -2202,11 +2209,11 @@
               <span class="location" data-i18n="experience.ikea.location">Bratislava, Slovakia · On-site</span>
             </div>
             <div class="experience-details">
-              <p class="experience-summary" data-i18n="experience.ikea.copy">Technická podpora tímov, pracovísk a zariadení v prevádzke, kde musí byť riešenie rýchle, zrozumiteľné a použiteľné hneď.</p>
+              <p class="experience-summary" data-i18n="experience.ikea.copy">Technická podpora tímov, pracovísk a zariadení v rýchlej prevádzke.</p>
               <div class="experience-skills">
-                <span><b data-i18n="experience.ikea.skill1">Denná technická podpora</b></span>
-                <span><b data-i18n="experience.ikea.skill2">Riešenie problémov pod tlakom</b></span>
-                <span><b data-i18n="experience.ikea.skill3">Komunikácia s tímami</b></span>
+                <span><b data-i18n="experience.ikea.skill1">Technická podpora</b></span>
+                <span><b data-i18n="experience.ikea.skill2">Riešenie incidentov</b></span>
+                <span><b data-i18n="experience.ikea.skill3">Tímová komunikácia</b></span>
                 <span><b data-i18n="experience.ikea.skill4">Používateľské školenia</b></span>
               </div>
             </div>
@@ -2220,12 +2227,12 @@
               <span class="location" data-i18n="experience.pcexpres.location">Západné a stredné Slovensko · On-site</span>
             </div>
             <div class="experience-details">
-              <p class="experience-summary" data-i18n="experience.pcexpres.copy">Diagnostika pred zákazníkom, opravy telefónov a PC, vysvetlenie nálezu a kontrola zariadenia po oprave.</p>
+              <p class="experience-summary" data-i18n="experience.pcexpres.copy">Diagnostika pred zákazníkom, opravy telefónov a PC, výstupná kontrola servisu.</p>
               <div class="experience-skills">
-                <span><b data-i18n="experience.pcexpres.skill1">Diagnostika porúch</b></span>
+                <span><b data-i18n="experience.pcexpres.skill1">Diagnostika</b></span>
                 <span><b data-i18n="experience.pcexpres.skill2">Opravy telefónov a PC</b></span>
-                <span><b data-i18n="experience.pcexpres.skill3">Komunikácia so zákazníkom</b></span>
-                <span><b data-i18n="experience.pcexpres.skill4">Zodpovednosť za výsledok</b></span>
+                <span><b data-i18n="experience.pcexpres.skill3">Zákaznícka komunikácia</b></span>
+                <span><b data-i18n="experience.pcexpres.skill4">Kvalita opravy</b></span>
               </div>
             </div>
           </article>
@@ -2238,9 +2245,9 @@
               <span class="location" data-i18n="experience.fixservis.location">Nitra, Slovakia · On-site</span>
             </div>
             <div class="experience-details">
-              <p class="experience-summary" data-i18n="experience.fixservis.copy">Autorizovaný servis Huawei: diagnostika, servisné postupy výrobcu, práca s dielmi a finálna kontrola kvality.</p>
+              <p class="experience-summary" data-i18n="experience.fixservis.copy">Autorizovaný servis Huawei: diagnostika, servisné postupy a kontrola kvality.</p>
               <div class="experience-skills">
-                <span><b data-i18n="experience.fixservis.skill1">Autorizované servisné postupy</b></span>
+                <span><b data-i18n="experience.fixservis.skill1">Servisné postupy</b></span>
                 <span><b data-i18n="experience.fixservis.skill2">Diagnostika zariadení</b></span>
                 <span><b data-i18n="experience.fixservis.skill3">Opravy podľa štandardov</b></span>
                 <span><b data-i18n="experience.fixservis.skill4">Kontrola kvality</b></span>
@@ -2271,7 +2278,7 @@
       <span>© <span id="year"></span> Martin Nagy</span>
     </footer>
 
-    <section class="easter-egg shell reveal" aria-label="Mini game" data-runner>
+    <section class="easter-egg shell" aria-label="Mini game" data-runner>
           <button class="easter-trigger" type="button" data-game-trigger aria-expanded="false" aria-controls="binary-runner" data-i18n="game.prompt">Toto určite nie je skrytá minihra</button>
       <div class="binary-runner" id="binary-runner" hidden>
         <div class="binary-runner-head">
@@ -2374,21 +2381,21 @@
       "experience.leo.role": "IT Špecialista",
       "experience.leo.duration": "máj 2025 - súčasnosť",
       "experience.leo.location": "Bratislava, Slovakia · Hybrid",
-      "experience.leo.copy": "Každodenná podpora používateľov, koncových zariadení a lokálneho IT prostredia; veci riešim tak, aby po mne ostal jasný postup.",
-      "experience.leo.skill1": "Samostatné riešenie",
+      "experience.leo.copy": "Samostatná IT podpora používateľov, správa zariadení a lokálneho IT prostredia.",
+      "experience.leo.skill1": "Samostatnosť",
       "experience.leo.skill2": "Podpora používateľov",
       "experience.leo.skill3": "Správa zariadení",
-      "experience.leo.skill4": "Lokálne IT prostredie",
+      "experience.leo.skill4": "Lokálne IT",
       "experience.ikea.company": "IKEA · Plný úväzok",
       "experience.ikea.companyName": "IKEA",
       "experience.ikea.workType": "Plný úväzok",
       "experience.ikea.role": "Špecialista technickej podpory",
       "experience.ikea.duration": "apríl 2023 - apríl 2025",
       "experience.ikea.location": "Bratislava, Slovakia · On-site",
-      "experience.ikea.copy": "Technická podpora tímov, pracovísk a zariadení v prevádzke, kde musí byť riešenie rýchle, zrozumiteľné a použiteľné hneď.",
-      "experience.ikea.skill1": "Denná technická podpora",
-      "experience.ikea.skill2": "Riešenie problémov pod tlakom",
-      "experience.ikea.skill3": "Komunikácia s tímami",
+      "experience.ikea.copy": "Technická podpora tímov, pracovísk a zariadení v rýchlej prevádzke.",
+      "experience.ikea.skill1": "Technická podpora",
+      "experience.ikea.skill2": "Riešenie incidentov",
+      "experience.ikea.skill3": "Tímová komunikácia",
       "experience.ikea.skill4": "Používateľské školenia",
       "experience.pcexpres.company": "PCexpres · FREELANCE",
       "experience.pcexpres.companyName": "PCexpres",
@@ -2396,19 +2403,19 @@
       "experience.pcexpres.role": "Servisný technik mobilných zariadení",
       "experience.pcexpres.duration": "október 2021 - apríl 2023",
       "experience.pcexpres.location": "Západné a stredné Slovensko · On-site",
-      "experience.pcexpres.copy": "Diagnostika pred zákazníkom, opravy telefónov a PC, vysvetlenie nálezu a kontrola zariadenia po oprave.",
-      "experience.pcexpres.skill1": "Diagnostika porúch",
+      "experience.pcexpres.copy": "Diagnostika pred zákazníkom, opravy telefónov a PC, výstupná kontrola servisu.",
+      "experience.pcexpres.skill1": "Diagnostika",
       "experience.pcexpres.skill2": "Opravy telefónov a PC",
-      "experience.pcexpres.skill3": "Komunikácia so zákazníkom",
-      "experience.pcexpres.skill4": "Zodpovednosť za výsledok",
+      "experience.pcexpres.skill3": "Zákaznícka komunikácia",
+      "experience.pcexpres.skill4": "Kvalita opravy",
       "experience.fixservis.company": "FixServis · Plný úväzok",
       "experience.fixservis.companyName": "FixServis",
       "experience.fixservis.workType": "Plný úväzok",
       "experience.fixservis.role": "Autorizovaný technik Huawei",
       "experience.fixservis.duration": "október 2019 - október 2021",
       "experience.fixservis.location": "Nitra, Slovakia · On-site",
-      "experience.fixservis.copy": "Autorizovaný servis Huawei: diagnostika, servisné postupy výrobcu, práca s dielmi a finálna kontrola kvality.",
-      "experience.fixservis.skill1": "Autorizované servisné postupy",
+      "experience.fixservis.copy": "Autorizovaný servis Huawei: diagnostika, servisné postupy a kontrola kvality.",
+      "experience.fixservis.skill1": "Servisné postupy",
       "experience.fixservis.skill2": "Diagnostika zariadení",
       "experience.fixservis.skill3": "Opravy podľa štandardov",
       "experience.fixservis.skill4": "Kontrola kvality",
@@ -2417,6 +2424,7 @@
       "game.prompt.active": "Dobre no... možno trochu je.",
       "game.score": "Skóre",
       "game.ready": "Jeden klik skok. Dvojklik vo vzduchu salto. Shield drží 5 sekúnd alebo jeden hit.",
+      "game.hint": "Klik / medzerník = skok · dvojklik = backflip",
       "game.running": "Run beží",
       "game.over": "Smena skončila. Klikni pre reštart.",
       "game.over.ticket": "Technik zakopol o bug.",
@@ -2462,21 +2470,21 @@
       "experience.leo.role": "IT Specialista",
       "experience.leo.duration": "květen 2025 - současnost",
       "experience.leo.location": "Bratislava, Slovakia · Hybrid",
-      "experience.leo.copy": "Každodenní podpora uživatelů, koncových zařízení a lokálního IT prostředí; věci řeším tak, aby po mně zůstal jasný postup.",
-      "experience.leo.skill1": "Samostatné řešení",
+      "experience.leo.copy": "Samostatná IT podpora uživatelů, správa zařízení a lokálního IT prostředí.",
+      "experience.leo.skill1": "Samostatnost",
       "experience.leo.skill2": "Podpora uživatelů",
       "experience.leo.skill3": "Správa zařízení",
-      "experience.leo.skill4": "Lokální IT prostředí",
+      "experience.leo.skill4": "Lokální IT",
       "experience.ikea.company": "IKEA · Plný úvazek",
       "experience.ikea.companyName": "IKEA",
       "experience.ikea.workType": "Plný úvazek",
       "experience.ikea.role": "Specialista technické podpory",
       "experience.ikea.duration": "duben 2023 - duben 2025",
       "experience.ikea.location": "Bratislava, Slovakia · On-site",
-      "experience.ikea.copy": "Technická podpora týmů, pracovišť a zařízení v provozu, kde musí být řešení rychlé, srozumitelné a použitelné hned.",
-      "experience.ikea.skill1": "Denní technická podpora",
-      "experience.ikea.skill2": "Řešení problémů pod tlakem",
-      "experience.ikea.skill3": "Komunikace s týmy",
+      "experience.ikea.copy": "Technická podpora týmů, pracovišť a zařízení v rychlém provozu.",
+      "experience.ikea.skill1": "Technická podpora",
+      "experience.ikea.skill2": "Řešení incidentů",
+      "experience.ikea.skill3": "Týmová komunikace",
       "experience.ikea.skill4": "Školení uživatelů",
       "experience.pcexpres.company": "PCexpres · FREELANCE",
       "experience.pcexpres.companyName": "PCexpres",
@@ -2484,19 +2492,19 @@
       "experience.pcexpres.role": "Servisní technik mobilních zařízení",
       "experience.pcexpres.duration": "říjen 2021 - duben 2023",
       "experience.pcexpres.location": "Západní a střední Slovensko · On-site",
-      "experience.pcexpres.copy": "Diagnostika před zákazníkem, opravy telefonů a PC, vysvětlení nálezu a kontrola zařízení po opravě.",
-      "experience.pcexpres.skill1": "Diagnostika závad",
+      "experience.pcexpres.copy": "Diagnostika před zákazníkem, opravy telefonů a PC, výstupní kontrola servisu.",
+      "experience.pcexpres.skill1": "Diagnostika",
       "experience.pcexpres.skill2": "Opravy telefonů a PC",
-      "experience.pcexpres.skill3": "Komunikace se zákazníkem",
-      "experience.pcexpres.skill4": "Odpovědnost za výsledek",
+      "experience.pcexpres.skill3": "Zákaznická komunikace",
+      "experience.pcexpres.skill4": "Kvalita opravy",
       "experience.fixservis.company": "FixServis · Plný úvazek",
       "experience.fixservis.companyName": "FixServis",
       "experience.fixservis.workType": "Plný úvazek",
       "experience.fixservis.role": "Autorizovaný technik Huawei",
       "experience.fixservis.duration": "říjen 2019 - říjen 2021",
       "experience.fixservis.location": "Nitra, Slovakia · On-site",
-      "experience.fixservis.copy": "Autorizovaný servis Huawei: diagnostika, servisní postupy výrobce, práce s díly a finální kontrola kvality.",
-      "experience.fixservis.skill1": "Autorizované servisní postupy",
+      "experience.fixservis.copy": "Autorizovaný servis Huawei: diagnostika, servisní postupy a kontrola kvality.",
+      "experience.fixservis.skill1": "Servisní postupy",
       "experience.fixservis.skill2": "Diagnostika zařízení",
       "experience.fixservis.skill3": "Opravy podle standardů",
       "experience.fixservis.skill4": "Kontrola kvality",
@@ -2505,6 +2513,7 @@
       "game.prompt.active": "Dobře no... možná trochu je.",
       "game.score": "Skóre",
       "game.ready": "Jeden klik skok. Dvojklik ve vzduchu salto. Shield drží 5 sekund nebo jeden hit.",
+      "game.hint": "Klik / mezerník = skok · dvojklik = backflip",
       "game.running": "Run běží",
       "game.over": "Směna skončila. Klikni pro restart.",
       "game.over.ticket": "Technik zakopl o bug.",
@@ -2550,20 +2559,20 @@
       "experience.leo.role": "IT Specialist",
       "experience.leo.duration": "May 2025 - Present",
       "experience.leo.location": "Bratislava, Slovakia · Hybrid",
-      "experience.leo.copy": "Daily support for users, endpoint devices, and the local IT environment; I keep fixes clear enough that the next step is easy to follow.",
-      "experience.leo.skill1": "Independent solving",
+      "experience.leo.copy": "Independent IT support for users, device management, and local IT operations.",
+      "experience.leo.skill1": "Independence",
       "experience.leo.skill2": "User support",
       "experience.leo.skill3": "Device management",
-      "experience.leo.skill4": "Local IT environment",
+      "experience.leo.skill4": "Local IT",
       "experience.ikea.company": "IKEA · Full-time",
       "experience.ikea.companyName": "IKEA",
       "experience.ikea.workType": "Full-time",
       "experience.ikea.role": "Technical Support Specialist",
       "experience.ikea.duration": "Apr 2023 - Apr 2025",
       "experience.ikea.location": "Bratislava, Slovakia · On-site",
-      "experience.ikea.copy": "Technical support for teams, workplaces, and devices in live operations, where fixes need to be quick, clear, and usable immediately.",
-      "experience.ikea.skill1": "Daily technical support",
-      "experience.ikea.skill2": "Solving issues under pressure",
+      "experience.ikea.copy": "Technical support for teams, workplaces, and devices in fast-paced operations.",
+      "experience.ikea.skill1": "Technical support",
+      "experience.ikea.skill2": "Incident solving",
       "experience.ikea.skill3": "Team communication",
       "experience.ikea.skill4": "User training",
       "experience.pcexpres.company": "PCexpres · FREELANCE",
@@ -2572,19 +2581,19 @@
       "experience.pcexpres.role": "Mobile Device Service Technician",
       "experience.pcexpres.duration": "Oct 2021 - Apr 2023",
       "experience.pcexpres.location": "West and Central Slovakia · On-site",
-      "experience.pcexpres.copy": "Customer-facing diagnostics, phone and PC repairs, explaining findings clearly, and checking devices after the repair.",
-      "experience.pcexpres.skill1": "Fault diagnostics",
+      "experience.pcexpres.copy": "Customer-facing diagnostics, phone and PC repairs, and final service checks.",
+      "experience.pcexpres.skill1": "Diagnostics",
       "experience.pcexpres.skill2": "Phone and PC repair",
       "experience.pcexpres.skill3": "Customer communication",
-      "experience.pcexpres.skill4": "Responsibility for results",
+      "experience.pcexpres.skill4": "Repair quality",
       "experience.fixservis.company": "FixServis · Full-time",
       "experience.fixservis.companyName": "FixServis",
       "experience.fixservis.workType": "Full-time",
       "experience.fixservis.role": "Authorized Huawei Technician",
       "experience.fixservis.duration": "Oct 2019 - Oct 2021",
       "experience.fixservis.location": "Nitra, Slovakia · On-site",
-      "experience.fixservis.copy": "Authorized Huawei service: diagnostics, manufacturer procedures, parts handling, and final quality checks.",
-      "experience.fixservis.skill1": "Authorized service procedures",
+      "experience.fixservis.copy": "Authorized Huawei service: diagnostics, manufacturer procedures, and quality control.",
+      "experience.fixservis.skill1": "Service procedures",
       "experience.fixservis.skill2": "Device diagnostics",
       "experience.fixservis.skill3": "Repairs by standards",
       "experience.fixservis.skill4": "Quality control",
@@ -2593,6 +2602,7 @@
       "game.prompt.active": "Fine... maybe it kind of is.",
       "game.score": "Score",
       "game.ready": "One click to jump. Double click in air to flip. Shield lasts 5 seconds or one hit.",
+      "game.hint": "Click / Space = jump · double click = backflip",
       "game.running": "Run active",
       "game.over": "Shift over. Click to restart.",
       "game.over.ticket": "The tech tripped over a bug.",
@@ -3265,6 +3275,9 @@
       let chapterIndex = 0;
       let endMessage = "";
       let triggerTitleTimer = 0;
+      let controlHintDelay = 0;
+      let controlHintLife = 0;
+      let controlHintShown = false;
     
       function gameCopy(key) {
         const language = currentLanguage || html.lang || browserLanguageFallback();
@@ -3376,6 +3389,14 @@
         lastPressTime = 0;
         chapterIndex = 0;
         endMessage = "";
+        if (!controlHintShown) {
+          controlHintDelay = 1;
+          controlHintLife = 5;
+          controlHintShown = true;
+        } else {
+          controlHintDelay = 0;
+          controlHintLife = 0;
+        }
         running = true;
         gameOver = false;
         lastFrameTime = 0;
@@ -3469,6 +3490,11 @@
         spawnTimer -= seconds;
         pickupTimer -= seconds;
         speechCooldown = Math.max(0, speechCooldown - seconds);
+        if (controlHintDelay > 0) {
+          controlHintDelay = Math.max(0, controlHintDelay - seconds);
+        } else if (controlHintLife > 0) {
+          controlHintLife = Math.max(0, controlHintLife - seconds);
+        }
         if (speech) {
           speech.life -= seconds;
           if (speech.life <= 0) speech = null;
@@ -3882,6 +3908,40 @@
         ctx.restore();
       }
 
+      function drawControlHint() {
+        if (!running || gameOver || controlHintDelay > 0 || controlHintLife <= 0) return;
+        const hintText = gameCopy("game.hint");
+        if (!hintText) return;
+        ctx.save();
+        const age = 5 - controlHintLife;
+        const alpha = Math.min(1, controlHintLife / 0.4, age / 0.28);
+        const maxTextWidth = Math.min(width - 44, width < 460 ? 230 : 360);
+        ctx.font = "800 10.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        const lines = wrapSpeech(hintText, maxTextWidth);
+        const textWidth = Math.max(...lines.map((line) => ctx.measureText(line).width), 80);
+        const bubbleWidth = Math.min(width - 20, textWidth + 28);
+        const bubbleHeight = 20 + lines.length * 13;
+        const x = (width - bubbleWidth) / 2;
+        const y = 10;
+        ctx.globalAlpha = Math.max(0, alpha);
+        roundedRect(x, y, bubbleWidth, bubbleHeight, 999);
+        ctx.shadowColor = "rgba(143, 247, 210, 0.14)";
+        ctx.shadowBlur = 12;
+        ctx.fillStyle = "rgba(9, 24, 19, 0.82)";
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.34)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.fillStyle = "rgba(247, 250, 246, 0.88)";
+        lines.forEach((line, index) => {
+          ctx.fillText(line, width / 2, y + 13 + index * 13);
+        });
+        ctx.restore();
+      }
+
       function drawSpeech() {
         if (!speech) return;
         ctx.save();
@@ -3929,9 +3989,12 @@
         const tilt = player.grounded ? stride * 0.022 : Math.max(-0.14, Math.min(0.14, player.velocity / 2800)) + player.flipAngle;
         const x = player.x;
         const y = Math.max(player.y, 6);
-        ctx.fillStyle = "rgba(0, 0, 0, 0.22)";
+        const jumpHeight = Math.max(0, ground - player.height - player.y);
+        const shadowScale = Math.max(0.45, 1 - jumpHeight / 155);
+        const shadowAlpha = 0.1 + shadowScale * 0.12;
+        ctx.fillStyle = `rgba(0, 0, 0, ${shadowAlpha})`;
         ctx.beginPath();
-        ctx.ellipse(x + 22, ground + 4, 22, 4.5, 0, 0, Math.PI * 2);
+        ctx.ellipse(x + 22, ground + 4, 22 * shadowScale, 4.5 * (0.72 + shadowScale * 0.28), 0, 0, Math.PI * 2);
         ctx.fill();
         if (shield) {
           const shieldRatio = Math.max(0, Math.min(1, shieldTimer / 5));
@@ -4078,6 +4141,7 @@
         pickups.forEach(drawPickup);
         drawTechnician();
         drawSpeech();
+        drawControlHint();
         sparks.forEach((spark) => {
           ctx.fillStyle = spark.color;
           ctx.globalAlpha = Math.max(0, spark.life);
@@ -4681,6 +4745,15 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
 
 
 
