@@ -1662,9 +1662,9 @@
       }
 
       .hero {
-        grid-template-columns: minmax(0, 1fr) minmax(154px, 39vw);
+        grid-template-columns: minmax(0, 1fr) minmax(118px, 30vw);
         min-height: auto;
-        gap: 14px;
+        gap: 10px;
         align-items: start;
         padding-top: 30px;
         padding-bottom: 34px;
@@ -1674,8 +1674,9 @@
         grid-column: 2;
         grid-row: 1;
         justify-self: end;
-        width: min(200px, 39vw);
-        margin-top: 4px;
+        width: min(132px, 30vw);
+        margin-top: -4px;
+        transform: translateX(8px);
       }
 
       .hero-copy {
@@ -1779,7 +1780,7 @@
       }
 
       .profile {
-        width: min(178px, 38vw);
+        width: min(124px, 30vw);
       }
 
       .portrait {
@@ -1931,13 +1932,14 @@
       }
 
       .hero {
-        grid-template-columns: minmax(0, 1fr) minmax(136px, 36vw);
-        column-gap: 9px;
+        grid-template-columns: minmax(0, 1fr) minmax(106px, 29vw);
+        column-gap: 6px;
       }
 
       .profile {
-        width: min(176px, 39vw);
-        margin-top: 2px;
+        width: min(118px, 30vw);
+        margin-top: -6px;
+        transform: translateX(10px);
       }
 
       h1 {
@@ -2528,7 +2530,7 @@
       "services.repair.copy": "Diagnostikuji a opravuji telefony, tablety i počítače s jasným postupem, realistickým termínem a důrazem na spolehlivý výsledek.",
       "services.design.copy": "Tvořím přehledné weby a menší iOS prototypy se srozumitelnou strukturou a přirozeným používáním na různých zařízeních.",
       "experience.label": "Zkušenosti",
-      "experience.title": "Zkušenosti stručně. Méně buzzwordů, víc praxe.",
+      "experience.title": "Zkušenosti stručně. Detaily patří na LinkedIn.",
       "experience.leo.company": "Leo Express · Plný úvazek",
       "experience.leo.companyName": "Leo Express",
       "experience.leo.workType": "Plný úvazek",
@@ -2617,7 +2619,7 @@
       "services.repair.copy": "I diagnose and repair phones, tablets, and computers with a clear process, realistic timelines, and focus on reliable outcomes.",
       "services.design.copy": "I build clear websites and small iOS app prototypes with clean structure and practical usability across devices.",
       "experience.label": "Experience",
-      "experience.title": "Experience in brief. Less buzzwords, more real work.",
+      "experience.title": "Experience, briefly. Details belong on LinkedIn.",
       "experience.leo.company": "Leo Express · Full-time",
       "experience.leo.companyName": "Leo Express",
       "experience.leo.workType": "Full-time",
@@ -2799,8 +2801,11 @@
       const lineRect = line.getBoundingClientRect();
       const profileRect = profile?.getBoundingClientRect();
       const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
-      const safetyGap = viewportWidth <= 700 ? 0 : 24;
-      const rightLimit = profileRect && profileRect.left > lineRect.left
+      const isMobileHero = viewportWidth <= 700;
+      const overlapsProfile = profileRect && lineRect.top < profileRect.bottom - 8 && lineRect.bottom > profileRect.top + 8;
+      const shouldAvoidProfile = profileRect && profileRect.left > lineRect.left && (!isMobileHero || overlapsProfile);
+      const safetyGap = isMobileHero ? 10 : 24;
+      const rightLimit = shouldAvoidProfile
         ? profileRect.left - safetyGap
         : viewportWidth - 38;
       const availableWidth = Math.max(160, rightLimit - lineRect.left);
@@ -4849,6 +4854,7 @@
   </script>
 </body>
 </html>
+
 
 
 
