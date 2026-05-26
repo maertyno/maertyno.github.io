@@ -3264,6 +3264,7 @@
       let recentSpeech = [];
       let chapterIndex = 0;
       let endMessage = "";
+      let triggerTitleTimer = 0;
     
       function gameCopy(key) {
         const language = currentLanguage || html.lang || browserLanguageFallback();
@@ -3276,6 +3277,18 @@
 
       function setTriggerCopy(active = revealed) {
         trigger.textContent = gameCopy(active ? "game.prompt.active" : "game.prompt");
+      }
+
+      function scheduleTriggerTitle() {
+        if (triggerTitleTimer) {
+          window.clearTimeout(triggerTitleTimer);
+          triggerTitleTimer = 0;
+        }
+        setTriggerCopy(true);
+        triggerTitleTimer = window.setTimeout(() => {
+          if (!revealed) return;
+          trigger.textContent = "Ticket Run";
+        }, 5000);
       }
 
       function languageSpeech() {
@@ -3292,7 +3305,7 @@
         const source = available.length ? available : pool;
         const text = source[Math.floor(Math.random() * source.length)];
         if (!text) return;
-        speech = { text, life: 2.45, max: 2.45 };
+        speech = { text, life: 5, max: 5 };
         recentSpeech.push(text);
         if (recentSpeech.length > 18) recentSpeech.shift();
         speechCooldown = force ? 6 + Math.random() * 4.5 : 8 + Math.random() * 6;
@@ -3885,34 +3898,23 @@
         const x = Math.min(width - bubbleWidth - 8, Math.max(8, anchorX));
         const y = Math.max(8, anchorY - bubbleHeight);
         roundedRect(x, y, bubbleWidth, bubbleHeight, 10);
-        ctx.shadowColor = "rgba(143, 247, 210, 0.2)";
-        ctx.shadowBlur = 16;
-        const bubbleGradient = ctx.createLinearGradient(x, y, x + bubbleWidth, y + bubbleHeight);
-        bubbleGradient.addColorStop(0, "rgba(184, 255, 232, 0.22)");
-        bubbleGradient.addColorStop(0.42, "rgba(7, 22, 17, 0.5)");
-        bubbleGradient.addColorStop(1, "rgba(135, 168, 255, 0.18)");
-        ctx.fillStyle = bubbleGradient;
+        ctx.shadowColor = "rgba(143, 247, 210, 0.14)";
+        ctx.shadowBlur = 12;
+        ctx.fillStyle = "rgba(9, 24, 19, 0.8)";
         ctx.fill();
         ctx.shadowBlur = 0;
-        ctx.strokeStyle = "rgba(184, 255, 232, 0.36)";
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.4)";
         ctx.lineWidth = 1;
         ctx.stroke();
-        roundedRect(x + 3, y + 3, bubbleWidth - 6, bubbleHeight - 6, 8);
-        ctx.strokeStyle = "rgba(247, 250, 246, 0.08)";
-        ctx.stroke();
-        drawBinaryBubbleFrame(x, y, bubbleWidth, bubbleHeight, alpha, speech.text.length);
         ctx.beginPath();
         ctx.moveTo(Math.min(x + 24, bubbleWidth + x - 18), y + bubbleHeight);
         ctx.lineTo(Math.min(x + 36, bubbleWidth + x - 10), y + bubbleHeight);
         ctx.lineTo(player.x + 27, Math.max(18, player.y + 8));
         ctx.closePath();
-        ctx.fillStyle = "rgba(9, 27, 21, 0.42)";
+        ctx.fillStyle = "rgba(9, 24, 19, 0.8)";
         ctx.fill();
-        ctx.strokeStyle = "rgba(184, 255, 232, 0.28)";
+        ctx.strokeStyle = "rgba(184, 255, 232, 0.38)";
         ctx.stroke();
-        ctx.font = "800 7px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
-        ctx.fillStyle = `rgba(184, 255, 232, ${0.3 * alpha})`;
-        ctx.fillText("01", Math.min(x + 31, bubbleWidth + x - 14), y + bubbleHeight - 3);
         ctx.font = "700 10.5px ui-sans-serif, system-ui, sans-serif";
         ctx.fillStyle = "rgba(247, 250, 246, 0.94)";
         lines.forEach((line, index) => {
@@ -4128,13 +4130,16 @@
           focusGame();
           panel.hidden = false;
           trigger.setAttribute("aria-expanded", "true");
-          setTriggerCopy(true);
+          scheduleTriggerTitle();
           window.requestAnimationFrame(() => {
             panel.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "end" });
+            window.setTimeout(resetGame, reducedMotion.matches ? 0 : 220);
           });
+          return;
         }
         resetGame();
       }
+
     
       function handleGamePress(event) {
         event.preventDefault();
@@ -4181,10 +4186,11 @@
       window.addEventListener("site-language-applied", () => {
         if (!revealed) {
           setState("game.ready");
+          if (triggerTitleTimer) { window.clearTimeout(triggerTitleTimer); triggerTitleTimer = 0; }
           setTriggerCopy(false);
           return;
         }
-        setTriggerCopy(true);
+        scheduleTriggerTitle();
         updateHud();
         setState(gameOver ? "game.over" : "game.running");
         drawGame();
@@ -4205,7 +4211,7 @@
       }
 
       function trimElements() {
-        while (elements.length > 34) {
+        while (elements.length > 24) {
           const item = elements.shift();
           item.el.remove();
         }
@@ -4296,7 +4302,7 @@
 
       window.addEventListener("pointermove", (event) => {
         const now = performance.now();
-        if (now - lastSpawn < 78) return;
+        if (now - lastSpawn < 110) return;
 
         const point = { x: event.clientX, y: event.clientY };
         addNode(point.x, point.y);
@@ -4338,7 +4344,7 @@
     }
 
     function addNode() {
-        if (nodes.length > 8) nodes.shift();
+        if (nodes.length > 6) nodes.shift();
         const edge = Math.floor(Math.random() * 4);
         const start = [
             { x: Math.random() * width, y: -20 },
@@ -4364,7 +4370,7 @@
     }
 
     function addBit(node) {
-        if (bits.length > 14) bits.shift();
+        if (bits.length > 10) bits.shift();
         bits.push({
             x: node.x + (Math.random() - 0.5) * 34,
             y: node.y + (Math.random() - 0.5) * 34,
@@ -4393,7 +4399,7 @@
         ctx.globalCompositeOperation = 'lighter';
         ctx.font = '11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
 
-        if (timestamp - lastSpawn > 1050 + Math.random() * 520) {
+        if (timestamp - lastSpawn > 1300 + Math.random() * 650) {
             addNode();
             lastSpawn = timestamp;
         }
@@ -4407,16 +4413,16 @@
             node.y += (node.ty - node.y) * Math.min(seconds * 0.34, 0.06);
             node.life = Math.sin(progress * Math.PI);
 
-            if (Math.random() < seconds * 0.28) addBit(node);
+            if (Math.random() < seconds * 0.18) addBit(node);
 
             for (let j = i - 1; j >= 0; j -= 1) {
                 const other = nodes[j];
                 const distance = Math.hypot(node.x - other.x, node.y - other.y);
-                if (distance < 210) {
+                if (distance < 170) {
                     ctx.beginPath();
                     ctx.moveTo(node.x, node.y);
                     ctx.lineTo(other.x, other.y);
-                    ctx.strokeStyle = `rgba(143, 247, 210, ${(1 - distance / 210) * node.life * other.life * 0.16})`;
+                    ctx.strokeStyle = `rgba(143, 247, 210, ${(1 - distance / 170) * node.life * other.life * 0.12})`;
                     ctx.lineWidth = 0.8;
                     ctx.stroke();
                 }
@@ -4445,7 +4451,7 @@
 
     window.addEventListener('resize', resizeMobileCanvas, { passive: true });
     resizeMobileCanvas();
-    for (let index = 0; index < 4; index += 1) addNode();
+    for (let index = 0; index < 3; index += 1) addNode();
     frame = window.requestAnimationFrame(renderMobileAmbient);
     window.__cursorTechEnabled = "mobile";
     }
@@ -4477,7 +4483,7 @@
         speed: 0.006 + Math.random() * 0.01
     }));
 
-    const maxParticles = 26;
+    const maxParticles = 16;
     let dpr = 1;
     let width = 0;
     let height = 0;
@@ -4493,7 +4499,7 @@
     }
 
     function resizeCanvas() {
-        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        dpr = Math.min(window.devicePixelRatio || 1, 1.2);
         width = window.innerWidth;
         height = window.innerHeight;
         canvas.width = Math.floor(width * dpr);
@@ -4533,7 +4539,7 @@
 
     function render(timestamp = performance.now()) {
         frame = 0;
-        if (lastFrameTime && timestamp - lastFrameTime < 22) {
+        if (lastFrameTime && timestamp - lastFrameTime < 28) {
             frame = window.requestAnimationFrame(render);
             return;
         }
@@ -4545,7 +4551,7 @@
         ctx.globalCompositeOperation = 'lighter';
         ctx.font = '12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
 
-        const pointerEase = 1 - Math.pow(1 - 0.045, frameStep);
+        const pointerEase = 1 - Math.pow(1 - 0.038, frameStep);
         smoothPointer.x += (pointer.x - smoothPointer.x) * pointerEase;
         smoothPointer.y += (pointer.y - smoothPointer.y) * pointerEase;
 
@@ -4559,7 +4565,7 @@
                 resetGhost(ghost);
             }
 
-            if (Math.random() < 0.06 * chanceStep) {
+            if (Math.random() < 0.035 * chanceStep) {
                 spawnParticles(ghost.x, ghost.y, 1);
             }
         });
@@ -4582,26 +4588,26 @@
             for (let p = 0; p < effectPoints.length; p += 1) {
                 const point = effectPoints[p];
                 const dist = Math.hypot(particle.x - point.x, particle.y - point.y);
-                if (dist < 300) {
-                    const influence = 1 - dist / 300;
+                if (dist < 220) {
+                    const influence = 1 - dist / 220;
                     strongestInfluence = Math.max(strongestInfluence, influence);
-                    drawLine(particle, point, influence * particle.life * 0.24, 1 + influence * 2);
+                    drawLine(particle, point, influence * particle.life * 0.18, 0.8 + influence * 1.2);
                 }
             }
 
-            const minJ = Math.max(0, i - 12);
+            const minJ = Math.max(0, i - 8);
             for (let j = i - 1; j >= minJ; j -= 1) {
                 const other = particles[j];
                 const distance = Math.hypot(particle.x - other.x, particle.y - other.y);
 
-                if (distance < 230) {
-                    drawLine(particle, other, (1 - distance / 230) * particle.life * 0.16, 0.8);
+                if (distance < 170) {
+                    drawLine(particle, other, (1 - distance / 170) * particle.life * 0.11, 0.7);
                 }
             }
 
-            const drawSize = particle.size * (1 + strongestInfluence * 2);
+            const drawSize = particle.size * (1 + strongestInfluence * 1.4);
 
-            ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * 0.55})`;
+            ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * 0.48})`;
             ctx.fillRect(
                 particle.x - drawSize * 0.08,
                 particle.y - drawSize * 0.08,
@@ -4609,7 +4615,7 @@
                 drawSize * 0.16
             );
 
-            ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * (0.18 + strongestInfluence * 0.22)})`;
+            ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * (0.14 + strongestInfluence * 0.16)})`;
             ctx.fillText(particle.bit, particle.x + 8, particle.y - 8);
         }
 
@@ -4629,7 +4635,7 @@
         pointer.y = event.clientY;
 
         const now = performance.now();
-        if (now - lastSpawn > 120) {
+        if (now - lastSpawn > 170) {
             spawnParticles(pointer.x, pointer.y, 1);
             lastSpawn = now;
         }
@@ -4649,7 +4655,7 @@
             if (particles.length < maxParticles - 2) spawnParticles(ghost.x, ghost.y, 1);
         });
         scheduleRender();
-    }, 1400);
+    }, 1800);
 }
 
     initBinaryRunner();
@@ -4675,5 +4681,13 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
 
 
