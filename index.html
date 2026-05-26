@@ -385,7 +385,7 @@
     .hero {
       display: grid;
       grid-template-columns: minmax(0, 1.18fr) minmax(170px, 0.62fr);
-      gap: clamp(24px, 4vw, 54px);
+      gap: clamp(30px, 4.8vw, 68px);
       align-items: start;
       padding: clamp(48px, 7vh, 68px) 0 clamp(72px, 9vh, 104px);
     }
@@ -423,41 +423,49 @@
     }
 
     h1 {
-      max-width: min(760px, 100%);
-      font-size: clamp(42px, 5.8vw, 78px);
-      line-height: 0.98;
-      letter-spacing: -0.028em;
+      max-width: min(840px, 100%);
+      font-size: clamp(66px, 8vw, 104px);
+      line-height: 0.96;
+      letter-spacing: -0.045em;
       text-wrap: balance;
     }
 
     .tone {
       display: block;
       max-width: 100%;
-      margin-top: -0.04em;
-      padding-top: 0.08em;
-      padding-bottom: 0.26em;
+      margin-top: -0.02em;
+      padding-top: 0.06em;
+      padding-bottom: 0.16em;
       font-size: inherit;
-      line-height: 1.16;
+      line-height: 1.02;
       letter-spacing: inherit;
       white-space: normal;
       overflow-wrap: normal;
       color: transparent;
-      background: linear-gradient(115deg, #ffffff 4%, #b8ffe8 48%, #9fd7ff 92%);
+      background: linear-gradient(112deg, #c4fff0 0%, #b5f2ff 52%, #9fd8ff 100%);
       -webkit-background-clip: text;
       background-clip: text;
     }
 
+    .hero-fit-line {
+      display: inline-block;
+      width: max-content;
+      max-width: none;
+      white-space: nowrap;
+      text-wrap: nowrap;
+    }
+
     .detail-tone {
-      font-size: 0.58em;
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-      margin-top: -0.2em;
-      padding-bottom: 0.18em;
-      max-width: 11.8em;
-      white-space: normal;
+      font-size: 0.54em;
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      margin-top: -0.02em;
+      padding-bottom: 0.22em;
+      max-width: 100%;
+      white-space: nowrap;
       text-align: left;
-      text-wrap: balance;
-      background: linear-gradient(115deg, #b8ffe8 4%, #a9bcff 46%, #f0dcff 70%, #ffd48a 96%);
+      text-wrap: nowrap;
+      background: linear-gradient(112deg, #a9ffe8 0%, #9ddcff 34%, #a7b7ff 62%, #b89cff 84%, #d6b5ff 100%);
       -webkit-background-clip: text;
       background-clip: text;
     }
@@ -612,7 +620,7 @@
       display: grid;
       gap: 16px;
       justify-self: end;
-      width: min(420px, 100%);
+      width: min(390px, 96%);
     }
 
     .portrait {
@@ -720,7 +728,7 @@
     h2 {
       margin-top: 12px;
       font-size: clamp(32px, 4.6vw, 62px);
-      line-height: 1.12;
+      line-height: 1.02;
       letter-spacing: -0.03em;
     }
 
@@ -1449,6 +1457,57 @@
       }
     }
 
+    @media (max-width: 1280px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr) minmax(150px, 28vw);
+        gap: clamp(16px, 2.5vw, 28px);
+      }
+
+      h1 {
+        max-width: 100%;
+        font-size: clamp(64px, 7.2vw, 90px);
+        line-height: 0.94;
+      }
+
+      .hero-fit-line {
+      white-space: nowrap;
+      text-wrap: nowrap;
+    }
+
+    .detail-tone {
+        font-size: 0.54em;
+      }
+
+      .profile {
+        width: min(318px, 96%);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr) minmax(118px, 24vw);
+        gap: 16px;
+      }
+
+      h1 {
+        font-size: clamp(58px, 8.2vw, 76px);
+        line-height: 0.95;
+      }
+
+      .hero-fit-line {
+      white-space: nowrap;
+      text-wrap: nowrap;
+    }
+
+    .detail-tone {
+        font-size: 0.54em;
+      }
+
+      .profile {
+        width: min(205px, 96%);
+      }
+    }
+
     @media (max-width: 900px) {
       .nav {
         grid-template-columns: 1fr auto;
@@ -1682,26 +1741,31 @@
 
       h1 {
         max-width: 100%;
-        font-size: clamp(34px, 9.2vw, 48px);
-        line-height: 0.98;
-        letter-spacing: -0.012em;
+        font-size: clamp(52px, 13.2vw, 72px);
+        line-height: 0.94;
+        letter-spacing: -0.045em;
       }
 
       .tone {
         font-size: inherit;
         margin-top: -0.02em;
         padding-top: 0.06em;
-        padding-bottom: 0.14em;
+        padding-bottom: 0.18em;
         line-height: 1.04;
       }
 
-      .detail-tone {
-        font-size: 0.58em;
-        line-height: 1.2;
-        margin-top: -0.12em;
-        padding-bottom: 0.22em;
+      .hero-fit-line {
+      white-space: nowrap;
+      text-wrap: nowrap;
+    }
+
+    .detail-tone {
+        font-size: 0.54em;
+        line-height: 1.04;
+        margin-top: 0.02em;
+        padding-bottom: 0.24em;
         text-align: left;
-        white-space: normal;
+        white-space: nowrap;
       }
 
       .lead {
@@ -1877,8 +1941,8 @@
       }
 
       h1 {
-        font-size: clamp(33px, 10.4vw, 44px);
-        line-height: 1.03;
+        font-size: clamp(48px, 13.5vw, 62px);
+        line-height: 0.96;
       }
 
       .skill-rail {
@@ -2097,7 +2161,7 @@
     <main class="shell">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy reveal">
-          <h1 id="hero-title" data-i18n-html="hero.title">IT podpora.<br>Opravy.<br><span class="tone">Digitálne riešenia.</span><span class="tone detail-tone">s citom pre detail.</span></h1>
+          <h1 id="hero-title" data-i18n-html="hero.title">IT podpora.<br>Opravy.<br><span class="tone hero-fit-line">Digitálne&nbsp;riešenia.</span><span class="tone detail-tone">s citom pre detail.</span></h1>
           <p class="lead" data-i18n="hero.lead">Udržiavam techniku, zariadenia a digitálne prostredia v chode. Spájam prax v IT podpore, troubleshootingu, opravách elektroniky, webdizajne a vývoji iOS aplikácií.</p>
           <div class="skill-rail" aria-label="Core skills">
             <div class="rail-item">
@@ -2179,7 +2243,7 @@
         <div class="section-head">
           <div>
             <span class="label" data-i18n="experience.label">Skúsenosti</span>
-            <h2 id="experience-title" data-i18n="experience.title">Skúsenosti stručne. Menej buzzwordov, viac praxe.</h2>
+            <h2 id="experience-title" data-i18n="experience.title">Skúsenosti stručne. Detaily patria na LinkedIn.</h2>
           </div>
         </div>
 
@@ -2299,7 +2363,7 @@
         "nav.home": "Úvod",
         "nav.services": "Čo robím",
         "nav.contact": "Kontakt",
-      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone\">Digitálne riešenia.</span><span class=\"tone detail-tone\">s citom pre detail.</span>",
+      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\">Digitálne&nbsp;riešenia.</span><span class=\"tone detail-tone\">s citom pre detail.</span>",
         "hero.lead": "Som Martin Nagy, technický nadšenec s praxou v IT podpore, opravách elektroniky, webdizajne a vývoji iOS aplikácií. Rád riešim problémy, skladám veci do poriadku a dávam digitálnym nápadom čistú vizuálnu formu.",
         "hero.email": "Napísať email",
         "hero.work": "Pozrieť prácu",
@@ -2319,7 +2383,7 @@
         "nav.home": "Úvod",
         "nav.services": "Co dělám",
         "nav.contact": "Kontakt",
-      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone\">Digitální řešení.</span><span class=\"tone detail-tone\">s citem pro detail.</span>",
+      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\">Digitální&nbsp;řešení.</span><span class=\"tone detail-tone\">s citem pro detail.</span>",
         "hero.lead": "Jsem Martin Nagy, technický nadšenec s praxí v IT podpoře, opravách elektroniky, webdesignu a vývoji iOS aplikací. Rád řeším problémy, dávám věci do pořádku a převádím digitální nápady do čisté vizuální formy.",
         "hero.email": "Napsat email",
         "hero.work": "Prohlédnout práci",
@@ -2339,7 +2403,7 @@
         "nav.home": "Home",
         "nav.services": "What I do",
         "nav.contact": "Contact",
-      "hero.title": "IT support.<br>Repairs.<br><span class=\"tone\">Digital solutions.</span><span class=\"tone detail-tone\">with an eye for detail.</span>",
+      "hero.title": "IT support.<br>Repairs.<br><span class=\"tone hero-fit-line\">Digital&nbsp;solutions.</span><span class=\"tone detail-tone\">with an eye for detail.</span>",
         "hero.lead": "I am Martin Nagy, a tech enthusiast with hands-on experience in IT support, electronics repair, web design, and iOS app development. I like solving problems, bringing devices back into shape, and giving digital ideas a clear visual form.",
         "hero.email": "Send email",
         "hero.work": "View work",
@@ -2358,7 +2422,7 @@
 
     Object.assign(translations.sk, {
       "nav.experience": "Prax",
-      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone\">Digitálne riešenia.</span><span class=\"tone detail-tone\">s citom pre detail.</span>",
+      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\">Digitálne&nbsp;riešenia.</span><span class=\"tone detail-tone\">s citom pre detail.</span>",
       "hero.lead": "Udržiavam techniku, zariadenia a digitálne prostredia v chode. Spájam prax v IT podpore, troubleshootingu, opravách elektroniky, webdizajne a vývoji iOS aplikácií.",
       "hero.work": "Pozrieť prax",
       "rail.support.title": "IT podpora",
@@ -2375,7 +2439,7 @@
       "services.repair.copy": "Diagnostikujem a opravujem telefóny, tablety aj počítače s jasným postupom, realistickým termínom a dôrazom na spoľahlivý výsledok.",
       "services.design.copy": "Tvorím prehľadné weby a menšie iOS prototypy so zrozumiteľnou štruktúrou a prirodzeným používaním na rôznych zariadeniach.",
       "experience.label": "Skúsenosti",
-      "experience.title": "Skúsenosti stručne. Menej buzzwordov, viac praxe.",
+      "experience.title": "Skúsenosti stručne. Detaily patria na LinkedIn.",
       "experience.leo.company": "Leo Express · Plný úväzok",
       "experience.leo.companyName": "Leo Express",
       "experience.leo.workType": "Plný úväzok",
@@ -2447,7 +2511,7 @@
 
     Object.assign(translations.cs, {
       "nav.experience": "Praxe",
-      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone\">Digitální řešení.</span><span class=\"tone detail-tone\">s citem pro detail.</span>",
+      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\">Digitální&nbsp;řešení.</span><span class=\"tone detail-tone\">s citem pro detail.</span>",
       "hero.lead": "Udržuji techniku, zařízení a digitální prostředí v chodu. Spojuji praxi v IT podpoře, troubleshootingu, opravách elektroniky, webdesignu a vývoji iOS aplikací.",
       "hero.work": "Prohlédnout praxi",
       "rail.support.title": "IT podpora",
@@ -2536,7 +2600,7 @@
 
     Object.assign(translations.en, {
       "nav.experience": "Experience",
-      "hero.title": "IT support.<br>Repairs.<br><span class=\"tone\">Digital solutions.</span><span class=\"tone detail-tone\">with an eye for detail.</span>",
+      "hero.title": "IT support.<br>Repairs.<br><span class=\"tone hero-fit-line\">Digital&nbsp;solutions.</span><span class=\"tone detail-tone\">with an eye for detail.</span>",
       "hero.lead": "I keep technology, devices, and digital environments running, combining hands-on IT support, troubleshooting, electronics repair, web design, and iOS development experience.",
       "hero.work": "View experience",
       "rail.support.title": "IT Support",
@@ -2721,6 +2785,38 @@
       languageIndicator.style.transform = `translate3d(${buttonRect.left - switcherRect.left}px, ${buttonRect.top - switcherRect.top}px, 0)`;
     }
 
+    let heroFitFrame = 0;
+
+    function fitHeroTitleLine() {
+      const line = document.querySelector(".hero-fit-line");
+      const profile = document.querySelector(".profile");
+      if (!line) return;
+
+      line.style.fontSize = "1em";
+      line.style.width = "max-content";
+      line.style.maxWidth = "none";
+
+      const lineRect = line.getBoundingClientRect();
+      const profileRect = profile?.getBoundingClientRect();
+      const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
+      const safetyGap = viewportWidth <= 700 ? 0 : 24;
+      const rightLimit = profileRect && profileRect.left > lineRect.left
+        ? profileRect.left - safetyGap
+        : viewportWidth - 38;
+      const availableWidth = Math.max(160, rightLimit - lineRect.left);
+      const naturalWidth = lineRect.width;
+
+      if (!naturalWidth) return;
+
+      const scale = availableWidth / naturalWidth;
+      line.style.fontSize = `${Math.min(1.22, Math.max(0.42, scale)).toFixed(3)}em`;
+    }
+
+    function scheduleHeroTitleFit() {
+      window.cancelAnimationFrame(heroFitFrame);
+      heroFitFrame = window.requestAnimationFrame(fitHeroTitleLine);
+    }
+
     function applyLanguage(language, persist = false) {
       const nextLanguage = supportedLanguages.includes(language) ? language : "en";
       const dictionary = translations[nextLanguage];
@@ -2810,11 +2906,18 @@
     });
 
     window.addEventListener("resize", updateLanguageIndicator, { passive: true });
+    window.addEventListener("resize", scheduleHeroTitleFit, { passive: true });
     window.addEventListener("orientationchange", () => {
-      window.setTimeout(updateLanguageIndicator, 120);
+      window.setTimeout(() => {
+        updateLanguageIndicator();
+        scheduleHeroTitleFit();
+      }, 120);
     }, { passive: true });
     if (document.fonts && typeof document.fonts.ready?.then === "function") {
-      document.fonts.ready.then(updateLanguageIndicator).catch(() => {});
+      document.fonts.ready.then(() => {
+        updateLanguageIndicator();
+        scheduleHeroTitleFit();
+      }).catch(() => {});
     }
 
     const navProgressElement = document.querySelector(".nav");
@@ -4746,6 +4849,32 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
