@@ -455,6 +455,14 @@
       text-wrap: nowrap;
     }
 
+    .mobile-title-word {
+      display: inline;
+    }
+
+    .mobile-title-space {
+      display: inline;
+    }
+
     .detail-tone {
       font-size: 0.54em;
       line-height: 1.04;
@@ -1681,7 +1689,16 @@
       .hero-fit-line {
         white-space: normal;
         text-wrap: wrap;
-        overflow-wrap: anywhere;
+        overflow-wrap: normal;
+        word-break: normal;
+      }
+
+      .mobile-title-word {
+        display: block;
+      }
+
+      .mobile-title-space {
+        display: none;
       }
 
       .detail-tone {
@@ -1776,7 +1793,7 @@
 
       h1 {
         max-width: 100%;
-        font-size: clamp(35px, 10.8vw, 50px);
+        font-size: clamp(32px, 9.8vw, 46px);
         line-height: 1.04;
         letter-spacing: -0.012em;
       }
@@ -1792,7 +1809,8 @@
       .hero-fit-line {
         white-space: normal;
         text-wrap: wrap;
-        overflow-wrap: anywhere;
+        overflow-wrap: normal;
+        word-break: normal;
       }
 
       .detail-tone {
@@ -1977,7 +1995,7 @@
       }
 
       h1 {
-        font-size: clamp(33px, 10.4vw, 44px);
+        font-size: clamp(31px, 9.6vw, 42px);
         line-height: 1.03;
       }
 
@@ -2197,7 +2215,7 @@
     <main class="shell">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy reveal">
-          <h1 id="hero-title" data-i18n-html="hero.title">IT podpora.<br>Opravy.<br><span class="tone hero-fit-line">Digitálne&nbsp;riešenia.</span><span class="tone detail-tone">s citom pre detail.</span></h1>
+          <h1 id="hero-title" data-i18n-html="hero.title">IT podpora.<br>Opravy.<br><span class="tone hero-fit-line"><span class="mobile-title-word">Digitálne</span><span class="mobile-title-space"> </span><span class="mobile-title-word">riešenia.</span></span><span class="tone detail-tone">s citom pre detail.</span></h1>
           <p class="lead" data-i18n="hero.lead">Udržiavam techniku, zariadenia a digitálne prostredia v chode. Spájam prax v IT podpore, troubleshootingu, opravách elektroniky, webdizajne a vývoji iOS aplikácií.</p>
           <div class="skill-rail" aria-label="Core skills">
             <div class="rail-item">
@@ -2399,7 +2417,7 @@
         "nav.home": "Úvod",
         "nav.services": "Čo robím",
         "nav.contact": "Kontakt",
-      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\">Digitálne&nbsp;riešenia.</span><span class=\"tone detail-tone\">s citom pre detail.</span>",
+      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\"><span class=\"mobile-title-word\">Digitálne</span><span class=\"mobile-title-space\"> </span><span class=\"mobile-title-word\">riešenia.</span></span><span class=\"tone detail-tone\">s citom pre detail.</span>",
         "hero.lead": "Som Martin Nagy, technický nadšenec s praxou v IT podpore, opravách elektroniky, webdizajne a vývoji iOS aplikácií. Rád riešim problémy, skladám veci do poriadku a dávam digitálnym nápadom čistú vizuálnu formu.",
         "hero.email": "Napísať email",
         "hero.work": "Pozrieť prácu",
@@ -2419,7 +2437,7 @@
         "nav.home": "Úvod",
         "nav.services": "Co dělám",
         "nav.contact": "Kontakt",
-      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\">Digitální&nbsp;řešení.</span><span class=\"tone detail-tone\">s citem pro detail.</span>",
+      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\"><span class=\"mobile-title-word\">Digitální</span><span class=\"mobile-title-space\"> </span><span class=\"mobile-title-word\">řešení.</span></span><span class=\"tone detail-tone\">s citem pro detail.</span>",
         "hero.lead": "Jsem Martin Nagy, technický nadšenec s praxí v IT podpoře, opravách elektroniky, webdesignu a vývoji iOS aplikací. Rád řeším problémy, dávám věci do pořádku a převádím digitální nápady do čisté vizuální formy.",
         "hero.email": "Napsat email",
         "hero.work": "Prohlédnout práci",
@@ -2439,7 +2457,7 @@
         "nav.home": "Home",
         "nav.services": "What I do",
         "nav.contact": "Contact",
-      "hero.title": "IT support.<br>Repairs.<br><span class=\"tone hero-fit-line\">Digital&nbsp;solutions.</span><span class=\"tone detail-tone\">with an eye for detail.</span>",
+      "hero.title": "IT support.<br>Repairs.<br><span class=\"tone hero-fit-line\"><span class=\"mobile-title-word\">Digital</span><span class=\"mobile-title-space\"> </span><span class=\"mobile-title-word\">solutions.</span></span><span class=\"tone detail-tone\">with an eye for detail.</span>",
         "hero.lead": "I am Martin Nagy, a tech enthusiast with hands-on experience in IT support, electronics repair, web design, and iOS app development. I like solving problems, bringing devices back into shape, and giving digital ideas a clear visual form.",
         "hero.email": "Send email",
         "hero.work": "View work",
@@ -2458,7 +2476,7 @@
 
     Object.assign(translations.sk, {
       "nav.experience": "Prax",
-      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\">Digitálne&nbsp;riešenia.</span><span class=\"tone detail-tone\">s citom pre detail.</span>",
+      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\"><span class=\"mobile-title-word\">Digitálne</span><span class=\"mobile-title-space\"> </span><span class=\"mobile-title-word\">riešenia.</span></span><span class=\"tone detail-tone\">s citom pre detail.</span>",
       "hero.lead": "Udržiavam techniku, zariadenia a digitálne prostredia v chode. Spájam prax v IT podpore, troubleshootingu, opravách elektroniky, webdizajne a vývoji iOS aplikácií.",
       "hero.work": "Pozrieť prax",
       "rail.support.title": "IT podpora",
@@ -2547,7 +2565,7 @@
 
     Object.assign(translations.cs, {
       "nav.experience": "Praxe",
-      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\">Digitální&nbsp;řešení.</span><span class=\"tone detail-tone\">s citem pro detail.</span>",
+      "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\"><span class=\"mobile-title-word\">Digitální</span><span class=\"mobile-title-space\"> </span><span class=\"mobile-title-word\">řešení.</span></span><span class=\"tone detail-tone\">s citem pro detail.</span>",
       "hero.lead": "Udržuji techniku, zařízení a digitální prostředí v chodu. Spojuji praxi v IT podpoře, troubleshootingu, opravách elektroniky, webdesignu a vývoji iOS aplikací.",
       "hero.work": "Prohlédnout praxi",
       "rail.support.title": "IT podpora",
@@ -2636,7 +2654,7 @@
 
     Object.assign(translations.en, {
       "nav.experience": "Experience",
-      "hero.title": "IT support.<br>Repairs.<br><span class=\"tone hero-fit-line\">Digital&nbsp;solutions.</span><span class=\"tone detail-tone\">with an eye for detail.</span>",
+      "hero.title": "IT support.<br>Repairs.<br><span class=\"tone hero-fit-line\"><span class=\"mobile-title-word\">Digital</span><span class=\"mobile-title-space\"> </span><span class=\"mobile-title-word\">solutions.</span></span><span class=\"tone detail-tone\">with an eye for detail.</span>",
       "hero.lead": "I keep technology, devices, and digital environments running, combining hands-on IT support, troubleshooting, electronics repair, web design, and iOS development experience.",
       "hero.work": "View experience",
       "rail.support.title": "IT Support",
@@ -3063,79 +3081,107 @@
       const runnerSpeech = {
         sk: {
           idle: [
-            "Toto malo byt rychle.",
-            "Klasika. Fungovalo to vcera.",
-            "Som pokojny. Zatial.",
-            "Kto sem dal ohen?",
-            "Toto nie je v popise prace.",
-            "Ak to spadne, restartujem seba.",
-            "Len bez paniky. Mozno.",
-            "Dneska bez kavy, odvazne.",
-            "Tento bug sa tvari osobne.",
-            "Este jeden skok a davam fakturu.",
-            "Mam to pod kontrolou. Asi.",
-            "Toto vyzera ako pondelok.",
-            "Kde je safe mode?",
-            "Niekto testoval v produkcii.",
-            "Nechcem ukazovat prstom, ale update.",
-            "Ticho, diagnostikujem za behu.",
-            "Mam laptop, teda autoritu.",
-            "Toto je velmi lokalna infrastruktura.",
-            "Ak preskocim toto, beriem obed.",
-            "Nie je to bug, je to prekazka."
+            "Ticket beží. Ja tiež.",
+            "Kábel vyzerá podozrivo, čiže normálny deň.",
+            "Najprv preverím logy, potom panika.",
+            "Reštart nechávam ako elegantnú možnosť.",
+            "Zatiaľ to funguje. To je podozrivé.",
+            "Helpdesk mode: pokojný výraz, rýchle nohy.",
+            "Tento incident má dobrý timing. Zlý, ale dobrý.",
+            "Ak to bliká, tvárim sa, že to je plánované.",
+            "Systém protestuje, ja pokračujem.",
+            "Nie je to útek. Je to terénna diagnostika.",
+            "Bug sa tvári nenápadne. Neprešlo mu to.",
+            "Oprava za behu je stále oprava.",
+            "Dnes riešim veci skôr, než ma dobehnú.",
+            "Keby tu bol manuál, otvorím ho hneď po smene."
           ],
           jump: [
-            "Hop. Profesionalne.",
-            "Servisny skok.",
-            "Preskocene, zapisane.",
-            "Elegantne ako workaround."
+            "Hop. Incident obídený.",
+            "Prekážka preskočená, ticket zatiaľ žije.",
+            "Rýchly workaround v praxi.",
+            "Problém zostal pod nohami.",
+            "Elegantné nie. Funkčné áno.",
+            "Skok schválený zdravým rozumom.",
+            "O jeden problém menej v ceste.",
+            "Hop a tvárim sa pokojne."
           ],
           flip: [
-            "Salto nebolo v SLA.",
-            "Toto som sa v servise nenaucil.",
-            "Backflip deployment.",
-            "Auditor to nevidel."
+            "Salto mimo dokumentácie.",
+            "Ak sa niekto pýta, bol to test.",
+            "Fyzika dostala krátky timeout.",
+            "Bug je zmätený. Výborne.",
+            "Zbytočné? Možno. Štýlové? Určite.",
+            "Zapisujem: funguje aj v otočke."
           ],
           shield: [
-            "Shield? Konecne benefit.",
-            "Firewall na telo.",
-            "Teraz som certifikovany.",
-            "Päť sekund sebavedomia."
+            "Štít zapnutý, tempo drží.",
+            "Firewall v teréne aktívny.",
+            "Problém sa odrazil. Pekne.",
+            "Tento update si nechám.",
+            "Krátke okno bez stresu.",
+            "Bug narazil na oprávnenia."
           ],
           tier: [
-            "Aha, sprint review.",
-            "Rychlost plus, pokoj minus.",
-            "Level up. Nervy tiez.",
-            "Teraz to zacina byt zaujimave."
+            "Priorita stúpa.",
+            "Viac rýchlosti, menej priestoru na omyl.",
+            "Level hore, tep hore.",
+            "Systém práve pridal prácu.",
+            "Teraz už treba obe oči.",
+            "Toto už vyzerá ako incident."
           ]
         },
         cs: {
           idle: [
-            "Tohle melo byt rychle.",
-            "Klasika. Vcera to fungovalo.",
-            "Jsem v klidu. Zatim.",
-            "Kdo sem dal ohen?",
-            "Tohle neni v popisu prace.",
-            "Jestli to spadne, restartuju sebe.",
-            "Bez paniky. Mozna.",
-            "Dnes bez kavy, odvazne.",
-            "Tenhle bug to bere osobne.",
-            "Jeste jeden skok a pisu fakturu.",
-            "Mam to pod kontrolou. Asi.",
-            "Tohle vypada jako pondeli.",
-            "Kde je safe mode?",
-            "Nekdo testoval v produkci.",
-            "Nechci ukazovat prstem, ale update.",
-            "Ticho, diagnostikuju za behu.",
-            "Mam laptop, tedy autoritu.",
-            "Tohle je hodne lokalni infrastruktura.",
-            "Jestli to preskocim, beru obed.",
-            "Neni to bug, je to prekazka."
+            "Ticket běží. Já taky.",
+            "Kabel vypadá podezřele, takže normální den.",
+            "Nejdřív zkontroluju logy, potom panika.",
+            "Restart nechávám jako elegantní možnost.",
+            "Zatím to funguje. To je podezřelé.",
+            "Helpdesk mode: klidný výraz, rychlé nohy.",
+            "Tenhle incident má dobré načasování. Špatné, ale dobré.",
+            "Když to bliká, tvářím se, že je to plánované.",
+            "Systém protestuje, já pokračuju.",
+            "Neutíkám. Dělám terénní diagnostiku.",
+            "Bug se tváří nenápadně. Neprošlo mu to.",
+            "Oprava za běhu je pořád oprava.",
+            "Dnes řeším věci dřív, než mě doběhnou.",
+            "Kdyby tu byl manuál, otevřu ho hned po směně."
           ],
-          jump: ["Hop. Profesionalne.", "Servisni skok.", "Preskoceno, zapsano.", "Elegantni workaround."],
-          flip: ["Salto nebylo v SLA.", "Tohle me v servisu neucili.", "Backflip deployment.", "Auditor to nevidel."],
-          shield: ["Shield? Konecne benefit.", "Firewall na telo.", "Ted jsem certifikovany.", "Pet sekund sebevedomi."],
-          tier: ["Aha, sprint review.", "Rychlost plus, klid minus.", "Level up. Nervy taky.", "Ted to zacina byt zajimave."]
+          jump: [
+            "Hop. Incident obejitý.",
+            "Překážka přeskočená, ticket zatím žije.",
+            "Rychlý workaround v praxi.",
+            "Problém zůstal pod nohama.",
+            "Elegantní ne. Funkční ano.",
+            "Skok schválen zdravým rozumem.",
+            "O jeden problém méně v cestě.",
+            "Hop a tvářím se klidně."
+          ],
+          flip: [
+            "Salto mimo dokumentaci.",
+            "Jestli se někdo ptá, byl to test.",
+            "Fyzika dostala krátký timeout.",
+            "Bug je zmatený. Výborně.",
+            "Zbytečné? Možná. Stylové? Určitě.",
+            "Zapisuju: funguje i v otočce."
+          ],
+          shield: [
+            "Štít zapnutý, tempo drží.",
+            "Firewall v terénu aktivní.",
+            "Problém se odrazil. Hezky.",
+            "Tenhle update si nechám.",
+            "Krátké okno bez stresu.",
+            "Bug narazil na oprávnění."
+          ],
+          tier: [
+            "Priorita stoupá.",
+            "Více rychlosti, méně prostoru na omyl.",
+            "Level nahoru, tep nahoru.",
+            "Systém právě přidal práci.",
+            "Teď už to chce obě oči.",
+            "Tohle už vypadá jako incident."
+          ]
         },
         en: {
           idle: [
@@ -3323,10 +3369,10 @@
         const source = available.length ? available : pool;
         const text = source[Math.floor(Math.random() * source.length)];
         if (!text) return;
-        speech = { text, life: 2.7, max: 2.7 };
+        speech = { text, life: 4.2, max: 4.2 };
         recentSpeech.push(text);
-        if (recentSpeech.length > 9) recentSpeech.shift();
-        speechCooldown = force ? 4.8 + Math.random() * 3.2 : 7.5 + Math.random() * 6.5;
+        if (recentSpeech.length > 18) recentSpeech.shift();
+        speechCooldown = force ? 13 + Math.random() * 7 : 20 + Math.random() * 10;
       }
     
       function chapterForScore() {
@@ -3346,7 +3392,7 @@
           const baseSpeed = width < 460 ? 205 : 245;
           const tierStep = width < 460 ? 30 : 38;
           speed = Math.max(speed, baseSpeed + chapterIndex * tierStep);
-          speak("tier", true);
+          if (Math.random() < 0.25) speak("tier", true);
           burst(Math.min(width - 90, player.x + 78), ground - 66, chapter.color);
         }
         metaNode.textContent = "";
@@ -3379,7 +3425,7 @@
         sparks = [];
         notes = [];
         speech = null;
-        speechCooldown = 2.4 + Math.random() * 2.8;
+        speechCooldown = 8 + Math.random() * 5;
         recentSpeech = [];
         score = 0;
         streak = 0;
@@ -3467,7 +3513,7 @@
         player.flipAvailable = true;
         player.flipAngle = 0;
         player.flipVelocity = 0;
-        if (Math.random() < 0.22) speak("jump", true);
+        if (Math.random() < 0.05) speak("jump");
       }
 
       function flip() {
@@ -3475,7 +3521,7 @@
         player.flipAvailable = false;
         player.flipVelocity = -12.5;
         player.velocity = Math.min(player.velocity, width < 460 ? -300 : -340);
-        speak("flip", true);
+        if (Math.random() < 0.07) speak("flip");
         burst(player.x + player.width / 2, player.y + 18, "rgba(184, 255, 232, 0.5)");
       }
     
@@ -3504,7 +3550,7 @@
           speech.life -= seconds;
           if (speech.life <= 0) speech = null;
         }
-        if (!speech && speechCooldown <= 0 && Math.random() < seconds * 0.55) {
+        if (!speech && speechCooldown <= 0 && Math.random() < seconds * 0.1) {
           speak("idle");
         }
         if (shield) {
@@ -3594,7 +3640,7 @@
           shield = true;
           shieldTimer = 5;
           score += 18;
-          speak("shield", true);
+          if (Math.random() < 0.22) speak("shield", true);
           burst(pickup.x + 11, pickup.y + 11, "rgba(135, 168, 255, 0.85)");
           pickups.splice(index, 1);
         }
