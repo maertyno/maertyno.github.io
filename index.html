@@ -3300,6 +3300,8 @@
       let dpr = 1;
       let frame = 0;
       let lastFrameTime = 0;
+      const unlockClicksRequired = 10;
+      let triggerClicks = 0;
       let revealed = false;
       let running = false;
       let gameOver = false;
@@ -4242,6 +4244,7 @@
       function revealGame() {
         if (!revealed) {
           revealed = true;
+          triggerClicks = 0;
           focusGame();
           panel.hidden = false;
           trigger.setAttribute("aria-expanded", "true");
@@ -4278,8 +4281,18 @@
         event.preventDefault();
         handleGamePress(event);
       }
+
+      function handleTriggerPress(event) {
+        event.preventDefault();
+        if (!revealed) {
+          triggerClicks += 1;
+          if (triggerClicks >= unlockClicksRequired) revealGame();
+          return;
+        }
+        handleGamePress(event);
+      }
     
-      trigger.addEventListener("click", handleGamePress);
+      trigger.addEventListener("click", handleTriggerPress);
       canvas.addEventListener("pointerdown", handleGamePress);
       canvas.addEventListener("dblclick", (event) => {
         event.preventDefault();
