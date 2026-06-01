@@ -1248,18 +1248,41 @@
       border: 0;
       border-bottom: 1px solid rgba(143, 247, 210, 0.34);
       padding: 0 0 4px;
+      position: relative;
       color: rgba(247, 250, 246, 0.56);
       background: transparent;
       font: inherit;
       font-size: 13px;
       cursor: pointer;
-      transition: color 220ms ease, border-color 220ms ease, text-shadow 220ms ease;
+      --unlock-progress: 0;
+      transition: color 220ms ease, border-color 220ms ease, text-shadow 220ms ease, transform 180ms ease;
     }
 
     .easter-trigger:hover {
       color: rgba(184, 255, 232, 0.9);
       border-color: rgba(184, 255, 232, 0.72);
       text-shadow: 0 0 18px rgba(143, 247, 210, 0.26);
+    }
+
+    .easter-trigger::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 2px;
+      transform-origin: left center;
+      transform: scaleX(var(--unlock-progress));
+      background: linear-gradient(90deg, rgba(143, 247, 210, 0.2), rgba(184, 255, 232, 0.96));
+      opacity: 0.96;
+      transition: transform 180ms ease;
+      pointer-events: none;
+    }
+
+    .easter-trigger.is-probing {
+      color: rgba(198, 255, 237, 0.96);
+      text-shadow: 0 0 20px rgba(143, 247, 210, 0.32);
+      transform: translateY(-1px);
     }
 
     .binary-runner {
@@ -2398,7 +2421,7 @@
     </footer>
 
     <section class="easter-egg shell" aria-label="Mini game" data-runner>
-          <button class="easter-trigger" type="button" data-game-trigger aria-expanded="false" aria-controls="binary-runner" data-i18n="game.prompt">Toto určite nie je skrytá minihra</button>
+          <button class="easter-trigger" type="button" data-game-trigger aria-expanded="false" aria-controls="binary-runner" data-i18n="game.prompt">Ticket Run</button>
       <div class="binary-runner" id="binary-runner" hidden>
         <div class="binary-runner-head">
           <span><span data-i18n="game.score">Skóre</span>: <span class="binary-runner-score" data-game-score>0</span></span>
@@ -2539,8 +2562,8 @@
       "experience.fixservis.skill3": "Opravy podľa štandardov",
       "experience.fixservis.skill4": "Kontrola kvality",
       "contact.title": "Nápad, problém alebo<br>technická výzva?<br><span class=\"contact-keep\">Môžeme sa na to pozrieť.</span>",
-      "game.prompt": "Toto určite nie je skrytá minihra",
-      "game.prompt.active": "Dobre no... možno trochu je.",
+      "game.prompt": "Ticket Run",
+      "game.prompt.active": "Ticket Run",
       "game.score": "Skóre",
       "game.ready": "Jeden klik skok. Dvojklik vo vzduchu salto. Shield drží 5 sekúnd alebo jeden hit.",
       "game.hint": "Klik / medzerník = skok · dvojklik = backflip",
@@ -2628,8 +2651,8 @@
       "experience.fixservis.skill3": "Opravy podle standardů",
       "experience.fixservis.skill4": "Kontrola kvality",
       "contact.title": "Nápad, problém nebo<br>technická výzva?<br><span class=\"contact-keep\">Můžeme se na to podívat.</span>",
-      "game.prompt": "Tohle určitě není skrytá minihra",
-      "game.prompt.active": "Dobře no... možná trochu je.",
+      "game.prompt": "Ticket Run",
+      "game.prompt.active": "Ticket Run",
       "game.score": "Skóre",
       "game.ready": "Jeden klik skok. Dvojklik ve vzduchu salto. Shield drží 5 sekund nebo jeden hit.",
       "game.hint": "Klik / mezerník = skok · dvojklik = backflip",
@@ -2717,8 +2740,8 @@
       "experience.fixservis.skill3": "Repairs by standards",
       "experience.fixservis.skill4": "Quality control",
       "contact.title": "An idea, problem<br>or a technical challenge?<br><span class=\"contact-keep\">We can take a look.</span>",
-      "game.prompt": "This is definitely not a hidden minigame",
-      "game.prompt.active": "Fine... maybe it kind of is.",
+      "game.prompt": "Ticket Run",
+      "game.prompt.active": "Ticket Run",
       "game.score": "Score",
       "game.ready": "One click to jump. Double click in air to flip. Shield lasts 5 seconds or one hit.",
       "game.hint": "Click / Space = jump · double click = backflip",
@@ -3341,20 +3364,32 @@
         stateNode.textContent = gameCopy(key);
       }
 
-      function setTriggerCopy(active = revealed) {
-        trigger.textContent = gameCopy(active ? "game.prompt.active" : "game.prompt");
+      function setTriggerCopy() {
+        trigger.textContent = "Ticket Run";
       }
 
-      function scheduleTriggerTitle() {
+      function setTriggerProgress() {
+        const progress = revealed ? 1 : Math.min(triggerClicks / unlockClicksRequired, 1);
+        trigger.style.setProperty("--unlock-progress", progress.toFixed(3));
+      }
+
+      function pulseTrigger() {
+        trigger.classList.remove("is-probing");
+        void trigger.offsetWidth;
+        trigger.classList.add("is-probing");
         if (triggerTitleTimer) {
           window.clearTimeout(triggerTitleTimer);
           triggerTitleTimer = 0;
         }
-        setTriggerCopy(true);
         triggerTitleTimer = window.setTimeout(() => {
-          if (!revealed) return;
-          trigger.textContent = "Ticket Run";
-        }, 5000);
+          trigger.classList.remove("is-probing");
+          triggerTitleTimer = 0;
+        }, 220);
+      }
+
+      function scheduleTriggerTitle() {
+        setTriggerCopy();
+        setTriggerProgress();
       }
 
       function languageSpeech() {
@@ -4245,6 +4280,8 @@
         if (!revealed) {
           revealed = true;
           triggerClicks = 0;
+          setTriggerCopy();
+          setTriggerProgress();
           focusGame();
           panel.hidden = false;
           trigger.setAttribute("aria-expanded", "true");
@@ -4286,6 +4323,8 @@
         event.preventDefault();
         if (!revealed) {
           triggerClicks += 1;
+          setTriggerProgress();
+          pulseTrigger();
           if (triggerClicks >= unlockClicksRequired) revealGame();
           return;
         }
@@ -4315,7 +4354,9 @@
         if (!revealed) {
           setState("game.ready");
           if (triggerTitleTimer) { window.clearTimeout(triggerTitleTimer); triggerTitleTimer = 0; }
-          setTriggerCopy(false);
+          trigger.classList.remove("is-probing");
+          setTriggerCopy();
+          setTriggerProgress();
           return;
         }
         scheduleTriggerTitle();
@@ -4323,6 +4364,9 @@
         setState(gameOver ? "game.over" : "game.running");
         drawGame();
       });
+
+      setTriggerCopy();
+      setTriggerProgress();
     }
 
     function initDomCursorTech(layer) {
