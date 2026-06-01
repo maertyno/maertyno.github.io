@@ -1173,17 +1173,16 @@
 
     .contact-title-line {
       display: block;
-      min-height: 1.02em;
+      min-height: 1.08em;
+      line-height: 1.04;
     }
 
     .contact-title-line-1 {
-      display: flex;
-      align-items: baseline;
-      gap: 0.06em;
-      flex-wrap: nowrap;
+      display: block;
     }
 
     .contact-title-tail {
+      display: inline;
       white-space: normal;
     }
 
@@ -1266,8 +1265,7 @@
     }
 
     .contact-title-trigger.easter-trigger {
-      display: inline-flex;
-      align-items: baseline;
+      display: inline;
       pointer-events: auto;
       margin: 0;
       padding: 0;
@@ -1297,6 +1295,10 @@
       transform: none;
     }
 
+    .contact-title-line-3 {
+      min-height: 1.08em;
+    }
+
     .contact-game .binary-runner {
       position: absolute;
       inset: 0;
@@ -1312,10 +1314,7 @@
     }
 
     .contact-game .binary-runner-head {
-      top: 12px;
-      left: 16px;
-      right: 16px;
-      z-index: 2;
+      display: none;
     }
 
     .contact-game .binary-runner-canvas {
@@ -2014,6 +2013,10 @@
         font-size: clamp(42px, 8.8vw, 54px);
         line-height: 1.04;
         overflow-wrap: anywhere;
+      }
+
+      .contact-title-line {
+        min-height: 1.1em;
       }
 
       .contact-keep {

@@ -655,6 +655,8 @@ const translations = {
       const scoreNode = shell.querySelector("[data-game-score]");
       const metaNode = shell.querySelector("[data-game-meta]");
       const stateNode = shell.querySelector("[data-game-state]");
+      const scoreActionNode = shell.querySelector(".actions .button.primary span");
+      const levelActionNode = shell.querySelector(".actions .button:not(.primary) span");
       if (!trigger || !titleNode || !titleLineOne || !titleLineTwo || !titleLineThree || !panel || !canvas || !scoreNode || !metaNode || !stateNode) return;
     
       const ctx = canvas.getContext("2d");
@@ -663,30 +665,40 @@ const translations = {
       const maxScore = 30000;
       const chapters = [
         { min: 0, key: "game.chapter.support", color: "rgba(143, 247, 210, 0.34)", ground: "rgba(143, 247, 210, 0.32)" },
-        { min: 3000, key: "game.chapter.repair", color: "rgba(255, 212, 138, 0.34)", ground: "rgba(255, 212, 138, 0.3)" },
-        { min: 6000, key: "game.chapter.network", color: "rgba(126, 215, 255, 0.34)", ground: "rgba(126, 215, 255, 0.3)" },
-        { min: 9000, key: "game.chapter.storage", color: "rgba(176, 205, 255, 0.34)", ground: "rgba(176, 205, 255, 0.3)" },
-        { min: 12000, key: "game.chapter.server", color: "rgba(135, 168, 255, 0.36)", ground: "rgba(135, 168, 255, 0.32)" },
-        { min: 15000, key: "game.chapter.monitoring", color: "rgba(143, 247, 210, 0.28)", ground: "rgba(143, 247, 210, 0.26)" },
-        { min: 18000, key: "game.chapter.deploy", color: "rgba(214, 176, 255, 0.32)", ground: "rgba(214, 176, 255, 0.28)" },
-        { min: 21000, key: "game.chapter.security", color: "rgba(255, 212, 138, 0.3)", ground: "rgba(255, 212, 138, 0.26)" },
-        { min: 24000, key: "game.chapter.datacenter", color: "rgba(255, 116, 116, 0.28)", ground: "rgba(255, 116, 116, 0.28)" },
-        { min: 27000, key: "game.chapter.final", color: "rgba(247, 250, 246, 0.32)", ground: "rgba(247, 250, 246, 0.26)" }
+        { min: 1000, key: "game.chapter.repair", color: "rgba(255, 212, 138, 0.34)", ground: "rgba(255, 212, 138, 0.3)" },
+        { min: 2000, key: "game.chapter.network", color: "rgba(126, 215, 255, 0.34)", ground: "rgba(126, 215, 255, 0.3)" },
+        { min: 3000, key: "game.chapter.storage", color: "rgba(176, 205, 255, 0.34)", ground: "rgba(176, 205, 255, 0.3)" },
+        { min: 4000, key: "game.chapter.server", color: "rgba(135, 168, 255, 0.36)", ground: "rgba(135, 168, 255, 0.32)" },
+        { min: 5000, key: "game.chapter.monitoring", color: "rgba(143, 247, 210, 0.28)", ground: "rgba(143, 247, 210, 0.26)" },
+        { min: 6000, key: "game.chapter.deploy", color: "rgba(214, 176, 255, 0.32)", ground: "rgba(214, 176, 255, 0.28)" },
+        { min: 7000, key: "game.chapter.security", color: "rgba(255, 212, 138, 0.3)", ground: "rgba(255, 212, 138, 0.26)" },
+        { min: 8000, key: "game.chapter.datacenter", color: "rgba(255, 116, 116, 0.28)", ground: "rgba(255, 116, 116, 0.28)" },
+        { min: 9000, key: "game.chapter.final", color: "rgba(247, 250, 246, 0.32)", ground: "rgba(247, 250, 246, 0.26)" }
       ];
     
       const incidentTypes = [
-        { kind: "virus", width: 32, height: 32 },
-        { kind: "bug", width: 44, height: 30 },
-        { kind: "wifi", width: 38, height: 34 },
-        { kind: "update", width: 40, height: 38 },
-        { kind: "fire", width: 34, height: 30 },
-        { kind: "crash", width: 46, height: 34 },
-        { kind: "battery", width: 42, height: 26, min: 4500 },
-        { kind: "lock", width: 34, height: 38, min: 10500 },
-        { kind: "popup", width: 48, height: 36, min: 16500 }
+        { kind: "virus", width: 32, height: 32, weight: 2.8 },
+        { kind: "bug", width: 44, height: 30, weight: 3.2 },
+        { kind: "wifi", width: 38, height: 34, weight: 2.6 },
+        { kind: "update", width: 40, height: 38, weight: 2.1 },
+        { kind: "fire", width: 34, height: 30, weight: 1.25, rare: true },
+        { kind: "crash", width: 46, height: 34, weight: 1.5, rare: true },
+        { kind: "battery", width: 42, height: 26, weight: 2.2 },
+        { kind: "router", width: 40, height: 28, weight: 2.1 },
+        { kind: "keyboard", width: 48, height: 18, weight: 1.8 },
+        { kind: "server", width: 34, height: 44, weight: 1.6 },
+        { kind: "chip", width: 32, height: 30, weight: 1.8 },
+        { kind: "lock", width: 34, height: 38, weight: 1.8 },
+        { kind: "terminal", width: 44, height: 34, weight: 1.6 },
+        { kind: "database", width: 38, height: 38, weight: 1.4 },
+        { kind: "drone", width: 40, height: 24, weight: 1.1, air: true, rare: true },
+        { kind: "popup", width: 48, height: 36, weight: 1.4 },
+        { kind: "cable", width: 54, height: 16, weight: 1.25 },
+        { kind: "cloud", width: 52, height: 26, weight: 1.05, air: true, rare: true }
       ];
       const pickupTypes = [
-        { kind: "shield" }
+        { kind: "shield", weight: 1 },
+        { kind: "jetpack", weight: 0.55, min: 1000 }
       ];
 
       const runnerSpeech = {
@@ -950,6 +962,8 @@ const translations = {
       let pickupTimer = 1.8;
       let shield = false;
       let shieldTimer = 0;
+      let jetpack = false;
+      let jetpackTimer = 0;
       let shake = 0;
       let speedFlash = 0;
       let lastIncident = "";
@@ -1077,6 +1091,16 @@ const translations = {
         }
         return chapter;
       }
+
+      function setActionHudDefault() {
+        if (scoreActionNode) scoreActionNode.textContent = gameCopy("contact.email") || "Email";
+        if (levelActionNode) levelActionNode.textContent = "LinkedIn";
+      }
+
+      function setActionHudGame() {
+        if (scoreActionNode) scoreActionNode.textContent = `Score ${Math.min(maxScore, Math.floor(score))}`;
+        if (levelActionNode) levelActionNode.textContent = `Level ${chapterIndex + 1}/${chapters.length}`;
+      }
     
       function updateHud() {
         const chapter = chapterForScore();
@@ -1092,6 +1116,7 @@ const translations = {
         }
         metaNode.textContent = "";
         scoreNode.textContent = String(Math.min(maxScore, Math.floor(score)));
+        setActionHudGame();
       }
     
       function resizeGame() {
@@ -1126,9 +1151,11 @@ const translations = {
         streak = 0;
         speed = width < 460 ? 205 : 245;
         spawnTimer = 1.05 + Math.random() * 0.85;
-        pickupTimer = 10.5 + Math.random() * 5.5;
+        pickupTimer = 9.5 + Math.random() * 6.5;
         shield = false;
         shieldTimer = 0;
+        jetpack = false;
+        jetpackTimer = 0;
         shake = 0;
         speedFlash = 0;
         lastIncident = "";
@@ -1160,12 +1187,16 @@ const translations = {
       }
     
       function chooseIncident() {
-        let available = incidentTypes.filter((incident) => incident.kind !== lastIncident && score >= (incident.min || 0));
-        if (!available.length) available = incidentTypes;
+        const level = Math.min(chapters.length, Math.max(1, Math.floor(score / 1000) + 1));
+        const unlockedCount = Math.min(incidentTypes.length, 4 + (level - 1) * 2);
+        const unlocked = incidentTypes.slice(0, unlockedCount);
+        let available = unlocked.filter((incident) => incident.kind !== lastIncident);
+        if (!available.length) available = unlocked;
         const pool = available.flatMap((incident) => {
-          if (incident.kind === "fire" || incident.kind === "popup") return [incident];
-          if (incident.kind === "battery" || incident.kind === "lock") return [incident, incident];
-          return [incident, incident, incident];
+          const base = incident.weight || 2;
+          const randomFactor = 0.7 + Math.random() * 0.9;
+          const repeats = Math.max(1, Math.round(base * randomFactor));
+          return Array.from({ length: repeats }, () => incident);
         });
         const next = pool[Math.floor(Math.random() * pool.length)];
         lastIncident = next.kind;
@@ -1179,13 +1210,30 @@ const translations = {
     
       function spawnIncident() {
         const incident = chooseIncident();
-        incidents.push({ ...incident, x: width + 24 + Math.random() * 80, y: ground - incident.height, wobble: Math.random() * Math.PI * 2, scored: false });
+        const airLift = incident.air ? 56 + Math.random() * 56 : 0;
+        incidents.push({
+          ...incident,
+          x: width + 24 + Math.random() * 80,
+          y: Math.max(16, ground - incident.height - airLift),
+          wobble: Math.random() * Math.PI * 2,
+          scored: false
+        });
       }
     
       function spawnPickup() {
-        if (shield || pickups.length) return;
-        const pickup = pickupTypes[Math.floor(Math.random() * pickupTypes.length)];
-        pickups.push({ ...pickup, x: width + 20, y: Math.max(34, ground - 72 - Math.random() * 20), width: 22, height: 22, spin: Math.random() * Math.PI * 2 });
+        if (shield || jetpack || pickups.length) return null;
+        const available = pickupTypes.filter((pickup) => score >= (pickup.min || 0));
+        if (!available.length) return null;
+        const pool = available.flatMap((pickup) => {
+          const repeats = Math.max(1, Math.round((pickup.weight || 1) * 10));
+          return Array.from({ length: repeats }, () => pickup);
+        });
+        const pickup = pool[Math.floor(Math.random() * pool.length)];
+        const y = pickup.kind === "jetpack"
+          ? Math.max(28, ground - 124 - Math.random() * 42)
+          : Math.max(34, ground - 72 - Math.random() * 20);
+        pickups.push({ ...pickup, x: width + 20, y, width: 22, height: 22, spin: Math.random() * Math.PI * 2 });
+        return pickup.kind;
       }
     
       function spawnBit() {
@@ -1201,7 +1249,7 @@ const translations = {
       }
     
       function jump() {
-        if (!running || gameOver || !player.grounded) return;
+        if (!running || gameOver || jetpack || !player.grounded) return;
         player.velocity = width < 460 ? -620 : -650;
         player.grounded = false;
         player.squash = 0.86;
@@ -1212,7 +1260,7 @@ const translations = {
       }
 
       function flip() {
-        if (!running || gameOver || player.grounded || !player.flipAvailable) return;
+        if (!running || gameOver || jetpack || player.grounded || !player.flipAvailable) return;
         player.flipAvailable = false;
         player.flipVelocity = -12.5;
         player.velocity = Math.min(player.velocity, width < 460 ? -300 : -340);
@@ -1255,9 +1303,16 @@ const translations = {
             burst(player.x + player.width / 2, player.y + 20, "rgba(135, 168, 255, 0.42)");
           }
         }
+        if (jetpack) {
+          jetpackTimer = Math.max(0, jetpackTimer - seconds);
+          if (jetpackTimer <= 0) {
+            jetpack = false;
+            burst(player.x + player.width / 2, player.y + 24, "rgba(255, 170, 102, 0.68)");
+          }
+        }
         shake = Math.max(0, shake - seconds * 18);
         speedFlash = Math.max(0, speedFlash - seconds);
-        player.runTime += seconds * (player.grounded ? 1 : 0.45);
+        player.runTime += seconds * (jetpack ? 1.8 : (player.grounded ? 1 : 0.45));
         player.squash += (1 - player.squash) * Math.min(seconds * 10, 1);
         if (!player.grounded && player.flipVelocity !== 0) {
           player.flipAngle += player.flipVelocity * seconds;
@@ -1278,21 +1333,38 @@ const translations = {
           spawnTimer = minGap + Math.random() * (maxGap - minGap) + pause;
         }
         if (pickupTimer <= 0) {
-          spawnPickup();
-          pickupTimer = 14.5 + Math.random() * 7.5;
+          const spawnedPickupKind = spawnPickup();
+          if (spawnedPickupKind === "jetpack") {
+            pickupTimer = 14 + Math.random() * 8;
+          } else if (spawnedPickupKind === "shield") {
+            pickupTimer = 12.5 + Math.random() * 8.2;
+          } else {
+            pickupTimer = 4.2 + Math.random() * 3.4;
+          }
         }
         
     
-        player.velocity += 1720 * seconds;
-        player.y += player.velocity * seconds;
-        if (player.y >= ground - player.height) {
-          if (!player.grounded && player.velocity > 180) player.squash = 1.14;
-          player.y = ground - player.height;
+        if (jetpack) {
+          const cruiseY = Math.max(18, ground - player.height - (height < 460 ? 80 : 94));
           player.velocity = 0;
-          player.grounded = true;
-          player.flipAngle = 0;
-          player.flipVelocity = 0;
+          player.y += (cruiseY - player.y) * Math.min(seconds * 14, 1);
+          player.grounded = false;
           player.flipAvailable = false;
+          player.flipVelocity = 0;
+          player.flipAngle = 0;
+          speed = Math.max(speed, targetSpeed * 1.58);
+        } else {
+          player.velocity += 1720 * seconds;
+          player.y += player.velocity * seconds;
+          if (player.y >= ground - player.height) {
+            if (!player.grounded && player.velocity > 180) player.squash = 1.14;
+            player.y = ground - player.height;
+            player.velocity = 0;
+            player.grounded = true;
+            player.flipAngle = 0;
+            player.flipVelocity = 0;
+            player.flipAvailable = false;
+          }
         }
     
         for (const incident of incidents) {
@@ -1332,11 +1404,22 @@ const translations = {
           const pickup = pickups[index];
           const box = { x: pickup.x + 2, y: pickup.y + 2, width: pickup.width - 4, height: pickup.height - 4 };
           if (!overlap(playerBox, box)) continue;
-          shield = true;
-          shieldTimer = 5;
-          score += 18;
-          if (Math.random() < 0.22) speak("shield", true);
-          burst(pickup.x + 11, pickup.y + 11, "rgba(135, 168, 255, 0.85)");
+          if (pickup.kind === "jetpack") {
+            jetpack = true;
+            jetpackTimer = 3;
+            shield = false;
+            shieldTimer = 0;
+            score += 28;
+            burst(pickup.x + 11, pickup.y + 11, "rgba(255, 166, 96, 0.92)");
+            addNote("JETPACK", pickup.x - 8, pickup.y - 8, "rgba(255, 206, 130, 0.96)");
+            if (Math.random() < 0.45) speak("tier", true);
+          } else {
+            shield = true;
+            shieldTimer = 5;
+            score += 18;
+            if (Math.random() < 0.22) speak("shield", true);
+            burst(pickup.x + 11, pickup.y + 11, "rgba(135, 168, 255, 0.85)");
+          }
           pickups.splice(index, 1);
         }
     
@@ -1344,6 +1427,13 @@ const translations = {
           const incident = incidents[index];
           const box = { x: incident.x + 3, y: incident.y + 3, width: incident.width - 6, height: incident.height - 5 };
           if (!overlap(playerBox, box)) continue;
+          if (jetpack) {
+            streak = Math.min(streak + 1, 12);
+            score += 22;
+            burst(incident.x + incident.width / 2, incident.y + incident.height / 2, "rgba(255, 166, 96, 0.9)");
+            incidents.splice(index, 1);
+            continue;
+          }
           if (shield) {
             shield = false;
             shieldTimer = 0;
@@ -1523,6 +1613,136 @@ const translations = {
           ctx.arc(cx, y + 25, 2.8, 0, Math.PI * 2);
           ctx.fill();
           ctx.fillRect(cx - 1, y + 27, 2, 6);
+        } else if (incident.kind === "router") {
+          roundedRect(x + 2, y + 6, incident.width - 4, incident.height - 10, 5);
+          ctx.fillStyle = "rgba(12, 34, 42, 0.9)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(126, 215, 255, 0.78)";
+          ctx.lineWidth = 1.4;
+          ctx.stroke();
+          ctx.fillStyle = "rgba(184, 255, 232, 0.74)";
+          ctx.fillRect(x + 8, y + 11, 3, 3);
+          ctx.fillRect(x + 14, y + 11, 3, 3);
+          ctx.fillRect(x + 20, y + 11, 3, 3);
+          ctx.strokeStyle = "rgba(126, 215, 255, 0.78)";
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.moveTo(x + 9, y + 8);
+          ctx.lineTo(x + 7, y + 2);
+          ctx.moveTo(x + incident.width - 9, y + 8);
+          ctx.lineTo(x + incident.width - 7, y + 2);
+          ctx.stroke();
+        } else if (incident.kind === "keyboard") {
+          roundedRect(x + 2, y + 8, incident.width - 4, incident.height - 10, 5);
+          ctx.fillStyle = "rgba(16, 24, 31, 0.94)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(184, 255, 232, 0.34)";
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+          ctx.fillStyle = "rgba(184, 255, 232, 0.52)";
+          for (let key = 0; key < 4; key += 1) {
+            ctx.fillRect(x + 8 + key * 9, y + 12, 5, 3);
+          }
+        } else if (incident.kind === "server") {
+          roundedRect(x + 4, y + 2, incident.width - 8, incident.height - 4, 4);
+          ctx.fillStyle = "rgba(7, 13, 19, 0.96)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(126, 215, 255, 0.72)";
+          ctx.lineWidth = 1.4;
+          ctx.stroke();
+          ctx.fillStyle = "rgba(184, 255, 232, 0.78)";
+          for (let row = 0; row < 3; row += 1) {
+            ctx.fillRect(x + 10, y + 9 + row * 10, 3, 3);
+            ctx.fillRect(x + 16, y + 9 + row * 10, 3, 3);
+            ctx.fillRect(x + 22, y + 9 + row * 10, 3, 3);
+          }
+        } else if (incident.kind === "chip") {
+          roundedRect(x + 8, y + 6, incident.width - 16, incident.height - 12, 4);
+          ctx.fillStyle = "rgba(29, 63, 82, 0.86)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(126, 215, 255, 0.84)";
+          ctx.lineWidth = 1.3;
+          ctx.stroke();
+          ctx.strokeStyle = "rgba(184, 255, 232, 0.52)";
+          for (let pin = 0; pin < 4; pin += 1) {
+            const pinY = y + 10 + pin * 5;
+            ctx.beginPath();
+            ctx.moveTo(x + 5, pinY);
+            ctx.lineTo(x + 8, pinY);
+            ctx.moveTo(x + incident.width - 5, pinY);
+            ctx.lineTo(x + incident.width - 8, pinY);
+            ctx.stroke();
+          }
+        } else if (incident.kind === "terminal") {
+          roundedRect(x + 1, y + 3, incident.width - 2, incident.height - 6, 5);
+          ctx.fillStyle = "rgba(5, 16, 11, 0.94)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(143, 247, 210, 0.72)";
+          ctx.lineWidth = 1.4;
+          ctx.stroke();
+          ctx.fillStyle = "rgba(143, 247, 210, 0.78)";
+          ctx.fillRect(x + 8, y + 10, incident.width - 16, 3);
+          ctx.fillRect(x + 8, y + 17, incident.width - 22, 3);
+          ctx.fillRect(x + 8, y + 24, incident.width - 18, 3);
+        } else if (incident.kind === "database") {
+          ctx.fillStyle = "rgba(126, 215, 255, 0.14)";
+          for (let layer = 0; layer < 3; layer += 1) {
+            const cyDb = y + 10 + layer * 10;
+            ctx.beginPath();
+            ctx.ellipse(cx, cyDb, 12, 4.6, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = "rgba(126, 215, 255, 0.76)";
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+          }
+        } else if (incident.kind === "drone") {
+          ctx.strokeStyle = "rgba(184, 255, 232, 0.74)";
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.moveTo(x + 8, cy);
+          ctx.lineTo(x + incident.width - 8, cy);
+          ctx.moveTo(cx, y + 5);
+          ctx.lineTo(cx, y + incident.height - 5);
+          ctx.stroke();
+          roundedRect(cx - 7, cy - 5, 14, 10, 4);
+          ctx.fillStyle = "rgba(18, 30, 38, 0.94)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(126, 215, 255, 0.7)";
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(x + 7, y + 6, 3.2, 0, Math.PI * 2);
+          ctx.arc(x + incident.width - 7, y + 6, 3.2, 0, Math.PI * 2);
+          ctx.arc(x + 7, y + incident.height - 6, 3.2, 0, Math.PI * 2);
+          ctx.arc(x + incident.width - 7, y + incident.height - 6, 3.2, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(184, 255, 232, 0.62)";
+          ctx.fill();
+        } else if (incident.kind === "cable") {
+          ctx.strokeStyle = "rgba(255, 212, 138, 0.86)";
+          ctx.lineWidth = 2.2;
+          ctx.beginPath();
+          ctx.moveTo(x + 3, cy);
+          ctx.bezierCurveTo(x + 16, cy - 10, x + 34, cy + 11, x + incident.width - 6, cy - 2);
+          ctx.stroke();
+          roundedRect(x + incident.width - 12, cy - 5, 8, 10, 2);
+          ctx.fillStyle = "rgba(255, 212, 138, 0.72)";
+          ctx.fill();
+        } else if (incident.kind === "cloud") {
+          ctx.fillStyle = "rgba(184, 255, 232, 0.18)";
+          ctx.beginPath();
+          ctx.arc(x + 18, y + 13, 9, 0, Math.PI * 2);
+          ctx.arc(x + 30, y + 11, 11, 0, Math.PI * 2);
+          ctx.arc(x + 40, y + 14, 8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = "rgba(184, 255, 232, 0.72)";
+          ctx.lineWidth = 1.3;
+          ctx.stroke();
+          ctx.strokeStyle = "rgba(255, 96, 96, 0.84)";
+          ctx.beginPath();
+          ctx.moveTo(x + 20, y + incident.height - 2);
+          ctx.lineTo(x + 30, y + incident.height - 10);
+          ctx.lineTo(x + 25, y + incident.height - 10);
+          ctx.lineTo(x + 34, y + incident.height - 20);
+          ctx.stroke();
         } else if (incident.kind === "popup") {
           roundedRect(x + 1, y + 3, incident.width - 2, incident.height - 6, 6);
           ctx.fillStyle = "rgba(9, 20, 17, 0.92)";
@@ -1581,24 +1801,52 @@ const translations = {
         ctx.translate(cx, y + pickup.height / 2);
         ctx.rotate(Math.sin(pickup.spin) * 0.16);
         ctx.translate(-cx, -(y + pickup.height / 2));
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = "rgba(135, 168, 255, 0.42)";
-        ctx.beginPath();
-        ctx.moveTo(cx, y + 2);
-        ctx.lineTo(x + 18, y + 7);
-        ctx.lineTo(x + 16, y + 17);
-        ctx.lineTo(cx, y + 21);
-        ctx.lineTo(x + 6, y + 17);
-        ctx.lineTo(x + 4, y + 7);
-        ctx.closePath();
-        ctx.fillStyle = "rgba(135, 168, 255, 0.22)";
-        ctx.fill();
-        ctx.strokeStyle = "rgba(165, 195, 255, 0.86)";
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(cx, y + 11, 5, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(184, 255, 232, 0.72)";
-        ctx.stroke();
+        if (pickup.kind === "jetpack") {
+          ctx.shadowBlur = 14;
+          ctx.shadowColor = "rgba(255, 176, 108, 0.45)";
+          roundedRect(x + 6, y + 3, 10, 16, 3);
+          ctx.fillStyle = "rgba(99, 120, 142, 0.78)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(214, 232, 246, 0.9)";
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+          roundedRect(x + 15, y + 4, 4, 5, 2);
+          ctx.fillStyle = "rgba(184, 255, 232, 0.85)";
+          ctx.fill();
+          ctx.beginPath();
+          ctx.moveTo(x + 8, y + 19);
+          ctx.lineTo(x + 6, y + 23);
+          ctx.lineTo(x + 11, y + 22);
+          ctx.closePath();
+          ctx.fillStyle = "rgba(255, 133, 76, 0.84)";
+          ctx.fill();
+          ctx.beginPath();
+          ctx.moveTo(x + 14, y + 19);
+          ctx.lineTo(x + 13, y + 24);
+          ctx.lineTo(x + 17, y + 22);
+          ctx.closePath();
+          ctx.fillStyle = "rgba(255, 208, 122, 0.82)";
+          ctx.fill();
+        } else {
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = "rgba(135, 168, 255, 0.42)";
+          ctx.beginPath();
+          ctx.moveTo(cx, y + 2);
+          ctx.lineTo(x + 18, y + 7);
+          ctx.lineTo(x + 16, y + 17);
+          ctx.lineTo(cx, y + 21);
+          ctx.lineTo(x + 6, y + 17);
+          ctx.lineTo(x + 4, y + 7);
+          ctx.closePath();
+          ctx.fillStyle = "rgba(135, 168, 255, 0.22)";
+          ctx.fill();
+          ctx.strokeStyle = "rgba(165, 195, 255, 0.86)";
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(cx, y + 11, 5, 0, Math.PI * 2);
+          ctx.strokeStyle = "rgba(184, 255, 232, 0.72)";
+          ctx.stroke();
+        }
         ctx.restore();
       }
 
@@ -1695,9 +1943,11 @@ const translations = {
       }
     
       function drawTechnician() {
-        const stride = player.grounded && running ? Math.sin(player.runTime * 17) : -0.48;
-        const bob = player.grounded && running ? Math.abs(Math.sin(player.runTime * 17)) * 1.4 : 0;
-        const tilt = player.grounded ? stride * 0.022 : Math.max(-0.14, Math.min(0.14, player.velocity / 2800)) + player.flipAngle;
+        const stride = jetpack ? 0 : (player.grounded && running ? Math.sin(player.runTime * 17) : -0.48);
+        const bob = jetpack ? 0 : (player.grounded && running ? Math.abs(Math.sin(player.runTime * 17)) * 1.4 : 0);
+        const tilt = jetpack
+          ? -0.06 + Math.sin(player.runTime * 9) * 0.02
+          : (player.grounded ? stride * 0.022 : Math.max(-0.14, Math.min(0.14, player.velocity / 2800)) + player.flipAngle);
         const x = player.x;
         const y = Math.max(player.y, 6);
         const jumpHeight = Math.max(0, ground - player.height - player.y);
@@ -1720,6 +1970,32 @@ const translations = {
           ctx.strokeStyle = "rgba(135, 168, 255, 0.18)";
           ctx.lineWidth = 1.2;
           ctx.stroke();
+        }
+        if (jetpack) {
+          const flamePulse = 0.72 + Math.sin(player.runTime * 22) * 0.2;
+          ctx.save();
+          ctx.globalAlpha = 0.88;
+          ctx.fillStyle = "rgba(255, 140, 92, 0.86)";
+          ctx.beginPath();
+          ctx.moveTo(x + 8, y + 40);
+          ctx.lineTo(x - 5 - flamePulse * 5, y + 46);
+          ctx.lineTo(x + 8, y + 50);
+          ctx.closePath();
+          ctx.fill();
+          ctx.fillStyle = "rgba(255, 218, 138, 0.82)";
+          ctx.beginPath();
+          ctx.moveTo(x + 8, y + 42);
+          ctx.lineTo(x - 1 - flamePulse * 3.5, y + 46);
+          ctx.lineTo(x + 8, y + 48);
+          ctx.closePath();
+          ctx.fill();
+          ctx.strokeStyle = "rgba(184, 255, 232, 0.38)";
+          ctx.lineWidth = 1.1;
+          ctx.beginPath();
+          ctx.moveTo(x + 6, y + 45);
+          ctx.lineTo(x - 13 - flamePulse * 8, y + 45);
+          ctx.stroke();
+          ctx.restore();
         }
         ctx.save();
         ctx.translate(x + 22, y + 24 - bob);
@@ -1993,6 +2269,7 @@ const translations = {
           trigger.classList.remove("is-probing");
           renderTriggerPhrase();
           setTriggerProgress();
+          setActionHudDefault();
           return;
         }
         scheduleTriggerTitle();
@@ -2005,6 +2282,7 @@ const translations = {
       renderTriggerPhrase();
       setTriggerProgress();
       lockContactLayout();
+      setActionHudDefault();
     }
 
     function initDomCursorTech(layer) {
