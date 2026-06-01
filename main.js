@@ -646,12 +646,16 @@ const translations = {
       if (!shell) return;
     
       const trigger = shell.querySelector("[data-game-trigger]");
+      const titleNode = shell.querySelector("#contact-title");
+      const titleLineOne = shell.querySelector("[data-contact-line=\"1\"]");
+      const titleLineTwo = shell.querySelector("[data-contact-line=\"2\"]");
+      const titleLineThree = shell.querySelector("[data-contact-line=\"3\"]");
       const panel = shell.querySelector("#binary-runner");
       const canvas = shell.querySelector("[data-game-canvas]");
       const scoreNode = shell.querySelector("[data-game-score]");
       const metaNode = shell.querySelector("[data-game-meta]");
       const stateNode = shell.querySelector("[data-game-state]");
-      if (!trigger || !panel || !canvas || !scoreNode || !metaNode || !stateNode) return;
+      if (!trigger || !titleNode || !titleLineOne || !titleLineTwo || !titleLineThree || !panel || !canvas || !scoreNode || !metaNode || !stateNode) return;
     
       const ctx = canvas.getContext("2d");
       const player = { x: 58, y: 0, width: 38, height: 46, velocity: 0, grounded: true, runTime: 0, squash: 1, flipAngle: 0, flipVelocity: 0, flipAvailable: false };
@@ -908,6 +912,32 @@ const translations = {
       let frame = 0;
       let lastFrameTime = 0;
       const unlockClicksRequired = 10;
+      const activationCopy = {
+        sk: {
+          trigger: "Nápad",
+          lines: [
+            ["problém", "alebo"],
+            ["technická", "výzva"],
+            ["Môžeme", "sa", "na", "to", "pozrieť"]
+          ]
+        },
+        cs: {
+          trigger: "Nápad",
+          lines: [
+            ["problém", "nebo"],
+            ["technická", "výzva"],
+            ["Můžeme", "se", "na", "to", "podívat"]
+          ]
+        },
+        en: {
+          trigger: "Nápad",
+          lines: [
+            ["problem", "or"],
+            ["technical", "challenge"],
+            ["We", "can", "take", "a", "look"]
+          ]
+        }
+      };
       let triggerClicks = 0;
       let revealed = false;
       let running = false;
@@ -938,6 +968,7 @@ const translations = {
       let controlHintDelay = 0;
       let controlHintLife = 0;
       let controlHintShown = false;
+      let contactLayoutLocked = false;
     
       function gameCopy(key) {
         const language = currentLanguage || html.lang || browserLanguageFallback();
@@ -948,13 +979,56 @@ const translations = {
         stateNode.textContent = gameCopy(key);
       }
 
-      function setTriggerCopy() {
-        trigger.textContent = "Ticket Run";
+      function activationTitleCopy() {
+        const language = currentLanguage || html.lang || browserLanguageFallback();
+        return activationCopy[language] || activationCopy.en;
+      }
+
+      function renderTriggerPhrase() {
+        const copy = activationTitleCopy();
+        const fullWords = copy.lines.flat();
+        const removedWords = Math.min(triggerClicks, unlockClicksRequired - 1);
+        const remainingWords = fullWords.slice(0, Math.max(0, fullWords.length - removedWords));
+        if (revealed || triggerClicks >= unlockClicksRequired) {
+          trigger.textContent = "Ticket Run";
+          titleLineOne.textContent = "";
+          titleLineTwo.textContent = "\u00A0";
+          titleLineThree.textContent = "\u00A0";
+          return;
+        }
+
+        trigger.textContent = copy.trigger;
+        const lineOneCount = Math.min(copy.lines[0].length, remainingWords.length);
+        const lineTwoCount = Math.min(copy.lines[1].length, Math.max(0, remainingWords.length - copy.lines[0].length));
+        const lineThreeCount = Math.min(copy.lines[2].length, Math.max(0, remainingWords.length - copy.lines[0].length - copy.lines[1].length));
+        const lineOneWords = remainingWords.slice(0, lineOneCount);
+        const lineTwoWords = remainingWords.slice(copy.lines[0].length, copy.lines[0].length + lineTwoCount);
+        const lineThreeWords = remainingWords.slice(copy.lines[0].length + copy.lines[1].length, copy.lines[0].length + copy.lines[1].length + lineThreeCount);
+
+        titleLineOne.textContent = lineOneWords.length ? `, ${lineOneWords.join(" ")}` : ",";
+        titleLineTwo.textContent = lineTwoWords.length ? `${lineTwoWords.join(" ")}?` : "\u00A0";
+        titleLineThree.textContent = lineThreeWords.length ? `${lineThreeWords.join(" ")}.` : "\u00A0";
       }
 
       function setTriggerProgress() {
+        // Progress stays logical in JS, but visual bar is intentionally disabled in CSS.
         const progress = revealed ? 1 : Math.min(triggerClicks / unlockClicksRequired, 1);
         trigger.style.setProperty("--unlock-progress", progress.toFixed(3));
+      }
+
+      function lockContactLayout() {
+        if (contactLayoutLocked) return;
+        const lock = () => {
+          const titleHeight = Math.ceil(titleNode.getBoundingClientRect().height);
+          const shellHeight = Math.ceil(shell.getBoundingClientRect().height);
+          if (titleHeight > 0) titleNode.style.minHeight = `${titleHeight}px`;
+          if (shellHeight > 0) shell.style.minHeight = `${shellHeight}px`;
+          contactLayoutLocked = titleHeight > 0 && shellHeight > 0;
+        };
+        lock();
+        if (!contactLayoutLocked) {
+          window.requestAnimationFrame(lock);
+        }
       }
 
       function pulseTrigger() {
@@ -972,7 +1046,7 @@ const translations = {
       }
 
       function scheduleTriggerTitle() {
-        setTriggerCopy();
+        renderTriggerPhrase();
         setTriggerProgress();
       }
 
@@ -1841,17 +1915,16 @@ const translations = {
       function revealGame() {
         if (!revealed) {
           revealed = true;
-          triggerClicks = 0;
-          setTriggerCopy();
+          renderTriggerPhrase();
           setTriggerProgress();
-          focusGame();
-          panel.hidden = false;
           trigger.setAttribute("aria-expanded", "true");
           scheduleTriggerTitle();
-          window.requestAnimationFrame(() => {
-            panel.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "end" });
-            window.setTimeout(resetGame, reducedMotion.matches ? 0 : 220);
-          });
+          const revealDelay = reducedMotion.matches ? 0 : 260;
+          window.setTimeout(() => {
+            focusGame();
+            panel.hidden = false;
+            window.setTimeout(resetGame, reducedMotion.matches ? 0 : 120);
+          }, revealDelay);
           return;
         }
         resetGame();
@@ -1885,6 +1958,7 @@ const translations = {
         event.preventDefault();
         if (!revealed) {
           triggerClicks += 1;
+          renderTriggerPhrase();
           setTriggerProgress();
           pulseTrigger();
           if (triggerClicks >= unlockClicksRequired) revealGame();
@@ -1917,7 +1991,7 @@ const translations = {
           setState("game.ready");
           if (triggerTitleTimer) { window.clearTimeout(triggerTitleTimer); triggerTitleTimer = 0; }
           trigger.classList.remove("is-probing");
-          setTriggerCopy();
+          renderTriggerPhrase();
           setTriggerProgress();
           return;
         }
@@ -1928,8 +2002,9 @@ const translations = {
       });
       window.addEventListener("visibilitychange", handleGameVisibilityChange, { passive: true });
 
-      setTriggerCopy();
+      renderTriggerPhrase();
       setTriggerProgress();
+      lockContactLayout();
     }
 
     function initDomCursorTech(layer) {

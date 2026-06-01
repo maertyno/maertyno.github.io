@@ -211,9 +211,16 @@
         </div>
       </section>
 
-      <section id="contact" class="contact-band reveal" aria-labelledby="contact-title">
+      <section id="contact" class="contact-band reveal" aria-labelledby="contact-title" data-runner>
         <div>
-          <h2 id="contact-title" data-i18n-html="contact.title">Nápad, problém alebo<br>technická výzva?<br><span class="contact-keep">Môžeme sa na to pozrieť.</span></h2>
+          <h2 id="contact-title">
+            <span class="contact-title-line contact-title-line-1">
+              <button class="contact-title-trigger easter-trigger" type="button" data-game-trigger aria-expanded="false" aria-controls="binary-runner">Nápad</button>
+              <span class="contact-title-tail" data-contact-line="1">, problém alebo</span>
+            </span>
+            <span class="contact-title-line contact-title-line-2" data-contact-line="2">technická výzva?</span>
+            <span class="contact-title-line contact-title-line-3"><span class="contact-keep" data-contact-line="3">Môžeme sa na to pozrieť.</span></span>
+          </h2>
         </div>
         <div class="actions">
           <a class="button primary" href="mailto:martinus.nagy@gmail.com">
@@ -225,24 +232,22 @@
             <span>LinkedIn</span>
           </a>
         </div>
+        <div class="contact-game" aria-label="Mini game">
+          <div class="binary-runner" id="binary-runner" hidden>
+            <div class="binary-runner-head">
+              <span><span data-i18n="game.score">Skóre</span>: <span class="binary-runner-score" data-game-score>0</span></span>
+              <span class="binary-runner-meta" data-game-meta>Helpdesk floor</span>
+            </div>
+            <canvas class="binary-runner-canvas" data-game-canvas aria-label="Ticket Run mini game"></canvas>
+            <div class="binary-runner-state" data-game-state aria-live="polite" data-i18n="game.ready">Jeden klik skok. Dvojklik vo vzduchu salto. Shield drží 5 sekúnd alebo jeden hit.</div>
+          </div>
+        </div>
       </section>
     </main>
 
     <footer class="footer shell">
       <span>© <span id="year"></span> Martin Nagy</span>
     </footer>
-
-    <section class="easter-egg shell" aria-label="Mini game" data-runner>
-          <button class="easter-trigger" type="button" data-game-trigger aria-expanded="false" aria-controls="binary-runner" data-i18n="game.prompt">Ticket Run</button>
-      <div class="binary-runner" id="binary-runner" hidden>
-        <div class="binary-runner-head">
-          <span><span data-i18n="game.score">Skóre</span>: <span class="binary-runner-score" data-game-score>0</span></span>
-          <span class="binary-runner-meta" data-game-meta>Helpdesk floor</span>
-        </div>
-        <canvas class="binary-runner-canvas" data-game-canvas aria-label="Ticket Run mini game"></canvas>
-            <div class="binary-runner-state" data-game-state aria-live="polite" data-i18n="game.ready">Jeden klik skok. Dvojklik vo vzduchu salto. Shield drží 5 sekúnd alebo jeden hit.</div>
-      </div>
-    </section>
   </div>
 
     <script src="./main.js" defer></script>

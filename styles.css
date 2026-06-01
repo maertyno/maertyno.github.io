@@ -1136,6 +1136,9 @@
       align-items: center;
       margin: 70px 0 46px;
       padding: clamp(30px, 4vw, 44px);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
       border: 1px solid var(--line);
       border-radius: 8px;
       background:
@@ -1157,9 +1160,30 @@
       box-shadow: 0 20px 66px rgba(0, 0, 0, 0.28), 0 0 22px rgba(143, 247, 210, 0.035);
     }
 
+    .contact-band > :not(.contact-game) {
+      position: relative;
+      z-index: 1;
+    }
+
     .contact-band h2 {
       max-width: none;
       margin: 0;
+      white-space: normal;
+    }
+
+    .contact-title-line {
+      display: block;
+      min-height: 1.02em;
+    }
+
+    .contact-title-line-1 {
+      display: flex;
+      align-items: baseline;
+      gap: 0.06em;
+      flex-wrap: nowrap;
+    }
+
+    .contact-title-tail {
       white-space: normal;
     }
 
@@ -1228,6 +1252,78 @@
     .contact-band .button:not(.primary):hover {
       border-color: rgba(143, 247, 210, 0.34);
       background: rgba(255, 255, 255, 0.12);
+    }
+
+    .contact-game {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: clamp(12px, 1.8vw, 20px);
+      pointer-events: none;
+    }
+
+    .contact-title-trigger.easter-trigger {
+      display: inline-flex;
+      align-items: baseline;
+      pointer-events: auto;
+      margin: 0;
+      padding: 0;
+      white-space: nowrap;
+      border-bottom: 0;
+      font: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      font-weight: inherit;
+      letter-spacing: inherit;
+      color: inherit;
+      text-shadow: 0 0 10px rgba(8, 14, 13, 0.35);
+      vertical-align: baseline;
+      transition: color 220ms ease, text-shadow 220ms ease;
+    }
+
+    .contact-title-trigger.easter-trigger::after {
+      display: none;
+    }
+
+    .contact-title-trigger[aria-expanded="true"] {
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    .contact-title-trigger.easter-trigger.is-probing {
+      transform: none;
+    }
+
+    .contact-game .binary-runner {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      max-width: none;
+      border-radius: inherit;
+      overflow: hidden;
+      text-align: left;
+      pointer-events: auto;
+      background:
+        linear-gradient(180deg, rgba(6, 9, 7, 0.18), rgba(6, 9, 7, 0.36)),
+        radial-gradient(circle at 16% 18%, rgba(143, 247, 210, 0.1), transparent 40%);
+    }
+
+    .contact-game .binary-runner-head {
+      top: 12px;
+      left: 16px;
+      right: 16px;
+      z-index: 2;
+    }
+
+    .contact-game .binary-runner-canvas {
+      height: 100%;
+    }
+
+    .contact-game .binary-runner[hidden] {
+      display: none;
     }
 
     .footer {
