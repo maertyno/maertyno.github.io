@@ -657,6 +657,7 @@ const translations = {
       const stateNode = shell.querySelector("[data-game-state]");
       const scoreActionNode = shell.querySelector(".actions .button.primary span");
       const levelActionNode = shell.querySelector(".actions .button:not(.primary) span");
+      const mobileGameMedia = window.matchMedia("(max-width: 900px) and (hover: none) and (pointer: coarse)");
       if (!trigger || !titleNode || !titleLineOne || !titleLineTwo || !titleLineThree || !panel || !canvas || !scoreNode || !metaNode || !stateNode) return;
     
       const ctx = canvas.getContext("2d");
@@ -942,7 +943,7 @@ const translations = {
           ]
         },
         en: {
-          trigger: "Nápad",
+          trigger: "Idea",
           lines: [
             ["problem", "or"],
             ["technical", "challenge"],
@@ -1098,8 +1099,16 @@ const translations = {
       }
 
       function setActionHudGame() {
-        if (scoreActionNode) scoreActionNode.textContent = `Score ${Math.min(maxScore, Math.floor(score))}`;
-        if (levelActionNode) levelActionNode.textContent = `Level ${chapterIndex + 1}/${chapters.length}`;
+        // Keep contact buttons static while playing; game HUD is shown in canvas header.
+        setActionHudDefault();
+      }
+
+      function setMobileGameUi(active) {
+        if (!mobileGameMedia.matches) {
+          shell.classList.remove("mobile-game-active");
+          return;
+        }
+        shell.classList.toggle("mobile-game-active", Boolean(active));
       }
     
       function updateHud() {
@@ -1114,7 +1123,7 @@ const translations = {
           if (Math.random() < 0.25) speak("tier", true);
           burst(Math.min(width - 90, player.x + 78), ground - 66, chapter.color);
         }
-        metaNode.textContent = "";
+        metaNode.textContent = `Level ${chapterIndex + 1}/${chapters.length}`;
         scoreNode.textContent = String(Math.min(maxScore, Math.floor(score)));
         setActionHudGame();
       }
@@ -1139,6 +1148,7 @@ const translations = {
     
       function resetGame() {
         resizeGame();
+        setMobileGameUi(true);
         incidents = [];
         pickups = [];
         bits = [];
@@ -2191,6 +2201,7 @@ const translations = {
       function revealGame() {
         if (!revealed) {
           revealed = true;
+          setMobileGameUi(true);
           renderTriggerPhrase();
           setTriggerProgress();
           trigger.setAttribute("aria-expanded", "true");
@@ -2249,6 +2260,19 @@ const translations = {
         event.preventDefault();
         flip();
       });
+      let lastTouchEnd = 0;
+      canvas.addEventListener("touchend", (event) => {
+        const now = Date.now();
+        if (now - lastTouchEnd < 320) {
+          // Block browser double-tap zoom inside the minigame area.
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, { passive: false });
+      canvas.addEventListener("gesturestart", (event) => {
+        // iOS Safari gesture guard for game surface.
+        event.preventDefault();
+      }, { passive: false });
       window.addEventListener("resize", () => {
         if (!revealed) return;
         resizeGame();
@@ -2278,10 +2302,14 @@ const translations = {
         drawGame();
       });
       window.addEventListener("visibilitychange", handleGameVisibilityChange, { passive: true });
+      mobileGameMedia.addEventListener("change", () => {
+        setMobileGameUi(revealed);
+      });
 
       renderTriggerPhrase();
       setTriggerProgress();
       lockContactLayout();
+      setMobileGameUi(false);
       setActionHudDefault();
     }
 
