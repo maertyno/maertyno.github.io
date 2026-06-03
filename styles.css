@@ -2988,3 +2988,181 @@
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
       }
     }
+
+    .hero h1 {
+      max-width: min(840px, 100%);
+      font-family: Inter, var(--font-sans);
+      font-size: clamp(66px, 8vw, 104px);
+      font-weight: 800;
+      line-height: 0.96;
+      letter-spacing: -0.045em;
+      text-wrap: balance;
+    }
+
+    .hero .tone {
+      display: block;
+      max-width: 100%;
+      margin-top: -0.02em;
+      padding-top: 0.06em;
+      padding-bottom: 0.16em;
+      font-size: inherit;
+      line-height: 1.02;
+      letter-spacing: inherit;
+      white-space: normal;
+      overflow-wrap: normal;
+      color: transparent;
+      background: linear-gradient(112deg, #c4fff0 0%, #b5f2ff 52%, #9fd8ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero .hero-fit-line {
+      display: inline-block;
+      width: max-content;
+      max-width: none;
+      white-space: nowrap;
+      text-wrap: nowrap;
+    }
+
+    .hero .detail-tone {
+      font-size: 0.54em;
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      margin-top: -0.02em;
+      padding-bottom: 0.22em;
+      max-width: 100%;
+      white-space: nowrap;
+      text-align: left;
+      text-wrap: nowrap;
+      background: linear-gradient(112deg, #a9ffe8 0%, #9ddcff 34%, #a7b7ff 62%, #b89cff 84%, #d6b5ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    @media (max-width: 1280px) {
+      .hero h1 {
+        max-width: 100%;
+        font-size: clamp(64px, 7.2vw, 90px);
+        line-height: 0.94;
+      }
+
+      .hero .detail-tone {
+        font-size: 0.54em;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero h1 {
+        font-size: clamp(58px, 8.2vw, 76px);
+        line-height: 0.95;
+      }
+
+      .hero .detail-tone {
+        font-size: 0.54em;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .hero h1 {
+        max-width: min(700px, 100%);
+        font-size: clamp(44px, 6.5vw, 88px);
+        line-height: 1.06;
+        letter-spacing: -0.028em;
+        text-wrap: balance;
+      }
+
+      .hero .tone {
+        white-space: normal;
+        text-wrap: wrap;
+        overflow-wrap: normal;
+        word-break: normal;
+      }
+
+      .hero .hero-fit-line {
+        white-space: normal;
+        text-wrap: wrap;
+        overflow-wrap: normal;
+        word-break: normal;
+      }
+
+      .hero .detail-tone {
+        font-size: 0.58em;
+        line-height: 1.12;
+        letter-spacing: -0.02em;
+        margin-top: -0.2em;
+        padding-bottom: 0.18em;
+        max-width: 11.8em;
+        white-space: normal;
+        text-align: left;
+        text-wrap: balance;
+      }
+
+      .footer-top-button {
+        flex-direction: column-reverse;
+        width: auto;
+        gap: 7px;
+      }
+
+      .footer-top-button-line {
+        width: 108px;
+      }
+
+      .footer-top-button-label {
+        display: block;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero h1 {
+        max-width: 100%;
+        font-size: clamp(32px, 9.8vw, 46px);
+        line-height: 1.04;
+        letter-spacing: -0.012em;
+      }
+
+      .hero .tone {
+        font-size: inherit;
+        margin-top: -0.02em;
+        padding-top: 0.06em;
+        padding-bottom: 0.24em;
+        line-height: 1.16;
+      }
+
+      .hero .detail-tone {
+        font-size: 0.58em;
+        line-height: 1.2;
+        margin-top: -0.12em;
+        padding-bottom: 0.22em;
+        text-align: left;
+        white-space: normal;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .hero h1 {
+        font-size: clamp(31px, 9.6vw, 42px);
+        line-height: 1.03;
+      }
+    }
+
+    @media (max-width: 900px) and (hover: none) and (pointer: coarse) {
+      .contact-band.mobile-game-active .contact-title-line-2,
+      .contact-band.mobile-game-active .contact-title-line-3 {
+        display: none;
+        min-height: 0;
+      }
+
+      .contact-band.mobile-game-active .mobile-runner-hud {
+        margin-top: 6px;
+        margin-bottom: 10px;
+      }
+
+      .contact-game .binary-runner {
+        top: 0;
+        bottom: 0;
+      }
+
+      .contact-game .binary-runner-head {
+        display: none !important;
+      }
+    }
