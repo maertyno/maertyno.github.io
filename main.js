@@ -16,8 +16,9 @@ const translations = {
         "services.repair.copy": "Diagnostika a opravy zariadení s dôrazom na presnosť, postup a detail. Skúsenosť s telefónmi, tabletmi, počítačmi aj menšou elektronikou.",
         "services.design.title": "Webdizajn a iOS aplikácie",
         "services.design.copy": "Tvorím prehľadné weby a iOS app koncepty, ktoré majú zrozumiteľnú štruktúru, dobrý vizuálny cit a fungujú prirodzene na rôznych zariadeniach.",
-        "contact.title": "Nápad, problém alebo<br>technická výzva?<br><span class=\"contact-keep\">Môžeme sa na to pozrieť.</span>",
-        "contact.email": "Email",
+      "contact.title": "Nápad, problém alebo<br>technická výzva?<br><span class=\"contact-keep\">Môžeme sa na to pozrieť.</span>",
+      "contact.email": "Email",
+      "footer.top": "Hore",
       },
       cs: {
         "nav.about": "O mně",
@@ -36,8 +37,9 @@ const translations = {
         "services.repair.copy": "Diagnostika a opravy zařízení s důrazem na přesnost, postup a detail. Zkušenost s telefony, tablety, počítači i menší elektronikou.",
         "services.design.title": "Webdesign a iOS aplikace",
         "services.design.copy": "Tvořím přehledné weby a iOS app koncepty, které mají srozumitelnou strukturu, dobrý vizuální cit a fungují přirozeně na různých zařízeních.",
-        "contact.title": "Nápad, problém nebo<br>technická výzva?<br><span class=\"contact-keep\">Můžeme se na to podívat.</span>",
-        "contact.email": "Email",
+      "contact.title": "Nápad, problém nebo<br>technická výzva?<br><span class=\"contact-keep\">Můžeme se na to podívat.</span>",
+      "contact.email": "Email",
+      "footer.top": "Nahoru",
       },
       en: {
         "nav.about": "About",
@@ -56,8 +58,9 @@ const translations = {
         "services.repair.copy": "Device diagnostics and repair with attention to accuracy, process, and detail. Hands-on experience with phones, tablets, computers, and small electronics.",
         "services.design.title": "Web Design & iOS Apps",
         "services.design.copy": "I create clear websites and iOS app concepts with strong structure, good visual detail, and natural usability across devices.",
-        "contact.title": "An idea, problem<br>or a technical challenge?<br><span class=\"contact-keep\">We can take a look.</span>",
-        "contact.email": "Email",
+      "contact.title": "An idea, problem<br>or a technical challenge?<br><span class=\"contact-keep\">We can take a look.</span>",
+      "contact.email": "Email",
+      "footer.top": "Top",
       }
     };
 
@@ -655,6 +658,9 @@ const translations = {
       const scoreNode = shell.querySelector("[data-game-score]");
       const metaNode = shell.querySelector("[data-game-meta]");
       const stateNode = shell.querySelector("[data-game-state]");
+      const mobileHudNode = shell.querySelector("[data-mobile-game-hud]");
+      const mobileScoreNode = shell.querySelector("[data-mobile-game-score]");
+      const mobileLevelNode = shell.querySelector("[data-mobile-game-level]");
       const scoreActionNode = shell.querySelector(".actions .button.primary span");
       const levelActionNode = shell.querySelector(".actions .button:not(.primary) span");
       const mobileGameMedia = window.matchMedia("(max-width: 900px) and (hover: none) and (pointer: coarse)");
@@ -965,6 +971,8 @@ const translations = {
       let shieldTimer = 0;
       let jetpack = false;
       let jetpackTimer = 0;
+      let landingGraceTimer = 0;
+      let jetpackLandingGracePending = false;
       let shake = 0;
       let speedFlash = 0;
       let lastIncident = "";
@@ -1107,12 +1115,18 @@ const translations = {
         if (levelActionNode) levelActionNode.textContent = `Level ${chapterIndex + 1}/${chapters.length}`;
       }
 
+      function setGameHudMode(active) {
+        shell.classList.toggle("game-hud-active", Boolean(active) && !mobileGameMedia.matches);
+      }
+
       function setMobileGameUi(active) {
         if (!mobileGameMedia.matches) {
           shell.classList.remove("mobile-game-active");
+          if (mobileHudNode) mobileHudNode.setAttribute("aria-hidden", "true");
           return;
         }
         shell.classList.toggle("mobile-game-active", Boolean(active));
+        if (mobileHudNode) mobileHudNode.setAttribute("aria-hidden", String(!active));
       }
     
       function updateHud() {
@@ -1129,7 +1143,15 @@ const translations = {
         }
         metaNode.textContent = `Level ${chapterIndex + 1}/${chapters.length}`;
         scoreNode.textContent = String(Math.min(maxScore, Math.floor(score)));
-        setActionHudGame();
+        if (mobileScoreNode) mobileScoreNode.textContent = String(Math.min(maxScore, Math.floor(score)));
+        if (mobileLevelNode) mobileLevelNode.textContent = `${chapterIndex + 1}/${chapters.length}`;
+        if (running && !gameOver) {
+          setActionHudGame();
+          setGameHudMode(true);
+        } else {
+          setActionHudDefault();
+          setGameHudMode(false);
+        }
       }
     
       function resizeGame() {
@@ -1149,10 +1171,20 @@ const translations = {
         document.body.classList.remove("desktop-effects");
         if (window.__deviceExperience) window.__deviceExperience.gameFocus = true;
       }
+
+      function unfocusGame() {
+        document.body.classList.remove("game-focus");
+        if (window.__forceDesktopEffects) {
+          document.body.classList.add("desktop-effects");
+        }
+        setGameHudMode(false);
+        if (window.__deviceExperience) window.__deviceExperience.gameFocus = false;
+      }
     
       function resetGame() {
         resizeGame();
         setMobileGameUi(true);
+        focusGame();
         incidents = [];
         pickups = [];
         bits = [];
@@ -1170,6 +1202,8 @@ const translations = {
         shieldTimer = 0;
         jetpack = false;
         jetpackTimer = 0;
+        landingGraceTimer = 0;
+        jetpackLandingGracePending = false;
         shake = 0;
         speedFlash = 0;
         lastIncident = "";
@@ -1321,8 +1355,12 @@ const translations = {
           jetpackTimer = Math.max(0, jetpackTimer - seconds);
           if (jetpackTimer <= 0) {
             jetpack = false;
+            jetpackLandingGracePending = true;
             burst(player.x + player.width / 2, player.y + 24, "rgba(255, 170, 102, 0.68)");
           }
+        }
+        if (landingGraceTimer > 0) {
+          landingGraceTimer = Math.max(0, landingGraceTimer - seconds);
         }
         shake = Math.max(0, shake - seconds * 18);
         speedFlash = Math.max(0, speedFlash - seconds);
@@ -1378,6 +1416,10 @@ const translations = {
             player.flipAngle = 0;
             player.flipVelocity = 0;
             player.flipAvailable = false;
+            if (jetpackLandingGracePending) {
+              landingGraceTimer = 1;
+              jetpackLandingGracePending = false;
+            }
           }
         }
     
@@ -1420,7 +1462,9 @@ const translations = {
           if (!overlap(playerBox, box)) continue;
           if (pickup.kind === "jetpack") {
             jetpack = true;
-            jetpackTimer = 3;
+            jetpackTimer = 6;
+            landingGraceTimer = 0;
+            jetpackLandingGracePending = false;
             shield = false;
             shieldTimer = 0;
             score += 28;
@@ -1429,7 +1473,7 @@ const translations = {
             if (Math.random() < 0.45) speak("tier", true);
           } else {
             shield = true;
-            shieldTimer = 5;
+            shieldTimer = 8;
             score += 18;
             if (Math.random() < 0.22) speak("shield", true);
             burst(pickup.x + 11, pickup.y + 11, "rgba(135, 168, 255, 0.85)");
@@ -1448,12 +1492,15 @@ const translations = {
             incidents.splice(index, 1);
             continue;
           }
-          if (shield) {
+          if (shield || landingGraceTimer > 0) {
             shield = false;
-            shieldTimer = 0;
+            if (shieldTimer > 0) shieldTimer = 0;
             streak = 0;
             score += 18;
             burst(incident.x + incident.width / 2, incident.y + incident.height / 2, "rgba(135, 168, 255, 0.85)");
+            if (landingGraceTimer > 0) {
+              landingGraceTimer = 0;
+            }
             incidents.splice(index, 1);
             continue;
           }
@@ -1467,6 +1514,8 @@ const translations = {
           const endings = ["game.over.ticket", "game.over.reboot", "game.over.escalated"];
           endMessage = gameCopy(endings[Math.floor(Math.random() * endings.length)]);
           setState("game.over");
+          unfocusGame();
+          setActionHudDefault();
           break;
         }
         if (score >= maxScore && running && !gameOver) {
@@ -1477,6 +1526,8 @@ const translations = {
           endMessage = gameCopy("game.win");
           setState("game.win");
           burst(player.x + player.width / 2, player.y + 8, "rgba(184, 255, 232, 0.92)");
+          unfocusGame();
+          setActionHudDefault();
         }
         updateHud();
       }
@@ -2212,7 +2263,6 @@ const translations = {
           scheduleTriggerTitle();
           const revealDelay = reducedMotion.matches ? 0 : 260;
           window.setTimeout(() => {
-            focusGame();
             panel.hidden = false;
             window.setTimeout(resetGame, reducedMotion.matches ? 0 : 120);
           }, revealDelay);
@@ -2243,6 +2293,27 @@ const translations = {
       function handleGameAction(event) {
         event.preventDefault();
         handleGamePress(event);
+      }
+
+      function closeGameAndReturnTop() {
+        running = false;
+        gameOver = false;
+        revealed = false;
+        panel.hidden = true;
+        setMobileGameUi(false);
+        unfocusGame();
+        setActionHudDefault();
+        setState("game.ready");
+        if (triggerTitleTimer) {
+          window.clearTimeout(triggerTitleTimer);
+          triggerTitleTimer = 0;
+        }
+        trigger.classList.remove("is-probing");
+        trigger.setAttribute("aria-expanded", "false");
+        triggerClicks = 0;
+        renderTriggerPhrase();
+        setTriggerProgress();
+        window.scrollTo({ top: 0, behavior: reducedMotion.matches ? "auto" : "smooth" });
       }
 
       function handleTriggerPress(event) {
@@ -2289,6 +2360,12 @@ const translations = {
           return;
         }
         handleGameAction(event);
+      });
+      document.querySelectorAll("[data-game-close]").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.preventDefault();
+          closeGameAndReturnTop();
+        });
       });
       window.addEventListener("site-language-applied", () => {
         if (!revealed) {

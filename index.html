@@ -221,6 +221,10 @@
             <span class="contact-title-line contact-title-line-2" data-contact-line="2">technická výzva?</span>
             <span class="contact-title-line contact-title-line-3"><span class="contact-keep" data-contact-line="3">Môžeme sa na to pozrieť.</span></span>
           </h2>
+          <div class="mobile-runner-hud" data-mobile-game-hud aria-hidden="true">
+            <span class="mobile-runner-hud-item"><span data-i18n="game.score">Skóre</span>: <span data-mobile-game-score>0</span></span>
+            <span class="mobile-runner-hud-item">Level <span data-mobile-game-level>1/10</span></span>
+          </div>
         </div>
         <div class="actions">
           <a class="button primary" href="mailto:martinus.nagy@gmail.com">
@@ -246,7 +250,22 @@
     </main>
 
     <footer class="footer shell">
-      <span>© <span id="year"></span> Martin Nagy</span>
+      <div class="footer-bottom-band">
+        <div class="footer-brand">
+          <img class="footer-brand-mark" src="favicon.svg" alt="" aria-hidden="true" />
+          <span class="footer-brand-copy">© <span id="year"></span> Martin Nagy</span>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="#services" data-i18n="nav.services">Čo robím</a>
+          <a href="#experience" data-i18n="nav.experience">Skúsenosti</a>
+        </nav>
+        <button class="footer-top-button" type="button" data-game-close aria-label="Close mini game and scroll to top">
+          <span class="footer-top-button-label" data-i18n="footer.top">Top</span>
+          <span class="footer-top-button-line" aria-hidden="true">
+            <span class="footer-top-button-line-core"></span>
+          </span>
+        </button>
+      </div>
     </footer>
   </div>
 
