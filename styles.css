@@ -1176,6 +1176,7 @@
     .contact-band > :not(.contact-game) {
       position: relative;
       z-index: 1;
+      min-width: 0;
     }
 
     .contact-band h2 {
@@ -1257,6 +1258,13 @@
     .contact-band .button > * {
       position: relative;
       z-index: 1;
+    }
+
+    .contact-action-label {
+      display: inline-block;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum" 1;
     }
 
     .contact-band .button.primary:hover {
@@ -3216,6 +3224,43 @@
     }
 
     @media (max-width: 700px) {
+      .nav {
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      .nav-links {
+        min-width: 0;
+        gap: 4px;
+        padding-right: 0;
+      }
+
+      .nav-links a {
+        padding-inline: 8px;
+        font-size: 11px;
+      }
+
+      html[lang="en"] .nav-links {
+        gap: 2px;
+      }
+
+      html[lang="en"] .nav-links a {
+        padding-inline: 6px;
+        font-size: 10.25px;
+        letter-spacing: 0.01em;
+      }
+
+      html[lang="en"] .language-switcher {
+        gap: 1px;
+      }
+
+      html[lang="en"] .lang-button {
+        width: 31px;
+      }
+
+      html[lang="en"] .language-indicator {
+        width: 31px;
+      }
+
       .footer-bottom-band {
         display: grid;
         grid-template-columns: 1fr;
@@ -3285,7 +3330,7 @@
         content: "";
         right: 0;
         top: 0;
-        transform: rotate(84deg);
+        transform: rotate(90deg);
       }
 
       .footer-top-button:hover .footer-top-button-line-core {
@@ -3303,16 +3348,17 @@
     }
 
     .topbar {
-      background:
-        linear-gradient(180deg, rgba(4, 9, 8, 0.98) 0%, rgba(4, 9, 8, 0.94) 66%, rgba(4, 9, 8, 0.72) 88%, transparent 100%);
+      background: transparent;
     }
 
     .nav {
-      border-color: rgba(214, 255, 242, 0.22);
+      border-color: rgba(214, 255, 242, 0.18);
       background:
-        linear-gradient(180deg, rgba(12, 21, 18, 0.98), rgba(5, 10, 8, 0.96)),
-        rgba(5, 10, 8, 0.98);
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.035);
+        linear-gradient(180deg, rgba(10, 18, 15, 0.94), rgba(7, 13, 11, 0.92)),
+        rgba(7, 13, 11, 0.94);
+      box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
     }
 
     .nav::after {
@@ -3323,8 +3369,8 @@
     }
 
     .language-switcher {
-      background: rgba(255, 255, 255, 0.065);
-      border-color: rgba(214, 255, 242, 0.18);
+      background: rgba(255, 255, 255, 0.055);
+      border-color: rgba(214, 255, 242, 0.16);
     }
 
     @media (min-width: 901px) {
@@ -3343,5 +3389,34 @@
 
       .hero-copy .lead-first::after {
         content: "";
+      }
+
+      .contact-band {
+        grid-template-columns: minmax(0, 1fr) minmax(244px, 288px);
+        gap: clamp(34px, 4vw, 54px);
+      }
+
+      .contact-band > :first-child {
+        max-width: 13.2ch;
+      }
+
+      .contact-band .actions {
+        flex-direction: column;
+        align-items: stretch;
+        justify-self: end;
+        width: min(288px, 100%);
+      }
+
+      .contact-band .actions .button {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .contact-band.game-hud-active .contact-action-score {
+        min-width: 10ch;
+      }
+
+      .contact-band.game-hud-active .contact-action-level {
+        min-width: 9ch;
       }
     }

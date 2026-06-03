@@ -1113,7 +1113,7 @@ const translations = {
           setActionHudDefault();
           return;
         }
-        if (scoreActionNode) scoreActionNode.textContent = `${gameCopy("game.score")}: ${Math.min(maxScore, Math.floor(score))}`;
+        if (scoreActionNode) scoreActionNode.textContent = `${gameCopy("game.score")}: ${String(Math.min(maxScore, Math.floor(score))).padStart(4, "0")}`;
         if (levelActionNode) levelActionNode.textContent = `Level ${chapterIndex + 1}/${chapters.length}`;
       }
 
