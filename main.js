@@ -5,7 +5,7 @@ const translations = {
         "nav.services": "Čo robím",
         "nav.contact": "Kontakt",
       "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\"><span class=\"mobile-title-word\">Digitálne</span><span class=\"mobile-title-space\"> </span><span class=\"mobile-title-word\">riešenia.</span></span><span class=\"tone detail-tone\">s citom pre detail.</span>",
-        "hero.lead": "Som Martin Nagy, technický nadšenec s praxou v IT podpore, opravách elektroniky, webdizajne a vývoji iOS aplikácií. Rád riešim problémy, skladám veci do poriadku a dávam digitálnym nápadom čistú vizuálnu formu.",
+        "hero.lead": "<span class=\"lead-first\">Udržiavam techniku, zariadenia a digitálne prostredia v chode.</span><span class=\"lead-rest\">Spájam IT podporu, troubleshooting, opravy elektroniky, webdizajn a iOS vývoj s praktickým pohľadom na to, čo ľudia naozaj potrebujú.</span>",
         "hero.email": "Napísať email",
         "hero.work": "Pozrieť prácu",
         "services.label": "Služby",
@@ -26,7 +26,7 @@ const translations = {
         "nav.services": "Co dělám",
         "nav.contact": "Kontakt",
       "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\"><span class=\"mobile-title-word\">Digitální</span><span class=\"mobile-title-space\"> </span><span class=\"mobile-title-word\">řešení.</span></span><span class=\"tone detail-tone\">s citem pro detail.</span>",
-        "hero.lead": "Jsem Martin Nagy, technický nadšenec s praxí v IT podpoře, opravách elektroniky, webdesignu a vývoji iOS aplikací. Rád řeším problémy, dávám věci do pořádku a převádím digitální nápady do čisté vizuální formy.",
+        "hero.lead": "<span class=\"lead-first\">Udržuji techniku, zařízení a digitální prostředí v chodu.</span><span class=\"lead-rest\">Spojuji IT podporu, troubleshooting, opravy elektroniky, webdesign a iOS vývoj s praktickým pohledem na to, co lidé opravdu potřebují.</span>",
         "hero.email": "Napsat email",
         "hero.work": "Prohlédnout práci",
         "services.label": "Služby",
@@ -47,7 +47,7 @@ const translations = {
         "nav.services": "What I do",
         "nav.contact": "Contact",
       "hero.title": "IT support.<br>Repairs.<br><span class=\"tone hero-fit-line\"><span class=\"mobile-title-word\">Digital</span><span class=\"mobile-title-space\"> </span><span class=\"mobile-title-word\">solutions.</span></span><span class=\"tone detail-tone\">with an eye for detail.</span>",
-        "hero.lead": "I am Martin Nagy, a tech enthusiast with hands-on experience in IT support, electronics repair, web design, and iOS app development. I like solving problems, bringing devices back into shape, and giving digital ideas a clear visual form.",
+        "hero.lead": "<span class=\"lead-first\">I keep technology, devices, and digital environments running.</span><span class=\"lead-rest\">I combine IT support, troubleshooting, electronics repair, web design, and iOS development with a practical eye for what people actually need.</span>",
         "hero.email": "Send email",
         "hero.work": "View work",
         "services.label": "Services",
@@ -67,7 +67,7 @@ const translations = {
     Object.assign(translations.sk, {
       "nav.experience": "Prax",
       "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\"><span class=\"mobile-title-word\">Digitálne</span><span class=\"mobile-title-space\"> </span><span class=\"mobile-title-word\">riešenia.</span></span><span class=\"tone detail-tone\">s citom pre detail.</span>",
-      "hero.lead": "Udržiavam techniku, zariadenia a digitálne prostredia v chode. Spájam prax v IT podpore, troubleshootingu, opravách elektroniky, webdizajne a vývoji iOS aplikácií.",
+      "hero.lead": "<span class=\"lead-first\">Udržiavam techniku, zariadenia a digitálne prostredia v chode.</span><span class=\"lead-rest\">Spájam IT podporu, troubleshooting, opravy elektroniky, webdizajn a iOS vývoj s praktickým pohľadom na to, čo ľudia naozaj potrebujú.</span>",
       "hero.work": "Pozrieť prax",
       "rail.support.title": "IT podpora",
       "rail.support.copy": "používatelia, zariadenia, infra",
@@ -156,7 +156,7 @@ const translations = {
     Object.assign(translations.cs, {
       "nav.experience": "Praxe",
       "hero.title": "IT podpora.<br>Opravy.<br><span class=\"tone hero-fit-line\"><span class=\"mobile-title-word\">Digitální</span><span class=\"mobile-title-space\"> </span><span class=\"mobile-title-word\">řešení.</span></span><span class=\"tone detail-tone\">s citem pro detail.</span>",
-      "hero.lead": "Udržuji techniku, zařízení a digitální prostředí v chodu. Spojuji praxi v IT podpoře, troubleshootingu, opravách elektroniky, webdesignu a vývoji iOS aplikací.",
+      "hero.lead": "<span class=\"lead-first\">Udržuji techniku, zařízení a digitální prostředí v chodu.</span><span class=\"lead-rest\">Spojuji IT podporu, troubleshooting, opravy elektroniky, webdesign a iOS vývoj s praktickým pohledem na to, co lidé opravdu potřebují.</span>",
       "hero.work": "Prohlédnout praxi",
       "rail.support.title": "IT podpora",
       "rail.support.copy": "uživatelé, zařízení, infra",
@@ -245,7 +245,7 @@ const translations = {
     Object.assign(translations.en, {
       "nav.experience": "Experience",
       "hero.title": "IT support.<br>Repairs.<br><span class=\"tone hero-fit-line\"><span class=\"mobile-title-word\">Digital</span><span class=\"mobile-title-space\"> </span><span class=\"mobile-title-word\">solutions.</span></span><span class=\"tone detail-tone\">with an eye for detail.</span>",
-      "hero.lead": "I keep technology, devices, and digital environments running, combining hands-on IT support, troubleshooting, electronics repair, web design, and iOS development experience.",
+      "hero.lead": "<span class=\"lead-first\">I keep technology, devices, and digital environments running.</span><span class=\"lead-rest\">I combine IT support, troubleshooting, electronics repair, web design, and iOS development with a practical eye for what people actually need.</span>",
       "hero.work": "View experience",
       "rail.support.title": "IT Support",
       "rail.support.copy": "users, devices, infra",
@@ -342,7 +342,7 @@ const translations = {
     const buttons = document.querySelectorAll("[data-lang]");
     const languageSwitcher = document.querySelector(".language-switcher");
     const languageIndicator = document.querySelector(".language-indicator");
-    const richTextKeys = new Set(["hero.title", "contact.title"]);
+    const richTextKeys = new Set(["hero.title", "hero.lead", "contact.title"]);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const coarsePointer = window.matchMedia("(hover: none) and (pointer: coarse)");
     const ua = navigator.userAgent || "";
@@ -455,6 +455,7 @@ const translations = {
       line.style.maxWidth = "none";
 
       const heading = line.closest("h1");
+      const heroCopy = line.closest(".hero-copy");
       const lineRect = line.getBoundingClientRect();
       const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
       if (viewportWidth <= 700) {
@@ -464,10 +465,11 @@ const translations = {
         return;
       }
       const headingRect = heading?.getBoundingClientRect();
+      const copyRect = heroCopy?.getBoundingClientRect();
       const headingStyle = heading ? window.getComputedStyle(heading) : null;
       const headingPadRight = headingStyle ? Number.parseFloat(headingStyle.paddingRight || "0") : 0;
       const rightLimit = headingRect
-        ? headingRect.right - headingPadRight - 2
+        ? Math.min(headingRect.right, copyRect?.right || headingRect.right) - headingPadRight - 8
         : viewportWidth - 24;
       const availableWidth = Math.max(140, rightLimit - lineRect.left);
       const naturalWidth = lineRect.width;
