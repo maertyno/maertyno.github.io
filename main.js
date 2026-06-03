@@ -1099,8 +1099,12 @@ const translations = {
       }
 
       function setActionHudGame() {
-        // Keep contact buttons static while playing; game HUD is shown in canvas header.
-        setActionHudDefault();
+        if (mobileGameMedia.matches) {
+          setActionHudDefault();
+          return;
+        }
+        if (scoreActionNode) scoreActionNode.textContent = `${gameCopy("game.score")}: ${Math.min(maxScore, Math.floor(score))}`;
+        if (levelActionNode) levelActionNode.textContent = `Level ${chapterIndex + 1}/${chapters.length}`;
       }
 
       function setMobileGameUi(active) {
@@ -1118,7 +1122,7 @@ const translations = {
         if (running && previousChapter !== chapterIndex && score > 0) {
           speedFlash = 0.55;
           const baseSpeed = width < 460 ? 205 : 245;
-          const tierStep = width < 460 ? 30 : 38;
+          const tierStep = width < 460 ? 42 : 58;
           speed = Math.max(speed, baseSpeed + chapterIndex * tierStep);
           if (Math.random() < 0.25) speak("tier", true);
           burst(Math.min(width - 90, player.x + 78), ground - 66, chapter.color);
@@ -1284,11 +1288,11 @@ const translations = {
     
       function updateGame(seconds) {
         const progress = Math.min(score / maxScore, 1);
-        const speedTier = Math.min(18, Math.floor(score / 1500));
+        const speedTier = Math.min(20, Math.floor(score / 1000));
         const multiplier = 1 + Math.min(streak, 9) * 0.018;
-        const difficulty = speedTier / 18;
-        const baseRate = 25 + progress * 28;
-        const targetSpeed = (width < 460 ? 205 : 245) + speedTier * (width < 460 ? 18 : 23);
+        const difficulty = speedTier / 20;
+        const baseRate = 25 + progress * 34;
+        const targetSpeed = (width < 460 ? 205 : 245) + speedTier * (width < 460 ? 21 : 31) + progress * (width < 460 ? 36 : 78);
         score += seconds * baseRate * multiplier;
         speed += (targetSpeed - speed) * Math.min(seconds * 5.4, 1);
         spawnTimer -= seconds;
@@ -1337,9 +1341,9 @@ const translations = {
     
         if (spawnTimer <= 0) {
           spawnIncident();
-          const minGap = Math.max(0.38, 0.92 - difficulty * 0.5);
-          const maxGap = Math.max(0.72, 1.78 - difficulty * 0.68);
-          const pause = Math.random() < 0.18 ? Math.random() * 0.58 : 0;
+          const minGap = Math.max(0.34, 0.92 - difficulty * 0.54);
+          const maxGap = Math.max(0.58, 1.78 - difficulty * 0.86);
+          const pause = Math.random() < Math.max(0.07, 0.18 - difficulty * 0.1) ? Math.random() * 0.48 : 0;
           spawnTimer = minGap + Math.random() * (maxGap - minGap) + pause;
         }
         if (pickupTimer <= 0) {
@@ -2304,6 +2308,7 @@ const translations = {
       window.addEventListener("visibilitychange", handleGameVisibilityChange, { passive: true });
       mobileGameMedia.addEventListener("change", () => {
         setMobileGameUi(revealed);
+        if (revealed) updateHud();
       });
 
       renderTriggerPhrase();

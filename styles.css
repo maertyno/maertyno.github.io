@@ -1314,7 +1314,7 @@
     }
 
     .contact-game .binary-runner-head {
-      display: flex;
+      display: none;
       top: 10px;
       left: 14px;
       right: 14px;
@@ -2143,6 +2143,15 @@
     @media (max-width: 900px) and (hover: none) and (pointer: coarse) {
       .contact-band.mobile-game-active .actions {
         display: none;
+      }
+
+      .contact-game .binary-runner {
+        top: -12px;
+        bottom: 12px;
+      }
+
+      .contact-game .binary-runner-head {
+        display: flex;
       }
 
       .skill-rail .rail-item {
