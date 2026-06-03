@@ -1170,6 +1170,7 @@ const translations = {
         document.body.classList.add("game-focus");
         document.body.classList.remove("desktop-effects");
         if (window.__deviceExperience) window.__deviceExperience.gameFocus = true;
+        window.dispatchEvent(new CustomEvent("site-effects-paused"));
       }
 
       function unfocusGame() {
@@ -1179,6 +1180,7 @@ const translations = {
         }
         setGameHudMode(false);
         if (window.__deviceExperience) window.__deviceExperience.gameFocus = false;
+        window.dispatchEvent(new CustomEvent("site-effects-resume"));
       }
     
       function resetGame() {
@@ -2529,9 +2531,10 @@ const translations = {
     let frame = 0;
     let lastFrameTime = 0;
     let lastSpawn = 0;
+    let effectsPaused = false;
 
     function resizeMobileCanvas() {
-        dpr = Math.min(window.devicePixelRatio || 1, 1.15);
+        dpr = 1;
         width = window.innerWidth;
         height = window.innerHeight;
         canvas.width = Math.floor(width * dpr);
@@ -2542,7 +2545,7 @@ const translations = {
     }
 
     function addNode() {
-        if (nodes.length > 6) nodes.shift();
+        if (nodes.length > 4) nodes.shift();
         const edge = Math.floor(Math.random() * 4);
         const start = [
             { x: Math.random() * width, y: -20 },
@@ -2568,7 +2571,7 @@ const translations = {
     }
 
     function addBit(node) {
-        if (bits.length > 10) bits.shift();
+        if (bits.length > 6) bits.shift();
         bits.push({
             x: node.x + (Math.random() - 0.5) * 34,
             y: node.y + (Math.random() - 0.5) * 34,
@@ -2579,7 +2582,7 @@ const translations = {
     }
 
     function renderMobileAmbient(timestamp = performance.now()) {
-        if (window.__forceDesktopEffects) {
+        if (window.__forceDesktopEffects || effectsPaused || document.body.classList.contains("game-focus")) {
             frame = 0;
             return;
         }
@@ -2590,7 +2593,7 @@ const translations = {
         }
 
         frame = 0;
-        if (lastFrameTime && timestamp - lastFrameTime < 33) {
+        if (lastFrameTime && timestamp - lastFrameTime < 66) {
             frame = window.requestAnimationFrame(renderMobileAmbient);
             return;
         }
@@ -2602,7 +2605,7 @@ const translations = {
         ctx.globalCompositeOperation = 'lighter';
         ctx.font = '11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
 
-        if (timestamp - lastSpawn > 1300 + Math.random() * 650) {
+        if (timestamp - lastSpawn > 2200 + Math.random() * 900) {
             addNode();
             lastSpawn = timestamp;
         }
@@ -2621,17 +2624,17 @@ const translations = {
             for (let j = i - 1; j >= 0; j -= 1) {
                 const other = nodes[j];
                 const distance = Math.hypot(node.x - other.x, node.y - other.y);
-                if (distance < 170) {
+                if (distance < 140) {
                     ctx.beginPath();
                     ctx.moveTo(node.x, node.y);
                     ctx.lineTo(other.x, other.y);
-                    ctx.strokeStyle = `rgba(143, 247, 210, ${(1 - distance / 170) * node.life * other.life * 0.12})`;
+                    ctx.strokeStyle = `rgba(143, 247, 210, ${(1 - distance / 140) * node.life * other.life * 0.09})`;
                     ctx.lineWidth = 0.8;
                     ctx.stroke();
                 }
             }
 
-            ctx.fillStyle = `rgba(184, 255, 232, ${node.life * 0.44})`;
+            ctx.fillStyle = `rgba(184, 255, 232, ${node.life * 0.36})`;
             ctx.fillRect(node.x - node.size / 2, node.y - node.size / 2, node.size, node.size);
 
             if (progress >= 1) nodes.splice(i, 1);
@@ -2645,7 +2648,7 @@ const translations = {
                 bits.splice(i, 1);
                 continue;
             }
-            ctx.fillStyle = `rgba(184, 255, 232, ${bit.life * 0.22})`;
+            ctx.fillStyle = `rgba(184, 255, 232, ${bit.life * 0.16})`;
             ctx.fillText(bit.bit, bit.x, bit.y);
         }
 
@@ -2653,7 +2656,7 @@ const translations = {
     }
 
     function handleMobileAmbientVisibility() {
-        if (document.visibilityState !== "visible") {
+        if (document.visibilityState !== "visible" || effectsPaused || document.body.classList.contains("game-focus")) {
             if (frame) window.cancelAnimationFrame(frame);
             frame = 0;
             lastFrameTime = 0;
@@ -2664,8 +2667,24 @@ const translations = {
         }
     }
 
+    function pauseMobileAmbient() {
+        effectsPaused = true;
+        nodes.length = 0;
+        bits.length = 0;
+        ctx.clearRect(0, 0, width, height);
+        handleMobileAmbientVisibility();
+    }
+
+    function resumeMobileAmbient() {
+        effectsPaused = false;
+        if (!nodes.length) addNode();
+        handleMobileAmbientVisibility();
+    }
+
     window.addEventListener('resize', resizeMobileCanvas, { passive: true });
     window.addEventListener('visibilitychange', handleMobileAmbientVisibility, { passive: true });
+    window.addEventListener("site-effects-paused", pauseMobileAmbient, { passive: true });
+    window.addEventListener("site-effects-resume", resumeMobileAmbient, { passive: true });
     resizeMobileCanvas();
     for (let index = 0; index < 3; index += 1) addNode();
     frame = window.requestAnimationFrame(renderMobileAmbient);
@@ -2689,7 +2708,7 @@ const translations = {
     const particles = [];
     const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
     const smoothPointer = { x: pointer.x, y: pointer.y };
-    const ghostCount = 3;
+    const ghostCount = 2;
     const ghosts = Array.from({ length: ghostCount }, () => ({
         x: Math.random() * window.innerWidth,
         y: Math.random() * window.innerHeight,
@@ -2699,7 +2718,7 @@ const translations = {
         speed: 0.006 + Math.random() * 0.01
     }));
 
-    const maxParticles = 16;
+    const maxParticles = 8;
     let dpr = 1;
     let width = 0;
     let height = 0;
@@ -2707,6 +2726,7 @@ const translations = {
     let ghostInterval = 0;
     let lastSpawn = 0;
     let lastFrameTime = 0;
+    let effectsPaused = false;
 
     function resetGhost(ghost) {
         ghost.tx = Math.random() * width;
@@ -2716,7 +2736,7 @@ const translations = {
     }
 
     function resizeCanvas() {
-        dpr = Math.min(window.devicePixelRatio || 1, 1.2);
+        dpr = 1;
         width = window.innerWidth;
         height = window.innerHeight;
         canvas.width = Math.floor(width * dpr);
@@ -2727,6 +2747,7 @@ const translations = {
     }
 
     function spawnParticles(x, y, count = 3) {
+        if (effectsPaused || document.body.classList.contains("game-focus") || document.visibilityState !== "visible") return;
         while (particles.length > maxParticles - count) particles.shift();
 
         for (let index = 0; index < count; index += 1) {
@@ -2739,7 +2760,7 @@ const translations = {
                 vx: Math.cos(angle) * speed,
                 vy: Math.sin(angle) * speed,
                 life: 1,
-                size: 16 + Math.random() * 8,
+                size: 13 + Math.random() * 6,
                 bit: Math.random() > 0.5 ? '1' : '0'
             });
         }
@@ -2756,7 +2777,13 @@ const translations = {
 
     function render(timestamp = performance.now()) {
         frame = 0;
-        if (lastFrameTime && timestamp - lastFrameTime < 28) {
+        if (effectsPaused || document.body.classList.contains("game-focus") || document.visibilityState !== "visible") {
+            ctx.clearRect(0, 0, width, height);
+            particles.length = 0;
+            lastFrameTime = 0;
+            return;
+        }
+        if (lastFrameTime && timestamp - lastFrameTime < 45) {
             frame = window.requestAnimationFrame(render);
             return;
         }
@@ -2808,7 +2835,7 @@ const translations = {
                 if (dist < 220) {
                     const influence = 1 - dist / 220;
                     strongestInfluence = Math.max(strongestInfluence, influence);
-                    drawLine(particle, point, influence * particle.life * 0.18, 0.8 + influence * 1.2);
+                    drawLine(particle, point, influence * particle.life * 0.13, 0.7 + influence * 0.9);
                 }
             }
 
@@ -2818,13 +2845,13 @@ const translations = {
                 const distance = Math.hypot(particle.x - other.x, particle.y - other.y);
 
                 if (distance < 170) {
-                    drawLine(particle, other, (1 - distance / 170) * particle.life * 0.11, 0.7);
+                    drawLine(particle, other, (1 - distance / 170) * particle.life * 0.075, 0.6);
                 }
             }
 
             const drawSize = particle.size * (1 + strongestInfluence * 1.4);
 
-            ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * 0.48})`;
+            ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * 0.38})`;
             ctx.fillRect(
                 particle.x - drawSize * 0.08,
                 particle.y - drawSize * 0.08,
@@ -2832,7 +2859,7 @@ const translations = {
                 drawSize * 0.16
             );
 
-            ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * (0.14 + strongestInfluence * 0.16)})`;
+            ctx.fillStyle = `rgba(184, 255, 232, ${particle.life * (0.1 + strongestInfluence * 0.12)})`;
             ctx.fillText(particle.bit, particle.x + 8, particle.y - 8);
         }
 
@@ -2848,11 +2875,12 @@ const translations = {
     }
 
     window.addEventListener('pointermove', (event) => {
+        if (effectsPaused || document.body.classList.contains("game-focus")) return;
         pointer.x = event.clientX;
         pointer.y = event.clientY;
 
         const now = performance.now();
-        if (now - lastSpawn > 170) {
+        if (now - lastSpawn > 280) {
             spawnParticles(pointer.x, pointer.y, 1);
             lastSpawn = now;
         }
@@ -2868,13 +2896,13 @@ const translations = {
     function startGhostInterval() {
         if (ghostInterval) return;
         ghostInterval = window.setInterval(() => {
-            if (document.visibilityState !== "visible") return;
+            if (document.visibilityState !== "visible" || effectsPaused || document.body.classList.contains("game-focus")) return;
             ghosts.forEach((ghost) => {
-                if (Math.random() < 0.28) resetGhost(ghost);
+                if (Math.random() < 0.18) resetGhost(ghost);
                 if (particles.length < maxParticles - 2) spawnParticles(ghost.x, ghost.y, 1);
             });
             scheduleRender();
-        }, 1800);
+        }, 3200);
     }
 
     function stopGhostInterval() {
@@ -2884,19 +2912,33 @@ const translations = {
     }
 
     function handleCursorVisibility() {
-        if (document.visibilityState !== "visible") {
+        if (document.visibilityState !== "visible" || effectsPaused || document.body.classList.contains("game-focus")) {
             if (frame) window.cancelAnimationFrame(frame);
             frame = 0;
             lastFrameTime = 0;
             stopGhostInterval();
+            ctx.clearRect(0, 0, width, height);
+            particles.length = 0;
             return;
         }
         startGhostInterval();
         scheduleRender();
     }
 
+    function pauseCursorEffects() {
+        effectsPaused = true;
+        handleCursorVisibility();
+    }
+
+    function resumeCursorEffects() {
+        effectsPaused = false;
+        handleCursorVisibility();
+    }
+
     startGhostInterval();
     window.addEventListener("visibilitychange", handleCursorVisibility, { passive: true });
+    window.addEventListener("site-effects-paused", pauseCursorEffects, { passive: true });
+    window.addEventListener("site-effects-resume", resumeCursorEffects, { passive: true });
 }
 
     initBinaryRunner();
@@ -2907,9 +2949,8 @@ const translations = {
       initCursorTech();
     }
 
-    if (!lowPowerDevice) {
+    if (!lowPowerDevice && shouldUseTouchOnlyExperience()) {
       initCursorTech();
-      window.setTimeout(initCursorTech, 300);
     }
 
     window.addEventListener("pointermove", handleDesktopPointerWake, { once: true, passive: true });
