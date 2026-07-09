@@ -24,6 +24,7 @@ const copy = {
       lead: "Tankio works without an account, advertising, or cross-app tracking. Data stays on your device unless a feature needs a map or exchange-rate service to complete your request.",
       updated: "Effective July 9, 2026",
       contactText: "Questions about privacy or data can be sent to support.",
+      backLink: "Back to Tankio",
       sections: [
         ["What the app stores", "Tankio may save your app settings, fuel and trip values, saved routes, notes, language, theme, highway pass reminder settings, expiration dates, and the last selected or detected location used by app features. This information is stored locally on your device."],
         ["Location and maps", "Location is used only after permission is granted. It can be used for route calculations, current-location features, and nearby fuel station search. Map and place results are provided through Apple Maps, MapKit, Core Location, and system geocoding."],
@@ -43,7 +44,8 @@ const copy = {
       contactTitle: "Contact",
       issueTitle: "Reporting an issue",
       issueText: "Please include the app version, iPhone model, iOS version, selected language, and a short description of what happened.",
-      privacyLink: "Privacy Policy"
+      privacyLink: "Privacy Policy",
+      backLink: "Back to Tankio"
     }
   },
   sk: {
@@ -62,6 +64,7 @@ const copy = {
       lead: "Tankio funguje bez účtu, reklám a sledovania naprieč aplikáciami. Dáta zostávajú v zariadení, pokiaľ funkcia nepotrebuje mapovú alebo kurzovú službu na vybavenie tvojej požiadavky.",
       updated: "Platné od 9. júla 2026",
       contactText: "Otázky k súkromiu alebo dátam môžeš poslať na podporu.",
+      backLink: "Späť na Tankio",
       sections: [
         ["Čo aplikácia ukladá", "Tankio môže v zariadení uložiť nastavenia aplikácie, hodnoty paliva a jazdy, uložené trasy, poznámky, jazyk, vzhľad, nastavenia upozornení na diaľničnú známku, dátumy platnosti a poslednú zvolenú alebo zistenú polohu použitú funkciami aplikácie."],
         ["Poloha a mapy", "Poloha sa používa iba po povolení. Slúži na výpočet trás, funkcie aktuálnej polohy a vyhľadanie blízkych čerpacích staníc. Výsledky máp a miest poskytujú Apple Maps, MapKit, Core Location a systémové geokódovanie."],
@@ -81,7 +84,8 @@ const copy = {
       contactTitle: "Kontakt",
       issueTitle: "Nahlásenie problému",
       issueText: "Prosím prilož verziu aplikácie, model iPhonu, verziu iOS, zvolený jazyk a krátky opis toho, čo sa stalo.",
-      privacyLink: "Zásady súkromia"
+      privacyLink: "Zásady súkromia",
+      backLink: "Späť na Tankio"
     }
   },
   cs: {
@@ -100,6 +104,7 @@ const copy = {
       lead: "Tankio funguje bez účtu, reklam a sledování napříč aplikacemi. Data zůstávají v zařízení, pokud daná funkce nepotřebuje mapovou nebo kurzovou službu k vyřízení tvého požadavku.",
       updated: "Platné od 9. července 2026",
       contactText: "Otázky k soukromí nebo datům můžeš poslat na podporu.",
+      backLink: "Zpět na Tankio",
       sections: [
         ["Co aplikace ukládá", "Tankio může v zařízení uložit nastavení aplikace, hodnoty paliva a jízdy, uložené trasy, poznámky, jazyk, vzhled, nastavení upozornění na dálniční známku, data platnosti a poslední zvolenou nebo zjištěnou polohu použitou funkcemi aplikace."],
         ["Poloha a mapy", "Poloha se používá pouze po povolení. Slouží k výpočtu tras, funkcím aktuální polohy a vyhledání blízkých čerpacích stanic. Výsledky map a míst poskytují Apple Maps, MapKit, Core Location a systémové geokódování."],
@@ -119,7 +124,8 @@ const copy = {
       contactTitle: "Kontakt",
       issueTitle: "Nahlášení problému",
       issueText: "Prosím přilož verzi aplikace, model iPhonu, verzi iOS, zvolený jazyk a krátký popis toho, co se stalo.",
-      privacyLink: "Zásady soukromí"
+      privacyLink: "Zásady soukromí",
+      backLink: "Zpět na Tankio"
     }
   },
   hu: {
@@ -138,6 +144,7 @@ const copy = {
       lead: "A Tankio fiók, hirdetések és alkalmazások közötti követés nélkül működik. Az adatok az eszközön maradnak, kivéve ha egy funkció térképes vagy árfolyam-szolgáltatást használ a kérés teljesítéséhez.",
       updated: "Hatályos: 2026. július 9.",
       contactText: "Adatvédelmi vagy adatkezelési kérdéssel a támogatásnak írhatsz.",
+      backLink: "Vissza a Tankióhoz",
       sections: [
         ["Mit tárol az alkalmazás", "A Tankio helyben tárolhatja az alkalmazás beállításait, az üzemanyag- és úti adatokat, mentett útvonalakat, jegyzeteket, nyelvet, megjelenést, autópálya-matrica emlékeztetőket, lejárati dátumokat, valamint az alkalmazásfunkciókhoz használt utolsó kiválasztott vagy észlelt helyet."],
         ["Helyzet és térképek", "A helyzetadatot csak engedély után használja az alkalmazás. Erre útvonaltervezéshez, aktuális helyzethez és közeli töltőállomások kereséséhez lehet szükség. A térképes és helykeresési eredményeket az Apple Maps, a MapKit, a Core Location és a rendszer geokódolása biztosítja."],
@@ -157,7 +164,8 @@ const copy = {
       contactTitle: "Kapcsolat",
       issueTitle: "Hiba bejelentése",
       issueText: "Kérlek írd meg az alkalmazás verzióját, az iPhone modelljét, az iOS verzióját, a kiválasztott nyelvet és röviden azt, mi történt.",
-      privacyLink: "Adatvédelmi tájékoztató"
+      privacyLink: "Adatvédelmi tájékoztató",
+      backLink: "Vissza a Tankióhoz"
     }
   },
   fi: {
@@ -176,6 +184,7 @@ const copy = {
       lead: "Tankio toimii ilman käyttäjätiliä, mainoksia tai sovellusten välistä seurantaa. Tiedot pysyvät laitteellasi, ellei jokin toiminto tarvitse kartta- tai valuuttakurssipalvelua pyyntösi toteuttamiseen.",
       updated: "Voimassa 9. heinäkuuta 2026 alkaen",
       contactText: "Tietosuojaan tai tietoihin liittyvät kysymykset voi lähettää tukeen.",
+      backLink: "Takaisin Tankioon",
       sections: [
         ["Mitä sovellus tallentaa", "Tankio voi tallentaa laitteelle sovelluksen asetuksia, polttoaine- ja matka-arvoja, tallennettuja reittejä, muistiinpanoja, kielen, ulkoasun, tiemaksumuistutusten asetuksia, päättymispäiviä sekä viimeksi valitun tai havaitun sijainnin, jota sovelluksen toiminnot käyttävät."],
         ["Sijainti ja kartat", "Sijaintia käytetään vain luvan jälkeen. Sitä voidaan käyttää reittilaskentaan, nykyisen sijainnin toimintoihin ja lähimpien huoltoasemien hakuun. Kartta- ja paikkatulokset tulevat Apple Mapsin, MapKitin, Core Locationin ja järjestelmän geokoodauksen kautta."],
@@ -195,7 +204,8 @@ const copy = {
       contactTitle: "Yhteys",
       issueTitle: "Ongelman ilmoittaminen",
       issueText: "Liitä mukaan sovelluksen versio, iPhone-malli, iOS-versio, valittu kieli ja lyhyt kuvaus siitä, mitä tapahtui.",
-      privacyLink: "Tietosuojakäytäntö"
+      privacyLink: "Tietosuojakäytäntö",
+      backLink: "Takaisin Tankioon"
     }
   },
   sv: {
@@ -214,6 +224,7 @@ const copy = {
       lead: "Tankio fungerar utan konto, annonser eller spårning mellan appar. Data stannar på din enhet om inte en funktion behöver en kart- eller växelkursstjänst för att slutföra din begäran.",
       updated: "Gäller från 9 juli 2026",
       contactText: "Frågor om integritet eller data kan skickas till supporten.",
+      backLink: "Tillbaka till Tankio",
       sections: [
         ["Vad appen sparar", "Tankio kan spara appinställningar, bränsle- och resevärden, sparade rutter, anteckningar, språk, tema, inställningar för vägavgifts- eller vinjettpåminnelser, giltighetsdatum och den senast valda eller upptäckta platsen som används av appens funktioner. Informationen sparas lokalt på din enhet."],
         ["Plats och kartor", "Plats används endast efter att du har gett tillstånd. Den kan användas för ruttberäkning, funktioner för aktuell plats och sökning efter närliggande bensinstationer. Kart- och platsresultat tillhandahålls via Apple Maps, MapKit, Core Location och systemets geokodning."],
@@ -233,7 +244,8 @@ const copy = {
       contactTitle: "Kontakt",
       issueTitle: "Rapportera ett problem",
       issueText: "Skicka gärna med appversion, iPhone-modell, iOS-version, valt språk och en kort beskrivning av vad som hände.",
-      privacyLink: "Integritetspolicy"
+      privacyLink: "Integritetspolicy",
+      backLink: "Tillbaka till Tankio"
     }
   }
 };
