@@ -1,54 +1,329 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow" />
-  <meta name="description" content="Tankio support and privacy information." />
-  <meta name="theme-color" content="#0a100d" />
-  <title>Tankio</title>
-  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <meta name="description" content="Martin Nagy - IT support, electronics repair, web design, and iOS app development." />
+  <meta name="theme-color" content="#060907" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MN | Digital" />
+  <meta property="og:description" content="Martin Nagy - IT support, electronics repair, web design, and iOS app development." />
+  <meta property="og:locale" content="sk_SK" />
+  <meta property="og:site_name" content="MN | Digital" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MN | Digital" />
+  <meta name="twitter:description" content="Martin Nagy - IT support, electronics repair, web design, and iOS app development." />
+  
+  <link rel="canonical" href="" data-autofill-canonical />
+  <meta property="og:url" content="" data-autofill-og-url />
+  <meta property="og:image" content="" data-autofill-og-image />
+  <meta name="twitter:image" content="" data-autofill-twitter-image />
+<title>MN | Digital</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./tankio.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
-<body data-page="home">
-  <main class="wrap">
-    <header class="topline">
-      <a class="brand" href="/tankio/"><span class="brand-mark"><img src="./app-icon.png" alt="Tankio app icon" /></span><span>Tankio</span></a>
-      <div class="language-bar" data-language-bar aria-label="Language"></div>
+<body id="top">
+  <a class="skip-link" href="#main-content">Preskocit na obsah</a>
+  <div class="cursor-tech" aria-hidden="true">
+    <canvas id="cursor-canvas" aria-hidden="true" role="presentation"></canvas>
+  </div>
+  <div class="ambient-tech" aria-hidden="true"></div>
+  <div class="page">
+    <header class="topbar">
+      <nav class="nav shell" aria-label="Primary navigation">
+        <div class="nav-links">
+          <a href="#top" data-i18n="nav.home">Úvod</a>
+          <a href="#services" data-i18n="nav.services">Čo robím</a>
+          <a href="#experience" data-i18n="nav.experience">Skúsenosti</a>
+          <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+        </div>
+
+        <div class="language-switcher" aria-label="Language switcher">
+          <span class="language-indicator" aria-hidden="true"></span>
+          <button class="lang-button" type="button" data-lang="sk" aria-label="Slovensky">SK</button>
+          <button class="lang-button" type="button" data-lang="cs" aria-label="Česky">CZ</button>
+          <button class="lang-button" type="button" data-lang="en" aria-label="English">EN</button>
+        </div>
+      </nav>
     </header>
 
-    <section class="intro">
-      <p class="eyebrow" data-i18n="home.eyebrow">App information</p>
-      <h1 data-i18n="home.title">Tankio</h1>
-      <p class="lead" data-i18n="home.lead">Travel cost calculator for fuel, tolls, saved trips, nearby fuel stations, and PDF exports.</p>
-    </section>
-
-    <section class="document">
-      <div class="section">
-        <h2 data-i18n="home.supportTitle">Support</h2>
-        <p data-i18n="home.supportText">For help, feedback, or privacy questions, contact support.</p>
-        <div class="contact-strip">
-          <p><a href="mailto:support@nagymart.in">support@nagymart.in</a></p>
+    <main class="shell" id="main-content">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <h1 id="hero-title" data-i18n-html="hero.title">IT podpora.<br>Opravy.<br><span class="tone hero-fit-line"><span class="mobile-title-word">Digitálne</span><span class="mobile-title-space"> </span><span class="mobile-title-word">riešenia.</span></span><span class="tone detail-tone">s citom pre detail.</span></h1>
+          <p class="lead" data-i18n-html="hero.lead"><span class="lead-first">Udržiavam techniku, zariadenia a digitálne prostredia v chode.</span><span class="lead-rest">Spájam IT podporu, troubleshooting, opravy elektroniky, webdizajn a iOS vývoj s praktickým pohľadom na to, čo ľudia naozaj potrebujú.</span></p>
+          <div class="skill-rail" aria-label="Core skills">
+            <div class="rail-item">
+              <strong data-i18n="rail.support.title">IT podpora</strong>
+              <span data-i18n="rail.support.copy">používatelia, zariadenia, infra</span>
+            </div>
+            <div class="rail-item">
+              <strong data-i18n="rail.repair.title">Opravy</strong>
+              <span data-i18n="rail.repair.copy">telefóny, tablety, PC</span>
+            </div>
+            <div class="rail-item">
+              <strong data-i18n="rail.web.title">Webdizajn</strong>
+              <span data-i18n="rail.web.copy">čisté responzívne stránky</span>
+            </div>
+            <div class="rail-item">
+              <strong data-i18n="rail.ios.title">iOS aplikácie</strong>
+              <span data-i18n="rail.ios.copy">nápady a vývoj aplikácií</span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="button primary" href="mailto:martinus.nagy@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+              <span data-i18n="hero.email">Napísať email</span>
+            </a>
+            <a class="button" href="#experience">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+              <span data-i18n="hero.work">Pozrieť skúsenosti</span>
+            </a>
+            <a class="button" href="https://www.linkedin.com/in/nagymartinus/" data-linkedin-app="linkedin://in/nagymartinus" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="link-list">
-        <a class="link-row" href="/tankio/privacy/">
-          <strong data-i18n="home.privacyLink">Privacy Policy</strong>
-          <span>www.nagymart.in/tankio/privacy/</span>
-        </a>
-        <a class="link-row" href="/tankio/support/">
-          <strong data-i18n="home.supportLink">Support</strong>
-          <span>www.nagymart.in/tankio/support/</span>
-        </a>
-      </div>
-    </section>
+        <aside class="profile reveal" aria-label="Profile">
+          <div class="portrait">
+            <img src="./avat.jpg" alt="Martin Nagy portrait" />
+          </div>
+        </aside>
+      </section>
 
-    <footer class="footer">Tankio</footer>
-  </main>
-  <script src="./tankio.js" defer></script>
+      <section id="services" class="reveal" aria-labelledby="services-title">
+        <div class="section-head">
+          <div>
+            <span class="label" data-i18n="services.label">Čomu sa venujem</span>
+            <h2 id="services-title" data-i18n="services.title">S čím viem pomôcť?</h2>
+          </div>
+        </div>
+
+        <div class="services">
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/></svg>
+            </div>
+          <h3 data-i18n="services.it.title">IT podpora</h3>
+          <p data-i18n="services.it.copy">Riešim technické problémy od prvého nahlásenia po overené vyriešenie, s priebežnou komunikáciou pre používateľov aj tím.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+            </div>
+            <h3 data-i18n="services.repair.title">Opravy elektroniky</h3>
+          <p data-i18n="services.repair.copy">Diagnostikujem a opravujem telefóny, tablety aj počítače s jasným postupom, realistickým termínom a dôrazom na spoľahlivý výsledok.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 1.9 5.8h6.1l-4.9 3.6 1.9 5.8-5-3.6-5 3.6 1.9-5.8-4.9-3.6h6.1z"/></svg>
+            </div>
+            <h3 data-i18n="services.design.title">Webdizajn a iOS aplikácie</h3>
+          <p data-i18n="services.design.copy">Tvorím prehľadné weby a menšie iOS prototypy so zrozumiteľnou štruktúrou a prirodzeným používaním na rôznych zariadeniach.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="experience" class="reveal" aria-labelledby="experience-title">
+        <div class="section-head">
+          <div>
+            <span class="label" data-i18n="experience.label">Skúsenosti</span>
+            <h2 id="experience-title" data-i18n="experience.title">Skúsenosti stručne. Detaily patria na LinkedIn.</h2>
+          </div>
+        </div>
+
+        <div class="experience-list">
+          <article class="experience-item">
+            <div class="experience-meta">
+              <span class="company"><span class="company-brand leo" data-i18n="experience.leo.companyName">Leo Express</span> · <span data-i18n="experience.leo.workType">Plný úväzok</span></span>
+              <h3 class="role" data-i18n="experience.leo.role">IT Špecialista</h3>
+              <span class="duration" data-i18n="experience.leo.duration">máj 2025 - súčasnosť</span>
+              <span class="location" data-i18n="experience.leo.location">Bratislava, Slovakia · Hybrid</span>
+            </div>
+            <div class="experience-details">
+              <p class="experience-summary" data-i18n="experience.leo.copy">Samostatná IT podpora používateľov, správa zariadení a lokálneho IT prostredia.</p>
+              <div class="experience-skills">
+                <span><b data-i18n="experience.leo.skill1">Samostatnosť</b></span>
+                <span><b data-i18n="experience.leo.skill2">Podpora používateľov</b></span>
+                <span><b data-i18n="experience.leo.skill3">Správa zariadení</b></span>
+                <span><b data-i18n="experience.leo.skill4">Lokálne IT</b></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-item">
+            <div class="experience-meta">
+              <span class="company"><span class="company-brand ikea" data-i18n="experience.ikea.companyName">IKEA</span> · <span data-i18n="experience.ikea.workType">Plný úväzok</span></span>
+              <h3 class="role" data-i18n="experience.ikea.role">Špecialista technickej podpory</h3>
+              <span class="duration" data-i18n="experience.ikea.duration">apríl 2023 - apríl 2025</span>
+              <span class="location" data-i18n="experience.ikea.location">Bratislava, Slovakia · On-site</span>
+            </div>
+            <div class="experience-details">
+              <p class="experience-summary" data-i18n="experience.ikea.copy">Technická podpora tímov, pracovísk a zariadení v rýchlej prevádzke.</p>
+              <div class="experience-skills">
+                <span><b data-i18n="experience.ikea.skill1">Technická podpora</b></span>
+                <span><b data-i18n="experience.ikea.skill2">Riešenie incidentov</b></span>
+                <span><b data-i18n="experience.ikea.skill3">Tímová komunikácia</b></span>
+                <span><b data-i18n="experience.ikea.skill4">Používateľské školenia</b></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-item">
+            <div class="experience-meta">
+              <span class="company"><span class="company-brand pcexpres" data-i18n="experience.pcexpres.companyName">PCexpres</span> · <span data-i18n="experience.pcexpres.workType">FREELANCE</span></span>
+              <h3 class="role" data-i18n="experience.pcexpres.role">Servisný technik mobilných zariadení</h3>
+              <span class="duration" data-i18n="experience.pcexpres.duration">október 2021 - apríl 2023</span>
+              <span class="location" data-i18n="experience.pcexpres.location">Západné a stredné Slovensko · On-site</span>
+            </div>
+            <div class="experience-details">
+              <p class="experience-summary" data-i18n="experience.pcexpres.copy">Diagnostika pred zákazníkom, opravy telefónov a PC, výstupná kontrola servisu.</p>
+              <div class="experience-skills">
+                <span><b data-i18n="experience.pcexpres.skill1">Diagnostika</b></span>
+                <span><b data-i18n="experience.pcexpres.skill2">Opravy telefónov a PC</b></span>
+                <span><b data-i18n="experience.pcexpres.skill3">Zákaznícka komunikácia</b></span>
+                <span><b data-i18n="experience.pcexpres.skill4">Kvalita opravy</b></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-item">
+            <div class="experience-meta">
+              <span class="company"><span class="company-brand fixservis" data-i18n="experience.fixservis.companyName">FixServis</span> · <span data-i18n="experience.fixservis.workType">Plný úväzok</span></span>
+              <h3 class="role" data-i18n="experience.fixservis.role">Autorizovaný technik Huawei</h3>
+              <span class="duration" data-i18n="experience.fixservis.duration">október 2019 - október 2021</span>
+              <span class="location" data-i18n="experience.fixservis.location">Nitra, Slovakia · On-site</span>
+            </div>
+            <div class="experience-details">
+              <p class="experience-summary" data-i18n="experience.fixservis.copy">Autorizovaný servis Huawei: diagnostika, servisné postupy a kontrola kvality.</p>
+              <div class="experience-skills">
+                <span><b data-i18n="experience.fixservis.skill1">Servisné postupy</b></span>
+                <span><b data-i18n="experience.fixservis.skill2">Diagnostika zariadení</b></span>
+                <span><b data-i18n="experience.fixservis.skill3">Opravy podľa štandardov</b></span>
+                <span><b data-i18n="experience.fixservis.skill4">Kontrola kvality</b></span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-band reveal" aria-labelledby="contact-title" data-runner>
+        <div>
+          <h2 id="contact-title">
+            <span class="contact-title-line contact-title-line-1">
+              <button class="contact-title-trigger easter-trigger" type="button" data-game-trigger aria-expanded="false" aria-controls="binary-runner">Nápad</button>
+              <span class="contact-title-tail" data-contact-line="1">, problém alebo</span>
+            </span>
+            <span class="contact-title-line contact-title-line-2" data-contact-line="2">technická výzva?</span>
+            <span class="contact-title-line contact-title-line-3"><span class="contact-keep" data-contact-line="3">Môžeme sa na to pozrieť.</span></span>
+          </h2>
+          <div class="mobile-runner-hud" data-mobile-game-hud aria-hidden="true">
+            <span class="mobile-runner-hud-item"><span data-i18n="game.score">Skóre</span>: <span data-mobile-game-score>0</span></span>
+            <span class="mobile-runner-hud-item">Level <span data-mobile-game-level>1/10</span></span>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="mailto:martinus.nagy@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+            <span class="contact-action-label contact-action-score" data-i18n="contact.email">Email</span>
+          </a>
+          <a class="button" href="https://www.linkedin.com/in/nagymartinus/" data-linkedin-app="linkedin://in/nagymartinus" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <span class="contact-action-label contact-action-level">LinkedIn</span>
+          </a>
+        </div>
+        <div class="contact-game" aria-label="Mini game">
+          <div class="binary-runner" id="binary-runner" hidden>
+            <div class="binary-runner-head">
+              <span><span data-i18n="game.score">Skóre</span>: <span class="binary-runner-score" data-game-score>0</span></span>
+              <span class="binary-runner-meta" data-game-meta>Helpdesk floor</span>
+            </div>
+            <canvas class="binary-runner-canvas" data-game-canvas aria-label="Ticket Run mini game"></canvas>
+            <div class="binary-runner-state" data-game-state aria-live="polite" data-i18n="game.ready">Jeden klik skok. Dvojklik vo vzduchu salto. Shield drží 5 sekúnd alebo jeden hit.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer shell">
+      <div class="footer-bottom-band">
+        <div class="footer-brand">
+          <img class="footer-brand-mark" src="favicon.svg" alt="" aria-hidden="true" />
+          <span class="footer-brand-copy">© <span id="year"></span> Martin Nagy</span>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="#services" data-i18n="nav.services">Čo robím</a>
+          <a href="#experience" data-i18n="nav.experience">Skúsenosti</a>
+        </nav>
+        <button class="footer-top-button" type="button" data-game-close aria-label="Close mini game and scroll to top">
+          <span class="footer-top-button-label" data-i18n="footer.top">Top</span>
+          <span class="footer-top-button-line" aria-hidden="true">
+            <span class="footer-top-button-line-core"></span>
+          </span>
+        </button>
+      </div>
+    </footer>
+  </div>
+
+    <script src="./main.js" defer></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
