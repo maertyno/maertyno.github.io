@@ -13,9 +13,9 @@ const copy = {
       eyebrow: "App information",
       title: "Tankio",
       lead: "Travel cost calculator for fuel, tolls, saved trips, nearby fuel stations, and PDF exports.",
-      supportTitle: "Support",
-      supportText: "For help, feedback, or privacy questions, contact support.",
+      supportText: "Help, contact details, and issue reporting.",
       privacyLink: "Privacy Policy",
+      privacyText: "How Tankio handles data, permissions, and external services.",
       supportLink: "Support"
     },
     privacy: {
@@ -53,9 +53,9 @@ const copy = {
       eyebrow: "Informácie o aplikácii",
       title: "Tankio",
       lead: "Kalkulačka cestovných nákladov na palivo, diaľničné poplatky, uložené jazdy, blízke čerpacie stanice a PDF exporty.",
-      supportTitle: "Podpora",
-      supportText: "Ak potrebuješ pomoc, chceš poslať spätnú väzbu alebo sa opýtať na súkromie, napíš na podporu.",
+      supportText: "Pomoc, kontakt a nahlásenie problému.",
       privacyLink: "Zásady súkromia",
+      privacyText: "Ako Tankio pracuje s dátami, povoleniami a externými službami.",
       supportLink: "Podpora"
     },
     privacy: {
@@ -93,9 +93,9 @@ const copy = {
       eyebrow: "Informace o aplikaci",
       title: "Tankio",
       lead: "Kalkulačka cestovních nákladů na palivo, dálniční poplatky, uložené jízdy, blízké čerpací stanice a PDF exporty.",
-      supportTitle: "Podpora",
-      supportText: "Pokud potřebuješ pomoc, chceš poslat zpětnou vazbu nebo se zeptat na soukromí, napiš na podporu.",
+      supportText: "Pomoc, kontakt a nahlášení problému.",
       privacyLink: "Zásady soukromí",
+      privacyText: "Jak Tankio pracuje s daty, oprávněními a externími službami.",
       supportLink: "Podpora"
     },
     privacy: {
@@ -133,9 +133,9 @@ const copy = {
       eyebrow: "Alkalmazásinformáció",
       title: "Tankio",
       lead: "Útiköltség-kalkulátor üzemanyaghoz, útdíjakhoz, mentett utakhoz, közeli töltőállomásokhoz és PDF exporthoz.",
-      supportTitle: "Támogatás",
-      supportText: "Segítség, visszajelzés vagy adatvédelmi kérdés esetén írj a támogatásnak.",
+      supportText: "Segítség, kapcsolat és hibabejelentés.",
       privacyLink: "Adatvédelmi tájékoztató",
+      privacyText: "Így kezeli a Tankio az adatokat, engedélyeket és külső szolgáltatásokat.",
       supportLink: "Támogatás"
     },
     privacy: {
@@ -173,9 +173,9 @@ const copy = {
       eyebrow: "Sovelluksen tiedot",
       title: "Tankio",
       lead: "Matkakululaskuri polttoaineelle, tietulleille, tallennetuille matkoille, lähimmille huoltoasemille ja PDF-vienneille.",
-      supportTitle: "Tuki",
-      supportText: "Jos tarvitset apua, haluat antaa palautetta tai kysyä tietosuojasta, ota yhteyttä tukeen.",
+      supportText: "Apua, yhteystiedot ja ongelman ilmoittaminen.",
       privacyLink: "Tietosuojakäytäntö",
+      privacyText: "Miten Tankio käsittelee tietoja, käyttöoikeuksia ja ulkoisia palveluita.",
       supportLink: "Tuki"
     },
     privacy: {
@@ -213,9 +213,9 @@ const copy = {
       eyebrow: "Appinformation",
       title: "Tankio",
       lead: "Resekostnadskalkylator för bränsle, vägavgifter, sparade resor, närliggande bensinstationer och PDF-exporter.",
-      supportTitle: "Support",
-      supportText: "Kontakta supporten om du behöver hjälp, vill lämna feedback eller har frågor om integritet.",
+      supportText: "Hjälp, kontakt och felrapportering.",
       privacyLink: "Integritetspolicy",
+      privacyText: "Hur Tankio hanterar data, behörigheter och externa tjänster.",
       supportLink: "Support"
     },
     privacy: {
@@ -251,10 +251,7 @@ const copy = {
 };
 
 function getInitialLanguage() {
-  const saved = localStorage.getItem("tankio_site_language");
-  if (copy[saved]) return saved;
-  const browser = (navigator.language || "en").slice(0, 2).toLowerCase();
-  return copy[browser] ? browser : "en";
+  return "en";
 }
 
 function valueFor(path, lang) {
@@ -279,7 +276,6 @@ function applyLanguage(lang) {
   document.querySelectorAll("[data-lang]").forEach((button) => {
     button.setAttribute("aria-pressed", button.dataset.lang === selected ? "true" : "false");
   });
-  localStorage.setItem("tankio_site_language", selected);
 }
 
 function buildLanguageBar() {
