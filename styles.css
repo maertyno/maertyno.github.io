@@ -1240,3 +1240,69 @@ body.game-focus .contact-panel > :not(.contact-game) {
   .hero-note { width: 238px; }
   .hero-note strong { white-space: nowrap; }
 }
+
+/* Mobile layout polish: paired actions, single-line badges and tucked Tankio screens. */
+@keyframes tankio-mobile-peek-1 {
+  from { opacity: .74; transform: translate3d(calc(-50% - 92px), calc(-50% - 6px), -56px) rotateY(10deg) rotateZ(-9deg) scale(.78); }
+  to { opacity: .88; transform: translate3d(calc(-50% - 104px), calc(-50% - 11px), -56px) rotateY(12deg) rotateZ(-11deg) scale(.82); }
+}
+@keyframes tankio-mobile-peek-2 {
+  from { opacity: .78; transform: translate3d(calc(-50% - 62px), calc(-50% + 12px), -18px) rotateY(7deg) rotateZ(-5deg) scale(.84); }
+  to { opacity: .92; transform: translate3d(calc(-50% - 70px), calc(-50% + 16px), -18px) rotateY(9deg) rotateZ(-7deg) scale(.88); }
+}
+@keyframes tankio-mobile-peek-3 {
+  from { opacity: .78; transform: translate3d(calc(-50% + 62px), calc(-50% - 12px), -18px) rotateY(-7deg) rotateZ(5deg) scale(.84); }
+  to { opacity: .92; transform: translate3d(calc(-50% + 70px), calc(-50% - 16px), -18px) rotateY(-9deg) rotateZ(7deg) scale(.88); }
+}
+@keyframes tankio-mobile-peek-4 {
+  from { opacity: .74; transform: translate3d(calc(-50% + 92px), calc(-50% + 6px), -56px) rotateY(-10deg) rotateZ(9deg) scale(.78); }
+  to { opacity: .88; transform: translate3d(calc(-50% + 104px), calc(-50% + 11px), -56px) rotateY(-12deg) rotateZ(11deg) scale(.82); }
+}
+
+@media (max-width: 620px) {
+  .hero-actions {
+    align-items: center;
+    flex-flow: row nowrap;
+    gap: 12px;
+  }
+  .hero-actions .text-link {
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .service-card { padding-inline: 20px; }
+  .tag-row,
+  .tankio-points {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+    width: 100%;
+  }
+  .tag-row span,
+  .tankio-points > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 5px 2px;
+    overflow: visible;
+    font-size: clamp(5px, 1.55vw, 6.25px);
+    letter-spacing: -.035em;
+    line-height: 1.15;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .tankio-art { min-height: 300px; }
+  .tankio-copy { padding-inline: 20px; }
+  .tankio-stage { width: min(142px, 40%); }
+  .tankio-screen {
+    width: clamp(100px, 30vw, 118px);
+    border-radius: 12px;
+    box-shadow: 0 16px 34px rgba(0, 0, 0, .28);
+  }
+  .tankio-screen-1 { animation: tankio-mobile-peek-1 8.8s ease-in-out -1.2s infinite alternate; }
+  .tankio-screen-2 { animation: tankio-mobile-peek-2 8.1s ease-in-out -3.4s infinite alternate; }
+  .tankio-screen-3 { animation: tankio-mobile-peek-3 8.4s ease-in-out -2.2s infinite alternate; }
+  .tankio-screen-4 { animation: tankio-mobile-peek-4 9.1s ease-in-out -4.1s infinite alternate; }
+}
