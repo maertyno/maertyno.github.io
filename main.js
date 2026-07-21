@@ -557,6 +557,20 @@ function initTankioTilt() {
   });
 }
 
+const mobileFooterReload = window.matchMedia("(max-width: 620px)");
+const scrollTopAfterReloadKey = "mn-scroll-top-after-reload";
+
+if (sessionStorage.getItem(scrollTopAfterReloadKey) === "1") {
+  sessionStorage.removeItem(scrollTopAfterReloadKey);
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+  const forcePageTop = () => window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  forcePageTop();
+  window.addEventListener("load", forcePageTop, { once: true });
+  window.addEventListener("pageshow", forcePageTop, { once: true });
+  window.requestAnimationFrame(() => window.requestAnimationFrame(forcePageTop));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("year").textContent = new Date().getFullYear();
   const saved = localStorage.getItem("mn-language");
@@ -589,6 +603,14 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", updateScrollIndicator, { passive: true });
   window.addEventListener("resize", updateScrollIndicator);
   updateScrollIndicator();
+
+  document.querySelector(".footer-up")?.addEventListener("click", (event) => {
+    if (!mobileFooterReload.matches) return;
+    event.preventDefault();
+    sessionStorage.setItem(scrollTopAfterReloadKey, "1");
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.location.reload();
+  });
 
   initCursorTech();
   initHeroTilt();

@@ -608,7 +608,7 @@ function initBinaryRunner() {
     lastPressTime = 0;
     chapterIndex = 0;
     endMessage = "";
-    if (!controlHintShown) {
+    if (!controlHintShown && !mobileGameMedia.matches) {
       controlHintDelay = 1;
       controlHintLife = 5;
       controlHintShown = true;
