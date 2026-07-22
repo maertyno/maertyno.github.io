@@ -32,6 +32,11 @@ const copy = {
     "contact.eyebrow": "Have a question?", "contact.copy": "Tell me what needs fixing or building. I’ll reply like a person, without a form maze.", }
 };
 
+const tickerItems = {
+  sk: ["IT podpora", "Opravy elektroniky", "Webdizajn", "iOS aplikácie", "Vývoj webov", "Digitálne riešenia", "Servis techniky", "Precízny dizajn"],
+  cs: ["IT podpora", "Opravy elektroniky", "Webdesign", "iOS aplikace", "Vývoj webů", "Digitální řešení", "Servis techniky", "Precizní design"],
+  en: ["IT support", "Electronics repair", "Web design", "iOS apps", "Web development", "Digital solutions", "Tech servicing", "Precision design"]
+};
 const homepageLanguages = new Set(["sk", "cs", "en"]);
 
 const appStoreUrls = {
@@ -57,6 +62,10 @@ const setLanguage = (language) => {
   document.querySelectorAll("[data-i18n-html]").forEach((element) => {
     const value = copy[selected][element.dataset.i18nHtml];
     if (value) element.innerHTML = value;
+  });
+  const tickerLabels = tickerItems[selected];
+  document.querySelectorAll(".ticker-group span").forEach((element, index) => {
+    element.textContent = tickerLabels[index % tickerLabels.length];
   });
   document.querySelectorAll(".lang-button").forEach((button) => {
     const active = button.dataset.lang === selected;

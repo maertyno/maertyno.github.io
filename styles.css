@@ -1306,3 +1306,14 @@ body.game-focus .contact-panel > :not(.contact-game) {
   .tankio-screen-3 { animation: tankio-mobile-peek-3 8.4s ease-in-out -2.2s infinite alternate; }
   .tankio-screen-4 { animation: tankio-mobile-peek-4 9.1s ease-in-out -4.1s infinite alternate; }
 }
+/* Sticky ticker: docks below the header after reaching it. */
+.ticker {
+  position: sticky;
+  z-index: 19;
+  top: 76px;
+  box-shadow: 0 8px 22px rgba(24, 27, 23, .12);
+}
+
+@media (max-width: 620px) {
+  .ticker { top: 68px; }
+}
