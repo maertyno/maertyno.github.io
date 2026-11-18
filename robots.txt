@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /kacenka/
+
+Sitemap: https://www.nagymart.in/sitemap.xml
