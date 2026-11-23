@@ -1471,3 +1471,18 @@ body::after { content: ""; position: fixed; z-index: 0; width: 30rem; height: 30
 .ticker-group[aria-hidden="true"] { display: flex; }
 .ticker-group span { font-size: 11px; }
 @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+
+/* Mobile hero: one clear reading order, with the current-role card returning as a controlled overlay. */
+@media (max-width: 620px) {
+  .hero { display: flex; flex-direction: column; gap: 26px; padding-top: 48px; }
+  .hero-copy { display: contents; }
+  .hero h1 { order: 1; width: 100%; margin: 0; font-size: clamp(47px, 13.5vw, 59px); line-height: .94; }
+  .hero-visual { position: relative; top: auto; right: auto; order: 2; width: 100%; max-width: none; margin: 0; }
+  .portrait-frame { aspect-ratio: 1.18; border-radius: 12px; }
+  .portrait-frame img { object-position: 50% 29%; transform: none; }
+  .hero-caption { position: absolute; z-index: 3; left: 14px; bottom: 14px; display: block; width: min(226px, calc(100% - 28px)); margin: 0; padding: 12px 14px; border: 1px solid rgba(255,255,255,.72); border-radius: 12px; background: rgba(240,250,249,.76); box-shadow: 0 12px 28px rgba(13,35,38,.18), inset 0 1px 0 rgba(255,255,255,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .hero-caption > span { display: block; margin-bottom: 6px; padding: 0; font-size: 8px; }
+  .hero-caption strong { display: block; font-size: 13px; line-height: 1.18; }
+  .hero-intro { order: 3; width: 100%; margin: 0; padding-left: 14px; }
+  .hero-actions { order: 4; width: 100%; margin: 0; }
+}

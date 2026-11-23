@@ -493,3 +493,14 @@ h1 { max-width: 700px; font-size: clamp(56px, 10vw, 94px); letter-spacing: -.065
 .footer { padding: 42px 6px 14px; }
 
 @media (max-width: 620px) { .wrap { width: min(100% - 28px, 860px); } .topline { top: 8px; margin: 0 -5px 30px; padding: 9px 10px; border-radius: 15px; } .intro { padding: 30px 24px; border-radius: 23px; } .app-showcase { min-height: 330px; border-radius: 23px; } .link-row { min-height: 0; padding: 22px 54px 22px 20px; border-radius: 16px; } .link-row::after { right: 17px; } .section { padding: 22px 20px; border-radius: 16px; } }
+
+/* Six languages need a compact selector, not one oversized capsule. */
+@media (max-width: 620px) {
+  .topline { position: relative; top: auto; display: grid; grid-template-columns: 1fr; gap: 13px; margin: 0 0 24px; padding: 14px; border-radius: 16px; }
+  .brand { min-width: 0; }
+  .language-bar { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); width: 100%; gap: 0; padding: 0; border: 0; border-radius: 0; background: transparent; }
+  .language-bar button { min-width: 0; min-height: 36px; padding: 8px 0; border-radius: 0; border-bottom: 1px solid rgba(238,255,252,.14); color: #9cafb2; font-size: 12px; }
+  .language-bar button[aria-pressed="true"] { border-bottom-color: var(--accent); background: transparent; color: var(--accent); }
+  .intro { padding: 30px 24px 32px; }
+  h1 { font-size: clamp(48px, 16vw, 64px); }
+}
