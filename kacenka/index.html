@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#120b16">
+  <title>For Kačenka</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true"><i></i><i></i><i></i></div>
+  <main class="stage">
+    <section class="experience" aria-label="Spin the photograph five times">
+      <div class="halo" aria-hidden="true"></div>
+      <div class="orbit orbit-one" aria-hidden="true"></div>
+      <div class="orbit orbit-two" aria-hidden="true"></div>
+      <div class="card">
+        <div class="frame">
+          <div class="frame-inner">
+            <img id="gorilla" src="gorilla-before.jpg" alt="A gorilla making a cheeky gesture" draggable="false">
+            <div class="image-sheen" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="instruction" id="instruction" aria-live="polite">
+        <span class="counter"><b id="spinCount">0</b> / 23 spins</span>
+      </div>
+      <div class="decorations" aria-hidden="true"><i>♡</i><i>✦</i><i>♥</i><i>✧</i><i>♡</i></div>
+      <div class="voice-note" id="voiceNote" aria-hidden="true">
+        <span class="floating floating-heart">♡</span><span class="floating floating-star">✦</span><span class="floating floating-dot">♥</span>
+        <button class="play-note" id="playNote" type="button" aria-label="Prehraj si hlasovú správu"><span class="play-icon">▶</span><span id="playLabel">Prehraj si ma ♡</span></button>
+        <audio id="birthdayAudio" preload="metadata" src="for-kacenka.m4a"></audio>
+      </div>
+    </section>
+  </main>
+  <div class="magic" id="magic" aria-hidden="true"></div>
+  <script src="script.js"></script>
+</body>
+</html>
